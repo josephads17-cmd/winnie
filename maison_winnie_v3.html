@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Maison Winnie — Box bien-être pour lapin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:   #FDF6F0;
+  --peach:   #F2C4A8;
+  --peach2:  #F5D0B8;
+  --terra:   #E8947A;
+  --terra2:  #E8A882;
+  --brown:   #7A4A3A;
+  --mid:     #C87A5A;
+  --light:   #FBEADF;
+  --muted:   #D4A088;
+  --border:  #E8C4AC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);font-family:'Jost',sans-serif;color:var(--brown);overflow-x:hidden}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 56px 20px 32px;
+  transition:all .4s;
+}
+nav.scrolled{
+  background:rgba(253,246,240,0.94);
+  backdrop-filter:blur(14px);
+  border-bottom:0.5px solid var(--border);
+  padding:14px 56px;
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:17px;color:var(--brown);letter-spacing:1px}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-size:10px;color:var(--mid);text-decoration:none;letter-spacing:3px;font-weight:300;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:var(--terra)}
+.nav-cta{
+  background:var(--brown)!important;color:var(--cream)!important;
+  padding:9px 22px;border-radius:50px;transition:background .3s!important;
+}
+.nav-cta:hover{background:var(--terra)!important}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  padding:120px 56px 80px;
+  background:var(--cream);
+  text-align:center;
+}
+
+/* blobs décoratifs DA */
+.blob-tl{position:absolute;top:-60px;left:-80px;width:340px;height:340px;border-radius:60% 40% 70% 30%/50% 60% 40% 50%;background:var(--peach);opacity:.45;animation:morph 8s ease-in-out infinite}
+.blob-tr{position:absolute;top:40px;right:-60px;width:240px;height:240px;border-radius:40% 60% 30% 70%/60% 40% 50% 50%;background:var(--peach2);opacity:.35;animation:morph 10s ease-in-out infinite reverse}
+.blob-bl{position:absolute;bottom:-40px;left:10%;width:180px;height:180px;border-radius:50% 60% 40% 60%/60% 50% 50% 40%;background:var(--terra);opacity:.18;animation:morph 7s ease-in-out infinite 2s}
+.blob-br{position:absolute;bottom:60px;right:8%;width:220px;height:220px;border-radius:55% 45% 65% 35%/45% 55% 45% 55%;background:var(--peach2);opacity:.28;animation:morph 9s ease-in-out infinite 1s}
+
+/* confettis ronds DA */
+.dot{position:absolute;border-radius:50%;pointer-events:none}
+
+.hero-tag{position:relative;z-index:2;font-size:10px;letter-spacing:5px;color:var(--mid);text-transform:uppercase;font-weight:300;margin-bottom:18px;animation:fadein .8s ease both}
+.hero-title{position:relative;z-index:2;font-family:'Playfair Display',serif;font-size:72px;line-height:1.05;color:var(--brown);font-weight:400;margin-bottom:24px;animation:fadein .9s .12s ease both}
+.hero-title em{color:var(--terra);font-style:italic}
+.hero-sub{position:relative;z-index:2;font-size:16px;color:var(--mid);line-height:1.9;font-weight:300;max-width:520px;margin:0 auto 36px;animation:fadein .9s .24s ease both}
+.hero-actions{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;animation:fadein .9s .36s ease both}
+.btn-primary{
+  background:var(--brown);color:var(--cream);
+  padding:15px 38px;font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  border:none;border-radius:50px;font-weight:500;cursor:pointer;
+  font-family:'Jost',sans-serif;transition:all .3s;
+}
+.btn-primary:hover{background:var(--terra);transform:translateY(-2px)}
+.hero-price{font-size:13px;color:var(--muted);font-weight:300}
+
+/* lapin SVG centré */
+.hero-rabbit{position:relative;z-index:2;margin:16px auto 0;animation:float 4s ease-in-out infinite, fadein 1s .5s ease both}
+
+/* scroll hint */
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3;animation:fadein 1s .7s ease both}
+.scroll-line{width:1px;height:40px;background:var(--border);animation:pulse 2s ease-in-out infinite}
+.scroll-text{font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+
+/* badge prix */
+.rabbit-wrap{position:relative;display:inline-block}
+
+/* ─── SECTION BOX ─── */
+.section-box{
+  padding:100px 56px;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  background:var(--light);
+  border-top:0.5px solid var(--border);
+  border-bottom:0.5px solid var(--border);
+}
+.box-text .section-tag{font-size:10px;letter-spacing:5px;color:var(--mid);text-transform:uppercase;font-weight:300;margin-bottom:14px;display:block}
+.box-text h2{font-family:'Playfair Display',serif;font-size:46px;line-height:1.1;color:var(--brown);font-weight:400;margin-bottom:20px}
+.box-text h2 em{color:var(--terra);font-style:italic}
+.box-text p{font-size:15px;color:var(--mid);line-height:1.9;font-weight:300;margin-bottom:32px;max-width:460px}
+
+.products-list{display:flex;flex-direction:column;gap:10px}
+.product-item{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;border:0.5px solid var(--border);
+  border-radius:14px;background:var(--cream);transition:border-color .25s,transform .25s;
+}
+.product-item:hover{border-color:var(--terra);transform:translateX(4px)}
+.product-icon{width:40px;height:40px;border-radius:10px;background:var(--peach);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.product-info{flex:1}
+.product-name{font-size:13px;color:var(--brown);font-weight:400;margin-bottom:2px}
+.product-desc{font-size:11px;color:var(--mid);font-weight:300}
+.product-check{width:20px;height:20px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.product-surprise{opacity:.55;border-style:dashed}
+.product-surprise .product-check{background:var(--muted)}
+.mystery-grid{display:flex;flex-direction:column;gap:8px}
+.mystery-item{display:flex;align-items:center;gap:14px;padding:13px 16px;border:0.5px solid var(--border);border-radius:14px;background:var(--cream);transition:border-color .25s}
+.mystery-item:hover{border-color:var(--terra)}
+.mystery-icon{width:40px;height:40px;border-radius:10px;background:var(--light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mystery-info{flex:1}
+.mystery-name{font-size:13px;color:var(--brown);font-weight:400;margin-bottom:2px}
+.mystery-desc{font-size:11px;color:var(--mid);font-weight:300}
+.mystery-lock{flex-shrink:0;opacity:.6}
+
+/* ─── SECTION POURQUOI ─── */
+.section-why{padding:100px 56px;text-align:center}
+.section-why .section-tag{font-size:10px;letter-spacing:5px;color:var(--mid);text-transform:uppercase;font-weight:300;margin-bottom:14px;display:block}
+.section-why h2{font-family:'Playfair Display',serif;font-size:44px;color:var(--brown);font-weight:400;margin-bottom:56px}
+.section-why h2 em{color:var(--terra);font-style:italic}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.why-card{
+  background:var(--light);border:0.5px solid var(--border);
+  border-radius:20px;padding:32px 24px;text-align:left;
+  transition:transform .3s,border-color .3s;
+}
+.why-card:hover{transform:translateY(-4px);border-color:var(--terra)}
+.why-card-icon{width:48px;height:48px;border-radius:12px;background:var(--peach);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.why-card h4{font-family:'Playfair Display',serif;font-size:17px;color:var(--brown);margin-bottom:8px;font-weight:400}
+.why-card p{font-size:12px;color:var(--mid);line-height:1.7;font-weight:300}
+
+/* ─── SECTION TÉMOIGNAGES ─── */
+.section-reviews{
+  padding:100px 56px;
+  background:var(--brown);
+  text-align:center;
+}
+.section-reviews .section-tag{font-size:10px;letter-spacing:5px;color:rgba(242,196,168,.6);text-transform:uppercase;font-weight:300;margin-bottom:14px;display:block}
+.section-reviews h2{font-family:'Playfair Display',serif;font-size:42px;color:var(--cream);font-weight:400;margin-bottom:52px}
+.section-reviews h2 em{color:var(--peach);font-style:italic}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:left}
+.review-card{background:rgba(253,246,240,.07);border:0.5px solid rgba(242,196,168,.2);border-radius:20px;padding:28px 24px}
+.review-stars{color:var(--terra);font-size:13px;letter-spacing:2px;margin-bottom:10px}
+.review-text{font-family:'Playfair Display',serif;font-size:14px;color:var(--cream);font-style:italic;line-height:1.7;margin-bottom:12px}
+.review-author{font-size:11px;color:rgba(242,196,168,.6);font-weight:300;letter-spacing:1px}
+
+/* ─── SECTION CTA ─── */
+.section-cta{
+  padding:100px 56px;text-align:center;
+  background:var(--cream);
+  position:relative;overflow:hidden;
+}
+.cta-blob-l{position:absolute;left:-80px;top:50%;transform:translateY(-50%);width:260px;height:260px;border-radius:60% 40% 70% 30%/50% 60% 40% 50%;background:var(--peach);opacity:.4}
+.cta-blob-r{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:200px;height:200px;border-radius:40% 60% 30% 70%/60% 40% 50% 50%;background:var(--terra);opacity:.2}
+.section-cta .section-tag{font-size:10px;letter-spacing:5px;color:var(--mid);text-transform:uppercase;font-weight:300;margin-bottom:14px;display:block;position:relative;z-index:2}
+.section-cta h2{position:relative;z-index:2;font-family:'Playfair Display',serif;font-size:52px;color:var(--brown);font-weight:400;margin-bottom:14px;line-height:1.1}
+.section-cta h2 em{color:var(--terra);font-style:italic}
+.section-cta p{position:relative;z-index:2;font-size:15px;color:var(--mid);font-weight:300;margin-bottom:44px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.9}
+.cta-card{
+  position:relative;z-index:2;
+  display:inline-flex;align-items:center;gap:32px;
+  background:var(--light);border:0.5px solid var(--border);
+  border-radius:24px;padding:36px 48px;
+}
+.cta-price-block{text-align:left}
+.cta-price{font-family:'Playfair Display',serif;font-size:48px;color:var(--brown);line-height:1}
+.cta-price-detail{font-size:12px;color:var(--mid);font-weight:300;margin-top:4px}
+.btn-cta-final{
+  background:var(--brown);color:var(--cream);
+  padding:18px 44px;font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  border:none;border-radius:50px;font-weight:500;cursor:pointer;
+  font-family:'Jost',sans-serif;transition:all .3s;
+}
+.btn-cta-final:hover{background:var(--terra);transform:translateY(-2px)}
+.cta-reassurance{position:relative;z-index:2;font-size:11px;color:var(--muted);margin-top:16px;font-weight:300}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--cream);border-top:0.5px solid var(--border);
+  padding:36px 56px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-family:'Playfair Display',serif;font-size:15px;color:var(--brown)}
+.footer-tagline{font-size:10px;color:var(--muted);letter-spacing:2px;font-weight:300;text-transform:uppercase;margin-top:3px}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:2px;text-transform:uppercase;font-weight:300;transition:color .3s}
+.footer-links a:hover{color:var(--terra)}
+.footer-copy{font-size:11px;color:var(--muted);font-weight:300}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadein{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes morph{0%,100%{border-radius:60% 40% 70% 30%/50% 60% 40% 50%}50%{border-radius:40% 60% 30% 70%/60% 40% 50% 50%}}
+@keyframes pulse{0%,100%{opacity:.3;height:40px}50%{opacity:.7;height:52px}}
+
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ─── MOBILE ─── */
+@media(max-width:768px){
+  nav{padding:16px 20px}
+  .nav-links a:not(.nav-cta){display:none}
+  .nav-cta{padding:8px 16px;font-size:9px}
+
+  .hero{padding:100px 24px 60px;min-height:100svh}
+  .hero-title{font-size:42px}
+  .hero-sub{font-size:14px;max-width:100%}
+
+  .name-input-wrap>div{flex-direction:column;gap:10px;border-radius:20px;padding:16px;max-width:100%}
+  .name-input-wrap>div>div{width:100%;border-radius:50px;padding:4px 4px 4px 18px}
+  .name-input-wrap>div>div input{font-size:15px}
+  .name-input-wrap>div>div button{padding:10px 16px;font-size:9px}
+  .name-input-wrap>div>div{background:var(--light);border:0.5px solid var(--border)}
+  #btn-male, #btn-female{padding:8px 20px}
+
+  .hero-rabbit{width:200px;height:auto}
+  .blob-tl{width:220px;height:220px;top:-40px;left:-60px}
+  .blob-tr{width:160px;height:160px}
+  .blob-bl{width:120px;height:120px}
+  .blob-br{width:150px;height:150px}
+
+  .section-box{grid-template-columns:1fr;gap:40px;padding:60px 24px}
+  .box-text h2{font-size:36px}
+  .box-text p{max-width:100%}
+
+  .section-why{padding:60px 24px}
+  .section-why h2{font-size:32px;margin-bottom:36px}
+  .why-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .why-card{padding:20px 16px}
+  .why-card h4{font-size:14px}
+  .why-card p{font-size:11px}
+
+  .section-reviews{padding:60px 24px}
+  .section-reviews h2{font-size:32px;margin-bottom:36px}
+  .reviews-grid{grid-template-columns:1fr;gap:14px}
+
+  .section-cta{padding:60px 24px}
+  .section-cta h2{font-size:36px}
+  .cta-card{flex-direction:column;gap:20px;padding:28px 24px;width:100%;text-align:center}
+  .cta-price{font-size:38px}
+  .btn-cta-final{width:100%;padding:16px}
+  .cta-blob-l{display:none}
+  .cta-blob-r{display:none}
+
+  footer{flex-direction:column;gap:20px;padding:32px 24px;text-align:center}
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <div>
+    <div class="nav-logo" style="display:flex;align-items:center;gap:10px">
+    <svg width="36" height="36" viewBox="0 0 44 44" fill="none">
+      <!-- oreilles -->
+      <ellipse cx="16" cy="16" rx="7" ry="12" fill="#E8A882"/>
+      <ellipse cx="28" cy="16" rx="7" ry="12" fill="#E8A882"/>
+      <ellipse cx="16" cy="14" rx="4.5" ry="9" fill="#F5C4B3" opacity="0.7"/>
+      <ellipse cx="28" cy="14" rx="4.5" ry="9" fill="#F5C4B3" opacity="0.7"/>
+      <!-- tête -->
+      <ellipse cx="22" cy="28" rx="16" ry="14" fill="#F2C4A8"/>
+      <!-- yeux -->
+      <circle cx="17" cy="25" r="2.2" fill="#7A4A3A"/>
+      <circle cx="27" cy="25" r="2.2" fill="#7A4A3A"/>
+      <circle cx="17.8" cy="24.2" r="0.8" fill="white"/>
+      <circle cx="27.8" cy="24.2" r="0.8" fill="white"/>
+      <!-- nez -->
+      <ellipse cx="22" cy="30" rx="3" ry="2" fill="#E8947A"/>
+      <!-- moustaches -->
+      <line x1="17" y1="28" x2="10" y2="26" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
+      <line x1="17" y1="30" x2="9" y2="30" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
+      <line x1="27" y1="28" x2="34" y2="26" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
+      <line x1="27" y1="30" x2="35" y2="30" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--brown);letter-spacing:1px;line-height:1.1">La Maison Winnie</div>
+    </div>
+  </div>
+  </div>
+  <div class="nav-links">
+    <a href="#box">La box</a>
+    <a href="#why">Pourquoi nous</a>
+    <a href="#reviews">Avis</a>
+    <a href="#cta" class="nav-cta">Commander</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <!-- blobs DA -->
+  <div class="blob-tl"></div>
+  <div class="blob-tr"></div>
+  <div class="blob-bl"></div>
+  <div class="blob-br"></div>
+  <!-- confettis DA -->
+  <div class="dot" style="width:10px;height:10px;background:#E8947A;opacity:.35;top:22%;left:18%"></div>
+  <div class="dot" style="width:6px;height:6px;background:#F2C4A8;opacity:.5;top:35%;left:8%"></div>
+  <div class="dot" style="width:8px;height:8px;background:#D4A088;opacity:.4;top:65%;left:14%"></div>
+  <div class="dot" style="width:12px;height:12px;background:#E8947A;opacity:.25;top:18%;right:16%"></div>
+  <div class="dot" style="width:5px;height:5px;background:#F2C4A8;opacity:.55;top:48%;right:9%"></div>
+  <div class="dot" style="width:9px;height:9px;background:#C87A5A;opacity:.3;top:72%;right:18%"></div>
+
+  <span class="hero-tag">Box bien-être pour lapin</span>
+
+  <h1 class="hero-title">
+    Chouchoute<br>
+    <em id="rabbit-name-display">Winnie</em><br>
+    comme <span id="gender-display">il</span> le mérite
+  </h1>
+  <div class="name-input-wrap" style="position:relative;z-index:2;margin-top:-8px;margin-bottom:0;animation:fadein .9s .3s ease both">
+    <label style="font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;font-weight:300;display:block;margin-bottom:8px">
+      Quel est le prénom de ton lapin ?
+    </label>
+    <div style="display:flex;align-items:center;gap:8px;max-width:380px;margin:0 auto">
+      <!-- Toggle genre -->
+      <div style="display:flex;background:var(--light);border:0.5px solid var(--border);border-radius:50px;padding:3px;flex-shrink:0">
+        <button id="btn-male"
+          onclick="setGender('male')"
+          style="
+            background:var(--brown);color:var(--cream);
+            border:none;border-radius:50px;padding:8px 14px;
+            font-size:11px;letter-spacing:2px;text-transform:uppercase;
+            font-family:'Jost',sans-serif;font-weight:400;cursor:pointer;
+            transition:all .2s;
+          ">Il</button>
+        <button id="btn-female"
+          onclick="setGender('female')"
+          style="
+            background:transparent;color:var(--muted);
+            border:none;border-radius:50px;padding:8px 14px;
+            font-size:11px;letter-spacing:2px;text-transform:uppercase;
+            font-family:'Jost',sans-serif;font-weight:400;cursor:pointer;
+            transition:all .2s;
+          ">Elle</button>
+      </div>
+      <!-- Champ prénom -->
+      <div style="flex:1;display:flex;align-items:center;gap:0;background:var(--light);border:0.5px solid var(--border);border-radius:50px;padding:4px 4px 4px 18px">
+        <input
+          id="rabbit-name-input"
+          type="text"
+          placeholder="Winnie"
+          maxlength="20"
+          style="
+            flex:1;background:transparent;border:none;outline:none;
+            font-family:'Playfair Display',serif;font-size:16px;font-style:italic;
+            color:var(--terra);font-weight:400;caret-color:var(--terra);width:100%;
+          "
+        />
+        <button
+          style="
+            background:var(--brown);color:var(--cream);
+            border:none;border-radius:50px;
+            padding:10px 18px;font-size:10px;letter-spacing:2px;
+            text-transform:uppercase;font-family:'Jost',sans-serif;
+            font-weight:400;cursor:pointer;white-space:nowrap;
+            transition:background .3s;flex-shrink:0;
+          "
+          onmouseover="this.style.background='var(--terra)'"
+          onmouseout="this.style.background='var(--brown)'"
+          onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})"
+        >Commander</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="hero-sub">
+    Une box premium pensée avec amour — jouets en osier, soins naturels et accessoires soigneusement sélectionnés pour le bonheur de ton lapinou.
+  </p>
+
+
+
+  <!-- Lapin illustré centré -->
+  <div class="rabbit-wrap">
+    <svg class="hero-rabbit" width="260" height="280" viewBox="0 0 260 280" fill="none">
+      <!-- ombre -->
+      <ellipse cx="130" cy="265" rx="70" ry="12" fill="#E8C4AC" opacity="0.4"/>
+      <!-- corps -->
+      <ellipse cx="130" cy="200" rx="70" ry="68" fill="#F5EDE6"/>
+      <ellipse cx="130" cy="215" rx="50" ry="52" fill="#FDF6F0" opacity="0.55"/>
+      <!-- oreilles -->
+      <ellipse cx="100" cy="108" rx="20" ry="54" fill="#F5EDE6" transform="rotate(-10 100 108)"/>
+      <ellipse cx="160" cy="108" rx="20" ry="54" fill="#F5EDE6" transform="rotate(10 160 108)"/>
+      <ellipse cx="100" cy="100" rx="12" ry="40" fill="#FBEADF" transform="rotate(-10 100 100)"/>
+      <ellipse cx="160" cy="100" rx="12" ry="40" fill="#FBEADF" transform="rotate(10 160 100)"/>
+      <ellipse cx="100" cy="98" rx="7" ry="28" fill="#F5C4B3" opacity="0.55" transform="rotate(-10 100 98)"/>
+      <ellipse cx="160" cy="98" rx="7" ry="28" fill="#F5C4B3" opacity="0.55" transform="rotate(10 160 98)"/>
+      <!-- tête / museau -->
+      <ellipse cx="130" cy="195" rx="58" ry="62" fill="#F2C4A8"/>
+      <!-- yeux -->
+      <circle cx="110" cy="178" r="9" fill="#7A4A3A"/>
+      <circle cx="150" cy="178" r="9" fill="#7A4A3A"/>
+      <circle cx="112" cy="175" r="3" fill="white"/>
+      <circle cx="152" cy="175" r="3" fill="white"/>
+      <!-- nez -->
+      <ellipse cx="130" cy="194" rx="10" ry="7" fill="#E8947A"/>
+      <!-- sourire -->
+      <path d="M118 204 Q130 215 142 204" stroke="#D4A088" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <!-- moustaches -->
+      <line x1="118" y1="191" x2="96" y2="185" stroke="#D4A088" stroke-width="1" stroke-linecap="round"/>
+      <line x1="118" y1="196" x2="94" y2="195" stroke="#D4A088" stroke-width="1" stroke-linecap="round"/>
+      <line x1="142" y1="191" x2="164" y2="185" stroke="#D4A088" stroke-width="1" stroke-linecap="round"/>
+      <line x1="142" y1="196" x2="166" y2="195" stroke="#D4A088" stroke-width="1" stroke-linecap="round"/>
+      <!-- pattes -->
+      <ellipse cx="82" cy="252" rx="26" ry="14" fill="#F2C4A8"/>
+      <ellipse cx="178" cy="252" rx="26" ry="14" fill="#F2C4A8"/>
+      <ellipse cx="68" cy="256" rx="18" ry="10" fill="#FBEADF"/>
+      <ellipse cx="192" cy="256" rx="18" ry="10" fill="#FBEADF"/>
+      <ellipse cx="148" cy="260" rx="20" ry="11" fill="#F2C4A8"/>
+      <!-- petits bras -->
+      <ellipse cx="66" cy="226" rx="13" ry="9" fill="#F2C4A8" transform="rotate(-25 66 226)"/>
+      <ellipse cx="194" cy="226" rx="13" ry="9" fill="#F2C4A8" transform="rotate(25 194 226)"/>
+      <!-- joues roses -->
+      <circle cx="96" cy="192" r="10" fill="#E8947A" opacity="0.25"/>
+      <circle cx="164" cy="192" r="10" fill="#E8947A" opacity="0.25"/>
+      <!-- petits details déco DA -->
+      <circle cx="210" cy="155" r="5" fill="#E8947A" opacity="0.25"/>
+      <circle cx="52" cy="170" r="4" fill="#F2C4A8" opacity="0.4"/>
+      <circle cx="220" cy="200" r="3" fill="#D4A088" opacity="0.35"/>
+    </svg>
+  </div>
+
+
+</section>
+
+<!-- ─── SECTION BOX ─── -->
+<section class="section-box" id="box">
+  <div class="box-text fade-up">
+    <span class="section-tag">Ce qu'il y a dans la box</span>
+    <h2>5 produits choisis<br><em>pour <span id="box-gender-display">lui</span></em></h2>
+    <p>Chaque produit est sélectionné pour sa qualité, sa sécurité et sa capacité à rendre ton lapin heureux. Matières naturelles, sans chimie, pensés avec passion.</p>
+    <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+      Commander — 54,90€
+    </button>
+  </div>
+  <div class="products-list fade-up">
+
+    <div style="text-align:center;margin-bottom:20px">
+      <p style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--brown);line-height:1.7">
+        5 surprises sélectionnées avec amour.<br>Tu sauras ce que c'est à l'ouverture.
+      </p>
+    </div>
+
+    <div class="mystery-grid">
+
+      <div class="mystery-item">
+        <div class="mystery-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="8" stroke="#D4A088" stroke-width="1.2" stroke-dasharray="3 2"/><circle cx="13" cy="13" r="3" fill="#E8C4AC"/></svg></div>
+        <div class="mystery-info">
+          <div class="mystery-name">Pour s'amuser</div>
+          <div class="mystery-desc">Un jouet qu'<span class="mystery-gender">il</span> va adorer explorer</div>
+        </div>
+        <div class="mystery-lock"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="2" stroke="#D4A088" stroke-width="1.2"/><path d="M4 6V4.5a3 3 0 016 0V6" stroke="#D4A088" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+
+      <div class="mystery-item">
+        <div class="mystery-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="8" stroke="#D4A088" stroke-width="1.2" stroke-dasharray="3 2"/><circle cx="13" cy="13" r="3" fill="#E8C4AC"/></svg></div>
+        <div class="mystery-info">
+          <div class="mystery-name">Pour se reposer</div>
+          <div class="mystery-desc">Un accessoire cosy rien que pour <span class="mystery-gender-obj">lui</span></div>
+        </div>
+        <div class="mystery-lock"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="2" stroke="#D4A088" stroke-width="1.2"/><path d="M4 6V4.5a3 3 0 016 0V6" stroke="#D4A088" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+
+      <div class="mystery-item">
+        <div class="mystery-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="8" stroke="#D4A088" stroke-width="1.2" stroke-dasharray="3 2"/><circle cx="13" cy="13" r="3" fill="#E8C4AC"/></svg></div>
+        <div class="mystery-info">
+          <div class="mystery-name">Pour prendre soin</div>
+          <div class="mystery-desc">Un soin naturel pour sa fourrure</div>
+        </div>
+        <div class="mystery-lock"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="2" stroke="#D4A088" stroke-width="1.2"/><path d="M4 6V4.5a3 3 0 016 0V6" stroke="#D4A088" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+
+      <div class="mystery-item">
+        <div class="mystery-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="8" stroke="#D4A088" stroke-width="1.2" stroke-dasharray="3 2"/><circle cx="13" cy="13" r="3" fill="#E8C4AC"/></svg></div>
+        <div class="mystery-info">
+          <div class="mystery-name">Pour s'épanouir</div>
+          <div class="mystery-desc">Un jouet qui stimule ses petites méninges</div>
+        </div>
+        <div class="mystery-lock"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="2" stroke="#D4A088" stroke-width="1.2"/><path d="M4 6V4.5a3 3 0 016 0V6" stroke="#D4A088" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+
+      <div class="mystery-item" style="border-color:var(--terra);background:rgba(232,148,122,0.08)">
+        <div class="mystery-icon" style="background:var(--terra)"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 3l2.3 7H22l-5.8 4.2 2.2 6.8L13 17l-5.4 4 2.2-6.8L4 10h6.7z" stroke="#FDF6F0" stroke-width="1.2" stroke-linejoin="round" fill="none"/></svg></div>
+        <div class="mystery-info">
+          <div class="mystery-name" style="color:var(--terra)">La grande surprise</div>
+          <div class="mystery-desc">Celle que tu n'as pas vue venir. Promis.</div>
+        </div>
+        <div class="mystery-lock"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="2" stroke="#E8947A" stroke-width="1.2"/><path d="M4 6V4.5a3 3 0 016 0V6" stroke="#E8947A" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+
+    </div>
+
+    <p style="font-size:10px;color:var(--muted);text-align:center;margin-top:16px;letter-spacing:1px;font-weight:300">
+      100% naturel · Sélectionné avec amour · Livraison sous 48h
+    </p>
+
+  </div>
+</section>
+
+<!-- ─── SECTION POURQUOI ─── -->
+<section class="section-why" id="why">
+  <span class="section-tag fade-up">Pourquoi La Maison Winnie</span>
+  <h2 class="fade-up">Parce qu'<span id="why-gender-display">il</span> te donne <em>tout</em>,<br>sans rien demander</h2>
+  <div class="why-grid">
+    <div class="why-card fade-up">
+      <div class="why-card-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3C7.1 3 4 6.1 4 10s3.1 7 7 7 7-3.1 7-7" stroke="#7A4A3A" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M15 3l4 4-4 4" stroke="#7A4A3A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Sélectionné avec soin</h4>
+      <p>Chaque produit est testé et choisi pour sa qualité, sa sécurité et sa capacité à rendre ton lapin heureux.</p>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-card-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke="#7A4A3A" stroke-width="1.3" fill="none"/><path d="M8 11l2 2 4-4" stroke="#7A4A3A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>100% naturel</h4>
+      <p>Osier, bois non traité, jacinthe d'eau — rien de chimique, rien d'artificiel. Grignotable sans danger.</p>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-card-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2l2 6h6l-5 3.5 2 6L11 14l-5 3.5 2-6L3 8h6z" stroke="#7A4A3A" stroke-width="1.3" stroke-linejoin="round" fill="none"/></svg>
+      </div>
+      <h4>Une surprise à chaque fois</h4>
+      <p>Un 5ème produit mystère change régulièrement — bandana, accessoire exclusif, édition limitée.</p>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-card-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11h14M4 7h14M4 15h10" stroke="#7A4A3A" stroke-width="1.3" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Livraison offerte</h4>
+      <p>Chez toi sous 48h, dans un packaging soigné qui donne envie de filmer l'unboxing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION TÉMOIGNAGES ─── -->
+<section class="section-reviews" id="reviews">
+  <span class="section-tag fade-up">Ce que disent les mamans lapins</span>
+  <h2 class="fade-up">Des lapins <em>choyés</em><br>partout en France</h2>
+  <div class="reviews-grid">
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Ma lapine Noisette a sauté de joie en voyant le tunnel. Je n'avais jamais vu ça chez elle. La box vaut vraiment son prix."</div>
+      <div class="review-author">— Sophie M., propriétaire de Noisette</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Le packaging est tellement beau que j'ai hésité à l'ouvrir. Mon lapin lui n'a pas hésité — tout inspecté en 30 secondes."</div>
+      <div class="review-author">— Léa D., propriétaire de Caramel</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"La surprise du mois était un bandana avec son prénom brodé. J'ai pleuré. Mon lapin était magnifique. Je recommande à 100%."</div>
+      <div class="review-author">— Marine T., propriétaire de Réglisse</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION CTA ─── -->
+<section class="section-cta" id="cta">
+  <div class="cta-blob-l"></div>
+  <div class="cta-blob-r"></div>
+  <span class="section-tag fade-up">Prête à le chouchouter ?</span>
+  <h2 class="fade-up">Offre-lui<br>La Maison <em>Winnie</em></h2>
+  <p class="fade-up">Une seule box, cinq produits premium, une surprise — tout ce dont ton lapinou a besoin pour être au comble du bonheur.</p>
+  <div class="cta-card fade-up">
+    <div class="cta-price-block">
+      <div class="cta-price">54,90€</div>
+      <div class="cta-price-detail">Livraison offerte · Achat unique · Sans engagement</div>
+    </div>
+    <button class="btn-cta-final">Commander ma box</button>
+  </div>
+  <p class="cta-reassurance fade-up">Paiement sécurisé · Expédition sous 48h · Satisfait ou remboursé</p>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div>
+    <div class="footer-logo">La Maison Winnie</div>
+    <div class="footer-tagline">— bien-être pour lapins —</div>
+  </div>
+  <div class="footer-links">
+    <a href="#">Mentions légales</a>
+    <a href="#">CGV</a>
+    <a href="#">Retours</a>
+    <a href="#">Contact</a>
+    <a href="#">Instagram</a>
+  </div>
+  <div class="footer-copy">© 2025 La Maison Winnie</div>
+</footer>
+
+<script>
+// Nom lapin + genre live
+let currentGender = 'male';
+
+function setGender(g) {
+  currentGender = g;
+  const pronoun = g === 'male' ? 'il' : 'elle';
+  const pronounObj = g === 'male' ? 'lui' : 'elle';
+  document.getElementById('gender-display').textContent = pronoun;
+  document.getElementById('box-gender-display').textContent = pronounObj;
+  document.getElementById('why-gender-display').textContent = pronoun;
+  document.querySelectorAll('.mystery-gender').forEach(el => el.textContent = pronoun);
+  document.querySelectorAll('.mystery-gender-obj').forEach(el => el.textContent = pronounObj);
+  const btnMale = document.getElementById('btn-male');
+  const btnFemale = document.getElementById('btn-female');
+  if (g === 'male') {
+    btnMale.style.background = 'var(--brown)';
+    btnMale.style.color = 'var(--cream)';
+    btnFemale.style.background = 'transparent';
+    btnFemale.style.color = 'var(--muted)';
+  } else {
+    btnFemale.style.background = 'var(--brown)';
+    btnFemale.style.color = 'var(--cream)';
+    btnMale.style.background = 'transparent';
+    btnMale.style.color = 'var(--muted)';
+  }
+}
+
+const input = document.getElementById('rabbit-name-input');
+const display = document.getElementById('rabbit-name-display');
+if (input && display) {
+  input.addEventListener('input', () => {
+    const val = input.value.trim();
+    display.textContent = val || 'Winnie';
+  });
+  input.addEventListener('blur', () => {
+    if (!input.value.trim()) display.textContent = 'Winnie';
+  });
+}
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Fade up observer
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
