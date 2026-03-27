@@ -55,21 +55,16 @@ nav.scrolled{
   background:var(--cream);
   text-align:center;
 }
-
-/* blobs décoratifs DA */
 .blob-tl{position:absolute;top:-60px;left:-80px;width:340px;height:340px;border-radius:60% 40% 70% 30%/50% 60% 40% 50%;background:var(--peach);opacity:.45;animation:morph 8s ease-in-out infinite}
 .blob-tr{position:absolute;top:40px;right:-60px;width:240px;height:240px;border-radius:40% 60% 30% 70%/60% 40% 50% 50%;background:var(--peach2);opacity:.35;animation:morph 10s ease-in-out infinite reverse}
 .blob-bl{position:absolute;bottom:-40px;left:10%;width:180px;height:180px;border-radius:50% 60% 40% 60%/60% 50% 50% 40%;background:var(--terra);opacity:.18;animation:morph 7s ease-in-out infinite 2s}
 .blob-br{position:absolute;bottom:60px;right:8%;width:220px;height:220px;border-radius:55% 45% 65% 35%/45% 55% 45% 55%;background:var(--peach2);opacity:.28;animation:morph 9s ease-in-out infinite 1s}
-
-/* confettis ronds DA */
 .dot{position:absolute;border-radius:50%;pointer-events:none}
 
 .hero-tag{position:relative;z-index:2;font-size:10px;letter-spacing:5px;color:var(--mid);text-transform:uppercase;font-weight:300;margin-bottom:18px;animation:fadein .8s ease both}
 .hero-title{position:relative;z-index:2;font-family:'Playfair Display',serif;font-size:72px;line-height:1.05;color:var(--brown);font-weight:400;margin-bottom:24px;max-width:100%;word-break:break-word;overflow-wrap:break-word;animation:fadein .9s .12s ease both}
 .hero-title em{color:var(--terra);font-style:italic}
 .hero-sub{position:relative;z-index:2;font-size:16px;color:var(--mid);line-height:1.9;font-weight:300;max-width:520px;margin:0 auto 36px;animation:fadein .9s .24s ease both}
-.hero-actions{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;animation:fadein .9s .36s ease both}
 .btn-primary{
   background:var(--brown);color:var(--cream);
   padding:15px 38px;font-size:10px;letter-spacing:3px;text-transform:uppercase;
@@ -77,26 +72,18 @@ nav.scrolled{
   font-family:'Jost',sans-serif;transition:all .3s;
 }
 .btn-primary:hover{background:var(--terra);transform:translateY(-2px)}
-.hero-price{font-size:13px;color:var(--muted);font-weight:300}
-
-/* lapin SVG centré */
 .hero-rabbit{position:relative;z-index:2;margin:16px auto 0;animation:float 4s ease-in-out infinite, fadein 1s .5s ease both}
-
-/* scroll hint */
-.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3;animation:fadein 1s .7s ease both}
-.scroll-line{width:1px;height:40px;background:var(--border);animation:pulse 2s ease-in-out infinite}
-.scroll-text{font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
-
-/* badge prix */
 .rabbit-wrap{position:relative;display:inline-block}
 
 /* ─── SECTION BOX ─── */
 .section-box{
   padding:100px 56px;
-  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
   background:var(--light);
   border-top:0.5px solid var(--border);
-  border-bottom:0.5px solid var(--border);
 }
 .box-text .section-tag{font-size:10px;letter-spacing:5px;color:var(--mid);text-transform:uppercase;font-weight:300;margin-bottom:14px;display:block}
 .box-text h2{font-family:'Playfair Display',serif;font-size:46px;line-height:1.1;color:var(--brown);font-weight:400;margin-bottom:20px}
@@ -108,7 +95,6 @@ nav.scrolled{
   justify-content:center;
   align-items:center;
 }
-
 .box-visual img{
   width:100%;
   max-width:560px;
@@ -118,28 +104,50 @@ nav.scrolled{
   filter:drop-shadow(0 20px 40px rgba(122,74,58,0.10));
 }
 
-.products-list{display:flex;flex-direction:column;gap:10px}
-.product-item{
-  display:flex;align-items:center;gap:14px;
-  padding:14px 16px;border:0.5px solid var(--border);
-  border-radius:14px;background:var(--cream);transition:border-color .25s,transform .25s;
+/* ─── SECTION MYSTERY ─── */
+.section-mystery{
+  padding:70px 56px 100px;
+  background:var(--light);
+  border-bottom:0.5px solid var(--border);
 }
-.product-item:hover{border-color:var(--terra);transform:translateX(4px)}
-.product-icon{width:40px;height:40px;border-radius:10px;background:var(--peach);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.product-info{flex:1}
-.product-name{font-size:13px;color:var(--brown);font-weight:400;margin-bottom:2px}
-.product-desc{font-size:11px;color:var(--mid);font-weight:300}
-.product-check{width:20px;height:20px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.product-surprise{opacity:.55;border-style:dashed}
-.product-surprise .product-check{background:var(--muted)}
+.section-mystery-inner{
+  max-width:920px;
+  margin:0 auto;
+}
+.mystery-intro{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  line-height:1.5;
+  font-style:italic;
+  color:var(--brown);
+  margin-bottom:34px;
+}
 .mystery-grid{display:flex;flex-direction:column;gap:8px}
-.mystery-item{display:flex;align-items:center;gap:14px;padding:13px 16px;border:0.5px solid var(--border);border-radius:14px;background:var(--cream);transition:border-color .25s}
+.mystery-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:13px 16px;
+  border:0.5px solid var(--border);
+  border-radius:14px;
+  background:var(--cream);
+  transition:border-color .25s;
+}
 .mystery-item:hover{border-color:var(--terra)}
 .mystery-icon{width:40px;height:40px;border-radius:10px;background:var(--light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .mystery-info{flex:1}
 .mystery-name{font-size:13px;color:var(--brown);font-weight:400;margin-bottom:2px}
 .mystery-desc{font-size:11px;color:var(--mid);font-weight:300}
 .mystery-lock{flex-shrink:0;opacity:.6}
+.mystery-footer{
+  font-size:10px;
+  color:var(--muted);
+  text-align:center;
+  margin-top:16px;
+  letter-spacing:1px;
+  font-weight:300;
+}
 
 /* ─── SECTION POURQUOI ─── */
 .section-why{padding:100px 56px;text-align:center}
@@ -184,7 +192,6 @@ nav.scrolled{
 .section-cta h2{position:relative;z-index:2;font-family:'Playfair Display',serif;font-size:52px;color:var(--brown);font-weight:400;margin-bottom:14px;line-height:1.1}
 .section-cta h2 em{color:var(--terra);font-style:italic}
 .section-cta p{position:relative;z-index:2;font-size:15px;color:var(--mid);font-weight:300;margin-bottom:44px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.9}
-
 .cta-visual{
   position:relative;
   z-index:2;
@@ -193,7 +200,6 @@ nav.scrolled{
   align-items:center;
   margin:8px 0 32px;
 }
-
 .cta-visual img{
   width:100%;
   max-width:640px;
@@ -202,7 +208,6 @@ nav.scrolled{
   object-fit:contain;
   filter:drop-shadow(0 22px 45px rgba(122,74,58,0.10));
 }
-
 .cta-card{
   position:relative;z-index:2;
   display:inline-flex;align-items:center;gap:32px;
@@ -239,22 +244,18 @@ footer{
 @keyframes fadein{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes morph{0%,100%{border-radius:60% 40% 70% 30%/50% 60% 40% 50%}50%{border-radius:40% 60% 30% 70%/60% 40% 50% 50%}}
-@keyframes pulse{0%,100%{opacity:.3;height:40px}50%{opacity:.7;height:52px}}
 
 .fade-up{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
 /* ─── MOBILE ─── */
 @media(max-width:768px){
-
-  /* NAV — cacher tous les liens sauf Commander */
   nav{padding:14px 16px !important;gap:8px}
   .nav-links{gap:0}
   .nav-links a:not(.nav-cta){display:none !important}
   .nav-cta{padding:8px 14px;font-size:9px;letter-spacing:1px}
   .nav-logo{font-size:13px}
 
-  /* HERO — tout centrer et réduire */
   .hero{padding:88px 16px 48px !important;min-height:100svh}
   .hero-title{
     font-size:32px !important;
@@ -265,14 +266,11 @@ footer{
   }
   .hero-tag{font-size:9px;letter-spacing:3px}
   .hero-sub{font-size:13px !important;max-width:100% !important;padding:0 4px}
-
-  /* BLOBS — réduire pour éviter débordement */
   .blob-tl{width:160px !important;height:160px !important;top:-20px !important;left:-40px !important}
   .blob-tr{width:120px !important;height:120px !important;top:20px !important;right:-20px !important}
   .blob-bl{width:90px !important;height:90px !important}
   .blob-br{width:110px !important;height:110px !important;bottom:20px !important;right:0 !important}
 
-  /* INPUT — empiler verticalement */
   .name-input-wrap{width:100% !important;padding:0 4px}
   .name-input-wrap > div{
     flex-direction:column !important;
@@ -297,10 +295,8 @@ footer{
     width:100% !important;
   }
 
-  /* LAPIN */
   .hero-rabbit{width:160px !important;height:auto !important}
 
-  /* SECTION BOX — 1 colonne */
   .section-box{
     display:block !important;
     padding:48px 16px !important;
@@ -309,44 +305,37 @@ footer{
   .box-text h2{font-size:32px !important}
   .box-text p{max-width:100% !important;font-size:14px}
   .btn-primary{width:100% !important;text-align:center !important}
-  .box-visual{
-    margin-top:28px !important;
-  }
-  .box-visual img,
-  .cta-visual img{
-    max-width:100% !important;
-  }
+  .box-visual{margin-top:28px !important}
+  .box-visual img,.cta-visual img{max-width:100% !important}
 
-  /* MYSTERY */
+  .section-mystery{
+    padding:40px 16px 48px !important;
+  }
+  .mystery-intro{
+    font-size:22px !important;
+    margin-bottom:24px !important;
+  }
   .mystery-grid{gap:8px}
   .mystery-item{padding:12px 12px !important}
   .mystery-name{font-size:12px !important}
   .mystery-desc{font-size:11px !important}
 
-  /* SECTION POURQUOI — 1 colonne sur mobile */
   .section-why{padding:48px 16px !important}
   .section-why h2{font-size:28px !important;margin-bottom:28px !important}
-  .why-grid{
-    grid-template-columns:1fr !important;
-    gap:10px !important;
-  }
+  .why-grid{grid-template-columns:1fr !important;gap:10px !important}
   .why-card{padding:18px 16px !important}
   .why-card h4{font-size:14px !important}
   .why-card p{font-size:12px !important}
 
-  /* SECTION AVIS */
   .section-reviews{padding:48px 16px !important}
   .section-reviews h2{font-size:28px !important;margin-bottom:28px !important}
   .reviews-grid{grid-template-columns:1fr !important;gap:12px !important}
   .review-text{font-size:13px !important}
 
-  /* SECTION CTA */
   .section-cta{padding:48px 16px !important}
   .section-cta h2{font-size:32px !important}
   .section-cta p{font-size:14px !important;max-width:100% !important}
-  .cta-visual{
-    margin:10px 0 24px !important;
-  }
+  .cta-visual{margin:10px 0 24px !important}
   .cta-card{
     flex-direction:column !important;
     gap:16px !important;
@@ -358,7 +347,6 @@ footer{
   .btn-cta-final{width:100% !important;padding:15px !important}
   .cta-blob-l,.cta-blob-r{display:none !important}
 
-  /* FOOTER */
   footer{
     flex-direction:column !important;
     gap:16px !important;
@@ -375,30 +363,29 @@ footer{
 </head>
 <body>
 
-<!-- ─── NAV ─── -->
 <nav id="nav">
   <div>
     <div class="nav-logo" style="display:flex;align-items:center;gap:10px">
-    <svg width="36" height="36" viewBox="0 0 44 44" fill="none">
-      <ellipse cx="16" cy="16" rx="7" ry="12" fill="#E8A882"/>
-      <ellipse cx="28" cy="16" rx="7" ry="12" fill="#E8A882"/>
-      <ellipse cx="16" cy="14" rx="4.5" ry="9" fill="#F5C4B3" opacity="0.7"/>
-      <ellipse cx="28" cy="14" rx="4.5" ry="9" fill="#F5C4B3" opacity="0.7"/>
-      <ellipse cx="22" cy="28" rx="16" ry="14" fill="#F2C4A8"/>
-      <circle cx="17" cy="25" r="2.2" fill="#7A4A3A"/>
-      <circle cx="27" cy="25" r="2.2" fill="#7A4A3A"/>
-      <circle cx="17.8" cy="24.2" r="0.8" fill="white"/>
-      <circle cx="27.8" cy="24.2" r="0.8" fill="white"/>
-      <ellipse cx="22" cy="30" rx="3" ry="2" fill="#E8947A"/>
-      <line x1="17" y1="28" x2="10" y2="26" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
-      <line x1="17" y1="30" x2="9" y2="30" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
-      <line x1="27" y1="28" x2="34" y2="26" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
-      <line x1="27" y1="30" x2="35" y2="30" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
-    </svg>
-    <div>
-      <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--brown);letter-spacing:1px;line-height:1.1">La Maison Winnie</div>
+      <svg width="36" height="36" viewBox="0 0 44 44" fill="none">
+        <ellipse cx="16" cy="16" rx="7" ry="12" fill="#E8A882"/>
+        <ellipse cx="28" cy="16" rx="7" ry="12" fill="#E8A882"/>
+        <ellipse cx="16" cy="14" rx="4.5" ry="9" fill="#F5C4B3" opacity="0.7"/>
+        <ellipse cx="28" cy="14" rx="4.5" ry="9" fill="#F5C4B3" opacity="0.7"/>
+        <ellipse cx="22" cy="28" rx="16" ry="14" fill="#F2C4A8"/>
+        <circle cx="17" cy="25" r="2.2" fill="#7A4A3A"/>
+        <circle cx="27" cy="25" r="2.2" fill="#7A4A3A"/>
+        <circle cx="17.8" cy="24.2" r="0.8" fill="white"/>
+        <circle cx="27.8" cy="24.2" r="0.8" fill="white"/>
+        <ellipse cx="22" cy="30" rx="3" ry="2" fill="#E8947A"/>
+        <line x1="17" y1="28" x2="10" y2="26" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
+        <line x1="17" y1="30" x2="9" y2="30" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
+        <line x1="27" y1="28" x2="34" y2="26" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
+        <line x1="27" y1="30" x2="35" y2="30" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--brown);letter-spacing:1px;line-height:1.1">La Maison Winnie</div>
+      </div>
     </div>
-  </div>
   </div>
   <div class="nav-links">
     <a href="#box">La box</a>
@@ -408,7 +395,6 @@ footer{
   </div>
 </nav>
 
-<!-- ─── HERO ─── -->
 <section class="hero">
   <div class="blob-tl"></div>
   <div class="blob-tr"></div>
@@ -428,6 +414,7 @@ footer{
     <em id="rabbit-name-display">Winnie</em><br>
     comme <span id="gender-display">il</span> le mérite
   </h1>
+
   <div class="name-input-wrap" style="position:relative;z-index:2;margin-top:-8px;margin-bottom:0;animation:fadein .9s .3s ease both">
     <label style="font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;font-weight:300;display:block;margin-bottom:8px">
       Quel est le prénom de ton lapin ?
@@ -524,7 +511,6 @@ footer{
   </div>
 </section>
 
-<!-- ─── SECTION BOX ─── -->
 <section class="section-box" id="box">
   <div class="box-text fade-up">
     <span class="section-tag">Ce qu'il y a dans la box</span>
@@ -538,13 +524,14 @@ footer{
   <div class="box-visual fade-up">
     <img src="box-winnie.png" alt="La box La Maison Winnie" />
   </div>
+</section>
 
-  <div class="products-list fade-up">
-    <div style="text-align:center;margin-bottom:20px">
-      <p style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--brown);line-height:1.7">
-        5 surprises sélectionnées avec amour.<br>Tu sauras ce que c'est à l'ouverture.
-      </p>
-    </div>
+<section class="section-mystery">
+  <div class="section-mystery-inner fade-up">
+    <p class="mystery-intro">
+      5 surprises sélectionnées avec amour.<br>
+      Tu sauras ce que c'est à l'ouverture.
+    </p>
 
     <div class="mystery-grid">
       <div class="mystery-item">
@@ -593,13 +580,12 @@ footer{
       </div>
     </div>
 
-    <p style="font-size:10px;color:var(--muted);text-align:center;margin-top:16px;letter-spacing:1px;font-weight:300">
+    <p class="mystery-footer">
       100% naturel · Sélectionné avec amour · Livraison sous 48h
     </p>
   </div>
 </section>
 
-<!-- ─── SECTION POURQUOI ─── -->
 <section class="section-why" id="why">
   <span class="section-tag fade-up">Pourquoi La Maison Winnie</span>
   <h2 class="fade-up">Parce qu'<span id="why-gender-display">il</span> te donne <em>tout</em>,<br>sans rien demander</h2>
@@ -635,7 +621,6 @@ footer{
   </div>
 </section>
 
-<!-- ─── SECTION TÉMOIGNAGES ─── -->
 <section class="section-reviews" id="reviews">
   <span class="section-tag fade-up">Ce que disent les mamans lapins</span>
   <h2 class="fade-up">Des lapins <em>choyés</em><br>partout en France</h2>
@@ -658,7 +643,6 @@ footer{
   </div>
 </section>
 
-<!-- ─── SECTION CTA ─── -->
 <section class="section-cta" id="cta">
   <div class="cta-blob-l"></div>
   <div class="cta-blob-r"></div>
@@ -680,7 +664,6 @@ footer{
   <p class="cta-reassurance fade-up">Paiement sécurisé · Expédition sous 48h · Satisfait ou remboursé</p>
 </section>
 
-<!-- ─── FOOTER ─── -->
 <footer>
   <div>
     <div class="footer-logo">La Maison Winnie</div>
