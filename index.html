@@ -103,6 +103,21 @@ nav.scrolled{
 .box-text h2 em{color:var(--terra);font-style:italic}
 .box-text p{font-size:15px;color:var(--mid);line-height:1.9;font-weight:300;margin-bottom:32px;max-width:460px}
 
+.box-visual{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.box-visual img{
+  width:100%;
+  max-width:560px;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  filter:drop-shadow(0 20px 40px rgba(122,74,58,0.10));
+}
+
 .products-list{display:flex;flex-direction:column;gap:10px}
 .product-item{
   display:flex;align-items:center;gap:14px;
@@ -169,6 +184,25 @@ nav.scrolled{
 .section-cta h2{position:relative;z-index:2;font-family:'Playfair Display',serif;font-size:52px;color:var(--brown);font-weight:400;margin-bottom:14px;line-height:1.1}
 .section-cta h2 em{color:var(--terra);font-style:italic}
 .section-cta p{position:relative;z-index:2;font-size:15px;color:var(--mid);font-weight:300;margin-bottom:44px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.9}
+
+.cta-visual{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:8px 0 32px;
+}
+
+.cta-visual img{
+  width:100%;
+  max-width:640px;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  filter:drop-shadow(0 22px 45px rgba(122,74,58,0.10));
+}
+
 .cta-card{
   position:relative;z-index:2;
   display:inline-flex;align-items:center;gap:32px;
@@ -275,6 +309,13 @@ footer{
   .box-text h2{font-size:32px !important}
   .box-text p{max-width:100% !important;font-size:14px}
   .btn-primary{width:100% !important;text-align:center !important}
+  .box-visual{
+    margin-top:28px !important;
+  }
+  .box-visual img,
+  .cta-visual img{
+    max-width:100% !important;
+  }
 
   /* MYSTERY */
   .mystery-grid{gap:8px}
@@ -303,6 +344,9 @@ footer{
   .section-cta{padding:48px 16px !important}
   .section-cta h2{font-size:32px !important}
   .section-cta p{font-size:14px !important;max-width:100% !important}
+  .cta-visual{
+    margin:10px 0 24px !important;
+  }
   .cta-card{
     flex-direction:column !important;
     gap:16px !important;
@@ -336,21 +380,16 @@ footer{
   <div>
     <div class="nav-logo" style="display:flex;align-items:center;gap:10px">
     <svg width="36" height="36" viewBox="0 0 44 44" fill="none">
-      <!-- oreilles -->
       <ellipse cx="16" cy="16" rx="7" ry="12" fill="#E8A882"/>
       <ellipse cx="28" cy="16" rx="7" ry="12" fill="#E8A882"/>
       <ellipse cx="16" cy="14" rx="4.5" ry="9" fill="#F5C4B3" opacity="0.7"/>
       <ellipse cx="28" cy="14" rx="4.5" ry="9" fill="#F5C4B3" opacity="0.7"/>
-      <!-- tête -->
       <ellipse cx="22" cy="28" rx="16" ry="14" fill="#F2C4A8"/>
-      <!-- yeux -->
       <circle cx="17" cy="25" r="2.2" fill="#7A4A3A"/>
       <circle cx="27" cy="25" r="2.2" fill="#7A4A3A"/>
       <circle cx="17.8" cy="24.2" r="0.8" fill="white"/>
       <circle cx="27.8" cy="24.2" r="0.8" fill="white"/>
-      <!-- nez -->
       <ellipse cx="22" cy="30" rx="3" ry="2" fill="#E8947A"/>
-      <!-- moustaches -->
       <line x1="17" y1="28" x2="10" y2="26" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
       <line x1="17" y1="30" x2="9" y2="30" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
       <line x1="27" y1="28" x2="34" y2="26" stroke="#C87A5A" stroke-width="0.8" stroke-linecap="round"/>
@@ -371,12 +410,10 @@ footer{
 
 <!-- ─── HERO ─── -->
 <section class="hero">
-  <!-- blobs DA -->
   <div class="blob-tl"></div>
   <div class="blob-tr"></div>
   <div class="blob-bl"></div>
   <div class="blob-br"></div>
-  <!-- confettis DA -->
   <div class="dot" style="width:10px;height:10px;background:#E8947A;opacity:.35;top:22%;left:18%"></div>
   <div class="dot" style="width:6px;height:6px;background:#F2C4A8;opacity:.5;top:35%;left:8%"></div>
   <div class="dot" style="width:8px;height:8px;background:#D4A088;opacity:.4;top:65%;left:14%"></div>
@@ -396,7 +433,6 @@ footer{
       Quel est le prénom de ton lapin ?
     </label>
     <div style="display:flex;align-items:center;gap:8px;max-width:380px;margin:0 auto">
-      <!-- Toggle genre -->
       <div style="display:flex;background:var(--light);border:0.5px solid var(--border);border-radius:50px;padding:3px;flex-shrink:0">
         <button id="btn-male"
           onclick="setGender('male')"
@@ -417,7 +453,6 @@ footer{
             transition:all .2s;
           ">Elle</button>
       </div>
-      <!-- Champ prénom -->
       <div style="flex:1;display:flex;align-items:center;gap:0;background:var(--light);border:0.5px solid var(--border);border-radius:50px;padding:4px 4px 4px 18px">
         <input
           id="rabbit-name-input"
@@ -451,59 +486,42 @@ footer{
     Une box premium pensée avec amour — jouets en osier, soins naturels et accessoires soigneusement sélectionnés pour le bonheur de ton lapinou.
   </p>
 
-
-
-  <!-- Lapin illustré centré -->
   <div class="rabbit-wrap">
     <svg class="hero-rabbit" width="260" height="280" viewBox="0 0 260 280" fill="none">
-      <!-- ombre -->
       <ellipse cx="130" cy="265" rx="70" ry="12" fill="#E8C4AC" opacity="0.4"/>
-      <!-- corps -->
       <ellipse cx="130" cy="200" rx="70" ry="68" fill="#F5EDE6"/>
       <ellipse cx="130" cy="215" rx="50" ry="52" fill="#FDF6F0" opacity="0.55"/>
-      <!-- oreilles -->
       <ellipse cx="100" cy="108" rx="20" ry="54" fill="#F5EDE6" transform="rotate(-10 100 108)"/>
       <ellipse cx="160" cy="108" rx="20" ry="54" fill="#F5EDE6" transform="rotate(10 160 108)"/>
       <ellipse cx="100" cy="100" rx="12" ry="40" fill="#FBEADF" transform="rotate(-10 100 100)"/>
       <ellipse cx="160" cy="100" rx="12" ry="40" fill="#FBEADF" transform="rotate(10 160 100)"/>
       <ellipse cx="100" cy="98" rx="7" ry="28" fill="#F5C4B3" opacity="0.55" transform="rotate(-10 100 98)"/>
       <ellipse cx="160" cy="98" rx="7" ry="28" fill="#F5C4B3" opacity="0.55" transform="rotate(10 160 98)"/>
-      <!-- tête / museau -->
       <ellipse cx="130" cy="195" rx="58" ry="62" fill="#F2C4A8"/>
-      <!-- yeux -->
       <circle cx="110" cy="178" r="9" fill="#7A4A3A"/>
       <circle cx="150" cy="178" r="9" fill="#7A4A3A"/>
       <circle cx="112" cy="175" r="3" fill="white"/>
       <circle cx="152" cy="175" r="3" fill="white"/>
-      <!-- nez -->
       <ellipse cx="130" cy="194" rx="10" ry="7" fill="#E8947A"/>
-      <!-- sourire -->
       <path d="M118 204 Q130 215 142 204" stroke="#D4A088" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <!-- moustaches -->
       <line x1="118" y1="191" x2="96" y2="185" stroke="#D4A088" stroke-width="1" stroke-linecap="round"/>
       <line x1="118" y1="196" x2="94" y2="195" stroke="#D4A088" stroke-width="1" stroke-linecap="round"/>
       <line x1="142" y1="191" x2="164" y2="185" stroke="#D4A088" stroke-width="1" stroke-linecap="round"/>
       <line x1="142" y1="196" x2="166" y2="195" stroke="#D4A088" stroke-width="1" stroke-linecap="round"/>
-      <!-- pattes -->
       <ellipse cx="82" cy="252" rx="26" ry="14" fill="#F2C4A8"/>
       <ellipse cx="178" cy="252" rx="26" ry="14" fill="#F2C4A8"/>
       <ellipse cx="68" cy="256" rx="18" ry="10" fill="#FBEADF"/>
       <ellipse cx="192" cy="256" rx="18" ry="10" fill="#FBEADF"/>
       <ellipse cx="148" cy="260" rx="20" ry="11" fill="#F2C4A8"/>
-      <!-- petits bras -->
       <ellipse cx="66" cy="226" rx="13" ry="9" fill="#F2C4A8" transform="rotate(-25 66 226)"/>
       <ellipse cx="194" cy="226" rx="13" ry="9" fill="#F2C4A8" transform="rotate(25 194 226)"/>
-      <!-- joues roses -->
       <circle cx="96" cy="192" r="10" fill="#E8947A" opacity="0.25"/>
       <circle cx="164" cy="192" r="10" fill="#E8947A" opacity="0.25"/>
-      <!-- petits details déco DA -->
       <circle cx="210" cy="155" r="5" fill="#E8947A" opacity="0.25"/>
       <circle cx="52" cy="170" r="4" fill="#F2C4A8" opacity="0.4"/>
       <circle cx="220" cy="200" r="3" fill="#D4A088" opacity="0.35"/>
     </svg>
   </div>
-
-
 </section>
 
 <!-- ─── SECTION BOX ─── -->
@@ -516,8 +534,12 @@ footer{
       Commander — 54,90€
     </button>
   </div>
-  <div class="products-list fade-up">
 
+  <div class="box-visual fade-up">
+    <img src="ChatGPT%20Image%2027%20mars%202026%2C%2019_11_05.png" alt="La box La Maison Winnie" />
+  </div>
+
+  <div class="products-list fade-up">
     <div style="text-align:center;margin-bottom:20px">
       <p style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--brown);line-height:1.7">
         5 surprises sélectionnées avec amour.<br>Tu sauras ce que c'est à l'ouverture.
@@ -525,7 +547,6 @@ footer{
     </div>
 
     <div class="mystery-grid">
-
       <div class="mystery-item">
         <div class="mystery-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="8" stroke="#D4A088" stroke-width="1.2" stroke-dasharray="3 2"/><circle cx="13" cy="13" r="3" fill="#E8C4AC"/></svg></div>
         <div class="mystery-info">
@@ -570,13 +591,11 @@ footer{
         </div>
         <div class="mystery-lock"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="2" stroke="#E8947A" stroke-width="1.2"/><path d="M4 6V4.5a3 3 0 016 0V6" stroke="#E8947A" stroke-width="1.2" stroke-linecap="round"/></svg></div>
       </div>
-
     </div>
 
     <p style="font-size:10px;color:var(--muted);text-align:center;margin-top:16px;letter-spacing:1px;font-weight:300">
       100% naturel · Sélectionné avec amour · Livraison sous 48h
     </p>
-
   </div>
 </section>
 
@@ -646,6 +665,11 @@ footer{
   <span class="section-tag fade-up">Prête à le chouchouter ?</span>
   <h2 class="fade-up">Offre-lui<br>La Maison <em>Winnie</em></h2>
   <p class="fade-up">Une seule box, cinq produits premium, une surprise — tout ce dont ton lapinou a besoin pour être au comble du bonheur.</p>
+
+  <div class="cta-visual fade-up">
+    <img src="ChatGPT%20Image%2027%20mars%202026%2C%2019_11_05.png" alt="La box premium La Maison Winnie" />
+  </div>
+
   <div class="cta-card fade-up">
     <div class="cta-price-block">
       <div class="cta-price">54,90€</div>
@@ -673,7 +697,6 @@ footer{
 </footer>
 
 <script>
-// Nom lapin + genre live
 let currentGender = 'male';
 
 function setGender(g) {
@@ -712,13 +735,11 @@ if (input && display) {
   });
 }
 
-// Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// Fade up observer
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
