@@ -136,6 +136,114 @@ nav.scrolled{
 .how-card h4{font-family:'Playfair Display',serif;font-size:20px;color:var(--brown);margin-bottom:10px;font-weight:400}
 .how-card p{font-size:13px;color:var(--mid);line-height:1.8;font-weight:300}
 
+/* ─── SECTION PROMISE ─── */
+.section-promise{
+  padding:100px 56px;
+  background:var(--cream);
+  border-top:0.5px solid var(--border);
+  border-bottom:0.5px solid var(--border);
+}
+.promise-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  gap:56px;
+  align-items:center;
+}
+.promise-text h2{
+  font-family:'Playfair Display',serif;
+  font-size:48px;
+  line-height:1.1;
+  color:var(--brown);
+  font-weight:400;
+  margin-bottom:18px;
+}
+.promise-text h2 em{
+  color:var(--terra);
+  font-style:italic;
+}
+.promise-lead{
+  font-size:15px;
+  line-height:1.9;
+  color:var(--mid);
+  font-weight:300;
+  max-width:700px;
+  margin-bottom:30px;
+}
+.promise-cards{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.promise-card{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  background:var(--light);
+  border:0.5px solid var(--border);
+  border-radius:18px;
+  padding:18px 18px;
+}
+.promise-card-icon{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(232,148,122,0.12);
+  color:var(--terra);
+  font-size:14px;
+  flex-shrink:0;
+}
+.promise-card h4{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  color:var(--brown);
+  font-weight:400;
+  margin-bottom:6px;
+}
+.promise-card p{
+  font-size:13px;
+  line-height:1.8;
+  color:var(--mid);
+  font-weight:300;
+}
+.promise-visual{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.promise-seal{
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:linear-gradient(180deg, rgba(245,208,184,0.38) 0%, rgba(251,234,223,0.9) 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(122,74,58,0.08);
+  box-shadow:0 18px 45px rgba(122,74,58,0.06);
+}
+.promise-seal-inner{
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  border:1px solid rgba(122,74,58,0.10);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:rgba(253,246,240,0.72);
+}
+.promise-seal-inner span{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  line-height:1.25;
+  color:rgba(122,74,58,0.55);
+}
+
 /* ─── SECTION MONTHLY ─── */
 .section-mystery{
   padding:70px 56px 100px;
@@ -355,6 +463,41 @@ footer{
   .section-how h2{font-size:28px !important;margin-bottom:28px !important}
   .how-grid{grid-template-columns:1fr !important;gap:12px !important}
 
+  .section-promise{
+    padding:48px 16px !important;
+  }
+  .promise-inner{
+    grid-template-columns:1fr !important;
+    gap:28px !important;
+  }
+  .promise-text h2{
+    font-size:30px !important;
+  }
+  .promise-lead{
+    font-size:14px !important;
+    max-width:100% !important;
+  }
+  .promise-card{
+    padding:16px !important;
+  }
+  .promise-card h4{
+    font-size:17px !important;
+  }
+  .promise-card p{
+    font-size:12px !important;
+  }
+  .promise-seal{
+    width:180px !important;
+    height:180px !important;
+  }
+  .promise-seal-inner{
+    width:135px !important;
+    height:135px !important;
+  }
+  .promise-seal-inner span{
+    font-size:20px !important;
+  }
+
   .section-mystery{
     padding:40px 16px 48px !important;
   }
@@ -464,52 +607,52 @@ footer{
   </h1>
 
   <div class="name-input-wrap" style="position:relative;z-index:2;margin-top:-8px;margin-bottom:0;animation:fadein .9s .3s ease both">
-  <label style="font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;font-weight:300;display:block;margin-bottom:8px">
-    Quel est le prénom de ton lapin ?
-  </label>
-  <div style="display:flex;align-items:center;gap:8px;max-width:380px;margin:0 auto">
-    <div style="display:flex;background:var(--light);border:0.5px solid var(--border);border-radius:50px;padding:3px;flex-shrink:0">
-      <button id="btn-male"
-        onclick="setGender('male')"
-        style="
-          background:var(--brown);color:var(--cream);
-          border:none;border-radius:50px;padding:8px 14px;
-          font-size:11px;letter-spacing:2px;text-transform:uppercase;
-          font-family:'Jost',sans-serif;font-weight:400;cursor:pointer;
-          transition:all .2s;
-        ">Lapin</button>
-      <button id="btn-female"
-        onclick="setGender('female')"
-        style="
-          background:transparent;color:var(--muted);
-          border:none;border-radius:50px;padding:8px 14px;
-          font-size:11px;letter-spacing:2px;text-transform:uppercase;
-          font-family:'Jost',sans-serif;font-weight:400;cursor:pointer;
-          transition:all .2s;
-        ">Lapine</button>
-    </div>
-    <div style="flex:1;display:flex;align-items:center;background:var(--light);border:0.5px solid var(--border);border-radius:50px;padding:4px 18px">
-      <input
-        id="rabbit-name-input"
-        type="text"
-        placeholder="Winnie"
-        maxlength="20"
-        style="
-          flex:1;background:transparent;border:none;outline:none;
-          font-family:'Playfair Display',serif;font-size:16px;font-style:italic;
-          color:var(--terra);font-weight:400;caret-color:var(--terra);width:100%;
-        "
-      />
+    <label style="font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;font-weight:300;display:block;margin-bottom:8px">
+      Quel est le prénom de ton lapin ?
+    </label>
+    <div style="display:flex;align-items:center;gap:8px;max-width:380px;margin:0 auto">
+      <div style="display:flex;background:var(--light);border:0.5px solid var(--border);border-radius:50px;padding:3px;flex-shrink:0">
+        <button id="btn-male"
+          onclick="setGender('male')"
+          style="
+            background:var(--brown);color:var(--cream);
+            border:none;border-radius:50px;padding:8px 14px;
+            font-size:11px;letter-spacing:2px;text-transform:uppercase;
+            font-family:'Jost',sans-serif;font-weight:400;cursor:pointer;
+            transition:all .2s;
+          ">Lapin</button>
+        <button id="btn-female"
+          onclick="setGender('female')"
+          style="
+            background:transparent;color:var(--muted);
+            border:none;border-radius:50px;padding:8px 14px;
+            font-size:11px;letter-spacing:2px;text-transform:uppercase;
+            font-family:'Jost',sans-serif;font-weight:400;cursor:pointer;
+            transition:all .2s;
+          ">Lapine</button>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;background:var(--light);border:0.5px solid var(--border);border-radius:50px;padding:4px 18px">
+        <input
+          id="rabbit-name-input"
+          type="text"
+          placeholder="Winnie"
+          maxlength="20"
+          style="
+            flex:1;background:transparent;border:none;outline:none;
+            font-family:'Playfair Display',serif;font-size:16px;font-style:italic;
+            color:var(--terra);font-weight:400;caret-color:var(--terra);width:100%;
+          "
+        />
+      </div>
     </div>
   </div>
-</div>
 
   <p class="hero-sub">
     Chaque mois, une nouvelle sélection de friandises naturelles, jouets à mâcher et accessoires d’occupation pour le bonheur et le bien-être de ton lapinou.
   </p>
 
   <div class="hero-monthly-note">
-  Box mensuelle · Sans engagement · Annulable à tout moment
+    Box mensuelle · Sans engagement · Annulable à tout moment
   </div>
 
   <div class="rabbit-wrap">
@@ -585,52 +728,65 @@ footer{
   <span class="section-tag fade-up">Comment ça marche</span>
   <h2 class="fade-up">Un rendez-vous <em>mensuel</em><br>pour ton lapin</h2>
   <div class="how-grid">
-  <div class="how-card fade-up">
-    <div class="how-number">01</div>
-    <h4>Tu t’abonnes</h4>
-    <p>Tu rejoins La Maison Winnie et reçois chaque mois une nouvelle box pensée pour le plaisir et le bien-être de ton lapin.</p>
+    <div class="how-card fade-up">
+      <div class="how-number">01</div>
+      <h4>Tu t’abonnes</h4>
+      <p>Tu rejoins La Maison Winnie et reçois chaque mois une nouvelle box pensée pour le plaisir et le bien-être de ton lapin.</p>
+    </div>
+    <div class="how-card fade-up">
+      <div class="how-number">02</div>
+      <h4>Tu reçois la box du mois</h4>
+      <p>Chaque édition propose une sélection renouvelée de friandises, produits de mastication et jeux d’occupation.</p>
+    </div>
+    <div class="how-card fade-up">
+      <div class="how-number">03</div>
+      <h4>Tu gardes la liberté</h4>
+      <p>Sans engagement, ton abonnement est annulable à tout moment et pensé pour rester simple à gérer.</p>
+    </div>
   </div>
-  <div class="how-card fade-up">
-    <div class="how-number">02</div>
-    <h4>Tu reçois la box du mois</h4>
-    <p>Chaque édition propose une sélection renouvelée de friandises, produits de mastication et jeux d’occupation.</p>
-  </div>
-  <div class="how-card fade-up">
-    <div class="how-number">03</div>
-    <h4>Tu gardes la liberté</h4>
-    <p>Sans engagement, ton abonnement est annulable à tout moment et pensé pour rester simple à gérer.</p>
-  </div>
-</div>
 </section>
 
 <section class="section-promise">
-  <div class="promise-inner fade-up">
-    <div class="promise-text">
+  <div class="promise-inner">
+    <div class="promise-text fade-up">
       <span class="section-tag">Notre promesse</span>
       <h2>Une box pensée avec <em>douceur</em></h2>
       <p class="promise-lead">
         Chaque mois, La Maison Winnie imagine une sélection cohérente de friandises naturelles, produits de mastication et jeux d’occupation pour offrir à ton lapin une expérience aussi jolie qu’utile.
       </p>
 
-      <div class="promise-list">
-        <div class="promise-item">
-          <span class="promise-icon">✦</span>
-          <p>Une sélection mensuelle choisie avec soin, sans superflu</p>
+      <div class="promise-cards">
+        <div class="promise-card">
+          <div class="promise-card-icon">✦</div>
+          <div>
+            <h4>Une sélection mensuelle</h4>
+            <p>Choisie avec soin, sans superflu, pour un vrai moment de plaisir.</p>
+          </div>
         </div>
-        <div class="promise-item">
-          <span class="promise-icon">✦</span>
-          <p>Des produits pensés pour le plaisir, l’occupation et le bien-être</p>
+
+        <div class="promise-card">
+          <div class="promise-card-icon">✦</div>
+          <div>
+            <h4>Des produits pensés pour lui</h4>
+            <p>Mastication, occupation et douceurs réunies dans une box harmonieuse.</p>
+          </div>
         </div>
-        <div class="promise-item">
-          <span class="promise-icon">✦</span>
-          <p>Une box premium, sans engagement et annulable à tout moment</p>
+
+        <div class="promise-card">
+          <div class="promise-card-icon">✦</div>
+          <div>
+            <h4>Un abonnement libre</h4>
+            <p>Sans engagement, annulable à tout moment, avec une nouvelle édition chaque mois.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="promise-mark">
-      <div class="promise-mark-circle">
-        <span>La Maison Winnie</span>
+    <div class="promise-visual fade-up">
+      <div class="promise-seal">
+        <div class="promise-seal-inner">
+          <span>La Maison<br>Winnie</span>
+        </div>
       </div>
     </div>
   </div>
@@ -773,15 +929,15 @@ footer{
     </div>
     <button class="btn-cta-final">Découvrir la box du mois</button>
   </div>
-  
+
   <div style="position:relative;z-index:2;margin-top:18px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;color:var(--mid);font-size:11px;font-weight:300">
-  <span>Sans engagement</span>
-  <span>·</span>
-  <span>Annulable à tout moment</span>
-  <span>·</span>
-  <span>Gestion simple de l’abonnement</span>
-</div>
-  
+    <span>Sans engagement</span>
+    <span>·</span>
+    <span>Annulable à tout moment</span>
+    <span>·</span>
+    <span>Gestion simple de l’abonnement</span>
+  </div>
+
   <p class="cta-reassurance fade-up">Box mensuelle · Sans engagement · Annulable à tout moment</p>
 </section>
 
