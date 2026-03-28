@@ -215,6 +215,16 @@ nav.scrolled{
   justify-content:center;
   align-items:center;
 }
+ .promise-photo{
+  width:100%;
+  max-width:420px;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:28px;
+  box-shadow:0 18px 45px rgba(122,74,58,0.10);
+  border:0.5px solid var(--border);
+}
 .promise-seal{
   width:280px;
   height:280px;
@@ -473,6 +483,12 @@ footer{
   .promise-text h2{
     font-size:30px !important;
   }
+
+  .promise-photo{
+  max-width:100% !important;
+  aspect-ratio:4/5;
+  border-radius:22px !important;
+}
   .promise-lead{
     font-size:14px !important;
     max-width:100% !important;
@@ -783,12 +799,8 @@ footer{
     </div>
 
     <div class="promise-visual fade-up">
-      <div class="promise-seal">
-        <div class="promise-seal-inner">
-          <span>La Maison<br>Winnie</span>
-        </div>
-      </div>
-    </div>
+  <img src="rabbit-promise.jpg" alt="Lapin La Maison Winnie" class="promise-photo">
+</div>
   </div>
 </section>
 
