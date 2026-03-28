@@ -550,6 +550,106 @@ nav.scrolled{
   box-shadow:0 18px 45px rgba(122,74,58,0.10);
   border:0.5px solid var(--border);
 }
+
+.section-origin{
+  padding:100px 56px;
+  background:var(--light);
+}
+
+.origin-wrap{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  gap:56px;
+  align-items:center;
+}
+
+.section-kicker{
+  display:inline-block;
+  margin-bottom:14px;
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--mid);
+}
+
+.origin-text h2{
+  margin:0 0 22px;
+  font-family:'Playfair Display',serif;
+  font-size:48px;
+  line-height:1.08;
+  color:var(--brown);
+  font-weight:500;
+}
+
+.origin-text h2 span{
+  color:var(--terra);
+  font-style:italic;
+}
+
+.origin-text p{
+  margin:0 0 18px;
+  font-size:17px;
+  line-height:1.9;
+  color:var(--brown);
+  opacity:0.92;
+}
+
+.origin-text strong{
+  font-weight:600;
+  color:var(--brown);
+}
+
+.origin-note{
+  margin-top:24px;
+  display:inline-block;
+  padding:14px 18px;
+  border:1px solid rgba(122,74,58,0.12);
+  background:rgba(255,255,255,0.55);
+  border-radius:18px;
+  color:var(--brown);
+  font-size:15px;
+  line-height:1.6;
+}
+
+.origin-visual{
+  display:flex;
+  justify-content:center;
+}
+
+.origin-photo-placeholder{
+  width:100%;
+  max-width:430px;
+  aspect-ratio:4/5;
+  border-radius:28px;
+  border:1px dashed var(--border);
+  background:linear-gradient(180deg, rgba(245,208,184,0.22) 0%, rgba(251,234,223,0.78) 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:24px;
+  box-shadow:0 18px 45px rgba(122,74,58,0.05);
+}
+
+.origin-photo-placeholder span{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  line-height:1.35;
+  color:rgba(122,74,58,0.45);
+}
+
+.origin-photo{
+  width:100%;
+  max-width:430px;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:28px;
+  box-shadow:0 18px 45px rgba(122,74,58,0.10);
+  border:0.5px solid var(--border);
+} 
   
 /* ─── SECTION POURQUOI ─── */
 .section-why{padding:100px 56px;text-align:center}
@@ -801,6 +901,34 @@ footer{
 
 .namebox-image-placeholder,
 .namebox-photo{
+  max-width:100% !important;
+  border-radius:22px !important;
+}
+
+.section-origin{
+  padding:56px 16px !important;
+}
+
+.origin-wrap{
+  grid-template-columns:1fr !important;
+  gap:28px !important;
+}
+
+.origin-text h2{
+  font-size:32px !important;
+}
+
+.origin-text p{
+  font-size:15px !important;
+  line-height:1.8 !important;
+}
+
+.origin-note{
+  font-size:14px !important;
+}
+
+.origin-photo-placeholder,
+.origin-photo{
   max-width:100% !important;
   border-radius:22px !important;
 }
@@ -1190,7 +1318,47 @@ footer{
   </div>
 </section>
 
-<section class="section-why" id="why">
+<section class="section-origin">
+  <div class="origin-wrap">
+    <div class="origin-text fade-up">
+      <span class="section-kicker">NOTRE HISTOIRE</span>
+      <h2>Pourquoi est née <span>La Maison Winnie</span> ?</h2>
+
+      <p>
+        Tout a commencé avec <strong>Winnie</strong>, notre petite lapine de 7 mois.
+        Comme beaucoup de lapins, elle est curieuse, vive et a besoin d’être stimulée
+        chaque jour pour vraiment s’épanouir.
+      </p>
+
+      <p>
+        En cherchant pour elle, on s’est vite rendu compte qu’il y avait
+        <strong>peu de choix vraiment attirants</strong>, souvent à des prix élevés,
+        et rarement de quoi varier facilement les plaisirs au fil des semaines.
+      </p>
+
+      <p>
+        Alors on a décidé de créer ce qu’on aurait aimé trouver pour elle :
+        une <strong>box mensuelle douce, jolie et bien pensée</strong>, avec de nouveaux
+        jouets et découvertes pour stimuler mentalement, amuser et faire plaisir aux lapins.
+      </p>
+
+      <p>
+        Aujourd’hui, chaque box est imaginée avec la même intention :
+        <strong>offrir à ton lapin ce que nous voulons offrir à Winnie.</strong>
+      </p>
+
+      <div class="origin-note">
+        💛 Et aujourd’hui, Winnie inspire chaque box avant toi.
+      </div>
+    </div>
+
+    <div class="origin-visual fade-up">
+      <div class="origin-photo-placeholder">
+        <span>Photo de Winnie / photo fondatrice</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section-why" id="why">
   <span class="section-tag fade-up">Pourquoi La Maison Winnie</span>
