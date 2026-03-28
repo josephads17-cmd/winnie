@@ -763,33 +763,43 @@ let currentGender = 'male';
 
 function setGender(g) {
   currentGender = g;
+
   const pronoun = g === 'male' ? 'il' : 'elle';
   const pronounObj = g === 'male' ? 'lui' : 'elle';
-  document.getElementById('gender-display').textContent = pronoun;
-  document.getElementById('box-gender-display').textContent = pronounObj;
-  document.getElementById('why-gender-display').textContent = pronoun;
+
+  const boxGender = document.getElementById('box-gender-display');
+  const whyGender = document.getElementById('why-gender-display');
+
+  if (boxGender) boxGender.textContent = pronounObj;
+  if (whyGender) whyGender.textContent = pronoun;
+
   const btnMale = document.getElementById('btn-male');
   const btnFemale = document.getElementById('btn-female');
-  if (g === 'male') {
-    btnMale.style.background = 'var(--brown)';
-    btnMale.style.color = 'var(--cream)';
-    btnFemale.style.background = 'transparent';
-    btnFemale.style.color = 'var(--muted)';
-  } else {
-    btnFemale.style.background = 'var(--brown)';
-    btnFemale.style.color = 'var(--cream)';
-    btnMale.style.background = 'transparent';
-    btnMale.style.color = 'var(--muted)';
+
+  if (btnMale && btnFemale) {
+    if (g === 'male') {
+      btnMale.style.background = 'var(--brown)';
+      btnMale.style.color = 'var(--cream)';
+      btnFemale.style.background = 'transparent';
+      btnFemale.style.color = 'var(--muted)';
+    } else {
+      btnFemale.style.background = 'var(--brown)';
+      btnFemale.style.color = 'var(--cream)';
+      btnMale.style.background = 'transparent';
+      btnMale.style.color = 'var(--muted)';
+    }
   }
 }
 
 const input = document.getElementById('rabbit-name-input');
 const display = document.getElementById('rabbit-name-display');
+
 if (input && display) {
   input.addEventListener('input', () => {
     const val = input.value.trim();
     display.textContent = val || 'Winnie';
   });
+
   input.addEventListener('blur', () => {
     if (!input.value.trim()) display.textContent = 'Winnie';
   });
@@ -797,12 +807,15 @@ if (input && display) {
 
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 50);
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
 });
 
 const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
 }, { threshold: 0.12 });
+
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </script>
 </body>
