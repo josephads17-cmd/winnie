@@ -750,6 +750,12 @@ footer{
 .fade-up{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
+.rabbit-name-highlight{
+  color:var(--terra);
+  font-style:italic;
+  font-weight:600;
+}  
+
 /* ─── MOBILE ─── */
 @media(max-width:768px){
   nav{padding:14px 16px !important;gap:8px}
@@ -1512,16 +1518,16 @@ function updateDynamicTexts() {
   }
 
   if (textMerite) {
-    textMerite.innerText = name
-      ? "Parce que " + name + " mérite le meilleur, tout simplement"
-      : meritFallback;
-  }
+  textMerite.innerHTML = name
+    ? 'Parce que <span class="rabbit-name-highlight">' + name + '</span> mérite le meilleur, tout simplement'
+    : meritFallback;
+}
 
-  if (textAbonne) {
-    textAbonne.innerText = name
-      ? "Offre à " + name + " une box pleine d’attention"
-      : abonneFallback;
-  }
+if (textAbonne) {
+  textAbonne.innerHTML = name
+    ? 'Offre à <span class="rabbit-name-highlight">' + name + '</span> une box pleine d’attention'
+    : abonneFallback;
+}
 }
 
 function setGender(g) {
