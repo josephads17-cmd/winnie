@@ -755,6 +755,10 @@ footer{
   font-style:italic;
   font-weight:600;
 }  
+.hero-button-active{
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
 
 /* ─── MOBILE ─── */
 @media(max-width:768px){
@@ -1538,9 +1542,13 @@ if (ctaButton) {
   const heroButton = document.getElementById("hero-button");
 
 if (heroButton) {
-  heroButton.innerText = name
-    ? "Je chouchoute " + name
-    : "Je m’abonne";
+  if (name) {
+    heroButton.innerText = "Je chouchoute " + name;
+    heroButton.classList.add("hero-button-active");
+  } else {
+    heroButton.innerText = "Je m’abonne";
+    heroButton.classList.remove("hero-button-active");
+  }
 }
 
 function setGender(g) {
