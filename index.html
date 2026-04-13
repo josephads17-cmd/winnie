@@ -1118,7 +1118,7 @@ footer{
 <section class="section-box" id="box">
   <div class="box-text fade-up">
     <span class="section-tag">La box du mois</span>
-    <h2>Une sélection mensuelle<br><em>pensée pour <span id="box-gender-display">lui</span></em></h2>
+    <h2>Une sélection mensuelle<br><em>pensée pour <span id="text-selection">lui</span></em></h2>
     <p>
       Chaque édition réunit un assortiment soigné de friandises naturelles, produits de mastication et jouets d’occupation pour stimuler, apaiser et faire plaisir.
     </p>
@@ -1157,7 +1157,7 @@ footer{
 
 <section class="section-how" id="how">
   <span class="section-tag fade-up">Comment ça marche</span>
-  <h2 class="fade-up">Un rendez-vous <em>mensuel</em><br>pour ton lapin</h2>
+  <h2 class="fade-up">Un rendez-vous <em>mensuel</em><br>pour <span id="text-rdv">ton lapin</span></h2>
   <div class="how-grid">
     <div class="how-card fade-up">
       <div class="how-number">01</div>
@@ -1509,6 +1509,19 @@ if (input && display) {
   input.addEventListener('input', () => {
     const val = input.value.trim();
     display.textContent = val || 'Winnie';
+    const name = val 
+  ? val.charAt(0).toUpperCase() + val.slice(1) 
+  : '';
+
+document.getElementById("text-selection").innerText = name || "lui";
+document.getElementById("text-rdv").innerText = name || "ton lapin";
+document.getElementById("text-merite").innerText = name 
+  ? "Parce que " + name + " mérite mieux qu’un simple achat"
+  : "Parce qu'il mérite mieux qu’un simple achat";
+
+document.getElementById("text-abonne").innerText = name 
+  ? "Abonne " + name + " à La Maison Winnie"
+  : "Abonne ton lapin à La Maison Winnie";
   });
 
   input.addEventListener('blur', () => {
