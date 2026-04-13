@@ -1142,7 +1142,7 @@ footer{
         Produits choisis avec soin, sans superflu
       </div>
     </div>
-    <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+    <button class="btn-primary" id="hero-button" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
   Je m'abonne
 </button>
 
@@ -1535,6 +1535,12 @@ if (ctaButton) {
   ? "Je gâte " + name
   : "Je m'abonne maintenant";
 }
+  const heroButton = document.getElementById("hero-button");
+
+if (heroButton) {
+  heroButton.innerText = name
+    ? "Je chouchoute " + name
+    : "Je m’abonne";
 }
 
 function setGender(g) {
