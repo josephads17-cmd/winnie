@@ -1476,17 +1476,56 @@ footer{
 <script>
 let currentGender = 'male';
 
+function updateDynamicTexts() {
+  const input = document.getElementById('rabbit-name-input');
+  const display = document.getElementById('rabbit-name-display');
+
+  if (!input || !display) return;
+
+  const val = input.value.trim();
+  const name = val
+    ? val.charAt(0).toUpperCase() + val.slice(1)
+    : '';
+
+  display.textContent = name || 'Winnie';
+
+  const pronounObj = currentGender === 'male' ? 'lui' : 'elle';
+  const petLabel = currentGender === 'male' ? 'ton lapin' : 'ta lapine';
+  const meritFallback = currentGender === 'male'
+    ? "Parce qu'il mérite le meilleur, tout simplement"
+    : "Parce qu'elle mérite le meilleur, tout simplement";
+  const abonneFallback = currentGender === 'male'
+    ? "Offre à ton lapin une box pleine d’attention"
+    : "Offre à ta lapine une box pleine d’attention";
+
+  const textSelection = document.getElementById("text-selection");
+  const textRdv = document.getElementById("text-rdv");
+  const textMerite = document.getElementById("text-merite");
+  const textAbonne = document.getElementById("text-abonne");
+
+  if (textSelection) {
+    textSelection.innerText = name || pronounObj;
+  }
+
+  if (textRdv) {
+    textRdv.innerText = name || petLabel;
+  }
+
+  if (textMerite) {
+    textMerite.innerText = name
+      ? "Parce que " + name + " mérite le meilleur, tout simplement"
+      : meritFallback;
+  }
+
+  if (textAbonne) {
+    textAbonne.innerText = name
+      ? "Offre à " + name + " une box pleine d’attention"
+      : abonneFallback;
+  }
+}
+
 function setGender(g) {
   currentGender = g;
-
-  const pronoun = g === 'male' ? 'il' : 'elle';
-  const pronounObj = g === 'male' ? 'lui' : 'elle';
-
-  const boxGender = document.getElementById('box-gender-display');
-  const whyGender = document.getElementById('why-gender-display');
-
-  if (boxGender) boxGender.textContent = pronounObj;
-  if (whyGender) whyGender.textContent = pronoun;
 
   const btnMale = document.getElementById('btn-male');
   const btnFemale = document.getElementById('btn-female');
@@ -1504,34 +1543,25 @@ function setGender(g) {
       btnMale.style.color = 'var(--muted)';
     }
   }
+
+  updateDynamicTexts();
 }
 
 const input = document.getElementById('rabbit-name-input');
 const display = document.getElementById('rabbit-name-display');
 
 if (input && display) {
-  input.addEventListener('input', () => {
-    const val = input.value.trim();
-    display.textContent = val || 'Winnie';
-    const name = val 
-  ? val.charAt(0).toUpperCase() + val.slice(1) 
-  : '';
-
-document.getElementById("text-selection").innerText = name || "lui";
-document.getElementById("text-rdv").innerText = name || "ton lapin";
-document.getElementById("text-merite").innerText = name
-  ? "Parce que " + name + " mérite le meilleur, tout simplement"
-  : "Parce qu'il mérite le meilleur, tout simplement";
-
-document.getElementById("text-abonne").innerText = name
-  ? "Offre à " + name + " une box pleine d’attention"
-  : "Offre à ton lapin une box pleine d’attention";
-  });
+  input.addEventListener('input', updateDynamicTexts);
 
   input.addEventListener('blur', () => {
-    if (!input.value.trim()) display.textContent = 'Winnie';
+    if (!input.value.trim()) {
+      display.textContent = 'Winnie';
+      updateDynamicTexts();
+    }
   });
 }
+
+updateDynamicTexts();
 
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
