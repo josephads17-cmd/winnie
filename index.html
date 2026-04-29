@@ -1452,6 +1452,82 @@ footer{
   justify-content:center;
 }
   
+/* ─── SECTION VIDEO ─── */
+.section-video{
+  padding:90px 56px;
+  background:var(--cream);
+  text-align:center;
+  border-top:0.5px solid var(--border);
+  border-bottom:0.5px solid var(--border);
+}
+
+.video-inner{
+  max-width:900px;
+  margin:0 auto;
+}
+
+.section-video h2{
+  font-family:'Playfair Display',serif;
+  font-size:44px;
+  line-height:1.15;
+  color:var(--brown);
+  font-weight:400;
+  margin-bottom:16px;
+}
+
+.section-video h2 em{
+  color:var(--terra);
+  font-style:italic;
+}
+
+.section-video p{
+  max-width:680px;
+  margin:0 auto 30px;
+  font-size:15px;
+  line-height:1.9;
+  color:var(--mid);
+  font-weight:300;
+}
+
+.video-frame{
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+  border-radius:28px;
+  overflow:hidden;
+  border:0.5px solid var(--border);
+  box-shadow:0 18px 45px rgba(122,74,58,0.10);
+  background:var(--light);
+}
+
+.video-frame video{
+  width:100%;
+  display:block;
+  aspect-ratio:16/9;
+  object-fit:cover;
+}
+
+.video-note{
+  margin-top:16px !important;
+  margin-bottom:0 !important;
+  font-size:13px !important;
+  color:var(--muted) !important;
+}
+
+@media(max-width:768px){
+  .section-video{
+    padding:56px 16px !important;
+  }
+
+  .section-video h2{
+    font-size:30px !important;
+  }
+
+  .video-frame{
+    border-radius:20px !important;
+  }
+}
+  
 </style>
 </head>
 <body>
@@ -1855,6 +1931,33 @@ Sans engagement · Annulable à tout moment
   </div>
 </section> 
 
+<section class="section-video">
+  <div class="video-inner fade-up">
+    <span class="section-tag">Préparée avec soin</span>
+
+    <h2>
+      Une box composée<br>
+      <em>à la main</em>
+    </h2>
+
+    <p>
+      Chaque édition est préparée avec attention : une sélection naturelle, jolie et utile,
+      pensée pour offrir à ton lapin un vrai moment de découverte.
+    </p>
+
+    <div class="video-frame">
+      <video controls playsinline preload="metadata" poster="box-winnie.png">
+        <source src="preparation-box.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture vidéo.
+      </video>
+    </div>
+
+    <p class="video-note">
+      Préparée comme si c’était pour Winnie 🐰
+    </p>
+  </div>
+</section>
+  
  <!-- 
 <section class="section-mystery">
   <div class="section-mystery-inner fade-up">
