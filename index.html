@@ -1115,6 +1115,117 @@ footer{
   }
 }
   
+  /* ─── SECTION INSIDE BOX ─── */
+.section-inside-box{
+  padding:90px 56px;
+  background:var(--cream);
+  text-align:center;
+  border-top:0.5px solid var(--border);
+}
+
+.section-inside-box h2{
+  font-family:'Playfair Display',serif;
+  font-size:44px;
+  color:var(--brown);
+  font-weight:400;
+  margin-bottom:16px;
+  line-height:1.15;
+}
+
+.section-inside-box h2 em{
+  color:var(--terra);
+  font-style:italic;
+}
+
+.inside-intro{
+  max-width:640px;
+  margin:0 auto 38px;
+  font-size:15px;
+  line-height:1.9;
+  color:var(--mid);
+  font-weight:300;
+}
+
+.inside-grid{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.inside-card{
+  background:var(--light);
+  border:0.5px solid var(--border);
+  border-radius:22px;
+  padding:26px 20px;
+  text-align:left;
+  transition:transform .3s,border-color .3s;
+}
+
+.inside-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--terra);
+}
+
+.inside-icon{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  background:rgba(232,148,122,0.12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  margin-bottom:16px;
+}
+
+.inside-card h4{
+  font-family:'Playfair Display',serif;
+  font-size:19px;
+  color:var(--brown);
+  font-weight:400;
+  margin-bottom:8px;
+}
+
+.inside-card p{
+  font-size:12px;
+  line-height:1.8;
+  color:var(--mid);
+  font-weight:300;
+}
+
+.inside-note{
+  max-width:720px;
+  margin:28px auto 0;
+  padding:14px 18px;
+  background:rgba(255,255,255,0.45);
+  border:0.5px solid var(--border);
+  border-radius:16px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+@media(max-width:768px){
+  .section-inside-box{
+    padding:56px 16px !important;
+  }
+
+  .section-inside-box h2{
+    font-size:30px !important;
+  }
+
+  .inside-grid{
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+
+  .inside-card{
+    padding:20px 18px !important;
+  }
+}
+  
 </style>
 </head>
 <body>
@@ -1308,7 +1419,49 @@ footer{
     <img src="box-winnie.png" alt="La box mensuelle La Maison Winnie" />
   </div>
 </section>
+  
+<section class="section-inside-box" id="inside-box">
+  <span class="section-tag fade-up">Dans la box</span>
 
+  <h2 class="fade-up">
+    Ce que ton lapin reçoit<br><em>chaque mois</em>
+  </h2>
+
+  <p class="inside-intro fade-up">
+    Chaque édition varie, mais l’objectif reste le même : proposer une box complète, utile et agréable à découvrir.
+  </p>
+
+  <div class="inside-grid">
+    <div class="inside-card fade-up">
+      <div class="inside-icon">🌿</div>
+      <h4>Friandises naturelles</h4>
+      <p>Une sélection de douceurs pour varier les plaisirs et créer un vrai moment de découverte.</p>
+    </div>
+
+    <div class="inside-card fade-up">
+      <div class="inside-icon">🪵</div>
+      <h4>Mastication</h4>
+      <p>Des produits pensés pour occuper ton lapin et l’aider à exprimer son besoin naturel de ronger.</p>
+    </div>
+
+    <div class="inside-card fade-up">
+      <div class="inside-icon">🧺</div>
+      <h4>Jouets d’occupation</h4>
+      <p>Des éléments à explorer, pousser, grignoter ou manipuler pour stimuler sa curiosité.</p>
+    </div>
+
+    <div class="inside-card fade-up">
+      <div class="inside-icon">✨</div>
+      <h4>Surprise du mois</h4>
+      <p>Un petit plus selon l’édition, pour garder l’effet découverte à chaque nouvelle box.</p>
+    </div>
+  </div>
+
+  <div class="inside-note fade-up">
+    Le contenu exact peut varier selon les éditions, afin de garder une box renouvelée et intéressante chaque mois.
+  </div>
+</section>
+  
 <section class="section-how" id="how">
   <span class="section-tag fade-up">Comment ça marche</span>
   <h2 class="fade-up">Un rendez-vous <em>mensuel</em><br>pour <span id="text-rdv">ton lapin</span></h2>
