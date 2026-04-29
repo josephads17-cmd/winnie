@@ -1311,6 +1311,72 @@ footer{
     gap:12px !important;
   }
 }
+
+  /* ─── SECTION FAQ ─── */
+.section-faq{
+  padding:90px 56px;
+  background:var(--cream);
+  text-align:center;
+  border-top:0.5px solid var(--border);
+}
+
+.section-faq h2{
+  font-family:'Playfair Display',serif;
+  font-size:44px;
+  line-height:1.15;
+  color:var(--brown);
+  font-weight:400;
+  margin-bottom:38px;
+}
+
+.section-faq h2 em{
+  color:var(--terra);
+  font-style:italic;
+}
+
+.faq-list{
+  max-width:900px;
+  margin:0 auto;
+  display:grid;
+  gap:14px;
+  text-align:left;
+}
+
+.faq-item{
+  background:var(--light);
+  border:0.5px solid var(--border);
+  border-radius:20px;
+  padding:22px 24px;
+}
+
+.faq-item h4{
+  font-family:'Playfair Display',serif;
+  font-size:21px;
+  color:var(--brown);
+  font-weight:400;
+  margin-bottom:8px;
+}
+
+.faq-item p{
+  font-size:13px;
+  line-height:1.8;
+  color:var(--mid);
+  font-weight:300;
+}
+
+@media(max-width:768px){
+  .section-faq{
+    padding:56px 16px !important;
+  }
+
+  .section-faq h2{
+    font-size:30px !important;
+  }
+
+  .faq-item{
+    padding:18px 16px !important;
+  }
+}
   
 </style>
 </head>
@@ -1888,6 +1954,41 @@ footer{
   </div>
 </section>
 
+  <section class="section-faq" id="faq">
+  <span class="section-tag fade-up">Questions fréquentes</span>
+
+  <h2 class="fade-up">
+    Avant de recevoir<br><em>ta première box</em>
+  </h2>
+
+  <div class="faq-list">
+    <div class="faq-item fade-up">
+      <h4>Que contient la box ?</h4>
+      <p>Chaque édition contient une sélection de friandises naturelles, produits de mastication, jouets d’occupation et une surprise selon le mois.</p>
+    </div>
+
+    <div class="faq-item fade-up">
+      <h4>Le contenu change-t-il chaque mois ?</h4>
+      <p>Oui. Le but est de proposer une nouvelle découverte à chaque édition, tout en gardant une sélection cohérente.</p>
+    </div>
+
+    <div class="faq-item fade-up">
+      <h4>Puis-je annuler facilement ?</h4>
+      <p>Oui. L’abonnement est sans engagement et peut être annulé à tout moment depuis l’espace client sécurisé.</p>
+    </div>
+
+    <div class="faq-item fade-up">
+      <h4>Quand suis-je débité ?</h4>
+      <p>Le paiement est prélevé chaque mois à la date de renouvellement de ton abonnement.</p>
+    </div>
+
+    <div class="faq-item fade-up">
+      <h4>La livraison est-elle incluse ?</h4>
+      <p>Oui, la livraison est offerte dans le prix de l’abonnement.</p>
+    </div>
+  </div>
+</section>
+  
 <section class="section-cta" id="cta">
   <div class="cta-blob-l"></div>
   <div class="cta-blob-r"></div>
