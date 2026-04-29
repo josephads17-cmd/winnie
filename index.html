@@ -1080,6 +1080,41 @@ footer{
     font-size:19px !important;
   }
 }
+
+  .hero-trust-row{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin:0 auto 28px;
+  max-width:760px;
+}
+
+.hero-trust-row span{
+  background:rgba(255,255,255,0.55);
+  border:0.5px solid var(--border);
+  color:var(--brown);
+  padding:10px 15px;
+  border-radius:999px;
+  font-size:12px;
+  letter-spacing:1px;
+  font-weight:400;
+}
+
+@media(max-width:768px){
+  .hero-trust-row{
+    gap:8px;
+    margin-bottom:22px;
+  }
+
+  .hero-trust-row span{
+    font-size:11px;
+    padding:9px 12px;
+  }
+}
+  
 </style>
 </head>
 <body>
@@ -1180,7 +1215,14 @@ footer{
   <p class="hero-sub">
     Une box mensuelle premium pour lapin, avec une sélection de friandises naturelles et jouets — sans engagement, résiliable à tout moment.
   </p>
-
+  
+<div class="hero-trust-row">
+  <span>39,90€ / mois</span>
+  <span>Livraison offerte</span>
+  <span>Sans engagement</span>
+  <span>Testée par Winnie 🐰</span>
+</div>
+  
   <div class="hero-monthly-note">
     Box mensuelle · Sans engagement · Annulable à tout moment
   </div>
