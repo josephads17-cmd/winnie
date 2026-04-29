@@ -982,6 +982,104 @@ footer{
     gap:12px !important;
   }
 }
+  /* ─── SECTION WINNIE TEST ─── */
+.section-winnie-test{
+  padding:100px 56px;
+  background:var(--cream);
+  border-top:0.5px solid var(--border);
+  border-bottom:0.5px solid var(--border);
+}
+
+.winnie-test-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:0.95fr 1.05fr;
+  gap:56px;
+  align-items:center;
+}
+
+.winnie-test-photo{
+  width:100%;
+  max-width:440px;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:28px;
+  box-shadow:0 18px 45px rgba(122,74,58,0.10);
+  border:0.5px solid var(--border);
+}
+
+.winnie-test-text h2{
+  font-family:'Playfair Display',serif;
+  font-size:48px;
+  line-height:1.1;
+  color:var(--brown);
+  font-weight:400;
+  margin-bottom:18px;
+}
+
+.winnie-test-text h2 em{
+  color:var(--terra);
+  font-style:italic;
+}
+
+.winnie-test-text p{
+  font-size:15px;
+  line-height:1.9;
+  color:var(--mid);
+  font-weight:300;
+  max-width:680px;
+  margin-bottom:16px;
+}
+
+.winnie-quote{
+  margin-top:24px;
+  padding:18px 20px;
+  background:var(--light);
+  border:0.5px solid var(--border);
+  border-radius:18px;
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  line-height:1.45;
+  color:var(--brown);
+  font-style:italic;
+}
+
+.winnie-signature{
+  margin-top:14px;
+  font-size:14px;
+  color:var(--terra);
+  font-style:italic;
+}
+
+@media(max-width:768px){
+  .section-winnie-test{
+    padding:56px 16px !important;
+  }
+
+  .winnie-test-inner{
+    grid-template-columns:1fr !important;
+    gap:28px !important;
+  }
+
+  .winnie-test-text h2{
+    font-size:32px !important;
+  }
+
+  .winnie-test-text p{
+    font-size:14px !important;
+  }
+
+  .winnie-test-photo{
+    max-width:100% !important;
+    border-radius:22px !important;
+  }
+
+  .winnie-quote{
+    font-size:19px !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -1232,7 +1330,44 @@ footer{
 </div>
   </div>
 </section>
+ 
+<section class="section-winnie-test">
+  <div class="winnie-test-inner">
 
+    <div class="winnie-test-visual fade-up">
+      <img src="winnie-test-box.jpg" alt="Winnie teste la box" class="winnie-test-photo">
+    </div>
+
+    <div class="winnie-test-text fade-up">
+      <span class="section-tag">Testé par Winnie</span>
+
+      <h2>Chaque box est validée<br><em>par Winnie</em></h2>
+
+      <p>
+        Avant d’arriver chez toi, chaque box passe entre les pattes de Winnie.
+      </p>
+
+      <p>
+        Je m'appelle Winnie, j’ai été adoptée avec beaucoup d’amour,
+        et aujourd’hui je teste chaque produit pour m’assurer qu’il est vraiment intéressant pour les lapins.
+      </p>
+
+      <p>
+        Si ça ne me plaît pas, ça ne rentre pas dans la box.
+      </p>
+
+      <div class="winnie-quote">
+        “Si ça ne m’intéresse pas… ça ne rentre pas.”
+      </div>
+
+      <div class="winnie-signature">
+        — Winnie 🐰
+      </div>
+    </div>
+
+  </div>
+</section>
+  
 <section class="section-mystery">
   <div class="section-mystery-inner fade-up">
     <p class="mystery-intro">
