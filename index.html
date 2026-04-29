@@ -1225,6 +1225,92 @@ footer{
     padding:20px 18px !important;
   }
 }
+
+  /* ─── SECTION CONTROL ─── */
+.section-control{
+  padding:90px 56px;
+  background:var(--light);
+  border-top:0.5px solid var(--border);
+  border-bottom:0.5px solid var(--border);
+}
+
+.control-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:0.9fr 1.1fr;
+  gap:48px;
+  align-items:center;
+}
+
+.control-text h2{
+  font-family:'Playfair Display',serif;
+  font-size:46px;
+  line-height:1.1;
+  color:var(--brown);
+  font-weight:400;
+  margin-bottom:18px;
+}
+
+.control-text h2 em{
+  color:var(--terra);
+  font-style:italic;
+}
+
+.control-text p{
+  font-size:15px;
+  line-height:1.9;
+  color:var(--mid);
+  font-weight:300;
+}
+
+.control-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.control-card{
+  background:var(--cream);
+  border:0.5px solid var(--border);
+  border-radius:22px;
+  padding:24px 20px;
+}
+
+.control-card h4{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  color:var(--brown);
+  font-weight:400;
+  margin-bottom:8px;
+}
+
+.control-card p{
+  font-size:12px;
+  line-height:1.8;
+  color:var(--mid);
+  font-weight:300;
+}
+
+@media(max-width:768px){
+  .section-control{
+    padding:56px 16px !important;
+  }
+
+  .control-inner{
+    grid-template-columns:1fr !important;
+    gap:28px !important;
+  }
+
+  .control-text h2{
+    font-size:30px !important;
+  }
+
+  .control-grid{
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+}
   
 </style>
 </head>
@@ -1747,7 +1833,39 @@ footer{
     </div>
   </div>
 </section>
+  
+<section class="section-control">
+  <div class="control-inner">
+    <div class="control-text fade-up">
+      <span class="section-tag">Sans engagement</span>
 
+      <h2>Tu gardes toujours<br><em>le contrôle</em></h2>
+
+      <p>
+        La Maison Winnie fonctionne par abonnement mensuel, mais tu restes libre à tout moment.
+        Tu peux gérer ton abonnement simplement depuis ton espace client sécurisé.
+      </p>
+    </div>
+
+    <div class="control-grid">
+      <div class="control-card fade-up">
+        <h4>Annulable à tout moment</h4>
+        <p>Aucun engagement longue durée. Tu peux arrêter l’abonnement quand tu le souhaites.</p>
+      </div>
+
+      <div class="control-card fade-up">
+        <h4>Paiement sécurisé</h4>
+        <p>Les paiements sont gérés via Stripe, une solution fiable et sécurisée.</p>
+      </div>
+
+      <div class="control-card fade-up">
+        <h4>Espace client</h4>
+        <p>Tu peux retrouver tes factures, gérer ton abonnement et mettre à jour ton moyen de paiement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+  
 <section class="section-reviews" id="reviews">
   <span class="section-tag fade-up">Ce que disent les mamans lapins</span>
   <h2 class="fade-up">Des lapins <em>choyés</em><br>mois après mois</h2>
