@@ -1386,6 +1386,56 @@ footer{
   letter-spacing:1px;
   font-weight:300;
 }
+
+  /* ─── MID CTA ─── */
+.section-mid-cta{
+  padding:64px 56px;
+  background:var(--light);
+  border-bottom:0.5px solid var(--border);
+  text-align:center;
+}
+
+.mid-cta-inner{
+  max-width:760px;
+  margin:0 auto;
+  background:var(--cream);
+  border:0.5px solid var(--border);
+  border-radius:28px;
+  padding:42px 34px;
+  box-shadow:0 18px 45px rgba(122,74,58,0.06);
+}
+
+.mid-cta-inner h2{
+  font-family:'Playfair Display',serif;
+  font-size:38px;
+  line-height:1.15;
+  color:var(--brown);
+  font-weight:400;
+  margin:12px 0 12px;
+}
+
+.mid-cta-inner p{
+  font-size:14px;
+  line-height:1.8;
+  color:var(--mid);
+  font-weight:300;
+  margin-bottom:24px;
+}
+
+@media(max-width:768px){
+  .section-mid-cta{
+    padding:42px 16px !important;
+  }
+
+  .mid-cta-inner{
+    padding:30px 20px !important;
+    border-radius:22px !important;
+  }
+
+  .mid-cta-inner h2{
+    font-size:28px !important;
+  }
+}
   
 </style>
 </head>
@@ -1721,6 +1771,25 @@ footer{
       </div>
     </div>
 
+  </div>
+</section>
+
+<section class="section-mid-cta">
+  <div class="mid-cta-inner fade-up">
+    <span class="section-tag">Prêt à essayer ?</span>
+
+    <h2>Offre à ton lapin sa première box Winnie</h2>
+
+    <p>
+      Une sélection mensuelle naturelle, ludique et sans engagement.
+    </p>
+
+    <a href="https://buy.stripe.com/fZu6oH0hX4tPbEf1QR2Fa01"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="btn-primary">
+      Je découvre la box
+    </a>
   </div>
 </section>
   
