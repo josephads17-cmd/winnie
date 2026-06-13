@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1399877371962156');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1399877371962156&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Maison Winnie — Box mensuelle pour lapin</title>
+  <meta name="description" content="Une box mensuelle pour stimuler, occuper et gâter ton lapin : friandises naturelles, mastication, jouets d’occupation, livraison offerte et sans engagement." />
+  <meta property="og:title" content="La Maison Winnie — La box mensuelle pour lapin" />
+  <meta property="og:description" content="Chaque mois, une sélection naturelle, ludique et personnalisée pour ton lapin. Livraison offerte, sans engagement." />
+  <meta property="og:image" content="box-winnie.png" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://lamaisonwinnie.com/index-v2.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --cream:#FDF6F0;--cream-2:#FFF9F4;--sand:#F6E4D7;--peach:#F2C4A8;--terra:#E8947A;
+      --brown:#6F4032;--brown-2:#3F241C;--mid:#A5664E;--muted:#9C6B5C;--border:#E8C4AC;
+      --white:#fff;--shadow:0 22px 60px rgba(111,64,50,.10);--soft-shadow:0 14px 38px rgba(111,64,50,.08);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--brown);overflow-x:hidden}
+    img,video{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    button,input{font:inherit}
+    .container{max-width:1180px;margin:0 auto;padding:0 28px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(232,148,122,.28);border-radius:999px;background:rgba(255,255,255,.52);color:var(--mid);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:15px 26px;border-radius:999px;border:1px solid transparent;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;transition:transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--brown);color:var(--cream);box-shadow:0 14px 32px rgba(111,64,50,.18)}
+    .btn-primary:hover{background:var(--terra)}
+    .btn-secondary{background:rgba(255,255,255,.58);color:var(--brown);border-color:var(--border)}
+    .btn-secondary:hover{border-color:var(--terra);background:rgba(255,255,255,.82)}
+    .note{font-size:13px;color:var(--muted);line-height:1.7}
+    .section{padding:92px 0;border-top:1px solid rgba(232,196,172,.65)}
+    .section-title{font-family:'Playfair Display',serif;font-size:48px;line-height:1.08;font-weight:600;color:var(--brown-2);letter-spacing:-.02em}
+    .section-title em{color:var(--terra);font-style:italic}
+    .section-lead{margin-top:18px;font-size:17px;line-height:1.85;color:var(--mid);max-width:720px}
+
+    nav{position:fixed;z-index:50;top:16px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 32px));padding:10px 12px;border:1px solid rgba(232,196,172,.68);border-radius:999px;background:rgba(253,246,240,.78);backdrop-filter:blur(16px);box-shadow:0 10px 34px rgba(111,64,50,.08)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:10px;padding-left:6px}
+    .brand-mark{width:34px;height:34px;flex:0 0 34px}
+    .brand-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;letter-spacing:.03em;color:var(--brown)}
+    .nav-links{display:flex;align-items:center;gap:24px}
+    .nav-links a:not(.nav-buy){font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);font-weight:600}
+    .nav-buy{padding:11px 18px;border-radius:999px;background:var(--brown);color:var(--cream);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+
+    .hero{position:relative;min-height:100svh;padding:142px 0 72px;overflow:hidden;background:radial-gradient(circle at 20% 10%, rgba(242,196,168,.52), transparent 32%),radial-gradient(circle at 78% 12%, rgba(232,148,122,.18), transparent 34%),linear-gradient(180deg,var(--cream) 0%,var(--cream-2) 100%)}
+    .hero::after{content:"";position:absolute;inset:auto -8% -16% -8%;height:260px;background:linear-gradient(180deg,transparent,var(--sand));pointer-events:none}
+    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.03fr .97fr;gap:54px;align-items:center}
+    h1{font-family:'Playfair Display',serif;font-size:72px;line-height:.98;font-weight:600;letter-spacing:-.045em;color:var(--brown-2)}
+    h1 em{color:var(--terra);font-style:italic}
+    .hero-sub{margin-top:24px;max-width:650px;font-size:18px;line-height:1.85;color:var(--mid)}
+    .hero-actions{display:flex;align-items:center;gap:14px;margin-top:30px;flex-wrap:wrap}
+    .hero-proof{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .pill{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid rgba(232,196,172,.85);border-radius:999px;background:rgba(255,255,255,.62);color:var(--brown);font-size:12px;font-weight:600}
+    .hero-card{position:relative;padding:12px;border-radius:38px;background:rgba(255,255,255,.46);border:1px solid rgba(232,196,172,.68);box-shadow:var(--shadow)}
+    .hero-card-inner{overflow:hidden;border-radius:28px;background:var(--sand);border:1px solid rgba(255,255,255,.7)}
+    .hero-card img{width:100%;height:auto;object-fit:contain;padding:18px;filter:drop-shadow(0 24px 42px rgba(111,64,50,.12))}
+    .price-tag{position:absolute;right:-12px;bottom:26px;background:var(--brown);color:var(--cream);border-radius:22px;padding:14px 18px;box-shadow:0 14px 30px rgba(111,64,50,.22)}
+    .price-tag strong{font-family:'Playfair Display',serif;font-size:28px;display:block;line-height:1}.price-tag span{font-size:11px;opacity:.85}
+    .name-mini{margin-top:18px;padding:14px;border:1px solid rgba(232,196,172,.85);border-radius:24px;background:rgba(255,255,255,.55);max-width:560px}
+    .name-mini label{display:block;margin-bottom:9px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+    .name-row{display:flex;gap:10px;align-items:center}.name-row input{width:100%;border:1px solid var(--border);background:var(--cream-2);border-radius:999px;padding:13px 16px;color:var(--brown);outline:none}.name-row input:focus{border-color:var(--terra)}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:58px;align-items:center}
+    .image-shell{padding:10px;border-radius:34px;background:rgba(255,255,255,.44);border:1px solid rgba(232,196,172,.75);box-shadow:var(--soft-shadow)}
+    .image-shell img,.image-shell video{border-radius:25px;background:var(--sand);width:100%}
+    .bullets{display:grid;gap:12px;margin-top:24px}.bullet{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid rgba(232,196,172,.72);background:rgba(255,255,255,.48);border-radius:18px;color:var(--brown);line-height:1.6}.check{width:24px;height:24px;border-radius:50%;background:rgba(232,148,122,.16);color:var(--terra);display:flex;align-items:center;justify-content:center;font-weight:700;flex:0 0 24px}
+    .cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:38px}.card{background:rgba(255,255,255,.52);border:1px solid rgba(232,196,172,.78);border-radius:26px;padding:24px;box-shadow:0 12px 30px rgba(111,64,50,.05)}.card-icon{font-size:24px;margin-bottom:14px}.card h3{font-family:'Playfair Display',serif;font-size:23px;color:var(--brown-2);margin-bottom:8px}.card p{font-size:14px;line-height:1.75;color:var(--mid)}
+    .why{background:var(--sand)}.why-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:42px;align-items:start}.why-list{display:grid;gap:14px}.why-item{display:flex;gap:15px;padding:18px;background:rgba(253,246,240,.70);border:1px solid rgba(232,196,172,.8);border-radius:22px}.why-item h3{font-family:'Playfair Display',serif;font-size:23px;margin-bottom:6px}.why-item p{font-size:14px;line-height:1.75;color:var(--mid)}
+    .compare{width:100%;border-collapse:separate;border-spacing:0 10px;margin-top:34px}.compare th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);padding:0 18px 8px}.compare td{background:rgba(255,255,255,.58);border-top:1px solid rgba(232,196,172,.72);border-bottom:1px solid rgba(232,196,172,.72);padding:18px;color:var(--brown);line-height:1.55}.compare td:first-child{border-left:1px solid rgba(232,196,172,.72);border-radius:18px 0 0 18px;color:var(--muted)}.compare td:last-child{border-right:1px solid rgba(232,196,172,.72);border-radius:0 18px 18px 0;font-weight:600}
+    .cta-band{background:var(--brown);color:var(--cream);border-radius:34px;padding:46px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;box-shadow:0 22px 58px rgba(111,64,50,.22)}.cta-band h2{font-family:'Playfair Display',serif;font-size:42px;line-height:1.08}.cta-band p{margin-top:12px;color:rgba(253,246,240,.76);line-height:1.8}.cta-band .btn{background:var(--cream);color:var(--brown)}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}.step{padding:26px;border-radius:26px;background:rgba(255,255,255,.52);border:1px solid rgba(232,196,172,.78)}.step-num{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--brown);color:var(--cream);font-weight:700;margin-bottom:16px}.step h3{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:8px}.step p{font-size:14px;line-height:1.75;color:var(--mid)}
+    .reviews{background:var(--brown);color:var(--cream)}.reviews .section-title{color:var(--cream)}.reviews .section-lead{color:rgba(253,246,240,.75)}.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}.review{border:1px solid rgba(242,196,168,.24);background:rgba(253,246,240,.07);border-radius:24px;padding:24px}.stars{color:var(--peach);letter-spacing:.12em;margin-bottom:12px}.review p{font-family:'Playfair Display',serif;font-style:italic;line-height:1.7}.review span{display:block;margin-top:14px;color:rgba(242,196,168,.65);font-size:12px;letter-spacing:.06em}
+    .faq{display:grid;grid-template-columns:.7fr 1.3fr;gap:46px}.faq-list{display:grid;gap:12px}.faq-item{padding:20px;border-radius:22px;border:1px solid rgba(232,196,172,.78);background:rgba(255,255,255,.52)}.faq-item h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px}.faq-item p{font-size:14px;line-height:1.75;color:var(--mid)}
+    footer{padding:36px 0;border-top:1px solid rgba(232,196,172,.72);background:var(--cream-2)}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}.footer-logo{font-family:'Playfair Display',serif;font-weight:600}.footer-links{display:flex;gap:16px;flex-wrap:wrap}.footer-links a{font-size:12px;color:var(--muted)}
+    .fade-up{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease}.fade-up.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:900px){
+      .nav-links a:not(.nav-buy){display:none}.hero-grid,.split,.why-grid,.faq{grid-template-columns:1fr}.hero{padding-top:118px}h1{font-size:54px}.hero-card{max-width:540px;margin:0 auto}.cards-4,.steps,.review-grid{grid-template-columns:1fr 1fr}.cta-band{grid-template-columns:1fr;text-align:center}.cta-band .btn{width:100%}
+    }
+    @media(max-width:640px){
+      .container{padding:0 16px}.section{padding:62px 0}.brand-name{font-size:15px}.nav-buy{font-size:10px;padding:10px 12px}h1{font-size:42px}.section-title{font-size:34px}.hero-sub,.section-lead{font-size:15px}.hero-actions{flex-direction:column;align-items:stretch}.btn{width:100%;padding:15px 18px}.hero-proof{gap:8px}.pill{font-size:11px}.cards-4,.steps,.review-grid{grid-template-columns:1fr}.price-tag{right:8px;bottom:18px}.price-tag strong{font-size:22px}.name-row{flex-direction:column}.compare{font-size:14px}.compare th{display:none}.compare tr{display:grid;grid-template-columns:1fr;margin-bottom:12px}.compare td{border:1px solid rgba(232,196,172,.72)!important;border-radius:16px!important}.compare td:first-child::before{content:'Achat séparé';display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;color:var(--muted)}.compare td:last-child::before{content:'La Maison Winnie';display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;color:var(--terra)}.cta-band{padding:30px 20px;border-radius:26px}.cta-band h2{font-size:30px}.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}
+    }
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.fade-up{opacity:1!important;transform:none!important}}
+  </style>
+</head>
+<body>
+  <nav aria-label="Navigation principale">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Accueil La Maison Winnie">
+        <svg class="brand-mark" viewBox="0 0 44 44" fill="none" aria-hidden="true"><ellipse cx="16" cy="16" rx="7" ry="12" fill="#E8A882"/><ellipse cx="28" cy="16" rx="7" ry="12" fill="#E8A882"/><ellipse cx="22" cy="28" rx="16" ry="14" fill="#F2C4A8"/><circle cx="17" cy="25" r="2.2" fill="#7A4A3A"/><circle cx="27" cy="25" r="2.2" fill="#7A4A3A"/><ellipse cx="22" cy="30" rx="3" ry="2" fill="#E8947A"/></svg>
+        <span class="brand-name">La Maison Winnie</span>
+      </a>
+      <div class="nav-links">
+        <a href="#contenu">Contenu</a>
+        <a href="#pourquoi">Pourquoi</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-buy" href="https://buy.stripe.com/fZu6oH0hX4tPbEf1QR2Fa01" target="_blank" rel="noopener noreferrer">Recevoir la box</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="fade-up">
+          <span class="eyebrow">Box mensuelle pour lapin</span>
+          <h1>Chaque mois, une box surprise pour <em>stimuler</em> et gâter ton lapin</h1>
+          <p class="hero-sub">Friandises naturelles, produits de mastication et jouets d’occupation sélectionnés avec soin. Une expérience douce, utile et personnalisée, sans engagement.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://buy.stripe.com/fZu6oH0hX4tPbEf1QR2Fa01" target="_blank" rel="noopener noreferrer">Recevoir la box de mon lapin</a>
+            <a class="btn btn-secondary" href="#contenu">Voir ce qu’il y a dedans</a>
+          </div>
+          <div class="hero-proof" aria-label="Réassurances">
+            <span class="pill">39,90€ / mois</span><span class="pill">Livraison offerte</span><span class="pill">Sans engagement</span><span class="pill">Paiement sécurisé Stripe</span>
+          </div>
+          <div class="name-mini">
+            <label for="rabbit-name">Personnalise l’aperçu avec son prénom</label>
+            <div class="name-row">
+              <input id="rabbit-name" maxlength="20" placeholder="Ex : Winnie" autocomplete="off" />
+              <span class="pill" id="name-preview">Pour Winnie</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card fade-up">
+          <div class="hero-card-inner"><img src="box-winnie.png" alt="Box mensuelle La Maison Winnie pour lapin"></div>
+          <div class="price-tag"><strong>39,90€</strong><span>/ mois · livraison offerte</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contenu">
+      <div class="container split">
+        <div class="image-shell fade-up"><img src="box-contenu.png" alt="Exemple de contenu de la box La Maison Winnie"></div>
+        <div class="fade-up">
+          <span class="eyebrow">Dans la box</span>
+          <h2 class="section-title">Une sélection pensée pour éviter la <em>routine</em></h2>
+          <p class="section-lead">Chaque édition varie, mais l’objectif reste le même : proposer une box complète, naturelle, agréable à découvrir et vraiment utile pour ton lapin.</p>
+          <div class="bullets">
+            <div class="bullet"><span class="check">✓</span><span>Une sélection renouvelée chaque mois pour garder l’effet découverte.</span></div>
+            <div class="bullet"><span class="check">✓</span><span>Friandises, mastication et occupation dans une box cohérente.</span></div>
+            <div class="bullet"><span class="check">✓</span><span>Une box personnalisée au prénom de ton lapin.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="cards-4">
+          <div class="card fade-up"><div class="card-icon">🌿</div><h3>Friandises naturelles</h3><p>Des douceurs choisies pour varier les plaisirs sans donner une impression de sélection au hasard.</p></div>
+          <div class="card fade-up"><div class="card-icon">🪵</div><h3>Mastication</h3><p>Des produits pour répondre au besoin naturel de ronger et occuper ton lapin.</p></div>
+          <div class="card fade-up"><div class="card-icon">🧺</div><h3>Occupation</h3><p>Des éléments à explorer, pousser, grignoter ou manipuler pour stimuler sa curiosité.</p></div>
+          <div class="card fade-up"><div class="card-icon">✨</div><h3>Surprise du mois</h3><p>Un petit plus selon l’édition, pour garder un vrai moment d’unboxing chaque mois.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section why" id="pourquoi">
+      <div class="container why-grid">
+        <div class="fade-up">
+          <span class="eyebrow">Pourquoi ça compte</span>
+          <h2 class="section-title">Un lapin a besoin de plus qu’une gamelle pleine</h2>
+          <p class="section-lead">Les lapins sont curieux, actifs et ont besoin de ronger, explorer et s’occuper. La Maison Winnie t’aide à renouveler ses découvertes sans devoir chercher de nouveaux produits chaque mois.</p>
+        </div>
+        <div class="why-list">
+          <div class="why-item fade-up"><span class="check">✓</span><div><h3>Stimuler sa curiosité</h3><p>Une sélection différente l’encourage à découvrir, sentir et manipuler.</p></div></div>
+          <div class="why-item fade-up"><span class="check">✓</span><div><h3>Répondre au besoin de ronger</h3><p>La mastication fait partie de ses besoins naturels et l’aide à s’occuper.</p></div></div>
+          <div class="why-item fade-up"><span class="check">✓</span><div><h3>Créer un rituel mensuel</h3><p>La box devient un moment de lien entre toi et ton lapin.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow fade-up">Valeur de la box</span>
+        <h2 class="section-title fade-up">Pourquoi une box plutôt que des achats séparés ?</h2>
+        <p class="section-lead fade-up">Le but n’est pas juste d’envoyer des produits : c’est de simplifier la recherche, varier les découvertes et créer une vraie expérience autour de ton lapin.</p>
+        <table class="compare fade-up" aria-label="Comparaison entre achat séparé et La Maison Winnie">
+          <thead><tr><th>Acheter séparément</th><th>La Maison Winnie</th></tr></thead>
+          <tbody>
+            <tr><td>Tu dois chercher quoi acheter</td><td>Une sélection déjà pensée</td></tr>
+            <tr><td>Tu reprends souvent la même chose</td><td>Une édition différente chaque mois</td></tr>
+            <tr><td>Livraison parfois en plus</td><td>Livraison offerte incluse</td></tr>
+            <tr><td>Expérience classique</td><td>Box personnalisée au prénom</td></tr>
+            <tr><td>Pas d’effet surprise</td><td>Un vrai moment d’unboxing mensuel</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container cta-band fade-up">
+        <div>
+          <h2>Offre-lui sa première box Winnie</h2>
+          <p>Une sélection mensuelle naturelle, ludique et sans engagement. Tu peux annuler à tout moment depuis ton espace client.</p>
+        </div>
+        <a class="btn" href="https://buy.stripe.com/fZu6oH0hX4tPbEf1QR2Fa01" target="_blank" rel="noopener noreferrer">Recevoir la box</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div class="fade-up">
+          <span class="eyebrow">Testé par Winnie</span>
+          <h2 class="section-title">Si ça ne l’intéresse pas, ça ne rentre pas dans la box</h2>
+          <p class="section-lead">Chaque box est imaginée avec Winnie en tête : une sélection douce, naturelle et intéressante pour créer un vrai moment de découverte.</p>
+          <div class="bullets">
+            <div class="bullet"><span class="check">✓</span><span>Produits choisis avec soin, sans superflu.</span></div>
+            <div class="bullet"><span class="check">✓</span><span>Une attention particulière portée à la mastication et à l’occupation.</span></div>
+            <div class="bullet"><span class="check">✓</span><span>Une expérience pensée comme si c’était pour Winnie.</span></div>
+          </div>
+        </div>
+        <div class="image-shell fade-up"><img src="winnie-valide-box.png" alt="Winnie valide la box La Maison Winnie"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div class="image-shell fade-up"><img src="winnie-lifestyle.png" alt="Box La Maison Winnie personnalisée au prénom du lapin"></div>
+        <div class="fade-up">
+          <span class="eyebrow">Personnalisation</span>
+          <h2 class="section-title">Une box préparée pour lui, pas une box générique</h2>
+          <p class="section-lead">Son prénom sur la box, une sélection préparée avec soin, et l’impression de recevoir une vraie petite attention rien que pour lui.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="comment-ca-marche">
+      <div class="container">
+        <span class="eyebrow fade-up">Simple et libre</span>
+        <h2 class="section-title fade-up">Comment ça marche ?</h2>
+        <div class="steps">
+          <div class="step fade-up"><div class="step-num">01</div><h3>Tu commandes</h3><p>Tu indiques le prénom de ton lapin et tu rejoins La Maison Winnie.</p></div>
+          <div class="step fade-up"><div class="step-num">02</div><h3>Tu reçois la box</h3><p>Chaque mois, une nouvelle sélection arrive chez toi avec la livraison offerte.</p></div>
+          <div class="step fade-up"><div class="step-num">03</div><h3>Tu restes libre</h3><p>Sans engagement : tu peux annuler à tout moment depuis ton espace client sécurisé.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews" id="avis">
+      <div class="container">
+        <span class="eyebrow fade-up">Avis clients</span>
+        <h2 class="section-title fade-up">Des lapins choyés mois après mois</h2>
+        <p class="section-lead fade-up">À remplacer idéalement par de vrais avis avec photos de lapins dès que tu en as.</p>
+        <div class="review-grid">
+          <div class="review fade-up"><div class="stars">★★★★★</div><p>“J’aime l’idée de recevoir une sélection différente chaque mois sans devoir chercher moi-même quoi acheter.”</p><span>— Sophie M., propriétaire de Noisette</span></div>
+          <div class="review fade-up"><div class="stars">★★★★★</div><p>“Le packaging fait très attentionné. On sent que ce n’est pas une box générique.”</p><span>— Léa D., propriétaire de Caramel</span></div>
+          <div class="review fade-up"><div class="stars">★★★★★</div><p>“La partie mastication et occupation est vraiment ce qui m’a convaincue.”</p><span>— Marine T., propriétaire de Réglisse</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container faq">
+        <div class="fade-up">
+          <span class="eyebrow">FAQ</span>
+          <h2 class="section-title">Avant de recevoir sa première box</h2>
+          <p class="section-lead">Les réponses aux objections principales : contenu, abonnement, livraison, annulation et adaptation au lapin.</p>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item fade-up"><h3>Que contient la box ?</h3><p>Chaque édition contient une sélection de friandises naturelles, produits de mastication, jouets d’occupation et une surprise selon le mois.</p></div>
+          <div class="faq-item fade-up"><h3>Le contenu change-t-il chaque mois ?</h3><p>Oui. Le but est de proposer une nouvelle découverte à chaque édition, tout en gardant une sélection cohérente.</p></div>
+          <div class="faq-item fade-up"><h3>Puis-je annuler après une seule box ?</h3><p>Oui. L’abonnement est sans engagement et peut être annulé à tout moment depuis l’espace client sécurisé.</p></div>
+          <div class="faq-item fade-up"><h3>La livraison est-elle incluse ?</h3><p>Oui, la livraison est offerte dans le prix de l’abonnement.</p></div>
+          <div class="faq-item fade-up"><h3>Est-ce adapté à tous les lapins ?</h3><p>La box est pensée pour des lapins de compagnie, avec des produits naturels et d’occupation. Surveille toujours ton lapin avec un nouveau produit, surtout s’il a une sensibilité particulière.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container cta-band fade-up">
+        <div>
+          <h2>Prêt à recevoir sa première box ?</h2>
+          <p>39,90€ / mois · Livraison offerte · Sans engagement · Paiement sécurisé Stripe</p>
+        </div>
+        <a class="btn" href="https://buy.stripe.com/fZu6oH0hX4tPbEf1QR2Fa01" target="_blank" rel="noopener noreferrer">Recevoir la box de mon lapin</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div><div class="footer-logo">La Maison Winnie</div><div class="note">Box mensuelle premium pour lapins</div></div>
+      <div class="footer-links">
+        <a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a><a href="politique-confidentialite.html">Confidentialité</a><a href="mailto:onebrand.pro@gmail.com">Contact</a><a href="https://instagram.com/lamaisonwinnie" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+      <div class="note">© 2026 La Maison Winnie</div>
+    </div>
+  </footer>
+
+  <script>
+    const nameInput = document.getElementById('rabbit-name');
+    const namePreview = document.getElementById('name-preview');
+    function cleanName(value){return value.trim().slice(0,20).replace(/[<>]/g,'');}
+    function updateName(){
+      const name = cleanName(nameInput.value);
+      namePreview.textContent = name ? `Pour ${name.charAt(0).toUpperCase()+name.slice(1)}` : 'Pour Winnie';
+    }
+    if(nameInput){nameInput.addEventListener('input', updateName)}
+
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible')}})
+    },{threshold:.12});
+    document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
