@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Maison Winnie — V2.8 Promo LAPIN25</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:#FDF6F0;color:#6F4032;font-family:Arial,sans-serif;text-align:center;padding:24px}
+  </style>
+</head>
+<body>
+  <div>Chargement de la V2.8 avec le code promo LAPIN25...</div>
+  <script>
+    const defaultCheckout = 'https://buy.stripe.com/fZu6oH0hX4tPbEf1QR2Fa01';
+    const promoCheckout = 'https://buy.stripe.com/fZu6oH0hX4tPbEf1QR2Fa01?prefilled_promo_code=LAPIN25';
+
+    fetch('/index.html?v=3db69dfbb7006996897e877ea89ff356a3f94e43')
+      .then(response => response.text())
+      .then(html => {
+        html = html
+          .replaceAll(defaultCheckout, promoCheckout)
+          .replace('<link rel="canonical" href="https://lamaisonwinnie.com/" />', '<link rel="canonical" href="https://lamaisonwinnie.com/index-v2-8.html" />')
+          .replace('<title>La Maison Winnie — Box mensuelle pour lapin</title>', '<title>La Maison Winnie — Box mensuelle pour lapin | Promo LAPIN25</title>');
+
+        document.open();
+        document.write(html);
+        document.close();
+      })
+      .catch(() => {
+        document.body.innerHTML = '<p>Impossible de charger la V2.8. <a href="/">Retour au site</a></p>';
+      });
+  </script>
+</body>
+</html>
