@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Maison Winnie — V12 mobile sans badges hero</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:#FDF6F0;color:#6F4032;font-family:Arial,sans-serif;text-align:center;padding:24px}
+  </style>
+</head>
+<body>
+  <div>Chargement de la V12...</div>
+  <script>
+    fetch('/index.html?v=25c29e75775498ac2751620eef8d04887e755c8e')
+      .then(response => response.text())
+      .then(html => {
+        html = html
+          .replace('<link rel="canonical" href="https://lamaisonwinnie.com/" />', '<link rel="canonical" href="https://lamaisonwinnie.com/index-v12.html" />')
+          .replace('</style>', '@media(max-width:640px){.hero .pills{display:none!important}}\n  </style>');
+        document.open();
+        document.write(html);
+        document.close();
+      })
+      .catch(() => {
+        document.body.innerHTML = '<p>Impossible de charger la V12. <a href="/">Retour au site</a></p>';
+      });
+  </script>
+</body>
+</html>
