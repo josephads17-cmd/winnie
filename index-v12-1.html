@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Maison Winnie — V12.1 réassurance Stripe</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:#FDF6F0;color:#6F4032;font-family:Arial,sans-serif;text-align:center;padding:24px}
+  </style>
+</head>
+<body>
+  <div>Chargement de la V12.1...</div>
+  <script>
+    const promoLink = 'https://buy.stripe.com/fZu6oH0hX4tPbEf1QR2Fa01?prefilled_promo_code=LAPIN25';
+    const reassuranceText = "💡 Le tarif à 29,90€ s'affiche automatiquement en quelques secondes sur la page de paiement.";
+
+    function addReassuranceNearCheckoutLinks() {
+      const links = document.querySelectorAll('a.checkout-link[href="' + promoLink + '"]');
+      links.forEach((link) => {
+        if (link.closest('nav') || link.closest('.mobile-sticky')) return;
+        if (link.nextElementSibling && link.nextElementSibling.classList.contains('stripe-price-reassurance')) return;
+
+        const note = document.createElement('span');
+        note.className = 'note stripe-price-reassurance';
+        note.textContent = reassuranceText;
+        link.insertAdjacentElement('afterend', note);
+      });
+    }
+
+    fetch('/index.html?v=6d69d03524f15d1e5c615f31788296996a414d49')
+      .then(response => response.text())
+      .then(html => {
+        html = html
+          .replace('<link rel="canonical" href="https://lamaisonwinnie.com/" />', '<link rel="canonical" href="https://lamaisonwinnie.com/index-v12-1.html" />')
+          .replace('</style>', '.stripe-price-reassurance{display:block;margin-top:8px;font-size:12px;line-height:1.45;color:var(--muted);max-width:360px;text-align:center}.hero-actions+.stripe-price-reassurance{margin-left:auto;margin-right:auto}@media(max-width:640px){.stripe-price-reassurance{font-size:11px;line-height:1.45;margin-top:7px;max-width:320px}.mobile-sticky .stripe-price-reassurance{display:none}}\n  </style>');
+        document.open();
+        document.write(html);
+        document.close();
+        requestAnimationFrame(addReassuranceNearCheckoutLinks);
+      })
+      .catch(() => {
+        document.body.innerHTML = '<p>Impossible de charger la V12.1. <a href="/">Retour au site</a></p>';
+      });
+  </script>
+</body>
+</html>
