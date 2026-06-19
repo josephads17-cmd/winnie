@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Maison Winnie — V13 personnalisation</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:#FDF6F0;color:#6F4032;font-family:Arial,sans-serif;text-align:center;padding:24px}
+  </style>
+</head>
+<body>
+  <div>Chargement de la V13...</div>
+  <script>
+    fetch('/index.html?v=6d69d03524f15d1e5c615f31788296996a414d49')
+      .then(response => response.text())
+      .then(html => {
+        html = html
+          .replace('<link rel="canonical" href="https://lamaisonwinnie.com/" />', '<link rel="canonical" href="https://lamaisonwinnie.com/index-v13.html" />')
+          .replace('</style>', `.value-badge{display:inline-flex;align-items:center;justify-content:center;gap:7px;margin-top:10px;padding:8px 12px;border:1px solid rgba(232,196,172,.85);border-radius:999px;background:rgba(255,255,255,.62);color:var(--brown);font-size:12px;font-weight:700}.testimonial-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:34px}.testimonial-card{background:rgba(255,255,255,.58);border:1px solid rgba(232,196,172,.78);border-radius:25px;padding:22px;box-shadow:0 12px 28px rgba(111,64,50,.05);text-align:left}.testimonial-stars{color:var(--terra);font-size:14px;letter-spacing:.08em;margin-bottom:12px}.testimonial-card p{font-size:15px;line-height:1.72;color:var(--mid);margin:0}.testimonial-card strong{display:block;margin-top:14px;font-family:'Playfair Display',serif;font-size:20px;color:var(--dark)}@media(max-width:640px){.value-badge{font-size:11px;line-height:1.35;text-align:center;white-space:normal}.testimonial-grid{grid-template-columns:1fr;gap:12px;margin-top:24px}.testimonial-card{padding:18px;border-radius:20px}.testimonial-card p{font-size:14px;line-height:1.68}}\n  </style>`);
+        document.open();document.write(html);document.close();
+
+        requestAnimationFrame(() => {
+          const heroTitle = document.querySelector('.hero h1');
+          if (heroTitle) heroTitle.innerHTML = 'La box lapin personnalisée au <em>prénom</em> de ton lapin';
+
+          const heroSub = document.querySelector('.hero-sub');
+          if (heroSub) heroSub.textContent = 'Une box pensée et personnalisée pour ton lapin, pas un produit générique. Chaque mois, une sélection douce, utile et premium pour le stimuler, le gâter et créer un vrai moment cadeau.';
+
+          const heroNote = document.querySelector('.hero-note');
+          if (heroNote) {
+            heroNote.textContent = '39,90€ / mois — 29,90€ le premier mois avec LAPIN25 · box personnalisée · livraison offerte';
+            if (!document.querySelector('.hero .value-badge')) {
+              const value = document.createElement('div');
+              value.className = 'value-badge';
+              value.textContent = 'Valeur estimée du contenu : jusqu’à 35–40€';
+              heroNote.insertAdjacentElement('afterend', value);
+            }
+          }
+
+          const firstPill = document.querySelector('.hero .pills .pill');
+          if (firstPill) firstPill.textContent = 'Box personnalisée au prénom';
+
+          const mobileQuick = document.querySelector('.mobile-quick');
+          if (mobileQuick) mobileQuick.innerHTML = '<strong>La touche qui change tout : son prénom directement dans la box.</strong><br>29,90€ le premier mois avec LAPIN25, puis 39,90€ / mois. Livraison offerte et abonnement annulable simplement.';
+
+          const personalizationSection = Array.from(document.querySelectorAll('section.section')).find(section => section.textContent.includes('Une box préparée pour lui, pas une box générique'));
+          const contentSection = document.querySelector('#contenu');
+          const main = document.querySelector('main');
+          if (personalizationSection && contentSection && main) {
+            contentSection.parentNode.insertBefore(personalizationSection, contentSection);
+            const title = personalizationSection.querySelector('.title');
+            const lead = personalizationSection.querySelector('.lead');
+            if (title) title.innerHTML = 'Son prénom dans la box : le détail qui rend l’expérience <em>unique</em>';
+            if (lead) lead.textContent = 'C’est ce qui transforme une simple commande en vrai cadeau. La Maison Winnie n’envoie pas une box anonyme : elle prépare une expérience pensée pour ton lapin, avec son prénom visible à l’intérieur.';
+          }
+
+          const miniNotes = document.querySelectorAll('.mini-cta .note');
+          miniNotes.forEach(note => {
+            if (note.textContent.includes('29,90€ le premier mois') || note.textContent.includes('Code LAPIN25') || note.textContent.includes('Offre spéciale')) {
+              note.textContent = note.textContent + ' · valeur estimée 35–40€';
+            }
+          });
+
+          const existingMoments = document.querySelector('#avis');
+          if (existingMoments && !document.querySelector('#avis-clients')) {
+            const testimonials = document.createElement('section');
+            testimonials.className = 'section';
+            testimonials.id = 'avis-clients';
+            testimonials.innerHTML = `<div class="container center"><span class="eyebrow fade-up visible">Avis clients</span><h2 class="title fade-up visible">Ce qui revient le plus : la personnalisation fait toute la différence</h2><p class="lead fade-up visible">Le prénom sur la box donne immédiatement l’impression d’un vrai cadeau, tout en gardant une sélection naturelle, utile et premium.</p><div class="testimonial-grid"><article class="testimonial-card fade-up visible"><div class="testimonial-stars">★★★★★</div><p>“Le prénom de mon lapin écrit sur la box, ça paraît tout bête mais ça change tout. On a l'impression d'un vrai cadeau, pas d'un produit générique. Et niveau contenu, on est loin de la box à 2 balles.”</p><strong>Valérie F.</strong></article><article class="testimonial-card fade-up visible"><div class="testimonial-stars">★★★★★</div><p>“Mon lapin s'est jeté dessus direct à l'ouverture. Friandises naturelles, jouets de bonne qualité, et la petite touche perso avec son nom dessus. On sent que c'est pensé, pas juste assemblé.”</p><strong>Aline M.</strong></article><article class="testimonial-card fade-up visible"><div class="testimonial-stars">★★★★★</div><p>“J'étais sceptique sur le prix au début, mais en ouvrant la box j'ai compris pourquoi. La personnalisation est un vrai plus, et le contenu est varié à chaque fois d'après ce qu'on m'a dit.”</p><strong>Morgane C.</strong></article><article class="testimonial-card fade-up visible"><div class="testimonial-stars">★★★★★</div><p>“Cadeau parfait pour quelqu'un qui a un lapin. La box arrive avec son prénom dessus, c'est hyper mignon, et le lapin a eu de quoi s'occuper pendant un moment avec tout ce qu'il y avait dedans.”</p><strong>Lois K.</strong></article></div><div class="mini-cta fade-up visible"><a class="btn btn-primary checkout-link" href="https://buy.stripe.com/fZu6oH0hX4tPbEf1QR2Fa01?prefilled_promo_code=LAPIN25" target="_blank" rel="noopener noreferrer">Recevoir une box personnalisée</a><span class="note">29,90€ le premier mois avec LAPIN25, puis 39,90€ / mois · valeur estimée 35–40€</span></div></div>`;
+            existingMoments.insertAdjacentElement('afterend', testimonials);
+          }
+
+          document.querySelectorAll('.checkout-link').forEach(link => {
+            link.addEventListener('click', () => { if (window.fbq) fbq('track','InitiateCheckout'); });
+          });
+        });
+      })
+      .catch(() => {
+        document.body.innerHTML = '<p>Impossible de charger la V13. <a href="/">Retour au site</a></p>';
+      });
+  </script>
+</body>
+</html>
