@@ -13,7 +13,11 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1399877371962156');
 fbq('track', 'PageView');
-fbq('track', 'Purchase', {value: 29.90, currency: 'EUR'});
+(function() {
+  var sid = new URLSearchParams(window.location.search).get('sid');
+  var eventId = sid || ('px_' + Date.now());
+  fbq('track', 'Purchase', {value: 29.90, currency: 'EUR'}, {eventID: eventId});
+})();
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1399877371962156&ev=PageView&noscript=1"
