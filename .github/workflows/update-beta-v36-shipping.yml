@@ -1,4 +1,4 @@
-name: Update Beta V3.6 shipping threshold
+name: Update Beta V3.6 purchase rules
 
 on:
   push:
@@ -14,36 +14,62 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Change free-shipping threshold only
+      - name: Remove sachet minimum and keep shipping threshold
         run: |
           python - <<'PY'
           from pathlib import Path
+
           path = Path('beta-v3-6.html')
           text = path.read_text(encoding='utf-8')
-          replacements = {
-              'sub>=39?0:4.90': 'sub>=29.90?0:4.90',
-              'sub>=39 ? 0 : 4.90': 'sub>=29.90 ? 0 : 4.90',
-              'sub >= 39 ? 0 : 4.90': 'sub >= 29.90 ? 0 : 4.90',
-              '39-c.sub': '29.90-c.sub',
-              '39 - c.sub': '29.90 - c.sub',
-              'sub>=39': 'sub>=29.90',
-              'sub >= 39': 'sub >= 29.90',
-              'à partir de 39 €': 'dès 29,90 €',
-              'à partir de 39€': 'dès 29,90 €',
-              'Encore 39,00 €': 'Encore 29,90 €',
-              'Encore 39,00 €': 'Encore 29,90 €'
-          }
           before = text
+
+          replacements = {
+              "sub>=39?0:4.90": "sub>=29.90?0:4.90",
+              "sub>=39 ? 0 : 4.90": "sub>=29.90 ? 0 : 4.90",
+              "sub >= 39 ? 0 : 4.90": "sub >= 29.90 ? 0 : 4.90",
+              "39-c.sub": "29.90-c.sub",
+              "39 - c.sub": "29.90 - c.sub",
+              "sub>=39": "sub>=29.90",
+              "sub >= 39": "sub >= 29.90",
+              "à partir de 39 €": "dès 29,90 €",
+              "à partir de 39€": "dès 29,90 €",
+              "minimum de 4 sachets": "aucun minimum de sachets",
+              "Minimum 4 sachets requis": "Valider la Beta",
+              "minimum 4 sachets requis": "Valider la Beta",
+              "Choisissez au minimum 4 sachets": "Choisissez librement le nombre de sachets souhaité",
+              "0 sur 4 sachets": "0 sachet sélectionné",
+              "Encore 4 à choisir": "Aucun minimum requis",
+              "c.pc+'/4'": "String(c.pc)",
+              "c.pc+'/4 sachets'": "c.pc+' sachet'+(c.pc>1?'s':'')",
+              "$('plantsNext').disabled=c.pc<4": "$('plantsNext').disabled=false",
+              "$('cartBtn').disabled=c.pc<4": "$('cartBtn').disabled=false",
+              "$('cartBtn').textContent=c.pc<4?'Minimum 4 sachets requis':'Valider la Beta'": "$('cartBtn').textContent='Valider la Beta'",
+              "$('cartBtn').onclick=()=>{if(c.pc>=4)openModal()}": "$('cartBtn').onclick=()=>openModal()",
+              "$('progressText').textContent=c.pc+' sur 4 sachets'": "$('progressText').textContent=c.pc+' sachet'+(c.pc>1?'s':'')+' sélectionné'+(c.pc>1?'s':'')",
+              "$('progressHelp').textContent=c.pc>=4?'Minimum atteint':'Encore '+(4-c.pc)+' à choisir'": "$('progressHelp').textContent='Aucun minimum requis'",
+              "$('progressBar').style.width=Math.min(100,c.pc/4*100)+'%'": "$('progressBar').style.width=c.pc?100+'%':0+'%'"
+          }
+
           for old, new in replacements.items():
               text = text.replace(old, new)
+
+          # Remove any remaining blocking condition tied to four sachets.
+          text = text.replace("if(c.pc>=4)openModal()", "openModal()")
+          text = text.replace("disabled>Minimum 4 sachets requis", ">Valider la Beta")
+
+          # Hide the old four-sachet progress meter while preserving the V3.6 layout.
+          if '.progress-card{display:none!important}' not in text:
+              text = text.replace('</style>', '.progress-card{display:none!important}</style>', 1)
+
           if text == before:
-              raise SystemExit('No matching shipping threshold found; file left unchanged.')
+              raise SystemExit('No V3.6 purchase-rule change was required.')
+
           path.write_text(text, encoding='utf-8')
           PY
-      - name: Commit the exact V3.6 change
+      - name: Commit V3.6 purchase-rule change
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add beta-v3-6.html
-          git commit -m "Set V3.6 free shipping threshold to 29.90 EUR"
+          git commit -m "Remove V3.6 four-sachet minimum"
           git push
