@@ -1,0 +1,49 @@
+name: Update Beta V3.6 shipping threshold
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-beta-v36-shipping.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Change free-shipping threshold only
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('beta-v3-6.html')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              'sub>=39?0:4.90': 'sub>=29.90?0:4.90',
+              'sub>=39 ? 0 : 4.90': 'sub>=29.90 ? 0 : 4.90',
+              'sub >= 39 ? 0 : 4.90': 'sub >= 29.90 ? 0 : 4.90',
+              '39-c.sub': '29.90-c.sub',
+              '39 - c.sub': '29.90 - c.sub',
+              'sub>=39': 'sub>=29.90',
+              'sub >= 39': 'sub >= 29.90',
+              'à partir de 39 €': 'dès 29,90 €',
+              'à partir de 39€': 'dès 29,90 €',
+              'Encore 39,00 €': 'Encore 29,90 €',
+              'Encore 39,00 €': 'Encore 29,90 €'
+          }
+          before = text
+          for old, new in replacements.items():
+              text = text.replace(old, new)
+          if text == before:
+              raise SystemExit('No matching shipping threshold found; file left unchanged.')
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit the exact V3.6 change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add beta-v3-6.html
+          git commit -m "Set V3.6 free shipping threshold to 29.90 EUR"
+          git push
