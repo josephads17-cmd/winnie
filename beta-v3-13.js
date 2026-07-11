@@ -1,6 +1,16 @@
 const baseScript=document.createElement('script');
-baseScript.src='beta-v3-12.js?v=mobile-recap-fix';
+baseScript.src='beta-v3-12.js?v=mobile-recap-fix-2';
 baseScript.onload=()=>{
+  function applyMobileLayout(){
+    const mobile=window.matchMedia('(max-width: 640px)').matches;
+    const validation=document.querySelector('.validation-step');
+    const steps=document.querySelector('.steps');
+    if(validation)validation.style.display=mobile?'none':'';
+    if(steps)steps.style.gridTemplateColumns=mobile?'repeat(3,1fr)':'';
+  }
+  applyMobileLayout();
+  window.addEventListener('resize',applyMobileLayout);
+
   window.showRecap=function(){
     const isMobile=window.matchMedia('(max-width: 640px)').matches;
     if(isMobile){
