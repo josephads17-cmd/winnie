@@ -1,14 +1,32 @@
 const baseScript=document.createElement('script');
-baseScript.src='beta-v3-12.js?v=mobile-recap-fix-3';
+baseScript.src='beta-v3-12.js?v=mobile-recap-edit-fix-4';
 baseScript.onload=()=>{
-  let lastConfiguratorStep=3;
+  function isMobile(){return window.matchMedia('(max-width: 640px)').matches}
 
   function applyMobileLayout(){
-    const mobile=window.matchMedia('(max-width: 640px)').matches;
+    const mobile=isMobile();
     const validation=document.querySelector('.validation-step');
     const steps=document.querySelector('.steps');
     if(validation)validation.style.display=mobile?'none':'';
     if(steps)steps.style.gridTemplateColumns=mobile?'repeat(3,1fr)':'';
+  }
+
+  function scrollToElement(element,extra=12){
+    if(!element)return;
+    const nav=document.querySelector('.nav');
+    const offset=(nav?nav.offsetHeight:0)+extra;
+    const top=element.getBoundingClientRect().top+window.scrollY-offset;
+    window.scrollTo({top,behavior:'smooth'});
+  }
+
+  function activateConfiguratorStep(stepNumber){
+    document.querySelectorAll('.screen').forEach(screen=>{
+      screen.classList.toggle('active',Number(screen.dataset.screen)===stepNumber);
+    });
+    document.querySelectorAll('.step').forEach(step=>{
+      step.classList.toggle('active',Number(step.dataset.s)===stepNumber);
+    });
+    requestAnimationFrame(()=>scrollToElement(document.querySelector('.panel'),18));
   }
 
   applyMobileLayout();
@@ -17,50 +35,24 @@ baseScript.onload=()=>{
   const originalGo=window.go;
 
   window.showRecap=function(){
-    const isMobile=window.matchMedia('(max-width: 640px)').matches;
-    if(isMobile){
-      const activeScreen=document.querySelector('.screen.active');
-      if(activeScreen){
-        const current=Number(activeScreen.dataset.screen);
-        if(current>=1&&current<=3)lastConfiguratorStep=current;
-      }
-      document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
-      document.querySelectorAll('.step').forEach(x=>x.classList.remove('active'));
-      requestAnimationFrame(()=>{
-        const cart=document.querySelector('.cart');
-        if(!cart)return;
-        const nav=document.querySelector('.nav');
-        const offset=(nav?nav.offsetHeight:0)+12;
-        const top=cart.getBoundingClientRect().top+window.scrollY-offset;
-        window.scrollTo({top,behavior:'smooth'});
-      });
+    if(isMobile()){
+      document.querySelectorAll('.screen').forEach(screen=>screen.classList.remove('active'));
+      document.querySelectorAll('.step').forEach(step=>step.classList.remove('active'));
+      requestAnimationFrame(()=>scrollToElement(document.querySelector('.cart'),12));
       return;
     }
     originalGo(4);
   };
 
   window.returnToConfigurator=function(){
-    const target=(lastConfiguratorStep>=1&&lastConfiguratorStep<=3)?lastConfiguratorStep:3;
-    originalGo(target);
+    activateConfiguratorStep(3);
   };
 
-  const orderCta=document.getElementById('mobileOrderCta');
-  if(orderCta&&!document.getElementById('mobileEditCta')){
-    const editCta=document.createElement('button');
-    editCta.type='button';
-    editCta.id='mobileEditCta';
-    editCta.className='btn secondary mobile-order-cta';
-    editCta.textContent='Modifier ma box';
-    editCta.addEventListener('click',returnToConfigurator);
-    orderCta.parentNode.insertBefore(editCta,orderCta);
-  }
-
   window.go=function(n){
-    if(n===4 && window.matchMedia('(max-width: 640px)').matches){
-      showRecap();
+    if(n===4&&isMobile()){
+      window.showRecap();
       return;
     }
-    if(n>=1&&n<=3)lastConfiguratorStep=n;
     originalGo(n);
   };
 
@@ -71,6 +63,6 @@ baseScript.onload=()=>{
     if(cta)cta.textContent='Commander la box de '+st.name;
   };
 
-  render();
+  window.render();
 };
 document.head.appendChild(baseScript);
