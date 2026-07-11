@@ -16,7 +16,19 @@ const products=[
 {name:'Fraise',cat:'treat',w:'8 g',p:6.90,c:'linear-gradient(135deg,#d84c55,#ffd9dc)',desc:'100 % fraises lyophilisées, sans sucre ajouté.',why:'La fraise est adaptée comme friandise très occasionnelle.',benefits:'Référence premium et très gourmande.',dose:'Environ 0,2 à 0,5 g par distribution, une à deux fois par semaine.'}
 ];
 const st={name:'Winnie',p:products.map(()=>({q:0,m:'unique'}))};const $=id=>document.getElementById(id);const money=n=>n.toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
-function go(n){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',+x.dataset.screen===n));document.querySelectorAll('.step').forEach(x=>x.classList.toggle('active',+x.dataset.s===n));}
+function go(n){
+  document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',+x.dataset.screen===n));
+  document.querySelectorAll('.step').forEach(x=>x.classList.toggle('active',+x.dataset.s===n));
+  requestAnimationFrame(()=>{
+    const panel=document.querySelector('.panel');
+    if(panel){
+      const nav=document.querySelector('.nav');
+      const offset=(nav?nav.offsetHeight:0)+24;
+      const top=panel.getBoundingClientRect().top+window.scrollY-offset;
+      window.scrollTo({top,behavior:'smooth'});
+    }
+  });
+}
 function changeP(i,d){st.p[i].q=Math.max(0,st.p[i].q+d);render()}function modeP(i,v){st.p[i].m=v;render()}
 function rows(cat,id){$(id).innerHTML=products.map((p,i)=>({p,i})).filter(x=>x.p.cat===cat).map(({p,i})=>`<article class="item"><div class="thumbwrap"><div class="thumb" style="background:${p.c}"></div><button class="info" onclick="openInfo(${i})" aria-label="Informations sur ${p.name}">i</button></div><div><h4>${p.name}</h4><div class="meta">${p.w}</div><div class="price">${money(p.p)}</div></div><select class="mode" onchange="modeP(${i},this.value)"><option value="unique" ${st.p[i].m==='unique'?'selected':''}>Livraison unique</option><option value="mensuel" ${st.p[i].m==='mensuel'?'selected':''}>Mensuel</option></select><div class="qty"><button onclick="changeP(${i},-1)">−</button><span>${st.p[i].q}</span><button onclick="changeP(${i},1)">+</button></div></article>`).join('')}
 function render(){st.name=($('rabbitName').value||'Winnie').trim()||'votre lapin';['mockName','titleName','cartName','labelName'].forEach(id=>$(id).textContent=st.name);rows('flower','flowers');rows('leaf','leaves');rows('treat','treats');let lines=[],sub=0,count=0;products.forEach((p,i)=>{let x=st.p[i];if(x.q){let v=x.q*p.p;sub+=v;count+=x.q;lines.push({n:p.name,w:p.w,q:x.q,m:x.m,v})}});let ship=sub>=29.90?0:4.90,total=sub+ship;$('cartContent').className=lines.length?'cart-lines':'empty';$('cartContent').innerHTML=lines.length?lines.map(x=>`<div class="cart-line"><span>${x.q} × ${x.n} ${x.w}<br><small>${x.m==='mensuel'?'Mensuel':'Livraison unique'}</small></span><strong>${money(x.v)}</strong></div>`).join(''):'Aucun produit sélectionné pour le moment.';$('subtotal').textContent=money(sub);$('shipping').textContent=ship?money(ship):'Offerte';$('total').textContent=money(total);$('mockCount').textContent=count;$('mockShip').textContent=ship?money(ship):'Offerte';$('mockTotal').textContent=money(total);$('deliveryNote').textContent=sub>=29.90?'Livraison offerte atteinte.':'Encore '+money(29.90-sub)+' pour obtenir la livraison offerte.';$('floatName').textContent=st.name;$('floatCount').textContent=count;$('floatTotal').textContent=money(total);$('drawerName').textContent=st.name;$('drawerContent').className=lines.length?'cart-lines':'empty';$('drawerContent').innerHTML=lines.length?lines.map(x=>`<div class="cart-line"><span>${x.q} × ${x.n} ${x.w}<br><small>${x.m==='mensuel'?'Mensuel':'Livraison unique'}</small></span><strong>${money(x.v)}</strong></div>`).join(''):'Aucun produit sélectionné pour le moment.';$('drawerSubtotal').textContent=money(sub);$('drawerShipping').textContent=ship?money(ship):'Offerte';$('drawerTotal').textContent=money(total);$('drawerDelivery').textContent=sub>=29.90?'Livraison offerte atteinte.':'Encore '+money(29.90-sub)+' pour obtenir la livraison offerte.'}
