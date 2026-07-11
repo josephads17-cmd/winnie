@@ -1,0 +1,102 @@
+name: Create Beta V3.9
+
+on:
+  push:
+    paths:
+      - '.github/workflows/create-beta-v39.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  create-v39:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Beta V3.9 from V3.8
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          src = Path('beta-v3-8.html')
+          dst = Path('beta-v3-9.html')
+          text = src.read_text(encoding='utf-8')
+
+          text = text.replace('Beta V3.8', 'Beta V3.9')
+          text = text.replace(
+              '.surprise{margin-top:10px;padding:12px;border:1px dashed var(--terra);border-radius:17px;background:#fff8f2;font-size:13px;font-weight:800}',
+              '.surprise{margin-top:10px;padding:12px;border:1px dashed var(--terra);border-radius:17px;background:#fff8f2;font-size:13px;font-weight:800}.doseguide{margin:14px 0;padding:14px 16px;border:1px solid var(--gb);border-radius:20px;background:var(--green);color:#315b2e;font-size:13px;line-height:1.55}.doseguide strong{display:block;margin-bottom:5px;color:#244722}'
+          )
+          text = text.replace(
+              '<div class="help">Sélectionnez librement les références et les quantités. Cliquez sur le petit « i » pour consulter la fiche de chaque produit.</div>',
+              '<div class="help">Sélectionnez librement les références et les quantités. Cliquez sur le petit « i » pour consulter la fiche de chaque produit.</div><div class="doseguide"><strong>Repère de distribution des fleurs et feuilles séchées</strong>Total quotidien toutes références confondues : environ 1 à 2 g pour un lapin de moins de 2 kg, 2 à 4 g entre 2 et 4 kg, et 4 à 6 g au-delà. Introduire chaque nouveauté progressivement.</div>'
+          )
+          text = text.replace(
+              '<div class="help">Ces friandises restent occasionnelles et ne remplacent jamais le foin. Elles sont proposées en petits formats adaptés.</div>',
+              '<div class="help">Ces friandises restent occasionnelles et ne remplacent jamais le foin. Elles sont proposées en petits formats adaptés.</div><div class="doseguide"><strong>Repère de distribution</strong>Courgette : environ 0,5 à 1 g, deux à trois fois par semaine. Carotte : environ 0,3 à 0,7 g, une à deux fois par semaine. Fraise : environ 0,2 à 0,5 g, une à deux fois par semaine.</div>'
+          )
+          text = text.replace('<strong>Pourquoi c’est adapté</strong>', '<strong>Pourquoi il peut convenir</strong>')
+          text = text.replace('<strong>Intérêt dans la box</strong>', '<strong>Particularités du produit</strong>')
+          text = text.replace('<strong>Repère de portion</strong>', '<strong>Conseils de distribution</strong>')
+          text = text.replace(
+              'Le foin reste l’aliment principal. Introduire toute nouveauté progressivement et arrêter en cas de trouble digestif.',
+              'Le foin reste l’aliment principal. Les repères indiqués concernent un lapin adulte en bonne santé. Introduire toute nouveauté progressivement et arrêter en cas de trouble digestif.'
+          )
+
+          replacements = {
+              "{name:'Calendula',cat:'flower',w:'20 g',p:6.90": "{name:'Calendula',cat:'flower',w:'15 g',p:5.90",
+              "dose:'Commencer par une petite pincée mélangée au foin.'": "dose:'Commencer par environ 0,5 g ou une petite pincée. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Rose',cat:'flower',w:'20 g',p:6.90": "{name:'Rose',cat:'flower',w:'15 g',p:5.90",
+              "dose:'Une petite pincée occasionnellement.'": "dose:'Commencer par environ 0,5 g ou une petite pincée. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Bleuet',cat:'flower',w:'15 g',p:7.90": "{name:'Bleuet',cat:'flower',w:'10 g',p:6.90",
+              "dose:'Quelques pétales mélangés au foin.'": "dose:'Quelques pétales, soit environ 0,5 g au départ. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Mauve',cat:'flower',w:'15 g',p:7.90": "{name:'Mauve',cat:'flower',w:'10 g',p:6.90",
+              "dose:'Petite pincée, progressivement.'": "dose:'Une petite pincée, environ 0,5 g au départ. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Hibiscus blanc',cat:'flower',w:'25 g',p:6.90": "{name:'Hibiscus blanc',cat:'flower',w:'15 g',p:5.90",
+              "dose:'Quelques morceaux au départ.'": "dose:'Quelques fragments, soit environ 0,5 g au départ. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Pétales de tournesol',cat:'flower',w:'20 g',p:6.90": "{name:'Pétales de tournesol',cat:'flower',w:'15 g',p:6.90",
+              "{name:'Plantain',cat:'leaf',w:'20 g',p:5.90": "{name:'Plantain',cat:'leaf',w:'25 g',p:5.90",
+              "dose:'Une petite poignée très légère selon le gabarit.'": "dose:'Commencer par environ 0,5 à 1 g. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Pissenlit',cat:'leaf',w:'20 g',p:5.90": "{name:'Pissenlit',cat:'leaf',w:'25 g',p:5.90",
+              "dose:'Petite quantité en variant avec d’autres plantes.'": "dose:'Commencer par environ 0,5 à 1 g. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Framboisier',cat:'leaf',w:'20 g',p:5.90": "{name:'Framboisier',cat:'leaf',w:'25 g',p:5.90",
+              "dose:'Quelques feuilles émiettées au début.'": "dose:'Commencer par environ 0,5 à 1 g. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Fraisier',cat:'leaf',w:'20 g',p:5.90": "{name:'Fraisier',cat:'leaf',w:'25 g',p:5.90",
+              "dose:'Petite pincée en alternance.'": "dose:'Commencer par environ 0,5 à 1 g. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Ortie',cat:'leaf',w:'20 g',p:5.90": "{name:'Ortie',cat:'leaf',w:'25 g',p:5.90",
+              "dose:'Petite pincée, introduite progressivement.'": "dose:'Commencer par environ 0,5 g. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Noisetier',cat:'leaf',w:'20 g',p:5.90": "{name:'Noisetier',cat:'leaf',w:'25 g',p:5.90",
+              "dose:'Quelques feuilles ou fragments à la fois.'": "dose:'Commencer par environ 0,5 à 1 g. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.'",
+              "{name:'Courgette',cat:'treat',w:'25 g',p:4.90": "{name:'Courgette',cat:'treat',w:'20 g',p:4.90",
+              "dose:'Quelques petits morceaux, occasionnellement.'": "dose:'Environ 0,5 à 1 g par distribution, deux à trois fois par semaine.'",
+              "dose:'Un petit morceau de temps en temps en raison des sucres naturels concentrés.'": "dose:'Environ 0,3 à 0,7 g par distribution, une à deux fois par semaine.'",
+              "{name:'Fraise',cat:'treat',w:'10 g',p:5.90": "{name:'Fraise',cat:'treat',w:'8 g',p:6.90",
+              "dose:'Un très petit morceau, occasionnellement.'": "dose:'Environ 0,2 à 0,5 g par distribution, une à deux fois par semaine.'"
+          }
+          for old, new in replacements.items():
+              text = text.replace(old, new)
+
+          text = text.replace('complément végétal.', 'complément végétal dans une alimentation variée.')
+          text = text.replace('généralement adaptées.', 'généralement proposées aux lapins en complément du foin.')
+
+          required = [
+              "Beta V3.9",
+              "{name:'Calendula',cat:'flower',w:'15 g',p:5.90",
+              "{name:'Plantain',cat:'leaf',w:'25 g',p:5.90",
+              "{name:'Fraise',cat:'treat',w:'8 g',p:6.90",
+              "Repère de distribution des fleurs et feuilles séchées"
+          ]
+          missing = [item for item in required if item not in text]
+          if missing:
+              raise SystemExit(f'Missing expected V3.9 changes: {missing}')
+
+          dst.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit Beta V3.9
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add beta-v3-9.html
+          git commit -m "Create Beta V3.9 with final pricing weights and dosage guidance"
+          git push
