@@ -209,12 +209,11 @@ function activateConfiguratorStep(stepNumber) {
   document
     .querySelectorAll(".step")
     .forEach((step) =>
-      step.classList.toggle(
-        "active",
-        Number(step.dataset.s) === stepNumber,
-      ),
+      step.classList.toggle("active", Number(step.dataset.s) === stepNumber),
     );
-  requestAnimationFrame(() => scrollToElement(document.querySelector(".panel"), 18));
+  requestAnimationFrame(() =>
+    scrollToElement(document.querySelector(".panel"), 18),
+  );
 }
 
 function go(n) {
@@ -227,7 +226,9 @@ function showRecap() {
   document
     .querySelectorAll(".screen, .step")
     .forEach((element) => element.classList.remove("active"));
-  requestAnimationFrame(() => scrollToElement(document.querySelector(".cart"), 12));
+  requestAnimationFrame(() =>
+    scrollToElement(document.querySelector(".cart"), 12),
+  );
 }
 
 function returnToConfigurator() {
@@ -238,7 +239,8 @@ function applyMobileLayout() {
   const validation = document.querySelector(".validation-step");
   const steps = document.querySelector(".steps");
   if (validation) validation.style.display = isMobile() ? "none" : "";
-  if (steps) steps.style.gridTemplateColumns = isMobile() ? "repeat(3,1fr)" : "";
+  if (steps)
+    steps.style.gridTemplateColumns = isMobile() ? "repeat(3,1fr)" : "";
 }
 function changeP(i, d) {
   st.p[i].q = Math.max(0, st.p[i].q + d);
@@ -282,7 +284,7 @@ function rows(cat, id) {
 }
 function render() {
   st.name = ($("rabbitName").value || "Winnie").trim() || "votre lapin";
-  ["mockName", "titleName", "cartName", "labelName"].forEach(
+  ["mockName", "insideBoxName", "titleName", "cartName", "labelName"].forEach(
     (id) => ($(id).textContent = st.name),
   );
   rows("flower", "flowers");
@@ -407,7 +409,8 @@ function quickAdd() {
   st.p[activeInfoIndex].q += quickAmount;
   st.p[activeInfoIndex].m = $("quickMode").value;
   render();
-  $("quickFeedback").textContent = `${quickAmount} × ${product.name} ajouté${quickAmount > 1 ? "s" : ""} au panier ✓`;
+  $("quickFeedback").textContent =
+    `${quickAmount} × ${product.name} ajouté${quickAmount > 1 ? "s" : ""} au panier ✓`;
   quickAmount = 1;
   $("quickQty").textContent = "1";
 }
