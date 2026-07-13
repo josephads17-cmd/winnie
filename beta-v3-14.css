@@ -275,7 +275,7 @@ h2 {
 }
 .steps {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   margin-bottom: 20px;
 }
@@ -1071,55 +1071,36 @@ h2 {
   }
 }
 
-/* V3.14: name personalization integrated into the hero. */
-.hero-name-field {
-  margin-top: 24px;
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 12px 34px rgba(111, 64, 50, 0.07);
+/* V3.14: name personalization highlight. */
+.name-personalization {
+  background: linear-gradient(145deg, #fffaf6, #fff1e8);
 }
-.hero-name-field label {
-  display: block;
-  margin-bottom: 9px;
-  color: var(--dark);
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.hero-name-control {
+.personalization-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 10px;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
 }
-.hero-name-control input {
-  min-width: 0;
-  height: 52px;
-  padding: 0 16px;
+.personalization-copy .lead {
+  max-width: 670px;
+}
+.personalization-copy .btn {
+  margin-top: 24px;
+}
+.personalization-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 20px;
+}
+.personalization-points span {
+  padding: 9px 12px;
   border: 1px solid var(--border);
   border-radius: 999px;
-  outline: none;
-  background: #fffaf6;
-  color: var(--dark);
-  font-size: 17px;
-  font-weight: 700;
-}
-.hero-name-control input:focus {
-  border-color: var(--brown);
-  box-shadow: 0 0 0 3px rgba(111, 64, 50, 0.1);
-}
-.hero-name-field small {
-  display: block;
-  margin-top: 9px;
-  color: #8e5b48;
+  background: #fff;
+  color: var(--brown);
   font-size: 12px;
-  font-weight: 800;
-}
-.hero-inside-box {
-  width: min(500px, 100%);
-  margin-inline: auto;
+  font-weight: 900;
 }
 .inside-box {
   position: relative;
@@ -1215,17 +1196,24 @@ h2 {
   font-weight: 800;
 }
 @media (max-width: 880px) {
-  .hero-inside-box {
+  .personalization-layout {
+    grid-template-columns: 1fr;
+  }
+  .inside-box {
     width: min(520px, 100%);
-    margin: 12px auto 0;
+    margin: 4px auto 0;
   }
 }
 @media (max-width: 640px) {
-  .hero-name-control {
+  .personalization-copy .btn {
+    width: 100%;
+  }
+  .personalization-points {
+    display: grid;
     grid-template-columns: 1fr;
   }
-  .hero-name-control .btn {
-    width: 100%;
+  .personalization-points span {
+    text-align: center;
   }
   .inside-box-base {
     min-height: 225px;
