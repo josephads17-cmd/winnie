@@ -1,14 +1,14 @@
 const baseScript=document.createElement('script');
-baseScript.src='beta-v3-12.js?v=product-images-1';
+baseScript.src='beta-v3-12.js?v=product-images-2';
 baseScript.onload=()=>{
   function isMobile(){return window.matchMedia('(max-width: 640px)').matches}
 
   const imageFiles=[
-    'calendula.png','rose.png','bleuet.png','mauve.png','hibiscus-blanc.png','tournesol.png',
-    'plantain.png','pissenlit.png','framboisier.png','fraisier.png','ortie.png','noisetier.png',
-    'courgette.png','carotte.png','fraise.png'
+    'calendula.png','Rose.png','Bleuet.png','Mauve.png','Hibiscus blanc.png','Pétales de tournesol.png',
+    'Plantain.png','Pissenlit.png','Framboisier.png','Fraisier.png','Ortie.png','Noisetier.png',
+    'Courgette séchée.png','Carotte séchée.png','Fraise lyophilisée.png'
   ];
-  products.forEach((product,index)=>{product.img='assets/products/'+imageFiles[index]});
+  products.forEach((product,index)=>{product.img='assets/products/'+encodeURIComponent(imageFiles[index]).replace(/%2F/g,'/')});
 
   const visualStyles=document.createElement('style');
   visualStyles.textContent=`
@@ -23,7 +23,7 @@ baseScript.onload=()=>{
   `;
   document.head.appendChild(visualStyles);
 
-  function imageMarkup(product,index){
+  function imageMarkup(product){
     return `<img src="${product.img}" alt="${product.name} séché" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.style.background='${product.c}'">`;
   }
 
@@ -31,7 +31,7 @@ baseScript.onload=()=>{
     $(id).innerHTML=products.map((p,i)=>({p,i})).filter(x=>x.p.cat===cat).map(({p,i})=>`
       <article class="item">
         <div class="thumbwrap">
-          <div class="thumb" onclick="openInfo(${i})" role="button" tabindex="0" aria-label="Voir la fiche de ${p.name}">${imageMarkup(p,i)}</div>
+          <div class="thumb" onclick="openInfo(${i})" role="button" tabindex="0" aria-label="Voir la fiche de ${p.name}">${imageMarkup(p)}</div>
           <button class="info" onclick="openInfo(${i})" aria-label="Informations sur ${p.name}">i</button>
         </div>
         <div><h4>${p.name}</h4><div class="meta">${p.w}</div><div class="price">${money(p.p)}</div></div>
