@@ -19,74 +19,51 @@
       <div class="navlinks">
         <a href="#composer">Composer</a><a href="#preuves">Photos</a
         ><a href="#histoire">Qui sommes-nous</a><a href="#faq">FAQ</a
-        ><a class="btn" href="#composer">Créer la box</a>
+        ><a class="btn" href="#rabbitName">Créer la box</a>
       </div>
     </nav>
     <main id="top">
-      <section class="hero">
+      <section class="hero" id="personnalisation">
         <div class="container hero-grid">
           <div>
             <span class="eyebrow">Beta V3.14</span>
-            <h1>Sa box, ses goûts, <em>sa petite surprise.</em></h1>
+            <h1>
+              Une box composée pour lui. <em>Personnalisée à son prénom.</em>
+            </h1>
             <p class="lead">
-              Choisissez librement ses fleurs, plantes et petites gourmandises.
-              La box reste personnalisée au prénom de votre lapin et contient
-              une découverte surprise selon le mois.
+              Indiquez le prénom de votre lapin, puis choisissez librement ses
+              fleurs, plantes et petites gourmandises. Son prénom sera placé à
+              l’intérieur de la box avant son envoi.
             </p>
+            <div class="hero-name-field">
+              <label for="rabbitName"
+                >Quel est le prénom de votre lapin ?</label
+              >
+              <div class="hero-name-control">
+                <input
+                  id="rabbitName"
+                  maxlength="22"
+                  placeholder="Ex. Winnie"
+                  autocomplete="off"
+                />
+                <a class="btn" id="heroComposeCta" href="#composer"
+                  >Choisir ses produits</a
+                >
+              </div>
+              <small>Son prénom l’attendra à l’intérieur de sa box.</small>
+            </div>
             <div class="hero-actions">
-              <a class="btn" href="#composer">Composer sa box</a
-              ><a class="btn secondary" href="#avis">Voir les avis</a>
+              <a class="btn secondary" href="#avis">Voir les avis clients</a>
             </div>
             <div class="pills">
-              <span class="pill">Aucun minimum</span
+              <span class="pill">Prénom à l’intérieur</span
+              ><span class="pill">Aucun minimum</span
               ><span class="pill">Livraison offerte dès 29,90 €</span
               ><span class="pill">Surprise mensuelle incluse</span>
             </div>
           </div>
-          <div class="visual">
-            <div class="boxart">
-              <div class="mock">
-                <small>Préparée spécialement pour</small
-                ><strong id="mockName">Winnie</strong>
-                <div class="line">
-                  <span>Produits choisis</span><b id="mockCount">0</b>
-                </div>
-                <div class="line">
-                  <span>Surprise du mois</span><b>Incluse</b>
-                </div>
-                <div class="line">
-                  <span>Livraison</span><b id="mockShip">4,90 €</b>
-                </div>
-                <div class="line">
-                  <span>Total</span><b id="mockTotal">4,90 €</b>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="section name-personalization" id="personnalisation">
-        <div class="container personalization-layout">
-          <div class="personalization-copy">
-            <span class="eyebrow">Une attention vraiment personnelle</span>
-            <h2>Son prénom l’attend à l’intérieur de sa box.</h2>
-            <p class="lead">
-              Le prénom renseigné lors de la composition est placé à l’intérieur
-              de la box avant son envoi. Dès l’ouverture, votre lapin découvre
-              une attention préparée spécialement pour lui.
-            </p>
-            <div
-              class="personalization-points"
-              aria-label="Avantages de la personnalisation"
-            >
-              <span>Prénom à l’intérieur</span>
-              <span>Préparée individuellement</span>
-              <span>Unique à chaque lapin</span>
-            </div>
-            <a class="btn" href="#composer">Personnaliser sa box</a>
-          </div>
           <div
-            class="inside-box"
+            class="inside-box hero-inside-box"
             aria-label="Aperçu de la personnalisation intérieure"
           >
             <div class="inside-box-lid">
@@ -94,7 +71,7 @@
             </div>
             <div class="inside-box-base">
               <small>Cette box a été préparée pour</small>
-              <strong id="insideBoxName">Winnie</strong>
+              <strong id="insideBoxName">Son prénom</strong>
               <span>Une attention rien que pour votre lapin</span>
             </div>
           </div>
@@ -103,7 +80,9 @@
       <section class="section builder" id="composer">
         <div class="container center">
           <span class="eyebrow">Configurateur</span>
-          <h2>Composez la box de <span id="titleName">Winnie</span>.</h2>
+          <h2>
+            Choisissez les produits de <span id="titleName">votre lapin</span>.
+          </h2>
           <p class="lead">
             Choisissez exactement ce qui lui plaît. Aucun nombre minimum n’est
             imposé.
@@ -112,34 +91,15 @@
         <div class="container builder-grid">
           <div class="panel">
             <div class="steps">
-              <button class="step active" data-s="1" onclick="go(1)">
-                1. Prénom</button
-              ><button class="step" data-s="2" onclick="go(2)">
-                2. Fleurs & plantes</button
+              <button class="step active" data-s="2" onclick="go(2)">
+                1. Fleurs & plantes</button
               ><button class="step" data-s="3" onclick="go(3)">
-                3. Gourmandises</button
+                2. Gourmandises</button
               ><button class="step validation-step" data-s="4" onclick="go(4)">
-                4. Validation
+                3. Validation
               </button>
             </div>
-            <section class="screen active" data-screen="1">
-              <h2>Pour qui prépare-t-on la box ?</h2>
-              <div class="help">
-                Le prénom apparaîtra sur l’étiquette afin de conserver toute la
-                dimension émotionnelle de La Maison Winnie.
-              </div>
-              <div class="field">
-                <label>Prénom du lapin</label
-                ><input id="rabbitName" value="Winnie" maxlength="22" />
-              </div>
-              <div class="actions">
-                <span></span
-                ><button class="btn" onclick="go(2)">
-                  Choisir son contenu
-                </button>
-              </div>
-            </section>
-            <section class="screen" data-screen="2">
+            <section class="screen active" data-screen="2">
               <h2>Fleurs et plantes séchées</h2>
               <div class="help">
                 Sélectionnez librement les références et les quantités. Cliquez
@@ -163,7 +123,8 @@
               </div>
               <div class="items" id="leaves"></div>
               <div class="actions">
-                <button class="btn secondary" onclick="go(1)">Retour</button
+                <button class="btn secondary" onclick="focusNameInput()">
+                  Modifier le prénom</button
                 ><button class="btn" onclick="go(3)">
                   Voir les gourmandises
                 </button>

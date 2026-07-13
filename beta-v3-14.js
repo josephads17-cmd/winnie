@@ -235,12 +235,19 @@ function returnToConfigurator() {
   activateConfiguratorStep(3);
 }
 
+function focusNameInput() {
+  scrollToElement(document.querySelector(".hero"), 18);
+  window.setTimeout(() => $("rabbitName").focus(), 450);
+}
+
 function applyMobileLayout() {
   const validation = document.querySelector(".validation-step");
   const steps = document.querySelector(".steps");
   if (validation) validation.style.display = isMobile() ? "none" : "";
   if (steps)
-    steps.style.gridTemplateColumns = isMobile() ? "repeat(3,1fr)" : "";
+    steps.style.gridTemplateColumns = isMobile()
+      ? "repeat(2,1fr)"
+      : "repeat(3,1fr)";
 }
 function changeP(i, d) {
   st.p[i].q = Math.max(0, st.p[i].q + d);
@@ -283,10 +290,15 @@ function rows(cat, id) {
   });
 }
 function render() {
-  st.name = ($("rabbitName").value || "Winnie").trim() || "votre lapin";
-  ["mockName", "insideBoxName", "titleName", "cartName", "labelName"].forEach(
+  const enteredName = $("rabbitName").value.trim();
+  st.name = enteredName || "votre lapin";
+  $("insideBoxName").textContent = enteredName || "Son prénom";
+  ["titleName", "cartName", "labelName"].forEach(
     (id) => ($(id).textContent = st.name),
   );
+  $("heroComposeCta").textContent = enteredName
+    ? `Choisir les produits de ${enteredName}`
+    : "Choisir ses produits";
   rows("flower", "flowers");
   rows("leaf", "leaves");
   rows("treat", "treats");
@@ -316,9 +328,6 @@ function render() {
   $("subtotal").textContent = money(sub);
   $("shipping").textContent = ship ? money(ship) : "Offerte";
   $("total").textContent = money(total);
-  $("mockCount").textContent = count;
-  $("mockShip").textContent = ship ? money(ship) : "Offerte";
-  $("mockTotal").textContent = money(total);
   $("deliveryNote").textContent =
     sub >= 29.9
       ? "Livraison offerte atteinte."
