@@ -32,7 +32,7 @@
             </h1>
             <p class="lead">
               Indiquez le prénom de votre lapin, puis choisissez librement ses
-              fleurs, plantes et petites gourmandises. Son prénom sera placé à
+              fleurs et plantes séchées. Son prénom sera placé à
               l’intérieur de la box avant son envoi.
             </p>
             <div class="hero-name-field">
@@ -59,7 +59,7 @@
               <span class="pill">Prénom à l’intérieur</span
               ><span class="pill">Aucun minimum</span
               ><span class="pill">Livraison offerte dès 29,90 €</span
-              ><span class="pill">Surprise mensuelle incluse</span>
+              ><span class="pill">8 références soigneusement sélectionnées</span>
             </div>
           </div>
           <div class="visual hero-inside-box">
@@ -94,15 +94,15 @@
           <div class="panel">
             <div class="steps">
               <button class="step active" data-s="2" onclick="go(2)">
-                1. Fleurs & plantes</button
+                1. Fleurs</button
               ><button class="step" data-s="3" onclick="go(3)">
-                2. Gourmandises</button
+                2. Plantes</button
               ><button class="step validation-step" data-s="4" onclick="go(4)">
                 3. Validation
               </button>
             </div>
             <section class="screen active" data-screen="2">
-              <h2>Fleurs et plantes séchées</h2>
+              <h2>Choisissez ses fleurs séchées</h2>
               <div class="help">
                 Sélectionnez librement les références et les quantités.
                 <span class="help-detail">Cliquez sur le petit « i » pour consulter la fiche de
@@ -163,62 +163,61 @@
               </details>
               <div class="category">
                 <h3>Fleurs séchées</h3>
-                <span>6 choix</span>
+                <span>4 choix</span>
               </div>
               <div class="items" id="flowers"></div>
-              <div class="category">
-                <h3>Plantes & feuilles</h3>
-                <span>6 choix</span>
-              </div>
-              <div class="items" id="leaves"></div>
               <div class="actions">
                 <button class="btn secondary" onclick="focusNameInput()">
                   Modifier le prénom</button
                 ><button class="btn" onclick="go(3)">
-                  Voir les gourmandises
+                  Choisir ses plantes
                 </button>
               </div>
             </section>
             <section class="screen" data-screen="3">
-              <h2>Petites gourmandises</h2>
+              <h2>Choisissez ses plantes et feuilles</h2>
               <div class="help">
-                Ces friandises restent occasionnelles et ne remplacent jamais le
-                foin. Elles sont proposées en petits formats adaptés.
+                Quatre références complémentaires pour varier les odeurs, les
+                textures et les plaisirs, toujours en petite quantité.
+                <span class="help-detail">Cliquez sur le petit « i » pour consulter la fiche de
+                chaque produit.</span>
               </div>
               <div class="doseguide desktop-guidance">
-                <strong>Repère indicatif par occasion</strong>Courgette : 0,5 à
-                1 g, deux à trois fois par semaine. Carotte : 0,3 à 0,7 g, une à
-                deux fois par semaine. Fraise : 0,2 à 0,5 g, une à deux fois par
-                semaine.
+                <strong>À proposer en complément du foin</strong>
+                Plantain, pissenlit, framboisier et noisetier permettent de faire
+                tourner les références sans augmenter la quantité quotidienne.
                 <span class="dose-warning"
-                  >Alternez les gourmandises au lieu de cumuler leurs portions
-                  le même jour. La carotte et la fraise restent des friandises
-                  naturellement sucrées.</span
+                  >Introduisez une seule nouveauté à la fois et observez votre
+                  lapin pendant 24 heures.</span
                 >
               </div>
               <details class="mobile-guidance">
                 <summary>
                   <span>
-                    <strong>Conseils pour les gourmandises</strong>
-                    Portions et fréquence
+                    <strong>Conseils pour les plantes</strong>
+                    Variété et introduction progressive
                   </span>
                 </summary>
                 <div class="mobile-guidance-body">
-                  <p><strong>Courgette :</strong> 0,5 à 1 g, 2 à 3 fois par semaine.</p>
-                  <p><strong>Carotte :</strong> 0,3 à 0,7 g, 1 à 2 fois par semaine.</p>
-                  <p><strong>Fraise :</strong> 0,2 à 0,5 g, 1 à 2 fois par semaine.</p>
+                  <p>
+                    Ces plantes complètent le foin, qui reste disponible à volonté.
+                  </p>
+                  <p>
+                    Commencez par une petite quantité et introduisez une seule
+                    nouvelle référence à la fois.
+                  </p>
                   <p class="mobile-guidance-alert">
-                    Alternez-les : ne cumulez pas les portions le même jour.
+                    Observez l’appétit et les crottes pendant 24 heures.
                   </p>
                 </div>
               </details>
-              <div class="items" id="treats"></div>
-              <div class="surprise">
-                🎁 Une petite découverte différente selon le mois sera ajoutée à
-                la box, sans remplacer les produits choisis.
+              <div class="category">
+                <h3>Plantes & feuilles</h3>
+                <span>4 choix</span>
               </div>
+              <div class="items" id="leaves"></div>
               <div class="actions">
-                <button class="btn secondary" onclick="go(2)">Retour</button
+                <button class="btn secondary" onclick="go(2)">Retour aux fleurs</button
                 ><button class="btn" onclick="showRecap()">
                   Voir le récapitulatif
                 </button>
@@ -231,7 +230,7 @@
                 déclenche aucun paiement réel.
               </div>
               <div class="actions">
-                <button class="btn secondary" onclick="go(3)">Retour</button
+                <button class="btn secondary" onclick="go(3)">Retour aux plantes</button
                 ><button class="btn" onclick="openConfirm()">
                   Valider la Beta
                 </button>
@@ -262,7 +261,6 @@
             <div class="delivery" id="deliveryNote">
               Encore 29,90 € pour obtenir la livraison offerte.
             </div>
-            <div class="surprise">🎁 Surprise du mois incluse</div>
             <button
               class="btn secondary mobile-order-cta"
               type="button"
@@ -288,7 +286,7 @@
           <span class="eyebrow">Varier avec mesure</span>
           <h2>Composez une sélection riche et variée.</h2>
           <p class="lead">
-            Choisir plusieurs fleurs, plantes, feuilles et gourmandises permet
+            Choisir plusieurs fleurs, plantes et feuilles permet
             de renouveler les odeurs, les goûts et les textures au fil des
             jours. Vous pouvez donc varier largement le contenu de la box, puis
             faire tourner les produits sans les servir tous en même temps.
@@ -313,12 +311,12 @@
               </p>
             </article>
             <article class="variety-card treats-card">
-              <span aria-hidden="true">🍓</span>
-              <h3>Gourmandises</h3>
+              <span aria-hidden="true">🔄</span>
+              <h3>Alterner progressivement</h3>
               <p>
-                Choisissez plusieurs petites gourmandises pour varier les
-                récompenses d’un jour à l’autre. Elles restent occasionnelles
-                et leurs portions ne doivent pas être cumulées.
+                Faites découvrir une seule nouvelle référence à la fois, en
+                petite quantité. Si tout va bien après 24 heures, poursuivez la
+                rotation sans servir tous les produits le même jour.
               </p>
             </article>
           </div>
@@ -340,7 +338,7 @@
       <section class="section" id="avis">
         <div class="container center">
           <span class="eyebrow">Retours clients</span>
-          <h2>Ils valident le choix libre, sans perdre la surprise.</h2>
+          <h2>Ils valident une composition simple et vraiment personnalisée.</h2>
           <div class="proof-grid">
             <article class="proof">
               <div class="stars">★★★★★</div>
@@ -353,8 +351,7 @@
             <article class="proof">
               <div class="stars">★★★★★</div>
               <p>
-                « Garder une petite découverte en plus permet de conserver le
-                plaisir de la box. »
+                « Les deux étapes rendent la composition claire et rapide, sans trop de choix. »
               </p>
               <strong>Milo</strong>
             </article>
@@ -375,16 +372,16 @@
           <h2>Pourquoi avoir choisi ces produits ?</h2>
           <p class="lead">
             Nous avons retenu une gamme courte, lisible et complémentaire : des
-            fleurs pour le plaisir, des feuilles pour varier le quotidien et
-            quelques gourmandises à distribuer avec modération.
+            fleurs pour le plaisir et des feuilles pour varier le quotidien,
+            dans un parcours simple en deux étapes.
           </p>
           <div class="reason-grid">
             <article class="reason-card">
               <span class="reason-icon">🌼</span>
               <h3>Des références simples</h3>
               <p>
-                Chaque sachet contient une seule fleur, feuille ou gourmandise
-                clairement identifiée. Pas de mélange imposé ni d’ingrédient
+                Chaque sachet contient une seule fleur ou feuille clairement
+                identifiée. Pas de mélange imposé ni d’ingrédient
                 caché.
               </p>
             </article>
@@ -405,11 +402,11 @@
               </p>
             </article>
             <article class="reason-card">
-              <span class="reason-icon">🎁</span>
-              <h3>Choix libre + surprise</h3>
+              <span class="reason-icon">🌱</span>
+              <h3>Une gamme évolutive</h3>
               <p>
-                Le client maîtrise l’essentiel du contenu tout en conservant le
-                plaisir d’une petite découverte différente selon le mois.
+                La sélection démarre avec huit références complémentaires. De
+                nouvelles étapes pourront être ajoutées selon les envies des clients.
               </p>
             </article>
           </div>
@@ -521,12 +518,11 @@
             <p>
               La Maison Winnie est née d’une envie simple : proposer aux
               propriétaires de lapins une expérience plus personnelle, plus
-              claire et plus attentionnée qu’un simple panier de friandises.
+              claire et plus attentionnée qu’un simple panier de produits.
             </p>
             <p>
-              Chaque box porte le prénom du lapin. Le client choisit ce qui lui
-              correspond vraiment, tandis qu’une petite surprise conserve
-              l’émotion de la découverte.
+              Chaque box porte le prénom du lapin. Le client choisit librement ses
+              fleurs et ses plantes dans un parcours volontairement simple.
             </p>
             <p>
               Nous sélectionnons, pesons et préparons les produits à la main en
@@ -545,7 +541,7 @@
             <span class="eyebrow">Questions fréquentes</span>
             <h2>Tout ce qu’il faut savoir avant de composer sa box.</h2>
             <p class="lead">
-              Des réponses simples sur la sélection, les quantités, la surprise
+              Des réponses simples sur la sélection, les quantités, la composition
               et la livraison.
             </p>
           </div>
@@ -559,10 +555,10 @@
               </p>
             </details>
             <details class="faq-item">
-              <summary>La surprise remplace-t-elle un produit choisi ?</summary>
+              <summary>Comment se déroule la composition de la box ?</summary>
               <p>
-                Non. La petite découverte du mois est ajoutée en complément et
-                ne remplace jamais les références sélectionnées.
+                Vous choisissez d’abord les fleurs, puis les plantes et feuilles.
+                Le récapitulatif permet ensuite de vérifier toute la sélection.
               </p>
             </details>
             <details class="faq-item">
@@ -609,7 +605,7 @@
     </main>
     <footer class="footer">
       <div class="container">
-        La Maison Winnie — Beta V3.19 · choix libre · surprise mensuelle · aucun
+        La Maison Winnie — Beta V3.19 · fleurs et plantes au choix · aucun
         paiement réel.
       </div>
     </footer>
