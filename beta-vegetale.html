@@ -29,25 +29,27 @@
 .boxBase{position:absolute;left:0;right:0;bottom:0;height:142px;border:2px solid rgba(91,78,56,.2);border-radius:5px 5px 22px 22px;background-color:#f5efd9;background-image:radial-gradient(ellipse at center,rgba(112,126,67,.65) 0 18%,transparent 19%),radial-gradient(ellipse at center,rgba(155,165,112,.6) 0 15%,transparent 16%);background-size:68px 52px,52px 60px;background-position:3px 1px,31px 27px;overflow:hidden;transform:rotateX(2deg);transform-origin:bottom;z-index:3}
 .boxBase:after{content:"";position:absolute;inset:auto 0 0;height:42%;background:linear-gradient(180deg,transparent,rgba(99,84,57,.08))}
 .boxFrontLogo{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);width:62%;padding:12px 8px;border:1px solid rgba(57,46,35,.48);background:rgba(248,243,226,.88);text-align:center;color:#34291f;font-family:Fraunces,serif;font-size:17px;letter-spacing:.06em;white-space:nowrap}
-.boxProducts{position:absolute;z-index:2;left:10%;right:10%;bottom:104px;height:108px;display:flex;align-items:flex-end;justify-content:center;gap:10px;opacity:0;transform:translateY(24px) scale(.96);transition:opacity .45s .55s,transform .6s .5s cubic-bezier(.2,.8,.2,1)}
+.boxProducts{position:absolute;z-index:6;left:10%;right:10%;bottom:104px;height:108px;display:flex;align-items:flex-end;justify-content:center;gap:10px;opacity:0;transform:translateY(24px) scale(.96);transition:opacity .45s .55s,transform .6s .5s cubic-bezier(.2,.8,.2,1)}
 .productPouch{position:relative;width:30%;height:86px;border:1px solid rgba(71,77,57,.2);border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#fffdf7 0 64%,#eadbc5 64%);box-shadow:0 9px 14px rgba(55,47,36,.1)}
 .productPouch:nth-child(2){height:104px;background:linear-gradient(180deg,#fffdf7 0 61%,#e7cda9 61%)}
 .productPouch:nth-child(3){height:78px;background:linear-gradient(180deg,#fffdf7 0 62%,#d8dfbe 62%)}
 .productPouch:before{content:attr(data-label);position:absolute;left:4px;right:4px;top:17px;color:#5c4a3b;font-size:8px;font-weight:800;text-align:center;text-transform:uppercase;letter-spacing:.08em}
-.boxLid{position:absolute;z-index:5;left:0;right:0;bottom:134px;height:174px;transform-origin:50% 100%;transform-style:preserve-3d;transition:transform 1.05s cubic-bezier(.22,.78,.2,1);will-change:transform}
-.lidFace{position:absolute;inset:0;border:2px solid rgba(91,78,56,.2);border-radius:22px 22px 5px 5px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.boxLid{position:absolute;z-index:5;left:0;right:0;bottom:0;height:174px;transform-origin:50% 100%;transform:translateY(0) rotateX(0);transform-style:preserve-3d;transition:transform 1.05s cubic-bezier(.22,.78,.2,1);will-change:transform}
+.lidFace{position:absolute;inset:0;border:2px solid rgba(91,78,56,.2);border-radius:22px 22px 5px 5px;overflow:hidden;transition:opacity .38s .18s}
 .lidOutside{display:grid;place-items:center;background-color:#f5efd9;background-image:radial-gradient(ellipse at center,rgba(112,126,67,.65) 0 18%,transparent 19%),radial-gradient(ellipse at center,rgba(155,165,112,.6) 0 15%,transparent 16%);background-size:68px 52px,52px 60px;background-position:3px 1px,31px 27px}
 .lidOutsideLogo{width:65%;padding:15px 8px;border:1px solid rgba(57,46,35,.48);background:rgba(248,243,226,.88);text-align:center;color:#34291f}
 .lidOutsideLogo svg{display:block;width:42px;height:32px;margin:0 auto 5px}
 .lidOutsideLogo strong{font-family:Fraunces,serif;font-size:16px;letter-spacing:.06em}
-.lidInside{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background:linear-gradient(180deg,#fff,#fffdf8);transform:rotateX(180deg);color:#6f4032;text-align:center}
+.lidInside{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background:linear-gradient(180deg,#fff,#fffdf8);color:#6f4032;text-align:center;opacity:0}
 .lidInside span{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
 .lidInside strong{display:block;width:100%;margin-top:8px;font-family:Fraunces,serif;font-size:clamp(30px,5.2vw,53px);font-weight:600;color:#b87753;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lidInside small{margin-top:10px;color:#7f6a5b;font-size:10px;font-weight:700}
 .boxSideFlap{position:absolute;z-index:4;bottom:136px;width:26%;height:72px;border:1px solid rgba(91,78,56,.16);background:#f7f1dc;transition:transform .65s .18s cubic-bezier(.2,.8,.2,1);transform-origin:bottom}
 .boxSideFlap.left{left:1%;transform:rotateZ(0)}
 .boxSideFlap.right{right:1%;transform:rotateZ(0)}
-.boxStage.is-open .boxLid{transform:rotateX(-116deg)}
+.boxStage.is-open .boxLid{transform:translateY(-150px) rotateX(-8deg)}
+.boxStage.is-open .lidOutside{opacity:0}
+.boxStage.is-open .lidInside{opacity:1}
 .boxStage.is-open .boxProducts{opacity:1;transform:translateY(0) scale(1)}
 .boxStage.is-open .boxSideFlap.left{transform:translate(-30px,10px) rotateZ(-32deg)}
 .boxStage.is-open .boxSideFlap.right{transform:translate(30px,10px) rotateZ(32deg)}
@@ -58,8 +60,8 @@
 .boxPrompt{position:absolute;z-index:6;left:18px;right:18px;bottom:22px;text-align:center;color:var(--forest);font-size:12px;font-weight:800;letter-spacing:.035em;transition:.3s}
 .boxStage.is-open .boxPrompt{color:#8a6742}
 @media(max-width:900px){.boxStage{min-height:470px}.boxScene{bottom:66px}}
-@media(max-width:560px){.nameInputWrap{display:grid;grid-template-columns:1fr auto}.nameLiveBadge{font-size:9px}.boxStage{min-height:410px}.boxScene{width:88%;height:286px;bottom:58px}.boxBase{height:122px}.boxLid{bottom:116px;height:150px}.boxSideFlap{bottom:118px;height:60px}.boxProducts{bottom:90px;height:94px}.lidInside strong{font-size:34px}.boxFrontLogo{font-size:14px}}
-@media(prefers-reduced-motion:reduce){.boxLid,.boxProducts,.boxSideFlap,.botanicalSpark{transition:none!important}.boxStage.is-open .boxLid{transform:rotateX(-116deg)}}
+@media(max-width:560px){.nameInputWrap{display:grid;grid-template-columns:1fr auto}.nameLiveBadge{font-size:9px}.boxStage{min-height:410px}.boxScene{width:88%;height:286px;bottom:58px}.boxBase{height:122px}.boxLid{bottom:0;height:150px}.boxStage.is-open .boxLid{transform:translateY(-128px) rotateX(-8deg)}.boxSideFlap{bottom:118px;height:60px}.boxProducts{bottom:90px;height:94px}.lidInside strong{font-size:34px}.boxFrontLogo{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.boxLid,.lidFace,.boxProducts,.boxSideFlap,.botanicalSpark{transition:none!important}.boxStage.is-open .boxLid{transform:translateY(-150px) rotateX(-8deg)}}
 
 </style>
 </head>
