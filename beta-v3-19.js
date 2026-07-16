@@ -131,7 +131,6 @@ const $ = (id) => document.getElementById(id);
 const money = (n) =>
   n.toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
 const FREE_SHIPPING_THRESHOLD = 29.9;
-const SHIPPING_COST = 4.99;
 const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
 let activeInfoIndex = null;
 let quickAmount = 1;
@@ -157,9 +156,10 @@ function updateDeliveryProgress(rootId, sub) {
     : `Plus que ${money(remaining)} avant la livraison offerte`;
 
   if (reached) {
-    detail.textContent = `Vous économisez ${money(SHIPPING_COST)} sur cette commande.`;
+    detail.textContent =
+      "La livraison sera automatiquement offerte lors du paiement.";
   } else if (nextProductUnlocks) {
-    detail.textContent = `Ajoutez un sachet à ${money(cheapestProduct)} : la livraison passe à 0 € et votre total n’augmente que de ${money(cheapestProduct - SHIPPING_COST)}.`;
+    detail.textContent = `Ajoutez un sachet à ${money(cheapestProduct)} : vous franchissez le seuil et la livraison devient offerte.`;
   } else if (sub === 0) {
     detail.textContent = "Le décompte commence avec le premier sachet ajouté.";
   } else {
@@ -292,8 +292,8 @@ function render() {
       lines.push({ n: p.name, w: p.w, q: x.q, m: x.m, v });
     }
   });
-  let ship = sub >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST,
-    total = sub + ship;
+  const shippingIsFree = sub >= FREE_SHIPPING_THRESHOLD;
+  const total = sub;
   $("cartContent").className = lines.length ? "cart-lines" : "empty";
   $("cartContent").innerHTML = lines.length
     ? lines
@@ -304,7 +304,9 @@ function render() {
         .join("")
     : "Aucun produit sélectionné pour le moment.";
   $("subtotal").textContent = money(sub);
-  $("shipping").textContent = ship ? money(ship) : "Offerte";
+  $("shipping").textContent = shippingIsFree
+    ? "Offerte"
+    : "Calculée lors du paiement";
   $("total").textContent = money(total);
   updateDeliveryProgress("deliveryNote", sub);
   $("floatName").textContent = st.name;
@@ -321,7 +323,9 @@ function render() {
         .join("")
     : "Aucun produit sélectionné pour le moment.";
   $("drawerSubtotal").textContent = money(sub);
-  $("drawerShipping").textContent = ship ? money(ship) : "Offerte";
+  $("drawerShipping").textContent = shippingIsFree
+    ? "Offerte"
+    : "Calculée lors du paiement";
   $("drawerTotal").textContent = money(total);
   updateDeliveryProgress("drawerDelivery", sub);
   $("mobileOrderCta").textContent = `Commander la box de ${st.name}`;
