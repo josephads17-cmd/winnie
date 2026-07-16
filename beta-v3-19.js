@@ -3,7 +3,7 @@ const products = [
     name: "Calendula",
     img: "calendula.png",
     cat: "flower",
-    w: "15 g",
+    w: "20 g",
     p: 5.9,
     c: "linear-gradient(135deg,#f5b94d,#fff2bf)",
     desc: "Fleurs de souci séchées, naturellement colorées et sans additif.",
@@ -33,7 +33,7 @@ const products = [
     name: "Camomille bio",
     img: "Camomille-Bio.jpg",
     cat: "flower",
-    w: "15 g",
+    w: "20 g",
     p: 5.9,
     c: "linear-gradient(135deg,#e8c85c,#fff7d1)",
     desc: "Fleurs de camomille bio séchées, sans additif.",
@@ -49,7 +49,7 @@ const products = [
     name: "Hibiscus rouge",
     img: "Hibiscus-Rouge.jpg",
     cat: "flower",
-    w: "15 g",
+    w: "20 g",
     p: 5.9,
     c: "linear-gradient(135deg,#a92f45,#f3b1bb)",
     desc: "Fleurs d’hibiscus rouge séchées, sans additif.",
@@ -130,9 +130,45 @@ const st = {
 const $ = (id) => document.getElementById(id);
 const money = (n) =>
   n.toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
+const FREE_SHIPPING_THRESHOLD = 29.9;
+const SHIPPING_COST = 4.99;
 const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
 let activeInfoIndex = null;
 let quickAmount = 1;
+
+function updateDeliveryProgress(rootId, sub) {
+  const root = $(rootId);
+  if (!root) return;
+
+  const reached = sub >= FREE_SHIPPING_THRESHOLD;
+  const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - sub);
+  const progress = Math.min(100, (sub / FREE_SHIPPING_THRESHOLD) * 100);
+  const cheapestProduct = Math.min(...products.map((product) => product.p));
+  const nextProductUnlocks =
+    !reached && sub + cheapestProduct >= FREE_SHIPPING_THRESHOLD;
+  const title = root.querySelector(".delivery-title");
+  const detail = root.querySelector(".delivery-detail");
+  const bar = root.querySelector(".delivery-progress span");
+  const meter = root.querySelector(".delivery-progress");
+
+  root.classList.toggle("reached", reached);
+  title.textContent = reached
+    ? "Livraison offerte débloquée !"
+    : `Plus que ${money(remaining)} avant la livraison offerte`;
+
+  if (reached) {
+    detail.textContent = `Vous économisez ${money(SHIPPING_COST)} sur cette commande.`;
+  } else if (nextProductUnlocks) {
+    detail.textContent = `Ajoutez un sachet à ${money(cheapestProduct)} : la livraison passe à 0 € et votre total n’augmente que de ${money(cheapestProduct - SHIPPING_COST)}.`;
+  } else if (sub === 0) {
+    detail.textContent = "Le décompte commence avec le premier sachet ajouté.";
+  } else {
+    detail.textContent = `Votre panier a atteint ${Math.round(progress)} % du seuil.`;
+  }
+
+  bar.style.width = `${progress}%`;
+  meter.setAttribute("aria-valuenow", Math.round(progress));
+}
 
 function scrollToElement(element, extra = 12) {
   if (!element) return;
@@ -256,7 +292,7 @@ function render() {
       lines.push({ n: p.name, w: p.w, q: x.q, m: x.m, v });
     }
   });
-  let ship = sub >= 29.9 ? 0 : 4.9,
+  let ship = sub >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST,
     total = sub + ship;
   $("cartContent").className = lines.length ? "cart-lines" : "empty";
   $("cartContent").innerHTML = lines.length
@@ -270,10 +306,7 @@ function render() {
   $("subtotal").textContent = money(sub);
   $("shipping").textContent = ship ? money(ship) : "Offerte";
   $("total").textContent = money(total);
-  $("deliveryNote").textContent =
-    sub >= 29.9
-      ? "Livraison offerte atteinte."
-      : "Encore " + money(29.9 - sub) + " pour obtenir la livraison offerte.";
+  updateDeliveryProgress("deliveryNote", sub);
   $("floatName").textContent = st.name;
   $("floatCount").textContent = count;
   $("floatTotal").textContent = money(total);
@@ -290,10 +323,7 @@ function render() {
   $("drawerSubtotal").textContent = money(sub);
   $("drawerShipping").textContent = ship ? money(ship) : "Offerte";
   $("drawerTotal").textContent = money(total);
-  $("drawerDelivery").textContent =
-    sub >= 29.9
-      ? "Livraison offerte atteinte."
-      : "Encore " + money(29.9 - sub) + " pour obtenir la livraison offerte.";
+  updateDeliveryProgress("drawerDelivery", sub);
   $("mobileOrderCta").textContent = `Commander la box de ${st.name}`;
 }
 function openDrawer() {

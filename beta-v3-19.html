@@ -252,14 +252,23 @@
                 <span>Sous-total</span><strong id="subtotal">0,00 €</strong>
               </div>
               <div class="total-row">
-                <span>Livraison</span><strong id="shipping">4,90 €</strong>
+                <span>Livraison</span><strong id="shipping">4,99 €</strong>
               </div>
               <div class="big">
-                <span>Total estimé</span><strong id="total">4,90 €</strong>
+                <span>Total estimé</span><strong id="total">4,99 €</strong>
               </div>
             </div>
-            <div class="delivery" id="deliveryNote">
-              Encore 29,90 € pour obtenir la livraison offerte.
+            <div class="delivery" id="deliveryNote" role="status" aria-live="polite">
+              <strong class="delivery-title">Plus que 29,90 € avant la livraison offerte</strong>
+              <span class="delivery-detail">Le décompte commence avec le premier sachet ajouté.</span>
+              <div
+                class="delivery-progress"
+                role="progressbar"
+                aria-label="Progression vers la livraison offerte"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              ><span></span></div>
             </div>
             <button
               class="btn secondary mobile-order-cta"
@@ -475,7 +484,7 @@
               <h3>Livraison suivie</h3>
               <p>
                 Un lien de suivi est envoyé dès l’expédition. La livraison coûte
-                4,90 € sous 29,90 € et devient offerte dès ce seuil.
+                4,99 € sous 29,90 € et devient offerte dès ce seuil.
               </p>
             </article>
             <article class="trust-card">
@@ -547,7 +556,7 @@
               <summary>Dois-je choisir un nombre minimum de produits ?</summary>
               <p>
                 Non. Vous choisissez librement la quantité souhaitée. Sous 29,90
-                € de produits, la livraison coûte 4,90 €. Dès 29,90 €, elle est
+                € de produits, la livraison coûte 4,99 €. Dès 29,90 €, elle est
                 offerte.
               </p>
             </details>
@@ -631,7 +640,7 @@
         ><strong
           ><span id="floatCount">0</span> produit(s) · voir le panier</strong
         ></span
-      ><span class="float-total" id="floatTotal">4,90 €</span>
+      ><span class="float-total" id="floatTotal">4,99 €</span>
     </button>
     <div class="drawer" id="cartDrawer" onclick="drawerBackdrop(event)">
       <aside class="drawer-panel" aria-label="Résumé du panier">
@@ -650,13 +659,22 @@
             <span>Sous-total</span><strong id="drawerSubtotal">0,00 €</strong>
           </div>
           <div class="total-row">
-            <span>Livraison</span><strong id="drawerShipping">4,90 €</strong>
+            <span>Livraison</span><strong id="drawerShipping">4,99 €</strong>
           </div>
           <div class="big">
-            <span>Total estimé</span><strong id="drawerTotal">4,90 €</strong>
+            <span>Total estimé</span><strong id="drawerTotal">4,99 €</strong>
           </div>
-          <div class="delivery" id="drawerDelivery">
-            Encore 29,90 € pour obtenir la livraison offerte.
+          <div class="delivery" id="drawerDelivery" role="status" aria-live="polite">
+            <strong class="delivery-title">Plus que 29,90 € avant la livraison offerte</strong>
+            <span class="delivery-detail">Le décompte commence avec le premier sachet ajouté.</span>
+            <div
+              class="delivery-progress"
+              role="progressbar"
+              aria-label="Progression vers la livraison offerte"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+            ><span></span></div>
           </div>
           <button
             class="btn"

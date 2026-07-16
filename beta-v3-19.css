@@ -531,14 +531,47 @@ h2 {
 }
 .delivery {
   margin-top: 12px;
-  padding: 13px;
+  padding: 14px;
   border: 1px solid var(--gb);
   border-radius: 17px;
   background: var(--green);
   color: #315b2e;
   font-size: 13px;
-  font-weight: 800;
   line-height: 1.45;
+}
+.delivery-title,
+.delivery-detail {
+  display: block;
+}
+.delivery-title {
+  font-size: 14px;
+  font-weight: 900;
+}
+.delivery-detail {
+  margin-top: 3px;
+  font-weight: 700;
+}
+.delivery-progress {
+  height: 9px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(49, 91, 46, 0.16);
+}
+.delivery-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: #4f8449;
+  transition: width 0.3s ease;
+}
+.delivery.reached {
+  border-color: #75a46e;
+  background: #d8f1d4;
+}
+.delivery.reached .delivery-progress span {
+  background: #315b2e;
 }
 .surprise {
   margin-top: 10px;
