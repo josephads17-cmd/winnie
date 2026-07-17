@@ -70,9 +70,14 @@
             const validationScript = document.createElement("script");
             validationScript.src = "beta-v3-20.js?v=3";
             validationScript.onload = () => {
-              const targetId = window.location.hash.slice(1);
-              const target = targetId && document.getElementById(targetId);
-              if (target) requestAnimationFrame(() => target.scrollIntoView());
+              const persistenceScript = document.createElement("script");
+              persistenceScript.src = "beta-v3-21.js?v=2";
+              persistenceScript.onload = () => {
+                const targetId = window.location.hash.slice(1);
+                const target = targetId && document.getElementById(targetId);
+                if (target) requestAnimationFrame(() => target.scrollIntoView());
+              };
+              document.body.appendChild(persistenceScript);
             };
             document.body.appendChild(validationScript);
           };
