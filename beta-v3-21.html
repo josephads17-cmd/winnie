@@ -4,15 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>La Maison Winnie — Beta V3.21</title>
+    <title>La Maison Winnie — Beta V3.21 artistique</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="beta-v3-19.css?v=3" />
     <link rel="stylesheet" href="beta-v3-20.css?v=2" />
+    <link rel="stylesheet" href="beta-v3-21-art-a.css?v=1" />
+    <link rel="stylesheet" href="beta-v3-21-art-b.css?v=1" />
   </head>
   <body>
     <div class="preview-loading" role="status">
@@ -32,25 +34,25 @@
           sourceDocument.querySelectorAll("script").forEach((script) => script.remove());
           document.body.innerHTML = sourceDocument.body.innerHTML;
 
-          const heroBadge = document.querySelector(".hero .eyebrow");
-          if (heroBadge) heroBadge.textContent = "Beta V3.21";
-          const footerVersion = document.querySelector(".footer-meta small");
-          if (footerVersion) footerVersion.textContent = "Beta V3.21 — paiement sécurisé par Stripe";
-
           const baseScript = document.createElement("script");
           baseScript.src = "beta-v3-19.js?v=4";
           baseScript.onload = () => {
             const layoutScript = document.createElement("script");
             layoutScript.src = "beta-v3-20.js?v=2";
             layoutScript.onload = () => {
-              const persistenceScript = document.createElement("script");
-              persistenceScript.src = "beta-v3-21.js?v=3";
-              persistenceScript.onload = () => {
-                const targetId = window.location.hash.slice(1);
-                const target = targetId && document.getElementById(targetId);
-                if (target) requestAnimationFrame(() => target.scrollIntoView());
+              const artScript = document.createElement("script");
+              artScript.src = "beta-v3-21-art-small.js?v=1";
+              artScript.onload = () => {
+                const persistenceScript = document.createElement("script");
+                persistenceScript.src = "beta-v3-21.js?v=3";
+                persistenceScript.onload = () => {
+                  const targetId = window.location.hash.slice(1);
+                  const target = targetId && document.getElementById(targetId);
+                  if (target) requestAnimationFrame(() => target.scrollIntoView());
+                };
+                document.body.appendChild(persistenceScript);
               };
-              document.body.appendChild(persistenceScript);
+              document.body.appendChild(artScript);
             };
             document.body.appendChild(layoutScript);
           };
