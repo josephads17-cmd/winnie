@@ -243,7 +243,7 @@ function rows(cat, id) {
     .filter((x) => x.p.cat === cat)
     .map(
       ({ p, i }) =>
-        `<article class="item"><div class="thumbwrap"><div class="thumb" role="button" tabindex="0" data-product-index="${i}" aria-label="Voir la fiche de ${p.name}"><img src="${encodeURI(p.img)}" alt="${p.name} séché" loading="lazy" decoding="async"></div><button class="info" onclick="openInfo(${i})" aria-label="Informations sur ${p.name}">i</button></div><div><h4>${p.name}</h4><div class="meta">${p.w}</div><div class="price">${money(p.p)}</div></div><select class="mode" onchange="modeP(${i},this.value)"><option value="unique" ${st.p[i].m === "unique" ? "selected" : ""}>Livraison unique</option><option value="mensuel" ${st.p[i].m === "mensuel" ? "selected" : ""}>Mensuel</option></select><div class="qty"><button onclick="changeP(${i},-1)">−</button><span>${st.p[i].q}</span><button onclick="changeP(${i},1)">+</button></div></article>`,
+        `<article class="item"><div class="thumbwrap"><div class="thumb" role="button" tabindex="0" data-product-index="${i}" aria-label="Voir la fiche de ${p.name}"><img src="${encodeURI(p.img)}" alt="${p.name} séché" loading="lazy" decoding="async"></div><button class="info" onclick="openInfo(${i})" aria-label="Informations sur ${p.name}">i</button></div><div><h4>${p.name}</h4><div class="meta">${p.w}</div><div class="price">${money(p.p)}</div></div><select class="mode" onchange="modeP(${i},this.value)"><option value="unique" ${st.p[i].m === "unique" ? "selected" : ""}>Livraison unique</option><option value="mensuel" ${st.p[i].m === "mensuel" ? "selected" : ""}>Mensuel</option></select><div class="qty"><button onclick="changeP(${i},-1)">−</button><span>${st.p[i].q}</span><button onclick="changeP(${i},1)">+</button></div>${st.p[i].m === "mensuel" ? '<p class="monthly-note">✓ Sans engagement, annulable à tout moment</p>' : ""}</article>`,
     )
     .join("");
 
@@ -299,7 +299,7 @@ function render() {
     ? lines
         .map(
           (x) =>
-            `<div class="cart-line"><span>${x.q} × ${x.n} ${x.w}<br><small>${x.m === "mensuel" ? "Mensuel" : "Livraison unique"}</small></span><strong>${money(x.v)}</strong></div>`,
+            `<div class="cart-line"><span>${x.q} × ${x.n} ${x.w}<br><small>${x.m === "mensuel" ? "Mensuel · Sans engagement, annulable à tout moment" : "Livraison unique"}</small></span><strong>${money(x.v)}</strong></div>`,
         )
         .join("")
     : "Aucun produit sélectionné pour le moment.";
@@ -318,7 +318,7 @@ function render() {
     ? lines
         .map(
           (x) =>
-            `<div class="cart-line"><span>${x.q} × ${x.n} ${x.w}<br><small>${x.m === "mensuel" ? "Mensuel" : "Livraison unique"}</small></span><strong>${money(x.v)}</strong></div>`,
+            `<div class="cart-line"><span>${x.q} × ${x.n} ${x.w}<br><small>${x.m === "mensuel" ? "Mensuel · Sans engagement, annulable à tout moment" : "Livraison unique"}</small></span><strong>${money(x.v)}</strong></div>`,
         )
         .join("")
     : "Aucun produit sélectionné pour le moment.";
@@ -386,8 +386,13 @@ function openInfo(i) {
   $("quickPrice").textContent = money(p.p);
   $("quickQty").textContent = "1";
   $("quickMode").value = st.p[i].m;
+  updateQuickMonthlyNote();
   $("quickFeedback").textContent = "";
   $("infoModal").classList.add("open");
+}
+
+function updateQuickMonthlyNote() {
+  $("quickMonthlyNote").hidden = $("quickMode").value !== "mensuel";
 }
 
 function quickQty(delta) {

@@ -575,7 +575,8 @@
               <summary>Peut-on commander une seule fois ?</summary>
               <p>
                 Oui. Chaque produit peut être choisi en livraison unique ou en
-                formule mensuelle.
+                formule mensuelle. La formule mensuelle est sans engagement et
+                annulable à tout moment.
               </p>
             </details>
             <details class="faq-item">
@@ -728,7 +729,11 @@
             <strong id="quickPrice">0,00 €</strong>
           </div>
           <div class="quick-controls">
-            <select id="quickMode" class="mode">
+            <select
+              id="quickMode"
+              class="mode"
+              onchange="updateQuickMonthlyNote()"
+            >
               <option value="unique">Livraison unique</option>
               <option value="mensuel">Mensuel</option>
             </select>
@@ -738,6 +743,13 @@
               ><button type="button" onclick="quickQty(1)">+</button>
             </div>
           </div>
+          <p
+            class="monthly-note quick-monthly-note"
+            id="quickMonthlyNote"
+            hidden
+          >
+            ✓ Sans engagement, annulable à tout moment
+          </p>
           <button type="button" class="btn quick-button" onclick="quickAdd()">
             Ajouter au panier
           </button>
