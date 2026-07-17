@@ -12,39 +12,27 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="beta-v3-19.css?v=3" />
-    <link rel="stylesheet" href="beta-v3-20.css?v=1" />
+    <link rel="stylesheet" href="beta-v3-20.css?v=2" />
   </head>
   <body>
-    <div class="preview-loading" id="previewLoading" role="status">
-      Chargement de la prévisualisation…
-    </div>
+    <div class="preview-loading" role="status">Chargement de la prévisualisation…</div>
     <script>
       (async () => {
         try {
-          const response = await fetch("beta-v3-19.html?v=4", {
-            cache: "no-store",
-          });
-          if (!response.ok) throw new Error("La V3.19 n’a pas pu être chargée.");
-
-          const source = await response.text();
-          const sourceDocument = new DOMParser().parseFromString(
-            source,
-            "text/html",
+          const response = await fetch(
+            "https://cdn.jsdelivr.net/gh/josephads17-cmd/winnie@82e3a271c710785c991dcdbf82916811b6e3ab21/beta-v3-19.html",
+            { cache: "no-store" },
           );
-
+          if (!response.ok) throw new Error("La prévisualisation n’a pas pu être chargée.");
+          const sourceDocument = new DOMParser().parseFromString(await response.text(), "text/html");
           sourceDocument.querySelectorAll("script").forEach((script) => script.remove());
           document.body.innerHTML = sourceDocument.body.innerHTML;
-
           const baseScript = document.createElement("script");
           baseScript.src = "beta-v3-19.js?v=4";
           baseScript.onload = () => {
-            const previewScript = document.createElement("script");
-            previewScript.src = "beta-v3-20.js?v=1";
-            document.body.appendChild(previewScript);
-          };
-          baseScript.onerror = () => {
-            document.body.innerHTML =
-              '<p class="preview-error">Impossible de charger le configurateur.</p>';
+            const validationScript = document.createElement("script");
+            validationScript.src = "beta-v3-20.js?v=2";
+            document.body.appendChild(validationScript);
           };
           document.body.appendChild(baseScript);
         } catch (error) {
