@@ -1,5 +1,6 @@
 (() => {
-  const DESKTOP_VALIDATION_QUERY = "(min-width: 1025px)";
+  const DESKTOP_VALIDATION_QUERY =
+    "(min-width: 1025px) and (hover: hover) and (pointer: fine)";
   const grid = document.querySelector(".builder-grid");
   const cart = document.querySelector(".cart");
   const orderButton = document.getElementById("orderCta");
@@ -32,6 +33,7 @@
   const baseActivateConfiguratorStep = window.activateConfiguratorStep;
   const baseShowRecap = window.showRecap;
   const baseGo = window.go;
+  const baseStartCheckout = window.startCheckout;
 
   const isDesktopValidationViewport = () =>
     window.matchMedia(DESKTOP_VALIDATION_QUERY).matches;
@@ -76,6 +78,12 @@
 
   window.returnToConfigurator = function returnToConfigurator() {
     window.activateConfiguratorStep(3);
+  };
+
+  window.startCheckout = function startCheckout() {
+    const checkout = baseStartCheckout();
+    window.setTimeout(() => syncDesktopValidationMode(), 0);
+    return checkout;
   };
 
   window.addEventListener("resize", () => syncDesktopValidationMode());
