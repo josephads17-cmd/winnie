@@ -231,6 +231,7 @@ function returnToConfigurator() {
 }
 
 function focusNameInput() {
+  $("nameFeedback").textContent = "Indiquez le prénom de votre lapin pour passer au paiement.";
   scrollToElement(document.querySelector(".hero"), 18);
   window.setTimeout(() => $("rabbitName").focus(), 450);
 }
@@ -447,6 +448,7 @@ async function startCheckout() {
     return;
   }
   if (!items.length) {
+    $("checkoutFeedback").textContent = "Ajoutez au moins un produit à votre box avant de passer au paiement.";
     showRecap();
     return;
   }
@@ -476,7 +478,11 @@ async function startCheckout() {
       error.message || "Une erreur est survenue. Réessayez dans un instant.";
   }
 }
-$("rabbitName").addEventListener("input", render);
+$("rabbitName").addEventListener("input", () => {
+  $("rabbitName").removeAttribute("aria-invalid");
+  $("nameFeedback").textContent = "";
+  render();
+});
 document.querySelectorAll(".modal").forEach(
   (m) =>
     (m.onclick = (e) => {
