@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>La Maison Winnie — Beta V3.20</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="beta-v3-19.css?v=3" />
+    <link rel="stylesheet" href="beta-v3-20.css?v=1" />
+  </head>
+  <body>
+    <div class="preview-loading" id="previewLoading" role="status">
+      Chargement de la prévisualisation…
+    </div>
+    <script>
+      (async () => {
+        try {
+          const response = await fetch("beta-v3-19.html?v=4", {
+            cache: "no-store",
+          });
+          if (!response.ok) throw new Error("La V3.19 n’a pas pu être chargée.");
+
+          const source = await response.text();
+          const sourceDocument = new DOMParser().parseFromString(
+            source,
+            "text/html",
+          );
+
+          sourceDocument.querySelectorAll("script").forEach((script) => script.remove());
+          document.body.innerHTML = sourceDocument.body.innerHTML;
+
+          const baseScript = document.createElement("script");
+          baseScript.src = "beta-v3-19.js?v=4";
+          baseScript.onload = () => {
+            const previewScript = document.createElement("script");
+            previewScript.src = "beta-v3-20.js?v=1";
+            document.body.appendChild(previewScript);
+          };
+          baseScript.onerror = () => {
+            document.body.innerHTML =
+              '<p class="preview-error">Impossible de charger le configurateur.</p>';
+          };
+          document.body.appendChild(baseScript);
+        } catch (error) {
+          document.body.innerHTML = `<p class="preview-error">${error.message}</p>`;
+        }
+      })();
+    </script>
+  </body>
+</html>
