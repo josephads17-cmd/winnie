@@ -21,7 +21,7 @@
   display: contents;
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
   .builder-grid.desktop-validation-mode {
     grid-template-columns: minmax(0, 860px);
     justify-content: center;
