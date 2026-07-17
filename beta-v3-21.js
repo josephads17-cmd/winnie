@@ -2,6 +2,50 @@
   const STORAGE_KEY = "lmw-checkout-draft-v1";
   const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 
+  function updateCategoryLabels() {
+    document.querySelectorAll(".category").forEach((category) => {
+      const label = category.querySelector("span");
+      const screen = category.closest("[data-screen]");
+      if (!label || !screen) return;
+
+      const categoryName = screen.dataset.screen === "2" ? "flower" : "leaf";
+      const count = products.filter((product) => product.cat === categoryName).length;
+      label.textContent = `${count} variétés disponibles`;
+    });
+  }
+
+  window.updateDeliveryProgress = function updateDeliveryProgress(rootId, sub) {
+    const root = document.getElementById(rootId);
+    if (!root) return;
+
+    const reached = sub >= FREE_SHIPPING_THRESHOLD;
+    const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - sub);
+    const progress = Math.min(100, (sub / FREE_SHIPPING_THRESHOLD) * 100);
+    const cheapestProduct = Math.min(...products.map((product) => product.p));
+    const nextProductUnlocks =
+      !reached && sub + cheapestProduct >= FREE_SHIPPING_THRESHOLD;
+    const title = root.querySelector(".delivery-title");
+    const detail = root.querySelector(".delivery-detail");
+    const bar = root.querySelector(".delivery-progress span");
+    const meter = root.querySelector(".delivery-progress");
+
+    root.classList.toggle("reached", reached);
+
+    if (reached) {
+      title.textContent = "Livraison offerte débloquée !";
+      detail.textContent =
+        "Aucun frais de livraison ne sera ajouté lors du paiement.";
+    } else {
+      title.textContent = `Livraison offerte dès ${money(FREE_SHIPPING_THRESHOLD)}`;
+      detail.textContent = nextProductUnlocks
+        ? `Il manque ${money(remaining)}. Un sachet supplémentaire à ${money(cheapestProduct)} suffit pour en profiter.`
+        : `Il vous reste ${money(remaining)} à ajouter à votre panier.`;
+    }
+
+    bar.style.width = `${progress}%`;
+    meter.setAttribute("aria-valuenow", Math.round(progress));
+  };
+
   function readDraft() {
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -65,6 +109,8 @@
     return url.toString();
   }
 
+  updateCategoryLabels();
+
   const baseChangeP = window.changeP;
   window.changeP = function changeP(index, delta) {
     baseChangeP(index, delta);
@@ -86,6 +132,8 @@
   document.getElementById("rabbitName")?.addEventListener("input", saveDraft);
 
   const wasRestored = restoreDraft();
+  if (!wasRestored) render();
+
   const returnedFromCheckout =
     new URLSearchParams(window.location.search).get("checkout") === "cancelled";
 
