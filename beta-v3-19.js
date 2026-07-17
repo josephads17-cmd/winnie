@@ -123,9 +123,23 @@ const products = [
     dose: "Commencer par environ 0,5 à 1 g. À inclure dans la quantité totale quotidienne de fleurs et feuilles séchées.",
   },
 ];
+const productIds = [
+  "calendula",
+  "rose",
+  "camomille_bio",
+  "hibiscus_rouge",
+  "plantain",
+  "pissenlit",
+  "framboisier",
+  "noisetier",
+];
+products.forEach((product, index) => {
+  product.id = productIds[index];
+});
 const st = {
   name: "votre lapin",
-  p: products.map(() => ({ q: 0, m: "unique" })),
+  deliveryMode: "one_time",
+  p: products.map(() => ({ q: 0 })),
 };
 const $ = (id) => document.getElementById(id);
 const money = (n) =>
@@ -232,8 +246,8 @@ function changeP(i, d) {
   st.p[i].q = Math.max(0, st.p[i].q + d);
   render();
 }
-function modeP(i, v) {
-  st.p[i].m = v;
+function setDeliveryMode(mode) {
+  st.deliveryMode = mode === "monthly" ? "monthly" : "one_time";
   render();
 }
 function rows(cat, id) {
@@ -243,7 +257,7 @@ function rows(cat, id) {
     .filter((x) => x.p.cat === cat)
     .map(
       ({ p, i }) =>
-        `<article class="item"><div class="thumbwrap"><div class="thumb" role="button" tabindex="0" data-product-index="${i}" aria-label="Voir la fiche de ${p.name}"><img src="${encodeURI(p.img)}" alt="${p.name} séché" loading="lazy" decoding="async"></div><button class="info" onclick="openInfo(${i})" aria-label="Informations sur ${p.name}">i</button></div><div><h4>${p.name}</h4><div class="meta">${p.w}</div><div class="price">${money(p.p)}</div></div><select class="mode" onchange="modeP(${i},this.value)"><option value="unique" ${st.p[i].m === "unique" ? "selected" : ""}>Livraison unique</option><option value="mensuel" ${st.p[i].m === "mensuel" ? "selected" : ""}>Mensuel</option></select><div class="qty"><button onclick="changeP(${i},-1)">−</button><span>${st.p[i].q}</span><button onclick="changeP(${i},1)">+</button></div>${st.p[i].m === "mensuel" ? '<p class="monthly-note">✓ Sans engagement, annulable à tout moment</p>' : ""}</article>`,
+        `<article class="item"><div class="thumbwrap"><div class="thumb" role="button" tabindex="0" data-product-index="${i}" aria-label="Voir la fiche de ${p.name}"><img src="${encodeURI(p.img)}" alt="${p.name} séché" loading="lazy" decoding="async"></div><button class="info" onclick="openInfo(${i})" aria-label="Informations sur ${p.name}">i</button></div><div><h4>${p.name}</h4><div class="meta">${p.w}</div><div class="price">${money(p.p)}</div></div><div class="qty"><button onclick="changeP(${i},-1)">−</button><span>${st.p[i].q}</span><button onclick="changeP(${i},1)">+</button></div></article>`,
     )
     .join("");
 
@@ -289,17 +303,21 @@ function render() {
       let v = x.q * p.p;
       sub += v;
       count += x.q;
-      lines.push({ n: p.name, w: p.w, q: x.q, m: x.m, v });
+      lines.push({ n: p.name, w: p.w, q: x.q, v });
     }
   });
   const shippingIsFree = sub >= FREE_SHIPPING_THRESHOLD;
   const total = sub;
   $("cartContent").className = lines.length ? "cart-lines" : "empty";
+  const deliveryLabel =
+    st.deliveryMode === "monthly"
+      ? "Mensuel · Sans engagement, annulable à tout moment"
+      : "Livraison unique";
   $("cartContent").innerHTML = lines.length
     ? lines
         .map(
           (x) =>
-            `<div class="cart-line"><span>${x.q} × ${x.n} ${x.w}<br><small>${x.m === "mensuel" ? "Mensuel · Sans engagement, annulable à tout moment" : "Livraison unique"}</small></span><strong>${money(x.v)}</strong></div>`,
+            `<div class="cart-line"><span>${x.q} × ${x.n} ${x.w}<br><small>${deliveryLabel}</small></span><strong>${money(x.v)}</strong></div>`,
         )
         .join("")
     : "Aucun produit sélectionné pour le moment.";
@@ -308,6 +326,13 @@ function render() {
     ? "Offerte"
     : "Calculée lors du paiement";
   $("total").textContent = money(total);
+  document.querySelectorAll("[data-delivery-mode]").forEach((input) => {
+    input.checked = input.value === st.deliveryMode;
+  });
+  $("deliveryModeHelp").textContent =
+    st.deliveryMode === "monthly"
+      ? "Votre sélection sera préparée chaque mois. Sans engagement, annulable à tout moment."
+      : "Une seule préparation et un seul paiement.";
   updateDeliveryProgress("deliveryNote", sub);
   $("floatName").textContent = st.name;
   $("floatCount").textContent = count;
@@ -318,7 +343,7 @@ function render() {
     ? lines
         .map(
           (x) =>
-            `<div class="cart-line"><span>${x.q} × ${x.n} ${x.w}<br><small>${x.m === "mensuel" ? "Mensuel · Sans engagement, annulable à tout moment" : "Livraison unique"}</small></span><strong>${money(x.v)}</strong></div>`,
+            `<div class="cart-line"><span>${x.q} × ${x.n} ${x.w}<br><small>${deliveryLabel}</small></span><strong>${money(x.v)}</strong></div>`,
         )
         .join("")
     : "Aucun produit sélectionné pour le moment.";
@@ -328,7 +353,7 @@ function render() {
     : "Calculée lors du paiement";
   $("drawerTotal").textContent = money(total);
   updateDeliveryProgress("drawerDelivery", sub);
-  $("mobileOrderCta").textContent = `Commander la box de ${st.name}`;
+  $("orderCta").textContent = `Passer au paiement sécurisé`;
 }
 function openDrawer() {
   $("cartDrawer").classList.add("open");
@@ -385,14 +410,8 @@ function openInfo(i) {
   $("quickProduct").textContent = `${p.name} · ${p.w}`;
   $("quickPrice").textContent = money(p.p);
   $("quickQty").textContent = "1";
-  $("quickMode").value = st.p[i].m;
-  updateQuickMonthlyNote();
   $("quickFeedback").textContent = "";
   $("infoModal").classList.add("open");
-}
-
-function updateQuickMonthlyNote() {
-  $("quickMonthlyNote").hidden = $("quickMode").value !== "mensuel";
 }
 
 function quickQty(delta) {
@@ -404,7 +423,6 @@ function quickAdd() {
   if (activeInfoIndex === null) return;
   const product = products[activeInfoIndex];
   st.p[activeInfoIndex].q += quickAmount;
-  st.p[activeInfoIndex].m = $("quickMode").value;
   render();
   $("quickFeedback").textContent =
     `${quickAmount} × ${product.name} ajouté${quickAmount > 1 ? "s" : ""} au panier ✓`;
@@ -414,11 +432,49 @@ function quickAdd() {
 function closeInfo() {
   $("infoModal").classList.remove("open");
 }
-function openConfirm() {
-  $("confirmModal").classList.add("open");
-}
-function closeConfirm() {
-  $("confirmModal").classList.remove("open");
+async function startCheckout() {
+  const rabbitName = $("rabbitName").value.trim();
+  const items = products
+    .map((product, index) => ({ id: product.id, quantity: st.p[index].q }))
+    .filter((item) => item.quantity > 0);
+
+  if (!rabbitName) {
+    focusNameInput();
+    window.setTimeout(
+      () => $("rabbitName").setAttribute("aria-invalid", "true"),
+      450,
+    );
+    return;
+  }
+  if (!items.length) {
+    showRecap();
+    return;
+  }
+
+  const button = $("orderCta");
+  button.disabled = true;
+  button.textContent = "Redirection sécurisée…";
+  try {
+    const response = await fetch("https://lmw-checkout.vercel.app/api/create-checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        rabbitName,
+        deliveryMode: st.deliveryMode,
+        items,
+      }),
+    });
+    const data = await response.json();
+    if (!response.ok || !data.url) {
+      throw new Error(data.error || "Impossible de créer le paiement.");
+    }
+    window.location.assign(data.url);
+  } catch (error) {
+    button.disabled = false;
+    button.textContent = "Passer au paiement sécurisé";
+    $("checkoutFeedback").textContent =
+      error.message || "Une erreur est survenue. Réessayez dans un instant.";
+  }
 }
 $("rabbitName").addEventListener("input", render);
 document.querySelectorAll(".modal").forEach(
