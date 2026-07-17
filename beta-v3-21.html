@@ -32,6 +32,11 @@
           sourceDocument.querySelectorAll("script").forEach((script) => script.remove());
           document.body.innerHTML = sourceDocument.body.innerHTML;
 
+          const heroBadge = document.querySelector(".hero .eyebrow");
+          if (heroBadge) heroBadge.textContent = "Beta V3.21";
+          const footerVersion = document.querySelector(".footer-meta small");
+          if (footerVersion) footerVersion.textContent = "Beta V3.21 — paiement sécurisé par Stripe";
+
           const baseScript = document.createElement("script");
           baseScript.src = "beta-v3-19.js?v=4";
           baseScript.onload = () => {
