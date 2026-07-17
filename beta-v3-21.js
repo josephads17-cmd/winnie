@@ -58,9 +58,22 @@
     return st.p.some((item) => item.q > 0);
   }
 
+  function buildCancelUrl() {
+    const url = new URL(window.location.pathname || "/", window.location.origin);
+    url.searchParams.set("checkout", "cancelled");
+    url.hash = "composer";
+    return url.toString();
+  }
+
   const baseChangeP = window.changeP;
   window.changeP = function changeP(index, delta) {
     baseChangeP(index, delta);
+    saveDraft();
+  };
+
+  const baseQuickAdd = window.quickAdd;
+  window.quickAdd = function quickAdd() {
+    baseQuickAdd();
     saveDraft();
   };
 
@@ -108,8 +121,7 @@
           rabbitName,
           deliveryMode: st.deliveryMode,
           items,
-          cancelUrl:
-            "https://lamaisonwinnie.com/beta-v3-21.html?checkout=cancelled#composer",
+          cancelUrl: buildCancelUrl(),
         }),
       });
       const data = await response.json();
