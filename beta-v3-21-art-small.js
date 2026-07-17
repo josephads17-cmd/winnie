@@ -10,26 +10,26 @@
 
   document.body.classList.add("v321-art");
 
-  async function loadHeroImage(name, count) {
+  async function loadHeroImage(variableName, assetName, count) {
     try {
       const parts = await Promise.all(
         Array.from({ length: count }, (_, index) =>
-          fetch(`v321-assets/${name}-${index + 1}.txt?v=1`, { cache: "force-cache" })
+          fetch(`v321-assets/${assetName}-${index + 1}.txt?v=1`, { cache: "force-cache" })
             .then((response) => {
-              if (!response.ok) throw new Error(`Image ${name} indisponible.`);
+              if (!response.ok) throw new Error(`Image ${assetName} indisponible.`);
               return response.text();
             }),
         ),
       );
       const value = `url("data:image/webp;base64,${parts.join("")}")`;
-      document.documentElement.style.setProperty(`--v321-${name}-image`, value);
+      document.documentElement.style.setProperty(`--v321-${variableName}-image`, value);
     } catch (error) {
       console.error(error);
     }
   }
 
-  loadHeroImage("desktop", 8);
-  loadHeroImage("mobile", 10);
+  loadHeroImage("desktop", "desktop-small", 3);
+  loadHeroImage("mobile", "mobile-small", 3);
 
   const brand = nav?.querySelector(".brand");
   if (brand) {
