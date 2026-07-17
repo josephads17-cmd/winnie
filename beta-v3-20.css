@@ -1,0 +1,79 @@
+.preview-loading,
+.preview-error {
+  width: min(680px, calc(100% - 34px));
+  margin: 80px auto;
+  padding: 24px;
+  border: 1px solid var(--border, #e8c4ac);
+  border-radius: 24px;
+  background: #fffaf6;
+  color: #6f4032;
+  font-family: Jost, sans-serif;
+  font-weight: 800;
+  text-align: center;
+}
+
+.desktop-validation-intro,
+.desktop-validation-back {
+  display: none;
+}
+
+.desktop-validation-actions {
+  display: contents;
+}
+
+@media (min-width: 1025px) {
+  .builder-grid.desktop-validation-mode {
+    grid-template-columns: minmax(0, 860px);
+    justify-content: center;
+  }
+
+  .builder-grid.desktop-validation-mode .panel {
+    display: none;
+  }
+
+  .builder-grid.desktop-validation-mode .cart {
+    position: relative;
+    top: auto;
+    width: 100%;
+    padding: 28px;
+  }
+
+  .builder-grid.desktop-validation-mode .desktop-validation-intro {
+    display: block;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .builder-grid.desktop-validation-mode .desktop-validation-intro h2 {
+    margin-top: 12px;
+  }
+
+  .builder-grid.desktop-validation-mode .desktop-validation-intro .help {
+    margin-bottom: 0;
+  }
+
+  .builder-grid.desktop-validation-mode .cart > h3 {
+    margin-top: 0;
+    font-size: clamp(27px, 3vw, 38px);
+  }
+
+  .builder-grid.desktop-validation-mode .desktop-validation-actions {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .builder-grid.desktop-validation-mode .desktop-validation-back {
+    display: inline-flex;
+    flex: 0 0 auto;
+  }
+
+  .builder-grid.desktop-validation-mode .checkout-button {
+    flex: 1 1 auto;
+    width: auto;
+    margin-top: 0;
+  }
+}
