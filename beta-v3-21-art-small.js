@@ -14,7 +14,7 @@
     try {
       const parts = await Promise.all(
         Array.from({ length: count }, (_, index) =>
-          fetch(`v321-assets/${assetName}-${index + 1}.txt?v=1`, { cache: "force-cache" })
+          fetch(`v321-assets/${assetName}-${index + 1}.txt?v=2`, { cache: "force-cache" })
             .then((response) => {
               if (!response.ok) throw new Error(`Image ${assetName} indisponible.`);
               return response.text();
