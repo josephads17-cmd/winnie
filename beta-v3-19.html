@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="beta-v3-19.css?v=1" />
+    <link rel="stylesheet" href="beta-v3-19.css?v=2" />
   </head>
   <body>
     <nav class="nav">
@@ -226,13 +226,13 @@
             <section class="screen" data-screen="4">
               <h2>La box est prête.</h2>
               <div class="help">
-                Vérifiez le panier à droite. Cette page reste un prototype et ne
-                déclenche aucun paiement réel.
+                Vérifiez votre sélection, choisissez le rythme de livraison,
+                puis passez au paiement sécurisé.
               </div>
               <div class="actions">
                 <button class="btn secondary" onclick="go(3)">Retour aux plantes</button
-                ><button class="btn" onclick="openConfirm()">
-                  Valider la Beta
+                ><button class="btn" onclick="startCheckout()">
+                  Passer au paiement sécurisé
                 </button>
               </div>
             </section>
@@ -243,6 +243,12 @@
               Prénom à l’intérieur<span
                 >Pour <b id="labelName">votre lapin</b></span
               >
+            </div>
+            <div class="delivery-mode-choice" role="group" aria-labelledby="deliveryModeTitle">
+              <strong id="deliveryModeTitle">Rythme de livraison</strong>
+              <label><input type="radio" name="delivery-mode" value="one_time" data-delivery-mode checked onchange="setDeliveryMode(this.value)" /> Livraison unique</label>
+              <label><input type="radio" name="delivery-mode" value="monthly" data-delivery-mode onchange="setDeliveryMode(this.value)" /> Livraison mensuelle</label>
+              <span id="deliveryModeHelp">Une seule préparation et un seul paiement.</span>
             </div>
             <div id="cartContent" class="empty">
               Aucun produit sélectionné pour le moment.
@@ -277,15 +283,12 @@
             >
               Modifier ma box
             </button>
-            <button
-              class="btn mobile-order-cta"
-              id="mobileOrderCta"
-              onclick="openConfirm()"
-            >
-              Commander la box de votre lapin
+            <button class="btn checkout-button" id="orderCta" type="button" onclick="startCheckout()">
+              Passer au paiement sécurisé
             </button>
+            <div class="checkout-feedback" id="checkoutFeedback" role="alert" aria-live="polite"></div>
             <div class="beta">
-              Prototype BETA — aucun paiement ne sera effectué.
+              Paiement sécurisé par Stripe · Livraison calculée lors du paiement.
             </div>
           </aside>
         </div>
@@ -629,7 +632,7 @@
         </nav>
         <div class="footer-meta">
           <span>© 2026 La Maison Winnie</span>
-          <small>Beta V3.19 — aucun paiement réel</small>
+          <small>Beta V3.19 — paiement sécurisé par Stripe</small>
         </div>
       </div>
     </footer>
@@ -688,6 +691,13 @@
           >
             Continuer la composition
           </button>
+          <button
+            class="btn secondary"
+            style="width: 100%; margin-top: 8px"
+            onclick="closeDrawer();startCheckout()"
+          >
+            Passer au paiement sécurisé
+          </button>
         </div>
       </aside>
     </div>
@@ -729,27 +739,12 @@
             <strong id="quickPrice">0,00 €</strong>
           </div>
           <div class="quick-controls">
-            <select
-              id="quickMode"
-              class="mode"
-              onchange="updateQuickMonthlyNote()"
-            >
-              <option value="unique">Livraison unique</option>
-              <option value="mensuel">Mensuel</option>
-            </select>
             <div class="quick-qty">
               <button type="button" onclick="quickQty(-1)">−</button
               ><span id="quickQty">1</span
               ><button type="button" onclick="quickQty(1)">+</button>
             </div>
           </div>
-          <p
-            class="monthly-note quick-monthly-note"
-            id="quickMonthlyNote"
-            hidden
-          >
-            ✓ Sans engagement, annulable à tout moment
-          </p>
           <button type="button" class="btn quick-button" onclick="quickAdd()">
             Ajouter au panier
           </button>
@@ -770,17 +765,6 @@
         </p>
       </div>
     </div>
-    <div class="modal" id="confirmModal">
-      <div class="modalbox">
-        <button class="close" onclick="closeConfirm()">×</button
-        ><span class="eyebrow">Confirmation Beta</span>
-        <h3>Parcours validé</h3>
-        <p>
-          Aucun paiement n’est lancé. Cette fenêtre simule uniquement la
-          validation finale.
-        </p>
-      </div>
-    </div>
-    <script src="beta-v3-19.js?v=1"></script>
+    <script src="beta-v3-19.js?v=2"></script>
   </body>
 </html>
