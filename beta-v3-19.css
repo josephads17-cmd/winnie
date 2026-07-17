@@ -1173,6 +1173,11 @@ h2 {
   aspect-ratio: 4/3;
   object-fit: cover;
 }
+.photo-card.client-proof img {
+  object-fit: contain;
+  object-position: center;
+  background: #f6eee7;
+}
 .photo-placeholder {
   display: flex;
   flex-direction: column;
