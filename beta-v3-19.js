@@ -439,18 +439,17 @@ async function startCheckout() {
     .map((product, index) => ({ id: product.id, quantity: st.p[index].q }))
     .filter((item) => item.quantity > 0);
 
-  if (!rabbitName) {
-    focusNameInput();
-    window.setTimeout(
-      () => $("rabbitName").setAttribute("aria-invalid", "true"),
-      450,
-    );
+  if (!items.length) {
+    const message = "Ajoutez au moins un produit à votre box avant de passer au paiement.";
+    $("checkoutFeedback").textContent = message;
+    showRecap();
+    window.alert(message);
     return;
   }
-  if (!items.length) {
-    $("checkoutFeedback").textContent = "Ajoutez au moins un produit à votre box avant de passer au paiement.";
-    showRecap();
-    return;
+
+  if (!rabbitName) {
+    $("nameFeedback").textContent =
+      "Le prénom vous sera demandé sur la page de paiement Stripe.";
   }
 
   const button = $("orderCta");
