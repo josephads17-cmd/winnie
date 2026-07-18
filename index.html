@@ -34,6 +34,7 @@
     />
     <link rel="stylesheet" href="beta-v3-19.css?v=4" />
     <link rel="stylesheet" href="beta-v3-20.css?v=3" />
+    <link rel="stylesheet" href="beta-v3-22.css?v=6" />
     <script>
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1399877371962156');fbq('track','PageView');
     </script>
@@ -70,14 +71,19 @@
             const validationScript = document.createElement("script");
             validationScript.src = "beta-v3-20.js?v=3";
             validationScript.onload = () => {
-              const persistenceScript = document.createElement("script");
-              persistenceScript.src = "beta-v3-21.js?v=3";
-              persistenceScript.onload = () => {
-                const targetId = window.location.hash.slice(1);
-                const target = targetId && document.getElementById(targetId);
-                if (target) requestAnimationFrame(() => target.scrollIntoView());
+              const heroScript = document.createElement("script");
+              heroScript.src = "beta-v3-22.js?v=7";
+              heroScript.onload = () => {
+                const persistenceScript = document.createElement("script");
+                persistenceScript.src = "beta-v3-21.js?v=3";
+                persistenceScript.onload = () => {
+                  const targetId = window.location.hash.slice(1);
+                  const target = targetId && document.getElementById(targetId);
+                  if (target) requestAnimationFrame(() => target.scrollIntoView());
+                };
+                document.body.appendChild(persistenceScript);
               };
-              document.body.appendChild(persistenceScript);
+              document.body.appendChild(heroScript);
             };
             document.body.appendChild(validationScript);
           };
