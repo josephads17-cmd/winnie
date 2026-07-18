@@ -39,7 +39,7 @@
       title.textContent = `Livraison offerte dès ${money(FREE_SHIPPING_THRESHOLD)}`;
       detail.textContent = nextProductUnlocks
         ? `Il manque ${money(remaining)}. Un sachet supplémentaire à ${money(cheapestProduct)} suffit pour en profiter.`
-        : `Il vous reste ${money(remaining)} à ajouter à votre panier.`;
+        : `Il vous reste ${money(remaining)} avant d’obtenir la livraison gratuite.`;
     }
 
     bar.style.width = `${progress}%`;
