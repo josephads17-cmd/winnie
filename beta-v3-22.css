@@ -1,77 +1,224 @@
-/* Beta V3.22 : le site officiel reste inchangé.
-   Le petit bandeau supérieur « La Maison Winnie » de l’aperçu personnalisé
-   est masqué sur tous les écrans. Les fonds photographiques sont propres
-   à la Beta : une version mobile et une version desktop. */
+/* Beta V3.22 uniquement :
+   - bandeau supérieur « La Maison Winnie » masqué partout ;
+   - hero photographique dédié sur mobile et desktop ;
+   - bloc prénom mobile conservé avec l’identité visuelle du site officiel. */
 .hero .inside-box-lid {
   display: none;
 }
 
+.v322-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 @media (max-width: 767px) {
-  .v322-mobile-hero-ready .hero {
-    position: relative;
-    overflow: hidden;
-    background: #f7f2eb;
+  body.v322-mobile-layout .v321-commitments {
+    display: none !important;
   }
 
-  .v322-mobile-hero-ready .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+  body.v322-mobile-layout .v322-mobile-hero {
+    position: relative;
+    min-height: clamp(800px, 218vw, 930px);
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0 0 34px 34px;
+    background: var(--cream);
+  }
+
+  body.v322-mobile-hero-ready .v322-mobile-hero {
     background-image: var(--v322-mobile-hero-bg-image);
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: cover;
   }
 
-  .v322-mobile-hero-ready .hero::after {
+  body.v322-mobile-hero-ready .v322-mobile-hero::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
     background: linear-gradient(
       180deg,
-      rgba(249, 245, 239, 0.98) 0%,
-      rgba(249, 245, 239, 0.94) 34%,
-      rgba(249, 245, 239, 0.72) 53%,
-      rgba(249, 245, 239, 0.27) 72%,
-      rgba(249, 245, 239, 0.08) 100%
+      rgba(253, 246, 240, 0.28) 0%,
+      rgba(253, 246, 240, 0.08) 58%,
+      rgba(253, 246, 240, 0) 100%
     );
   }
 
-  .v322-mobile-hero-ready .hero .container {
+  .v322-mobile-hero-overlay {
     position: relative;
     z-index: 1;
+    display: flex;
+    justify-content: center;
+    padding: 38px 16px 0;
   }
 
-  .v322-mobile-hero-ready .hero .hero-name-field {
-    padding: 18px;
-    border: 1px solid rgba(232, 196, 172, 0.88);
-    border-radius: 24px;
-    background: rgba(255, 251, 247, 0.88);
-    box-shadow: 0 16px 34px rgba(111, 64, 50, 0.08);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+  .v322-mobile-hero-card {
+    width: min(100%, 720px);
+    padding: 30px 22px 26px;
+    border: 1px solid rgba(232, 196, 172, 0.92);
+    border-radius: 30px;
+    background: rgba(253, 246, 240, 0.88);
+    box-shadow: 0 20px 55px rgba(111, 64, 50, 0.12);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    text-align: center;
   }
 
-  .v322-mobile-hero-ready .hero .pill {
-    background: rgba(255, 251, 247, 0.88);
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
+  .v322-mobile-kicker,
+  .v322-section-kicker {
+    display: block;
+    color: var(--brown);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
   }
 
-  .v322-mobile-hero-ready .hero .visual.hero-inside-box {
-    width: min(100%, 390px);
-    margin: 230px auto 0;
-    padding: 0 8px 24px;
-    border: 0;
-    background: transparent;
+  .v322-mobile-hero-card h1 {
+    margin: 17px 0 0;
+    color: var(--dark);
+    font-size: clamp(43px, 12vw, 58px);
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .v322-mobile-hero-card h1 em {
+    display: block;
+    margin-top: 12px;
+    color: var(--terra);
+    font-size: 0.6em;
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+  }
+
+  .v322-mobile-hero-card > p {
+    margin: 23px 0 0;
+    color: var(--brown);
+    font-size: 15px;
+    line-height: 1.62;
+  }
+
+  .v322-mobile-main-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    margin-top: 25px;
+    padding: 13px 21px;
+    border-radius: 999px;
+    background: var(--brown);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    box-shadow: 0 15px 32px rgba(111, 64, 50, 0.2);
+  }
+
+  .v322-mobile-notes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 17px;
+  }
+
+  .v322-mobile-notes span {
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255, 250, 246, 0.92);
+    color: var(--brown);
+    font-size: 10px;
+    font-weight: 800;
+  }
+
+  .v322-personalise {
+    padding: 50px 0 42px;
+    border-bottom: 1px solid rgba(232, 196, 172, 0.7);
+    background: linear-gradient(180deg, var(--paper), var(--cream));
+  }
+
+  .v322-personalise-inner {
+    display: grid;
+    gap: 26px;
+  }
+
+  .v322-personalise-copy {
+    text-align: center;
+  }
+
+  .v322-personalise-copy h2 {
+    margin: 13px 0 0;
+    color: var(--dark);
+    font-size: clamp(39px, 11vw, 52px);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+
+  .v322-personalise-copy p {
+    margin: 20px 0 0;
+    color: var(--brown);
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .v322-name-card {
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    background: var(--sand);
+    box-shadow: var(--shadow);
+  }
+
+  .v322-name-card .hero-name-field {
+    max-width: none;
+    margin: 0;
+  }
+
+  .v322-name-card .hero-name-field label {
+    margin-bottom: 12px;
+    color: var(--dark);
+    font-family: "Playfair Display", serif;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  .v322-name-card .hero-name-control {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .v322-name-card .hero-name-control input {
+    min-height: 58px;
+    border-color: var(--border);
+    border-radius: 999px;
+    background: var(--paper);
     box-shadow: none;
   }
 
-  .v322-mobile-hero-ready .hero .hero-inside-box .inside-box {
-    width: min(92%, 350px);
-    margin: 0 auto;
-    filter: drop-shadow(0 22px 32px rgba(111, 64, 50, 0.16));
+  .v322-name-card .btn {
+    width: 100%;
+    min-height: 58px;
+    background: var(--brown);
+  }
+
+  .v322-name-card small {
+    color: var(--brown);
   }
 }
 
