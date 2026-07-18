@@ -145,4 +145,17 @@
   `;
 
   container.appendChild(guide);
+
+  const builderSection = document.getElementById("composer")?.closest("section");
+  const photoSection = document.getElementById("preuves");
+
+  if (builderSection && section) {
+    builderSection.insertAdjacentElement("afterend", section);
+  }
+
+  if (section && photoSection) {
+    section.insertAdjacentElement("afterend", photoSection);
+    const photoEyebrow = photoSection.querySelector(".eyebrow");
+    if (photoEyebrow) photoEyebrow.textContent = "Nos box en images";
+  }
 })();
