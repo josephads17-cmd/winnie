@@ -1,8 +1,78 @@
 /* Beta V3.22 : le site officiel reste inchangé.
    Le petit bandeau supérieur « La Maison Winnie » de l’aperçu personnalisé
-   est masqué sur tous les écrans. Le fond photographique reste réservé au PC. */
+   est masqué sur tous les écrans. Les fonds photographiques sont propres
+   à la Beta : une version mobile et une version desktop. */
 .hero .inside-box-lid {
   display: none;
+}
+
+@media (max-width: 767px) {
+  .v322-mobile-hero-ready .hero {
+    position: relative;
+    overflow: hidden;
+    background: #f7f2eb;
+  }
+
+  .v322-mobile-hero-ready .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--v322-mobile-hero-bg-image);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
+  }
+
+  .v322-mobile-hero-ready .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(249, 245, 239, 0.98) 0%,
+      rgba(249, 245, 239, 0.94) 34%,
+      rgba(249, 245, 239, 0.72) 53%,
+      rgba(249, 245, 239, 0.27) 72%,
+      rgba(249, 245, 239, 0.08) 100%
+    );
+  }
+
+  .v322-mobile-hero-ready .hero .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .v322-mobile-hero-ready .hero .hero-name-field {
+    padding: 18px;
+    border: 1px solid rgba(232, 196, 172, 0.88);
+    border-radius: 24px;
+    background: rgba(255, 251, 247, 0.88);
+    box-shadow: 0 16px 34px rgba(111, 64, 50, 0.08);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+
+  .v322-mobile-hero-ready .hero .pill {
+    background: rgba(255, 251, 247, 0.88);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  .v322-mobile-hero-ready .hero .visual.hero-inside-box {
+    width: min(100%, 390px);
+    margin: 230px auto 0;
+    padding: 0 8px 24px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .v322-mobile-hero-ready .hero .hero-inside-box .inside-box {
+    width: min(92%, 350px);
+    margin: 0 auto;
+    filter: drop-shadow(0 22px 32px rgba(111, 64, 50, 0.16));
+  }
 }
 
 @media (min-width: 981px) and (hover: hover) and (pointer: fine) {
