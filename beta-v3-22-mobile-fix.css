@@ -1,0 +1,26 @@
+/* Correctif mobile V3.22 : rendre le nouveau fond réellement visible. */
+@media (max-width: 767px) {
+  .v322-mobile-hero-ready .hero {
+    padding-bottom: clamp(410px, 112vw, 500px);
+  }
+
+  .v322-mobile-hero-ready .hero::before {
+    background-size: 100% auto;
+    background-position: center bottom;
+  }
+
+  .v322-mobile-hero-ready .hero::after {
+    background: linear-gradient(
+      180deg,
+      rgba(249, 245, 239, 0.97) 0%,
+      rgba(249, 245, 239, 0.88) 27%,
+      rgba(249, 245, 239, 0.42) 45%,
+      rgba(249, 245, 239, 0.08) 60%,
+      rgba(249, 245, 239, 0) 100%
+    );
+  }
+
+  .v322-mobile-hero-ready .hero .visual.hero-inside-box {
+    display: none;
+  }
+}
