@@ -35,7 +35,7 @@
 
   document.body.classList.add("v322-mobile-layout");
 
-  const mobileAssetPath = "assets/hero-mobile-v3-22.webp?v=2";
+  const mobileAssetPath = "ChatGPT Image 18 juil. 2026 à 14_03_05.png?v=1";
   const mobileAssetUrl = encodeURI(mobileAssetPath);
   const mobileHeroImage = new Image();
 
