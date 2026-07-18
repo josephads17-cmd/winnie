@@ -5,6 +5,13 @@
   const isDesktop = window.matchMedia(DESKTOP_QUERY).matches;
   const isMobile = window.matchMedia(MOBILE_QUERY).matches;
 
+  const heroHeading = document.querySelector(".hero h1");
+  if (heroHeading) {
+    const emphasis = heroHeading.querySelector("em")?.textContent.trim() ||
+      "Personnalisée à son prénom.";
+    heroHeading.innerHTML = `Une box composée pour votre lapin. <em>${emphasis}</em>`;
+  }
+
   if (isDesktop) {
     const assetPath = "ChatGPT Image 18 juil. 2026 à 12_46_32.png?v=2";
     const assetUrl = encodeURI(assetPath);
@@ -60,7 +67,7 @@
       <div class="v322-mobile-hero-card">
         <span class="v322-mobile-kicker">Box personnalisée pour lapin</span>
         <h1>
-          Une box composée pour lui.
+          Une box composée pour votre lapin.
           <em>Personnalisée à son prénom.</em>
         </h1>
         <p>
