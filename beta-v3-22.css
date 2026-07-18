@@ -1,6 +1,10 @@
 /* Beta V3.22 : le site officiel reste inchangé.
-   Sur PC uniquement, le hero conserve sa structure actuelle et reçoit
-   un fond photographique derrière le texte et l’aperçu personnalisé. */
+   Le petit bandeau supérieur « La Maison Winnie » de l’aperçu personnalisé
+   est masqué sur tous les écrans. Le fond photographique reste réservé au PC. */
+.hero .inside-box-lid {
+  display: none;
+}
+
 @media (min-width: 981px) and (hover: hover) and (pointer: fine) {
   .v322-hero-ready .hero {
     position: relative;
