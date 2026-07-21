@@ -1,0 +1,279 @@
+/* Beta V3.24 — savoir-faire français et contenu réel de Milo */
+.v324-french-section {
+  padding-block: clamp(54px, 7vw, 88px);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(236, 151, 122, 0.12), transparent 28%),
+    linear-gradient(180deg, #fffaf5 0%, #f7eee5 100%);
+  border-block: 1px solid rgba(190, 129, 102, 0.22);
+}
+
+.v324-french-heading {
+  max-width: 820px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+
+.v324-french-heading h2,
+.v324-milo-heading h2 {
+  margin: 12px 0 0;
+  color: var(--dark, #432a22);
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1.03;
+}
+
+.v324-french-heading .lead,
+.v324-milo-heading .lead {
+  max-width: 760px;
+  margin: 18px auto 0;
+}
+
+.v324-french-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.v324-french-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  min-height: 172px;
+  padding: 22px 18px;
+  border: 1px solid rgba(190, 129, 102, 0.3);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 16px 40px rgba(91, 55, 42, 0.07);
+}
+
+.v324-french-icon {
+  display: grid;
+  flex: 0 0 43px;
+  width: 43px;
+  height: 43px;
+  place-items: center;
+  border-radius: 15px;
+  background: var(--dark, #704435);
+  color: #fffaf6;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.v324-french-card h3 {
+  margin: 2px 0 8px;
+  color: var(--dark, #432a22);
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.v324-french-card p,
+.v324-origin-note {
+  margin: 0;
+  color: var(--brown, #765b50);
+  line-height: 1.55;
+}
+
+.v324-origin-note {
+  max-width: 760px;
+  margin: 20px auto 0;
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.82;
+}
+
+.v324-milo-section {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(208, 223, 188, 0.28), transparent 30%),
+    #fffdf9;
+}
+
+.v324-milo-heading {
+  max-width: 800px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.v324-milo-videos {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.v324-video-card {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(190, 129, 102, 0.28);
+  border-radius: 30px;
+  background: #f5ece4;
+  box-shadow: 0 24px 70px rgba(82, 52, 40, 0.12);
+}
+
+.v324-video-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 9 / 14;
+  background: #e9ded4;
+}
+
+.v324-video-featured .v324-video-frame {
+  aspect-ratio: 9 / 13;
+}
+
+.v324-video-frame video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.v324-video-card figcaption {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  padding: 17px 19px 19px;
+  text-align: left;
+}
+
+.v324-video-card figcaption > span {
+  color: var(--peach, #d98968);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.v324-video-card strong,
+.v324-milo-footer strong {
+  display: block;
+  color: var(--dark, #432a22);
+}
+
+.v324-video-card small {
+  display: block;
+  margin-top: 3px;
+  color: var(--brown, #765b50);
+  line-height: 1.35;
+}
+
+.v324-milo-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.v324-milo-photo {
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border-radius: 25px;
+  border: 1px solid rgba(190, 129, 102, 0.24);
+  background: #efe7df;
+}
+
+.v324-milo-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.v324-milo-photo:hover img {
+  transform: scale(1.025);
+}
+
+.v324-milo-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  margin-top: 22px;
+  padding: 22px 24px;
+  border: 1px solid rgba(190, 129, 102, 0.26);
+  border-radius: 24px;
+  background: #f8efe7;
+  text-align: left;
+}
+
+.v324-milo-footer p {
+  max-width: 700px;
+  margin: 5px 0 0;
+  color: var(--brown, #765b50);
+}
+
+.v324-milo-footer .btn {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+@media (max-width: 980px) {
+  .v324-french-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .v324-french-section {
+    padding-block: 44px;
+  }
+
+  .v324-french-heading {
+    text-align: left;
+  }
+
+  .v324-french-heading h2,
+  .v324-milo-heading h2 {
+    font-size: clamp(34px, 11vw, 46px);
+  }
+
+  .v324-french-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .v324-french-card {
+    min-height: 0;
+    padding: 17px;
+    border-radius: 20px;
+  }
+
+  .v324-origin-note {
+    text-align: left;
+  }
+
+  .v324-milo-heading {
+    text-align: left;
+  }
+
+  .v324-milo-videos {
+    grid-template-columns: 1fr;
+  }
+
+  .v324-video-frame,
+  .v324-video-featured .v324-video-frame {
+    aspect-ratio: 9 / 14;
+  }
+
+  .v324-milo-gallery {
+    grid-template-columns: 1fr 1fr;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 5px;
+  }
+
+  .v324-milo-photo {
+    min-width: 72vw;
+    scroll-snap-align: start;
+  }
+
+  .v324-milo-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .v324-milo-footer .btn {
+    width: 100%;
+    white-space: normal;
+  }
+}
