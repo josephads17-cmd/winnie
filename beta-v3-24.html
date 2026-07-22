@@ -34,6 +34,34 @@
         text-transform: uppercase;
         pointer-events: none;
       }
+
+      @media (max-width: 640px) {
+        .v323-botanical-grid {
+          display: grid;
+          grid-template-columns: none;
+          grid-auto-flow: column;
+          grid-auto-columns: 84vw;
+          gap: 12px;
+          overflow-x: auto;
+          margin-right: calc(50% - 50vw);
+          padding: 2px 18px 12px 0;
+          scroll-padding-left: 0;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-inline: contain;
+        }
+
+        .v323-botanical-grid::-webkit-scrollbar {
+          display: none;
+        }
+
+        .v323-botanical-card {
+          min-width: 0;
+          scroll-snap-align: start;
+          scroll-snap-stop: always;
+        }
+      }
     </style>
   </head>
   <body>
