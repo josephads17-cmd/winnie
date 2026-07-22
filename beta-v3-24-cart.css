@@ -1,0 +1,80 @@
+/* Beta V3.24 — quantités modifiables dans le panier mobile */
+@media (max-width: 640px) {
+  .v324-drawer-products {
+    display: grid;
+    gap: 0;
+    margin-top: 18px;
+  }
+
+  .v324-drawer-product {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border, #e8c4ac);
+  }
+
+  .v324-drawer-product:first-child {
+    border-top: 1px solid var(--border, #e8c4ac);
+  }
+
+  .v324-drawer-product-copy {
+    min-width: 0;
+  }
+
+  .v324-drawer-product-copy strong,
+  .v324-drawer-product-copy small {
+    display: block;
+  }
+
+  .v324-drawer-product-copy strong {
+    color: var(--dark, #341e17);
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .v324-drawer-product-copy small {
+    margin-top: 4px;
+    color: #8e5b48;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .v324-drawer-quantity {
+    display: grid;
+    grid-template-columns: 38px 32px 38px;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--border, #e8c4ac);
+    border-radius: 999px;
+    background: #fff;
+  }
+
+  .v324-drawer-quantity button {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #fff1e8;
+    color: var(--brown, #6f4032);
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .v324-drawer-quantity button:active {
+    transform: scale(0.94);
+  }
+
+  .v324-drawer-quantity span {
+    color: var(--dark, #341e17);
+    font-size: 16px;
+    font-weight: 900;
+    text-align: center;
+  }
+}
