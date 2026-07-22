@@ -180,4 +180,82 @@
   } else {
     bunnyVideos.forEach((video) => video.play().catch(() => {}));
   }
+
+  const mobileCartMedia = window.matchMedia("(max-width: 640px)");
+  const drawerProducts = [
+    { name: "Calendula", weight: "20 g" },
+    { name: "Rose", weight: "15 g" },
+    { name: "Camomille bio", weight: "20 g" },
+    { name: "Hibiscus rouge", weight: "20 g" },
+    { name: "Plantain", weight: "25 g" },
+    { name: "Pissenlit", weight: "25 g" },
+    { name: "Framboisier", weight: "25 g" },
+    { name: "Noisetier", weight: "25 g" },
+  ];
+
+  const getDisplayedQuantities = () =>
+    Array.from(document.querySelectorAll("#flowers .item, #leaves .item")).map((item) =>
+      Number(item.querySelector(".qty span")?.textContent || 0),
+    );
+
+  const renderEditableDrawer = () => {
+    if (!mobileCartMedia.matches) return;
+    const drawerContent = document.getElementById("drawerContent");
+    if (!drawerContent) return;
+
+    const quantities = getDisplayedQuantities();
+    const selected = drawerProducts
+      .map((product, index) => ({ ...product, index, quantity: quantities[index] || 0 }))
+      .filter((product) => product.quantity > 0);
+    const monthly = document.querySelector('[data-delivery-mode]:checked')?.value === "monthly";
+
+    drawerContent.className = selected.length ? "v324-drawer-products" : "empty";
+    drawerContent.innerHTML = selected.length
+      ? selected
+          .map(
+            (product) => `
+              <div class="v324-drawer-product">
+                <div class="v324-drawer-product-copy">
+                  <strong>${product.name}</strong>
+                  <small>${product.weight} · ${monthly ? "Livraison mensuelle" : "Livraison unique"}</small>
+                </div>
+                <div class="v324-drawer-quantity" role="group" aria-label="Quantité de ${product.name}">
+                  <button type="button" data-drawer-product-index="${product.index}" data-drawer-delta="-1" aria-label="Retirer un sachet de ${product.name}">−</button>
+                  <span aria-live="polite">${product.quantity}</span>
+                  <button type="button" data-drawer-product-index="${product.index}" data-drawer-delta="1" aria-label="Ajouter un sachet de ${product.name}">+</button>
+                </div>
+              </div>
+            `,
+          )
+          .join("")
+      : "Aucun produit sélectionné pour le moment.";
+
+    if (!drawerContent.dataset.quantityControlsReady) {
+      drawerContent.dataset.quantityControlsReady = "true";
+      drawerContent.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-drawer-product-index]");
+        if (!button) return;
+        const index = Number(button.dataset.drawerProductIndex);
+        const delta = Number(button.dataset.drawerDelta);
+        if (!Number.isInteger(index) || !delta || typeof window.changeP !== "function") return;
+        window.changeP(index, delta);
+      });
+    }
+  };
+
+  const baseRender = window.render;
+  if (typeof baseRender === "function") {
+    window.render = function renderV324() {
+      const result = baseRender();
+      renderEditableDrawer();
+      return result;
+    };
+  }
+
+  renderEditableDrawer();
+  if (mobileCartMedia.addEventListener) {
+    mobileCartMedia.addEventListener("change", renderEditableDrawer);
+  } else {
+    window.addEventListener("resize", renderEditableDrawer);
+  }
 })();
