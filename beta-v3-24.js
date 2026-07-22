@@ -71,30 +71,28 @@
       <div class="v324-bunny-rail" data-drag-scroll tabindex="0" aria-label="Photos et vidéos de la Bunny Army">
         <article class="v324-bunny-card">
           <div class="v324-bunny-media">
-            <video src="assets/milo/milo-deguste.mp4" muted playsinline controls preload="metadata" aria-label="Milo goûte sa sélection devant sa box personnalisée"></video>
+            <video
+              src="ec6545dc32074694be9a0c717ae7c708 2.MOV"
+              poster="18A0E444-170F-4A52-85D7-36E0C7C8931C 2.JPG"
+              muted playsinline controls preload="metadata"
+              aria-label="Milo découvre sa box personnalisée"
+            ></video>
           </div>
-          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>Milo</strong><small>Il goûte sa sélection devant sa box.</small></div></div>
+          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>Milo</strong><small>Il découvre sa sélection devant sa box personnalisée.</small></div></div>
         </article>
 
         <article class="v324-bunny-card">
           <div class="v324-bunny-media">
-            <video src="assets/milo/milo-decouvre-box.mp4" muted playsinline controls preload="metadata" aria-label="Milo explore sa box personnalisée"></video>
+            <img src="18A0E444-170F-4A52-85D7-36E0C7C8931C 2.JPG" alt="Milo avec sa box personnalisée La Maison Winnie" loading="lazy" decoding="async" />
           </div>
-          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>Milo</strong><small>Il explore librement les sachets.</small></div></div>
+          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>Milo</strong><small>Une vraie box préparée et personnalisée à son prénom.</small></div></div>
         </article>
 
         <article class="v324-bunny-card">
           <div class="v324-bunny-media">
-            <img src="assets/milo/milo-box-profile.webp" alt="Milo à côté de sa box personnalisée" loading="lazy" decoding="async" />
+            <img src="B526E0EA-205A-4A60-9349-5AC123194C3F.JPG" alt="Milo près de sa box La Maison Winnie" loading="lazy" decoding="async" />
           </div>
-          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>Milo</strong><small>Sa box personnalisée porte bien son prénom.</small></div></div>
-        </article>
-
-        <article class="v324-bunny-card">
-          <div class="v324-bunny-media">
-            <img src="assets/milo/milo-box-complete.webp" alt="La box complète reçue par Milo" loading="lazy" decoding="async" />
-          </div>
-          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>La box de Milo</strong><small>Les sachets réellement reçus par sa maîtresse.</small></div></div>
+          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>Milo</strong><small>La découverte de sa box en conditions réelles.</small></div></div>
         </article>
 
         <article class="v324-bunny-card v324-coming-card" aria-label="Pompon rejoint bientôt la Bunny Army">
