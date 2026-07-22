@@ -69,6 +69,18 @@
       </div>
 
       <div class="v324-bunny-rail" data-drag-scroll tabindex="0" aria-label="Photos et vidéos de la Bunny Army">
+        <article class="v324-bunny-card v324-bunny-featured">
+          <div class="v324-bunny-media">
+            <span class="v324-bunny-badge">À la une</span>
+            <video
+              src="PRODUIT OFFERT merci beaucoup @lamaisonwinnie 🥰🥰🥰🥰 #bunny #rabbitsofinstagram #boutique #col.mp4"
+              muted playsinline controls preload="metadata"
+              aria-label="Pompon découvre sa box La Maison Winnie"
+            ></video>
+          </div>
+          <div class="v324-bunny-caption"><span class="v324-member-avatar">P</span><div><strong>Pompon</strong><small>Sa maîtresse partage leur découverte complète de la box.</small></div></div>
+        </article>
+
         <article class="v324-bunny-card">
           <div class="v324-bunny-media">
             <video
@@ -83,23 +95,27 @@
 
         <article class="v324-bunny-card">
           <div class="v324-bunny-media">
-            <img src="18A0E444-170F-4A52-85D7-36E0C7C8931C 2.JPG" alt="Milo avec sa box personnalisée La Maison Winnie" loading="lazy" decoding="async" />
+            <img src="B526E0EA-205A-4A60-9349-5AC123194C3F.JPG" alt="Milo près de sa box La Maison Winnie" loading="lazy" decoding="async" />
           </div>
-          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>Milo</strong><small>Une vraie box préparée et personnalisée à son prénom.</small></div></div>
+          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>Milo</strong><small>Son prénom et sa sélection sont visibles dans la box.</small></div></div>
         </article>
 
         <article class="v324-bunny-card">
           <div class="v324-bunny-media">
-            <img src="B526E0EA-205A-4A60-9349-5AC123194C3F.JPG" alt="Milo près de sa box La Maison Winnie" loading="lazy" decoding="async" />
+            <video
+              src="AQPfXZAJyI2fD5EpSOpvDn0-qfIwwzLUqNe5dgXhYWnSLwk38GDGIPb8YMOk-y157Cco301dd9hSos46RMBKM7xPKIBWFj0-vhHXYT4.mp4"
+              muted playsinline controls preload="metadata"
+              aria-label="Buzz découvre sa box La Maison Winnie"
+            ></video>
           </div>
-          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>Milo</strong><small>La découverte de sa box en conditions réelles.</small></div></div>
+          <div class="v324-bunny-caption"><span class="v324-member-avatar">B</span><div><strong>Buzz</strong><small>Buzz rejoint à son tour la Bunny Army.</small></div></div>
         </article>
 
-        <article class="v324-bunny-card v324-coming-card" aria-label="Pompon rejoint bientôt la Bunny Army">
+        <article class="v324-bunny-card v324-coming-card" aria-label="Luna rejoint bientôt la Bunny Army">
           <div class="v324-coming-media">
             <span>${icons.rabbit}</span>
             <small>Prochain membre</small>
-            <strong>Pompon arrive bientôt</strong>
+            <strong>Luna arrive bientôt</strong>
             <p>Ses photos et vidéos rejoindront ce carrousel.</p>
           </div>
         </article>
