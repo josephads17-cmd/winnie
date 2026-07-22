@@ -61,6 +61,23 @@
           scroll-snap-align: start;
           scroll-snap-stop: always;
         }
+
+        body:not(.v324-mobile-recap-open) .builder-grid > .cart {
+          display: none !important;
+        }
+
+        body.v324-mobile-recap-open .builder-grid {
+          display: block;
+        }
+
+        body.v324-mobile-recap-open .builder-grid > .panel {
+          display: none !important;
+        }
+
+        body.v324-mobile-recap-open .builder-grid > .cart {
+          display: block !important;
+          width: 100%;
+        }
       }
     </style>
   </head>
@@ -99,6 +116,48 @@
           await loadScript("beta-v3-21.js?v=4");
           await loadScript("beta-v3-23.js?v=2");
           await loadScript("beta-v3-24.js?v=5");
+
+          const mobileRecapMedia = window.matchMedia("(max-width: 640px)");
+          const originalShowRecap = window.showRecap;
+          const originalActivateConfiguratorStep = window.activateConfiguratorStep;
+          const originalReturnToConfigurator = window.returnToConfigurator;
+          const originalGo = window.go;
+
+          const closeMobileRecap = () => {
+            document.body.classList.remove("v324-mobile-recap-open");
+          };
+
+          window.showRecap = function showRecapV324() {
+            if (mobileRecapMedia.matches) {
+              document.body.classList.add("v324-mobile-recap-open");
+            }
+            return originalShowRecap();
+          };
+
+          window.activateConfiguratorStep = function activateConfiguratorStepV324(stepNumber) {
+            closeMobileRecap();
+            return originalActivateConfiguratorStep(stepNumber);
+          };
+
+          window.returnToConfigurator = function returnToConfiguratorV324() {
+            closeMobileRecap();
+            return originalReturnToConfigurator();
+          };
+
+          window.go = function goV324(stepNumber) {
+            if (Number(stepNumber) !== 4) closeMobileRecap();
+            return originalGo(stepNumber);
+          };
+
+          const syncMobileRecapViewport = () => {
+            if (!mobileRecapMedia.matches) closeMobileRecap();
+          };
+
+          if (mobileRecapMedia.addEventListener) {
+            mobileRecapMedia.addEventListener("change", syncMobileRecapViewport);
+          } else {
+            window.addEventListener("resize", syncMobileRecapViewport);
+          }
 
           const targetId = window.location.hash.slice(1);
           const target = targetId && document.getElementById(targetId);
