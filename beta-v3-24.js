@@ -74,7 +74,7 @@
             <span class="v324-bunny-badge">À la une</span>
             <video
               src="PRODUIT%20OFFERT%20merci%20beaucoup%20%40lamaisonwinnie%20%F0%9F%A5%B0%F0%9F%A5%B0%F0%9F%A5%B0%F0%9F%A5%B0%20%23bunny%20%23rabbitsofinstagram%20%23boutique%20%23col.mp4"
-              muted playsinline controls preload="metadata"
+              autoplay muted loop playsinline controls preload="metadata"
               aria-label="Pompon découvre sa box La Maison Winnie"
             ></video>
           </div>
@@ -86,7 +86,7 @@
             <video
               src="ec6545dc32074694be9a0c717ae7c708%202.MOV"
               poster="18A0E444-170F-4A52-85D7-36E0C7C8931C%202.JPG"
-              muted playsinline controls preload="metadata"
+              autoplay muted loop playsinline controls preload="metadata"
               aria-label="Milo découvre sa box personnalisée"
             ></video>
           </div>
@@ -95,16 +95,9 @@
 
         <article class="v324-bunny-card">
           <div class="v324-bunny-media">
-            <img src="B526E0EA-205A-4A60-9349-5AC123194C3F.JPG" alt="Milo près de sa box La Maison Winnie" loading="lazy" decoding="async" />
-          </div>
-          <div class="v324-bunny-caption"><span class="v324-member-avatar">M</span><div><strong>Milo</strong><small>Son prénom et sa sélection sont visibles dans la box.</small></div></div>
-        </article>
-
-        <article class="v324-bunny-card">
-          <div class="v324-bunny-media">
             <video
               src="AQPfXZAJyI2fD5EpSOpvDn0-qfIwwzLUqNe5dgXhYWnSLwk38GDGIPb8YMOk-y157Cco301dd9hSos46RMBKM7xPKIBWFj0-vhHXYT4.mp4"
-              muted playsinline controls preload="metadata"
+              autoplay muted loop playsinline controls preload="metadata"
               aria-label="Buzz découvre sa box La Maison Winnie"
             ></video>
           </div>
@@ -161,4 +154,30 @@
       bunnyRail.scrollBy({ left: direction * Math.max(300, bunnyRail.clientWidth * 0.72), behavior: "smooth" });
     });
   });
+
+  const bunnyVideos = document.querySelectorAll(".v324-bunny-media video");
+  bunnyVideos.forEach((video) => {
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+  });
+
+  if ("IntersectionObserver" in window) {
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: [0, 0.55, 1] },
+    );
+    bunnyVideos.forEach((video) => videoObserver.observe(video));
+  } else {
+    bunnyVideos.forEach((video) => video.play().catch(() => {}));
+  }
 })();
