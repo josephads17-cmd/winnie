@@ -36,6 +36,75 @@
     <link rel="stylesheet" href="beta-v3-20.css?v=3" />
     <link rel="stylesheet" href="beta-v3-22.css?v=6" />
     <link rel="stylesheet" href="beta-v3-23.css?v=1" />
+    <link rel="stylesheet" href="beta-v3-24.css?v=2" />
+    <link rel="stylesheet" href="beta-v3-24-cart.css?v=1" />
+    <style>
+      .v324-bunny-media { position: relative; }
+      .v324-bunny-featured .v324-bunny-media {
+        border: 2px solid rgba(216, 137, 104, 0.9);
+        box-shadow: 0 20px 55px rgba(95, 57, 43, 0.15);
+      }
+      .v324-bunny-badge {
+        position: absolute;
+        z-index: 2;
+        top: 14px;
+        left: 14px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(67, 42, 34, 0.92);
+        color: #fffaf6;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        pointer-events: none;
+      }
+
+      @media (max-width: 640px) {
+        .v323-botanical-grid {
+          display: grid;
+          grid-template-columns: none;
+          grid-auto-flow: column;
+          grid-auto-columns: 84vw;
+          gap: 12px;
+          overflow-x: auto;
+          margin-right: calc(50% - 50vw);
+          padding: 2px 18px 12px 0;
+          scroll-padding-left: 0;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-inline: contain;
+        }
+
+        .v323-botanical-grid::-webkit-scrollbar {
+          display: none;
+        }
+
+        .v323-botanical-card {
+          min-width: 0;
+          scroll-snap-align: start;
+          scroll-snap-stop: always;
+        }
+
+        body:not(.v324-mobile-recap-open) .builder-grid > .cart {
+          display: none !important;
+        }
+
+        body.v324-mobile-recap-open .builder-grid {
+          display: block;
+        }
+
+        body.v324-mobile-recap-open .builder-grid > .panel {
+          display: none !important;
+        }
+
+        body.v324-mobile-recap-open .builder-grid > .cart {
+          display: block !important;
+          width: 100%;
+        }
+      }
+    </style>
     <script>
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1399877371962156');fbq('track','PageView');
     </script>
@@ -66,41 +135,67 @@
           const footerVersion = document.querySelector(".footer-meta small");
           if (footerVersion) footerVersion.textContent = "Paiement sécurisé par Stripe";
 
-          const finishNavigation = () => {
-            const targetId = window.location.hash.slice(1);
-            const target = targetId && document.getElementById(targetId);
-            if (target) requestAnimationFrame(() => target.scrollIntoView());
+          const loadScript = (src) => new Promise((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.body.appendChild(script);
+          });
+
+          await loadScript("beta-v3-19.js?v=5");
+          await loadScript("beta-v3-20.js?v=3");
+          await loadScript("beta-v3-22.js?v=8");
+          await loadScript("beta-v3-21.js?v=4");
+          await loadScript("beta-v3-23.js?v=2");
+          await loadScript("beta-v3-24.js?v=6");
+          await loadScript("beta-v3-24-instagram.js?v=1");
+
+          const mobileRecapMedia = window.matchMedia("(max-width: 640px)");
+          const originalShowRecap = window.showRecap;
+          const originalActivateConfiguratorStep = window.activateConfiguratorStep;
+          const originalReturnToConfigurator = window.returnToConfigurator;
+          const originalGo = window.go;
+
+          const closeMobileRecap = () => {
+            document.body.classList.remove("v324-mobile-recap-open");
           };
 
-          const baseScript = document.createElement("script");
-          baseScript.src = "beta-v3-19.js?v=5";
-          baseScript.onload = () => {
-            const validationScript = document.createElement("script");
-            validationScript.src = "beta-v3-20.js?v=3";
-            validationScript.onload = () => {
-              const heroScript = document.createElement("script");
-              heroScript.src = "beta-v3-22.js?v=8";
-              heroScript.onload = () => {
-                const persistenceScript = document.createElement("script");
-                persistenceScript.src = "beta-v3-21.js?v=4";
-                persistenceScript.onload = () => {
-                  const botanicalsScript = document.createElement("script");
-                  botanicalsScript.src = "beta-v3-23.js?v=2";
-                  botanicalsScript.onload = finishNavigation;
-                  botanicalsScript.onerror = finishNavigation;
-                  document.body.appendChild(botanicalsScript);
-                };
-                document.body.appendChild(persistenceScript);
-              };
-              document.body.appendChild(heroScript);
-            };
-            document.body.appendChild(validationScript);
+          window.showRecap = function showRecapV324() {
+            if (mobileRecapMedia.matches) {
+              document.body.classList.add("v324-mobile-recap-open");
+            }
+            return originalShowRecap();
           };
-          baseScript.onerror = () => {
-            document.body.innerHTML =
-              '<p class="preview-error">Impossible de charger le configurateur.</p>';
+
+          window.activateConfiguratorStep = function activateConfiguratorStepV324(stepNumber) {
+            closeMobileRecap();
+            return originalActivateConfiguratorStep(stepNumber);
           };
-          document.body.appendChild(baseScript);
+
+          window.returnToConfigurator = function returnToConfiguratorV324() {
+            closeMobileRecap();
+            return originalReturnToConfigurator();
+          };
+
+          window.go = function goV324(stepNumber) {
+            if (Number(stepNumber) !== 4) closeMobileRecap();
+            return originalGo(stepNumber);
+          };
+
+          const syncMobileRecapViewport = () => {
+            if (!mobileRecapMedia.matches) closeMobileRecap();
+          };
+
+          if (mobileRecapMedia.addEventListener) {
+            mobileRecapMedia.addEventListener("change", syncMobileRecapViewport);
+          } else {
+            window.addEventListener("resize", syncMobileRecapViewport);
+          }
+
+          const targetId = window.location.hash.slice(1);
+          const target = targetId && document.getElementById(targetId);
+          if (target) requestAnimationFrame(() => target.scrollIntoView());
         } catch (error) {
           document.body.innerHTML = `<p class="preview-error">${error.message}</p>`;
         }
