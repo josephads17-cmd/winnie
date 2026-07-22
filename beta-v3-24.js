@@ -73,7 +73,7 @@
           <div class="v324-bunny-media">
             <span class="v324-bunny-badge">À la une</span>
             <video
-              src="PRODUIT OFFERT merci beaucoup @lamaisonwinnie 🥰🥰🥰🥰 #bunny #rabbitsofinstagram #boutique #col.mp4"
+              src="PRODUIT%20OFFERT%20merci%20beaucoup%20%40lamaisonwinnie%20%F0%9F%A5%B0%F0%9F%A5%B0%F0%9F%A5%B0%F0%9F%A5%B0%20%23bunny%20%23rabbitsofinstagram%20%23boutique%20%23col.mp4"
               muted playsinline controls preload="metadata"
               aria-label="Pompon découvre sa box La Maison Winnie"
             ></video>
@@ -84,8 +84,8 @@
         <article class="v324-bunny-card">
           <div class="v324-bunny-media">
             <video
-              src="ec6545dc32074694be9a0c717ae7c708 2.MOV"
-              poster="18A0E444-170F-4A52-85D7-36E0C7C8931C 2.JPG"
+              src="ec6545dc32074694be9a0c717ae7c708%202.MOV"
+              poster="18A0E444-170F-4A52-85D7-36E0C7C8931C%202.JPG"
               muted playsinline controls preload="metadata"
               aria-label="Milo découvre sa box personnalisée"
             ></video>
