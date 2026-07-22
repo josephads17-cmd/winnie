@@ -13,6 +13,28 @@
     <link rel="stylesheet" href="beta-v3-22.css?v=6" />
     <link rel="stylesheet" href="beta-v3-23.css?v=1" />
     <link rel="stylesheet" href="beta-v3-24.css?v=2" />
+    <style>
+      .v324-bunny-media { position: relative; }
+      .v324-bunny-featured .v324-bunny-media {
+        border: 2px solid rgba(216, 137, 104, 0.9);
+        box-shadow: 0 20px 55px rgba(95, 57, 43, 0.15);
+      }
+      .v324-bunny-badge {
+        position: absolute;
+        z-index: 2;
+        top: 14px;
+        left: 14px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(67, 42, 34, 0.92);
+        color: #fffaf6;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
     <div class="preview-loading" id="previewLoading" role="status">Chargement du configurateur…</div>
@@ -48,7 +70,7 @@
           await loadScript("beta-v3-22.js?v=8");
           await loadScript("beta-v3-21.js?v=4");
           await loadScript("beta-v3-23.js?v=2");
-          await loadScript("beta-v3-24.js?v=3");
+          await loadScript("beta-v3-24.js?v=4");
 
           const targetId = window.location.hash.slice(1);
           const target = targetId && document.getElementById(targetId);
