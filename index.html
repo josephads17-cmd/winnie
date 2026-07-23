@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="beta-v3-23.css?v=1" />
     <link rel="stylesheet" href="beta-v3-24.css?v=2" />
     <link rel="stylesheet" href="beta-v3-24-cart.css?v=1" />
+    <link rel="stylesheet" href="beta-v3-25.css?v=2" />
     <style>
       .v324-bunny-media { position: relative; }
       .v324-bunny-featured .v324-bunny-media {
@@ -150,6 +151,8 @@
           await loadScript("beta-v3-23.js?v=2");
           await loadScript("beta-v3-24.js?v=6");
           await loadScript("beta-v3-24-instagram.js?v=1");
+          await loadScript("beta-v3-25.js?v=2");
+          await loadScript("beta-v3-25-checkout.js?v=1");
 
           const mobileRecapMedia = window.matchMedia("(max-width: 640px)");
           const originalShowRecap = window.showRecap;
@@ -161,24 +164,24 @@
             document.body.classList.remove("v324-mobile-recap-open");
           };
 
-          window.showRecap = function showRecapV324() {
+          window.showRecap = function showRecapV325() {
             if (mobileRecapMedia.matches) {
               document.body.classList.add("v324-mobile-recap-open");
             }
             return originalShowRecap();
           };
 
-          window.activateConfiguratorStep = function activateConfiguratorStepV324(stepNumber) {
+          window.activateConfiguratorStep = function activateConfiguratorStepV325(stepNumber) {
             closeMobileRecap();
             return originalActivateConfiguratorStep(stepNumber);
           };
 
-          window.returnToConfigurator = function returnToConfiguratorV324() {
+          window.returnToConfigurator = function returnToConfiguratorV325() {
             closeMobileRecap();
             return originalReturnToConfigurator();
           };
 
-          window.go = function goV324(stepNumber) {
+          window.go = function goV325(stepNumber) {
             if (Number(stepNumber) !== 4) closeMobileRecap();
             return originalGo(stepNumber);
           };
