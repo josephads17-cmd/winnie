@@ -46,6 +46,16 @@
   if (mobile.addEventListener) mobile.addEventListener("change", syncViewport);
   else window.addEventListener("resize", syncViewport);
 
+  const returnedFromCheckout =
+    new URLSearchParams(window.location.search).get("checkout") === "cancelled";
+
+  if (returnedFromCheckout) {
+    closeRecap();
+    const url = new URL(window.location.href);
+    url.hash = "composer";
+    window.history.replaceState(null, "", url);
+  }
+
   const waitForHero = new Promise((resolve) => {
     const started = performance.now();
     const check = () => {
@@ -65,7 +75,9 @@
   ])
     .then(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
     .then(() => {
-      const target = document.getElementById(window.location.hash.slice(1));
+      closeRecap();
+      const targetId = returnedFromCheckout ? "composer" : window.location.hash.slice(1);
+      const target = targetId && document.getElementById(targetId);
       if (target) target.scrollIntoView();
       window.clearTimeout(window.__lmwFinalLoadTimeout);
       document.documentElement.classList.remove("v327-app-loading");
