@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import crypto from "node:crypto";
 
+// Génère une version autonome à partir des sources actuellement validées.
 const read = (path) => fs.readFileSync(path, "utf8");
 const write = (path, content) => fs.writeFileSync(path, content.replace(/\r\n/g, "\n"), "utf8");
 
