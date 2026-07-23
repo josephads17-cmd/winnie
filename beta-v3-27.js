@@ -15,9 +15,8 @@
     const marker = document.createElement("div");
     marker.className = "v327-price-marker";
     marker.setAttribute("role", "note");
-    marker.setAttribute("aria-label", "Prix repère");
+    marker.setAttribute("aria-label", "Information tarifaire");
     marker.innerHTML = `
-      <span class="v327-price-label">Prix repère</span>
       <div class="v327-price-box">
         <span class="v327-price-dot" aria-hidden="true"></span>
         <p><strong>Dès 5,90 € le sachet</strong> — vous composez, vous payez ce que vous choisissez.</p>
@@ -71,6 +70,19 @@
     }
   };
 
-  injectMarkers();
-  window.addEventListener("pageshow", injectMarkers);
+  const moveBunnyArmyAfterHero = () => {
+    const hero = document.querySelector(".hero");
+    const bunnyArmy = document.getElementById("preuves");
+
+    if (!hero || !bunnyArmy || hero.nextElementSibling === bunnyArmy) return;
+    hero.insertAdjacentElement("afterend", bunnyArmy);
+  };
+
+  const applyV327 = () => {
+    injectMarkers();
+    moveBunnyArmyAfterHero();
+  };
+
+  applyV327();
+  window.addEventListener("pageshow", applyV327);
 })();
