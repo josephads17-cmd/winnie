@@ -1,4 +1,4 @@
-/* Beta V3.27 — repère tarifaire et préparation française dans le hero */
+/* Beta V3.27 — hero, carrousel France et références mobiles infinies */
 .v327-price-marker {
   width: 100%;
   max-width: 690px;
@@ -60,6 +60,7 @@
 }
 
 .v327-france-flag {
+  display: block;
   flex: 0 0 auto;
   width: 25px;
   height: 17px;
@@ -72,6 +73,160 @@
   display: block;
   width: 100%;
   height: 100%;
+}
+
+/* Nouveau carrousel de réassurance France, mobile et ordinateur */
+.v324-trust-rail.v327-trust-carousel {
+  position: relative;
+  padding: 18px 0;
+  border-block: 1px solid rgba(169, 112, 84, 0.18);
+  background:
+    radial-gradient(circle at 8% 20%, rgba(255, 255, 255, 0.9), transparent 25%),
+    linear-gradient(90deg, #f8eadb 0%, #fff9f3 48%, #f5e4d2 100%);
+  isolation: isolate;
+}
+
+.v324-trust-rail.v327-trust-carousel::before,
+.v324-trust-rail.v327-trust-carousel::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  width: 42px;
+  pointer-events: none;
+}
+
+.v324-trust-rail.v327-trust-carousel::before {
+  left: 0;
+  background: linear-gradient(90deg, #f8eadb 8%, rgba(248, 234, 219, 0));
+}
+
+.v324-trust-rail.v327-trust-carousel::after {
+  right: 0;
+  background: linear-gradient(270deg, #f5e4d2 8%, rgba(245, 228, 210, 0));
+}
+
+.v327-trust-scroller {
+  position: relative;
+  z-index: 1;
+  padding: 4px 0 10px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.v327-trust-track {
+  display: flex !important;
+  justify-content: flex-start !important;
+  gap: 16px;
+  width: max-content !important;
+  min-width: 0 !important;
+  padding-inline: max(28px, calc((100vw - 1280px) / 2)) !important;
+}
+
+.v327-trust-card {
+  position: relative;
+  display: grid;
+  flex: 0 0 clamp(290px, 23vw, 355px);
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 15px;
+  align-items: center;
+  min-height: 98px;
+  padding: 17px 20px;
+  overflow: hidden;
+  scroll-snap-align: center;
+  border: 1px solid rgba(114, 74, 54, 0.14);
+  border-radius: 28px;
+  background: rgba(255, 252, 248, 0.93);
+  color: #3e2a22;
+  box-shadow: 0 14px 34px rgba(85, 54, 39, 0.08);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.v327-trust-card::after {
+  content: "";
+  position: absolute;
+  right: -22px;
+  bottom: -34px;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: rgba(231, 143, 111, 0.09);
+  pointer-events: none;
+}
+
+.v327-trust-card.is-loop-active {
+  transform: translateY(-3px);
+  border-color: rgba(116, 72, 51, 0.27);
+  box-shadow: 0 20px 42px rgba(85, 54, 39, 0.13);
+}
+
+.v327-trust-icon {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 1px solid rgba(111, 64, 50, 0.11);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #fff, #f5e6d8);
+  color: #5b3c2f;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.v327-trust-icon > svg {
+  width: 36px;
+  height: 36px;
+}
+
+.v327-trust-icon-flag .v327-france-flag {
+  width: 34px;
+  height: 23px;
+  border-radius: 4px;
+  box-shadow: 0 5px 14px rgba(52, 30, 23, 0.12);
+}
+
+.v327-trust-copy {
+  display: block;
+  min-width: 0;
+  padding-right: 18px;
+}
+
+.v327-trust-copy small,
+.v327-trust-copy strong {
+  display: block;
+}
+
+.v327-trust-copy small {
+  margin-bottom: 5px;
+  color: #a16d4d;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.v327-trust-copy strong {
+  color: #3d2921;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.32;
+}
+
+.v327-trust-mini-flag {
+  position: absolute;
+  top: 13px;
+  right: 14px;
+  opacity: 0.72;
+}
+
+.v327-trust-mini-flag .v327-france-flag {
+  width: 19px;
+  height: 13px;
+  border-radius: 2px;
 }
 
 @media (min-width: 768px) {
@@ -130,6 +285,108 @@
     width: 23px;
     height: 16px;
   }
+
+  .v324-trust-rail.v327-trust-carousel {
+    padding: 14px 0 12px;
+  }
+
+  .v324-trust-rail.v327-trust-carousel::before,
+  .v324-trust-rail.v327-trust-carousel::after {
+    width: 18px;
+  }
+
+  .v327-trust-track {
+    gap: 12px;
+    padding-inline: 20px !important;
+  }
+
+  .v327-trust-card {
+    flex-basis: min(82vw, 330px);
+    grid-template-columns: 50px minmax(0, 1fr);
+    gap: 13px;
+    min-height: 88px;
+    padding: 14px 16px;
+    border-radius: 24px;
+    scroll-snap-align: center;
+  }
+
+  .v327-trust-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 17px;
+  }
+
+  .v327-trust-icon > svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .v327-trust-icon-flag .v327-france-flag {
+    width: 30px;
+    height: 20px;
+  }
+
+  .v327-trust-copy strong {
+    font-size: 14px;
+  }
+
+  /* Le catalogue mobile reste centré et boucle sans fin. */
+  .v327-infinite-catalog {
+    scroll-snap-type: x mandatory;
+  }
+
+  .v327-infinite-catalog .v325-catalog-card {
+    opacity: 0.6;
+    transform: scale(0.94);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .v327-infinite-catalog .v325-catalog-card.is-loop-active {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 24px 52px rgba(77, 52, 37, 0.14);
+  }
+
+  .v327-catalog-loop-ready .v325-swipe-hint {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .v327-catalog-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .v327-catalog-dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(80, 54, 39, 0.24);
+    transition:
+      width 0.22s ease,
+      background 0.22s ease;
+  }
+
+  .v327-catalog-dot.is-active {
+    width: 20px;
+    background: #6f4032;
+  }
+
+  .v327-catalog-loop-label {
+    color: #816f59;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1100px) {
@@ -139,5 +396,22 @@
 
   .v327-france-badge {
     font-size: 14px;
+  }
+
+  .v327-trust-card {
+    flex-basis: 310px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v327-trust-scroller,
+  .v327-infinite-catalog {
+    scroll-behavior: auto;
+  }
+
+  .v327-trust-card,
+  .v327-infinite-catalog .v325-catalog-card,
+  .v327-catalog-dot {
+    transition: none;
   }
 }
