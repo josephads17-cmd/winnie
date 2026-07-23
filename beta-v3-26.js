@@ -5,6 +5,8 @@
   const desktopMedia = window.matchMedia("(min-width: 768px)");
 
   const enhanceDesktopComposition = () => {
+    if (!desktopMedia.matches) return;
+
     const inner = document.querySelector(".v325-composition-inner");
     if (!inner || inner.querySelector(":scope > .v326-products")) return;
 
@@ -37,23 +39,48 @@
     inner.append(productsColumn, summaryColumn);
   };
 
+  const restoreMobileComposition = () => {
+    if (desktopMedia.matches) return;
+
+    const inner = document.querySelector(".v325-composition-inner");
+    const productsColumn = inner?.querySelector(":scope > .v326-products");
+    const summaryColumn = inner?.querySelector(":scope > .v326-summary");
+    if (!inner || !productsColumn || !summaryColumn) return;
+
+    const groups = Array.from(productsColumn.querySelectorAll(":scope > .v325-product-group"));
+    const summaryItems = Array.from(summaryColumn.children).filter(
+      (element) => !element.classList.contains("v326-summary-heading"),
+    );
+
+    groups.forEach((group) => inner.appendChild(group));
+    summaryItems.forEach((element) => inner.appendChild(element));
+    productsColumn.remove();
+    summaryColumn.remove();
+  };
+
+  const syncCompositionLayout = () => {
+    document.body.classList.toggle("v326-desktop-layout", desktopMedia.matches);
+    requestAnimationFrame(() => {
+      if (desktopMedia.matches) enhanceDesktopComposition();
+      else restoreMobileComposition();
+    });
+  };
+
   const baseRender = window.render;
   if (typeof baseRender === "function") {
     window.render = function renderV326() {
       const result = baseRender();
-      requestAnimationFrame(enhanceDesktopComposition);
+      requestAnimationFrame(() => {
+        if (desktopMedia.matches) enhanceDesktopComposition();
+        else restoreMobileComposition();
+      });
       return result;
     };
   }
 
-  const syncDesktopClass = () => {
-    document.body.classList.toggle("v326-desktop-layout", desktopMedia.matches);
-    requestAnimationFrame(enhanceDesktopComposition);
-  };
+  syncCompositionLayout();
+  if (desktopMedia.addEventListener) desktopMedia.addEventListener("change", syncCompositionLayout);
+  else window.addEventListener("resize", syncCompositionLayout);
 
-  syncDesktopClass();
-  if (desktopMedia.addEventListener) desktopMedia.addEventListener("change", syncDesktopClass);
-  else window.addEventListener("resize", syncDesktopClass);
-
-  window.addEventListener("pageshow", () => requestAnimationFrame(enhanceDesktopComposition));
+  window.addEventListener("pageshow", syncCompositionLayout);
 })();
