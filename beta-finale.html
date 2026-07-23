@@ -4,6 +4,7 @@ permalink: /beta-finale.html
 ---
 {% capture base_document %}{% include_relative beta-v3-19.html %}{% endcapture %}
 {% assign body_fragment = base_document | split: '<body>' | last | split: '<script' | first %}
+{% assign build_version = site.time | date: '%s' %}
 <!doctype html>
 <html lang="fr" class="v327-app-loading">
   <head>
@@ -17,7 +18,7 @@ permalink: /beta-finale.html
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
     <link rel="preload" as="image" href="ChatGPT%20Image%2018%20juil.%202026%20a%CC%80%2014_03_05.png?v=1" media="(max-width: 767px)" />
     <link rel="preload" as="image" href="ChatGPT%20Image%2018%20juil.%202026%20a%CC%80%2012_46_32.png?v=2" media="(min-width: 768px)" />
-    <link rel="stylesheet" href="beta-finale.css?v=1" />
+    <link rel="stylesheet" href="beta-finale.css?v={{ build_version }}" />
     <style>
       html.v327-app-loading { overflow: hidden; background: #fdf6f0; }
       html.v327-app-loading body { opacity: 0; pointer-events: none; }
@@ -63,7 +64,7 @@ permalink: /beta-finale.html
         document.documentElement.classList.add("v327-app-ready");
       }, 6000);
     </script>
-    <script defer src="beta-finale.js?v=1"></script>
+    <script defer src="beta-finale.js?v={{ build_version }}"></script>
   </head>
   <body>
 {{ body_fragment }}
