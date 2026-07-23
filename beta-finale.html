@@ -2,7 +2,7 @@
 layout: null
 permalink: /beta-finale.html
 ---
-{% capture base_document %}{% include_relative beta-v3-19.html %}{% endcapture %}
+{% capture base_document %}{% include_relative beta-finale-base.html %}{% endcapture %}
 {% assign body_fragment = base_document | split: '<body>' | last | split: '<script' | first %}
 {% assign build_version = site.time | date: '%s' %}
 <!doctype html>
@@ -62,7 +62,7 @@ permalink: /beta-finale.html
       window.__lmwFinalLoadTimeout = setTimeout(() => {
         document.documentElement.classList.remove("v327-app-loading");
         document.documentElement.classList.add("v327-app-ready");
-      }, 6000);
+      }, 4000);
     </script>
     <script defer src="beta-finale.js?v={{ build_version }}"></script>
   </head>
