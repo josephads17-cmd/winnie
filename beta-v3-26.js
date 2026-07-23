@@ -4,6 +4,14 @@
 
   const desktopMedia = window.matchMedia("(min-width: 768px)");
 
+  const moveBunnyArmyAfterComposer = () => {
+    const composer = document.getElementById("composer");
+    const bunnyArmy = document.getElementById("preuves");
+
+    if (!composer || !bunnyArmy || composer.nextElementSibling === bunnyArmy) return;
+    composer.insertAdjacentElement("afterend", bunnyArmy);
+  };
+
   const enhanceDesktopComposition = () => {
     if (!desktopMedia.matches) return;
 
@@ -60,6 +68,7 @@
 
   const syncCompositionLayout = () => {
     document.body.classList.toggle("v326-desktop-layout", desktopMedia.matches);
+    moveBunnyArmyAfterComposer();
     requestAnimationFrame(() => {
       if (desktopMedia.matches) enhanceDesktopComposition();
       else restoreMobileComposition();
@@ -71,6 +80,7 @@
     window.render = function renderV326() {
       const result = baseRender();
       requestAnimationFrame(() => {
+        moveBunnyArmyAfterComposer();
         if (desktopMedia.matches) enhanceDesktopComposition();
         else restoreMobileComposition();
       });
