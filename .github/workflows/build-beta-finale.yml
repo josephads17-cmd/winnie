@@ -2,6 +2,9 @@ name: Build beta finale
 
 on:
   workflow_dispatch:
+  issues:
+    types:
+      - opened
   push:
     branches:
       - main
@@ -34,6 +37,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: build-beta-finale
@@ -41,6 +45,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'issues' || github.event.issue.title == '[build] Beta finale'
     runs-on: ubuntu-latest
     steps:
       - name: Récupérer le dépôt
@@ -78,3 +83,9 @@ jobs:
           git add beta-finale.html beta-finale.css beta-finale.js beta-finale-manifest.json
           git commit -m "build: générer la beta finale consolidée"
           git push
+
+      - name: Fermer l'issue technique
+        if: github.event_name == 'issues' && success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue close "${{ github.event.issue.number }}" --comment "Beta finale générée automatiquement."
