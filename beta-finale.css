@@ -1,0 +1,35 @@
+---
+---
+/* La Maison Winnie — Bundle CSS consolidé par GitHub Pages. */
+
+/* ===== beta-v3-19.css ===== */
+{% include_relative beta-v3-19.css %}
+
+/* ===== beta-v3-20.css ===== */
+{% include_relative beta-v3-20.css %}
+
+/* ===== beta-v3-22.css ===== */
+{% include_relative beta-v3-22.css %}
+
+/* ===== beta-v3-23.css ===== */
+{% include_relative beta-v3-23.css %}
+
+/* ===== beta-v3-24.css ===== */
+{% include_relative beta-v3-24.css %}
+
+/* ===== beta-v3-24-cart.css ===== */
+{% include_relative beta-v3-24-cart.css %}
+
+/* ===== beta-v3-25.css ===== */
+{% include_relative beta-v3-25.css %}
+
+/* ===== beta-v3-26.css ===== */
+{% include_relative beta-v3-26.css %}
+
+/* ===== beta-v3-27.css ===== */
+{% include_relative beta-v3-27.css %}
+
+/* ===== styles auparavant intégrés au wrapper V3.27 ===== */
+{% capture v327_wrapper %}{% include_relative beta-v3-27.html %}{% endcapture %}
+{% assign v327_inline_style = v327_wrapper | split: '<style>' | last | split: '</style>' | first %}
+{{ v327_inline_style }}
