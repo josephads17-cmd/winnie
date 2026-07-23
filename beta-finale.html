@@ -1,0 +1,71 @@
+---
+layout: null
+permalink: /beta-finale.html
+---
+{% capture base_document %}{% include_relative beta-v3-19.html %}{% endcapture %}
+{% assign body_fragment = base_document | split: '<body>' | last | split: '<script' | first %}
+<!doctype html>
+<html lang="fr" class="v327-app-loading">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>La Maison Winnie — Beta finale consolidée</title>
+    <meta name="description" content="Version de test consolidée du configurateur La Maison Winnie." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href="ChatGPT%20Image%2018%20juil.%202026%20a%CC%80%2014_03_05.png?v=1" media="(max-width: 767px)" />
+    <link rel="preload" as="image" href="ChatGPT%20Image%2018%20juil.%202026%20a%CC%80%2012_46_32.png?v=2" media="(min-width: 768px)" />
+    <link rel="stylesheet" href="beta-finale.css?v=1" />
+    <style>
+      html.v327-app-loading { overflow: hidden; background: #fdf6f0; }
+      html.v327-app-loading body { opacity: 0; pointer-events: none; }
+      html.v327-app-loading::before {
+        content: "Préparation de La Maison Winnie…";
+        position: fixed;
+        z-index: 10000;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding-top: 70px;
+        background: radial-gradient(circle at 50% 38%, rgba(255,255,255,.96), transparent 25%), linear-gradient(180deg, #fffaf6, #f6e4d7);
+        color: #6f4032;
+        font: 700 15px/1.4 Jost, sans-serif;
+        letter-spacing: .08em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      html.v327-app-loading::after {
+        content: "";
+        position: fixed;
+        z-index: 10001;
+        top: calc(50% - 38px);
+        left: calc(50% - 18px);
+        width: 36px;
+        height: 36px;
+        border: 3px solid rgba(111,64,50,.16);
+        border-top-color: #6f4032;
+        border-radius: 50%;
+        animation: lmw-final-spin .8s linear infinite;
+      }
+      html.v327-app-ready body { animation: lmw-final-reveal .24s ease both; }
+      @keyframes lmw-final-spin { to { transform: rotate(360deg); } }
+      @keyframes lmw-final-reveal { from { opacity: 0; } to { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        html.v327-app-loading::after,
+        html.v327-app-ready body { animation: none; }
+      }
+    </style>
+    <script>
+      window.__lmwFinalLoadTimeout = setTimeout(() => {
+        document.documentElement.classList.remove("v327-app-loading");
+        document.documentElement.classList.add("v327-app-ready");
+      }, 6000);
+    </script>
+    <script defer src="beta-finale.js?v=1"></script>
+  </head>
+  <body>
+{{ body_fragment }}
+  </body>
+</html>
