@@ -82,6 +82,9 @@
       background: #6f4032;
       color: #fff;
     }
+    #infoModal .quick-add {
+      display: none !important;
+    }
     @media (max-width: 767px) {
       .v329-composer-subtitle { padding: 0 20px; font-size: 14px; }
       .v329-info-badge { width: 23px; height: 23px; margin-left: 6px; font-size: 13px; }
