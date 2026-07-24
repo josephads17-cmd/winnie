@@ -11,6 +11,9 @@
     { name: "Box Mélange", indexes: [0, 1, 4, 5] },
   ];
 
+  let anchorSnapshot = null;
+  let enhanceFrame = 0;
+
   const readQuantities = () =>
     typeof st !== "undefined" && Array.isArray(st.p)
       ? st.p.map((item) => Number(item.q || 0))
@@ -95,7 +98,16 @@
 
     const groups = Array.from(inner.querySelectorAll(":scope > .v325-product-group"));
     const summary = inner.querySelector(":scope > .v326-summary");
-    if (!summary || groups.length !== 2) return;
+
+    groups.forEach((group) =>
+      group.classList.remove("v328-stage-card", "v328-stage-flowers", "v328-stage-leaves"),
+    );
+    summary?.classList.remove("v328-stage-card", "v328-stage-summary");
+
+    if (!desktopMedia.matches || !summary || groups.length !== 2) {
+      inner.classList.remove("v328-artistic-desktop");
+      return;
+    }
 
     groups[0].classList.add("v328-stage-card", "v328-stage-flowers");
     groups[1].classList.add("v328-stage-card", "v328-stage-leaves");
@@ -117,6 +129,8 @@
         <h3>La box de ${rabbitName()}</h3>
         <p>Vérifiez les références, le rythme de livraison et le total avant le paiement sécurisé.</p>`;
     }
+
+    inner.classList.add("v328-artistic-desktop");
   };
 
   const addMatchChip = (inner, quantities) => {
@@ -133,6 +147,10 @@
     const summary = inner.querySelector(":scope > .v326-summary");
     const checkout = summary?.querySelector(".v325-review-button");
     if (summary && checkout) summary.insertBefore(chip, checkout);
+    else {
+      const preview = inner.querySelector(".v325-composition-preview");
+      if (preview) preview.insertAdjacentElement("beforebegin", chip);
+    }
   };
 
   const enhanceConfigurator = () => {
@@ -153,9 +171,49 @@
 
     addMatchChip(inner, readQuantities());
     decorateChoiceRows();
-
-    inner.classList.toggle("v328-artistic-desktop", desktopMedia.matches);
   };
+
+  const restoreAnchor = () => {
+    if (!anchorSnapshot) return;
+    const row = document.querySelector(`[data-v325-info="${anchorSnapshot.index}"]`)?.closest(".v325-choice-row");
+    if (row) {
+      const delta = row.getBoundingClientRect().top - anchorSnapshot.top;
+      if (Math.abs(delta) > 0.5) window.scrollBy(0, delta);
+    } else {
+      window.scrollTo(0, anchorSnapshot.scrollY);
+    }
+    anchorSnapshot = null;
+  };
+
+  const scheduleEnhance = () => {
+    cancelAnimationFrame(enhanceFrame);
+    document.body.classList.add("v328-config-updating");
+    enhanceFrame = requestAnimationFrame(() => {
+      enhanceConfigurator();
+      requestAnimationFrame(() => {
+        enhanceConfigurator();
+        restoreAnchor();
+        document.body.classList.remove("v328-config-updating");
+      });
+    });
+  };
+
+  document.addEventListener(
+    "pointerdown",
+    (event) => {
+      const control = event.target.closest("[data-v325-adjust]");
+      if (!control) return;
+      const row = control.closest(".v325-choice-row");
+      const info = row?.querySelector("[data-v325-info]");
+      if (!row || !info) return;
+      anchorSnapshot = {
+        index: Number(info.dataset.v325Info),
+        top: row.getBoundingClientRect().top,
+        scrollY: window.scrollY,
+      };
+    },
+    true,
+  );
 
   const preselectDefaults = () => {
     if (typeof st === "undefined" || !Array.isArray(st.p)) return;
@@ -179,17 +237,15 @@
   if (typeof baseRender === "function") {
     window.render = function renderV328Configurator() {
       const result = baseRender();
-      requestAnimationFrame(() => requestAnimationFrame(enhanceConfigurator));
+      scheduleEnhance();
       return result;
     };
   }
 
   preselectDefaults();
-  requestAnimationFrame(() => requestAnimationFrame(enhanceConfigurator));
-  document.getElementById("rabbitName")?.addEventListener("input", () => {
-    requestAnimationFrame(enhanceConfigurator);
-  });
-  if (desktopMedia.addEventListener) desktopMedia.addEventListener("change", enhanceConfigurator);
-  else window.addEventListener("resize", enhanceConfigurator);
-  window.addEventListener("pageshow", () => requestAnimationFrame(enhanceConfigurator));
+  scheduleEnhance();
+  document.getElementById("rabbitName")?.addEventListener("input", scheduleEnhance);
+  if (desktopMedia.addEventListener) desktopMedia.addEventListener("change", scheduleEnhance);
+  else window.addEventListener("resize", scheduleEnhance);
+  window.addEventListener("pageshow", scheduleEnhance);
 })();
