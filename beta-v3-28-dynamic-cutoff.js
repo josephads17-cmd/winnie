@@ -96,8 +96,10 @@
 
     if (isBusinessDay(today) && beforeCutoff) {
       return {
+        eyebrow: "Commande prioritaire",
         label: "Commandez avant 13 h",
-        result: "expédition aujourd’hui",
+        result: "Expédition aujourd’hui",
+        state: "today",
       };
     }
 
@@ -108,20 +110,30 @@
     })();
 
     return {
+      eyebrow: "Prochaine expédition",
       label: "Commandez maintenant",
-      result: `expédition ${formatShippingDate(shippingDay)}`,
+      result: `Expédition ${formatShippingDate(shippingDay)}`,
+      state: "next",
     };
   };
 
   const updateCutoffs = () => {
-    const { label, result } = messageForNow();
+    const { eyebrow, label, result, state } = messageForNow();
     document.querySelectorAll(".v328-cutoff").forEach((cutoff) => {
-      cutoff.innerHTML = `<span aria-hidden="true">🕘</span> <strong>${label}</strong> : ${result}`;
+      cutoff.classList.toggle("is-today", state === "today");
+      cutoff.innerHTML = `
+        <span class="v328-cutoff-icon" aria-hidden="true">${state === "today" ? "⚡" : "↗"}</span>
+        <span class="v328-cutoff-copy">
+          <small>${eyebrow}</small>
+          <strong>${label}</strong>
+          <span>${result}</span>
+        </span>`;
       cutoff.setAttribute("title", "Expéditions les jours ouvrés uniquement, hors jours fériés français.");
     });
   };
 
   updateCutoffs();
   window.addEventListener("pageshow", updateCutoffs);
+  window.addEventListener("lmw:cutoffs-updated", updateCutoffs);
   window.setInterval(updateCutoffs, 60_000);
 })();
