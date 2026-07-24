@@ -47,6 +47,7 @@ permalink: /beta-v3-29.html
     <script defer src="beta-v3-28-stability-hardfix.js?v={{ build_version }}"></script>
     <script defer src="beta-v3-28-no-image-flicker.js?v={{ build_version }}"></script>
     <script defer src="beta-v3-28-desktop-incremental-qty.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-29-enhancements.js?v={{ build_version }}"></script>
   </head>
   <body>
 {{ body_fragment }}
@@ -54,6 +55,16 @@ permalink: /beta-v3-29.html
       (() => {
         const ENDPOINT = "https://lmw-checkout.vercel.app/api/create-checkout-beta";
         let busy = false;
+
+        function resetDirectCheckout() {
+          busy = false;
+          document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
+            node.disabled = false;
+            node.textContent = "Passer au paiement sécurisé";
+          });
+          const feedback = document.getElementById("checkoutFeedback");
+          if (feedback?.textContent === "Connexion à Stripe…") feedback.textContent = "";
+        }
 
         async function directBetaCheckout(button) {
           if (busy) return;
@@ -88,9 +99,8 @@ permalink: /beta-v3-29.html
             if (!response.ok || !data.url) throw new Error(data.error || `Erreur Stripe (${response.status})`);
             location.assign(data.url);
           } catch (error) {
-            busy = false;
+            resetDirectCheckout();
             document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
-              node.disabled = false;
               node.textContent = originalText;
             });
             const message = error?.message || "Impossible de créer le paiement.";
@@ -107,6 +117,11 @@ permalink: /beta-v3-29.html
           event.stopImmediatePropagation();
           directBetaCheckout(button);
         }, true);
+
+        window.addEventListener("pageshow", resetDirectCheckout);
+        document.addEventListener("visibilitychange", () => {
+          if (document.visibilityState === "visible") resetDirectCheckout();
+        });
       })();
     </script>
   </body>
