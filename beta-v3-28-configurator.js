@@ -49,13 +49,21 @@
 
   const buildProgress = (count) => {
     const progress = document.createElement("div");
-    const capped = Math.min(6, count);
-    const width = (capped / 6) * 100;
-    const status = count >= 6
-      ? "Votre Box Complète est prête."
+    const capped = Math.min(8, count);
+    const width = (capped / 8) * 100;
+    const inSecondStage = count >= 4;
+    const missingFirst = Math.max(0, 4 - count);
+    const missingSecond = Math.max(0, 8 - count);
+    const status = count >= 8
+      ? "Livraison offerte et 15 % de réduction débloquées."
       : count >= 4
-        ? "Livraison offerte débloquée — encore deux sachets pour le format Box Complète."
-        : `${Math.max(0, 4 - count)} sachet${Math.max(0, 4 - count) > 1 ? "s" : ""} avant la livraison offerte.`;
+        ? `${missingSecond} sachet${missingSecond > 1 ? "s" : ""} avant la livraison offerte + 15 % de réduction.`
+        : `${missingFirst} sachet${missingFirst > 1 ? "s" : ""} avant la livraison offerte.`;
+
+    const rawPosition = count < 4
+      ? 7 + (Math.max(0, count) / 4) * 40
+      : 55 + ((Math.min(8, count) - 4) / 4) * 40;
+    const messagePosition = Math.max(inSecondStage ? 55 : 7, Math.min(inSecondStage ? 95 : 47, rawPosition));
 
     progress.className = "v328-progress-card";
     progress.innerHTML = `
@@ -63,12 +71,13 @@
         <strong>${count} sachet${count > 1 ? "s" : ""} sélectionné${count > 1 ? "s" : ""}</strong>
         <span>${status}</span>
       </div>
-      <div class="v328-progress-track" role="progressbar" aria-label="Progression de la composition" aria-valuemin="0" aria-valuemax="6" aria-valuenow="${Math.min(count, 6)}">
+      <div class="v328-progress-track" role="progressbar" aria-label="Progression de la composition" aria-valuemin="0" aria-valuemax="8" aria-valuenow="${Math.min(count, 8)}">
         <span class="v328-progress-fill" style="width:${width}%"></span>
+        <span class="v328-progress-message ${inSecondStage ? "is-second-stage" : "is-first-stage"}${count >= 8 ? " is-complete" : ""}" style="left:${messagePosition}%">${status}</span>
         <span class="v328-progress-label" data-count="4"><b>4 sachets</b>Livraison offerte</span>
         <i class="v328-progress-marker${count >= 4 ? " is-reached" : ""}" data-count="4" aria-hidden="true"></i>
-        <span class="v328-progress-label" data-count="6"><b>6 sachets</b>Box Complète</span>
-        <i class="v328-progress-marker${count >= 6 ? " is-reached" : ""}" data-count="6" aria-hidden="true"></i>
+        <span class="v328-progress-label" data-count="8"><b>8 sachets</b>Livraison offerte + 15 %</span>
+        <i class="v328-progress-marker${count >= 8 ? " is-reached" : ""}" data-count="8" aria-hidden="true"></i>
       </div>`;
     return progress;
   };
@@ -153,6 +162,16 @@
     }
   };
 
+  const addCutoff = (inner) => {
+    inner.querySelectorAll(".v328-cutoff").forEach((node) => node.remove());
+    inner.querySelectorAll(".v325-review-button").forEach((button) => {
+      const cutoff = document.createElement("p");
+      cutoff.className = "v328-cutoff";
+      cutoff.innerHTML = '<span aria-hidden="true">🕘</span> Avant <strong>vendredi 13 h</strong> = cette semaine';
+      button.insertAdjacentElement("afterend", cutoff);
+    });
+  };
+
   const enhanceConfigurator = () => {
     const compositionUi = document.getElementById("v325-composition-ui");
     const inner = document.querySelector(".v325-composition-inner");
@@ -170,6 +189,7 @@
     compositionUi.insertBefore(story, progress);
 
     addMatchChip(inner, readQuantities());
+    addCutoff(inner);
     decorateChoiceRows();
   };
 
