@@ -162,7 +162,11 @@
     button.textContent = "Redirection sécurisée…";
 
     try {
-      const response = await fetch("https://lmw-checkout.vercel.app/api/create-checkout", {
+      const isBetaV328 = window.location.pathname.endsWith("/beta-v3-28.html");
+      const endpoint = isBetaV328
+        ? "https://lmw-checkout.vercel.app/api/create-checkout-beta"
+        : "https://lmw-checkout.vercel.app/api/create-checkout";
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
