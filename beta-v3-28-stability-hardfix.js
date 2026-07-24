@@ -1,56 +1,66 @@
 (() => {
-  if (document.body.classList.contains("v328-hard-stability-ready")) return;
-  document.body.classList.add("v328-hard-stability-ready");
+  if (document.body.classList.contains("v328-hard-stability-v2-ready")) return;
+  document.body.classList.add("v328-hard-stability-v2-ready");
 
-  let snapshot = null;
-  let token = 0;
+  const nativeScrollTo = window.scrollTo.bind(window);
+  const nativeScrollBy = window.scrollBy.bind(window);
+  let locked = false;
+  let savedX = 0;
+  let savedY = 0;
+  let releaseTimer = 0;
+  let frameToken = 0;
 
-  const locateRow = (index) =>
-    document.querySelector(`[data-v325-info="${index}"]`)?.closest(".v325-choice-row");
-
-  const restore = (currentToken) => {
-    if (!snapshot || currentToken !== token) return;
-    const row = locateRow(snapshot.index);
-    if (row) {
-      const delta = row.getBoundingClientRect().top - snapshot.top;
-      if (Math.abs(delta) > 0.5) window.scrollBy(0, delta);
-    } else if (Math.abs(window.scrollY - snapshot.scrollY) > 0.5) {
-      window.scrollTo(0, snapshot.scrollY);
-    }
+  const holdPosition = () => {
+    if (!locked) return;
+    nativeScrollTo(savedX, savedY);
   };
 
-  const settle = () => {
-    const currentToken = ++token;
-    document.documentElement.classList.add("v328-hard-stabilizing");
+  const release = () => {
+    const token = ++frameToken;
+    const stabilize = () => {
+      if (token !== frameToken) return;
+      holdPosition();
+    };
 
+    stabilize();
     requestAnimationFrame(() => {
-      restore(currentToken);
+      stabilize();
       requestAnimationFrame(() => {
-        restore(currentToken);
-        requestAnimationFrame(() => {
-          restore(currentToken);
-          snapshot = null;
+        stabilize();
+        window.setTimeout(stabilize, 40);
+        window.setTimeout(() => {
+          stabilize();
+          locked = false;
+          window.scrollTo = nativeScrollTo;
+          window.scrollBy = nativeScrollBy;
           document.documentElement.classList.remove("v328-hard-stabilizing");
-        });
+        }, 140);
       });
     });
+  };
+
+  const lock = () => {
+    savedX = window.scrollX;
+    savedY = window.scrollY;
+    locked = true;
+    document.documentElement.classList.add("v328-hard-stabilizing");
+
+    window.scrollTo = (...args) => {
+      if (!locked) return nativeScrollTo(...args);
+    };
+    window.scrollBy = (...args) => {
+      if (!locked) return nativeScrollBy(...args);
+    };
+
+    window.clearTimeout(releaseTimer);
+    releaseTimer = window.setTimeout(release, 220);
   };
 
   document.addEventListener(
     "pointerdown",
     (event) => {
-      const control = event.target.closest("[data-v325-adjust]");
-      if (!control) return;
-      const row = control.closest(".v325-choice-row");
-      const index = Number(row?.querySelector("[data-v325-info]")?.dataset.v325Info);
-      if (!row || !Number.isInteger(index)) return;
-
-      snapshot = {
-        index,
-        top: row.getBoundingClientRect().top,
-        scrollY: window.scrollY,
-      };
-      document.documentElement.classList.add("v328-hard-stabilizing");
+      if (!event.target.closest("[data-v325-adjust]")) return;
+      lock();
     },
     true,
   );
@@ -59,8 +69,11 @@
     "click",
     (event) => {
       if (!event.target.closest("[data-v325-adjust]")) return;
-      settle();
+      const active = document.activeElement;
+      if (active instanceof HTMLElement) active.blur();
+      window.clearTimeout(releaseTimer);
+      releaseTimer = window.setTimeout(release, 20);
     },
-    true,
+    false,
   );
 })();
