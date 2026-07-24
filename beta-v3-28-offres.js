@@ -3,6 +3,7 @@
   document.body.classList.add("v328-offers-ready");
 
   const image = (src, alt) => `<img src="${encodeURI(src)}" alt="${alt}" loading="lazy" decoding="async">`;
+  const cutoff = '<p class="v328-cutoff"><span aria-hidden="true">🕘</span> Avant <strong>vendredi 13 h</strong> = cette semaine</p>';
   const catalog = {
     calendula: ["calendula.png", "Calendula"],
     rose: ["Rose.png", "Rose"],
@@ -31,6 +32,7 @@
       <div class="v328-card-price">23,60 €</div>
       <div class="v328-shipping-pill">✓ Livraison offerte incluse</div>
       <button class="v328-button" type="button" data-v328-bundle="${id}">Ajouter la ${name.toLowerCase()}</button>
+      ${cutoff}
       <p class="v328-offer-note" aria-live="polite"></p>
     </article>`;
 
@@ -65,6 +67,7 @@
             <li>Livraison offerte incluse dans le prix</li>
           </ul>
           <button class="v328-button" type="button" data-v328-bundle="complete">Commander la box complète — 29,90 €</button>
+          ${cutoff}
           <p class="v328-offer-note" aria-live="polite"></p>
         </div>
       </article>
@@ -76,24 +79,9 @@
           <p>Quatre sachets avec livraison offerte incluse, pour aller directement à l’essentiel.</p>
         </header>
         <div class="v328-theme-grid">
-          ${themeCard({
-            id: "flowers",
-            name: "Box Fleurs",
-            description: "Calendula, rose, camomille bio et hibiscus rouge — les quatre fleurs, un sachet de chaque.",
-            products: ["calendula", "rose", "camomille", "hibiscus"],
-          })}
-          ${themeCard({
-            id: "plants",
-            name: "Box Plantes",
-            description: "Plantain, pissenlit, framboisier et noisetier — les quatre plantes et feuilles, un sachet de chaque.",
-            products: ["plantain", "pissenlit", "framboisier", "noisetier"],
-          })}
-          ${themeCard({
-            id: "mixed",
-            name: "Box Mélange",
-            description: "Deux fleurs et deux plantes sélectionnées pour réunir le meilleur des deux univers.",
-            products: ["calendula", "rose", "plantain", "pissenlit"],
-          })}
+          ${themeCard({id:"flowers",name:"Box Fleurs",description:"Calendula, rose, camomille bio et hibiscus rouge — les quatre fleurs, un sachet de chaque.",products:["calendula","rose","camomille","hibiscus"]})}
+          ${themeCard({id:"plants",name:"Box Plantes",description:"Plantain, pissenlit, framboisier et noisetier — les quatre plantes et feuilles, un sachet de chaque.",products:["plantain","pissenlit","framboisier","noisetier"]})}
+          ${themeCard({id:"mixed",name:"Box Mélange",description:"Deux fleurs et deux plantes sélectionnées pour réunir le meilleur des deux univers.",products:["calendula","rose","plantain","pissenlit"]})}
         </div>
       </div>
     </div>`;
@@ -107,9 +95,7 @@
   section.addEventListener("click", (event) => {
     const button = event.target.closest("[data-v328-bundle]");
     if (!button) return;
-    const note = button.nextElementSibling;
-    if (note) {
-      note.textContent = "Offre prête : il reste à connecter son identifiant Stripe avant l’ouverture des commandes.";
-    }
+    const note = button.closest(".v328-theme-card, .v328-feature-copy")?.querySelector(".v328-offer-note");
+    if (note) note.textContent = "Offre prête : il reste à connecter son identifiant Stripe avant l’ouverture des commandes.";
   });
 })();
