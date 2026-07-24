@@ -1,0 +1,113 @@
+---
+layout: null
+permalink: /beta-v3-29.html
+---
+{% capture base_document %}{% include_relative beta-finale-base.html %}{% endcapture %}
+{% assign body_fragment = base_document | split: '<body>' | last | split: '<script' | first %}
+{% assign build_version = site.time | date: '%s' %}
+<!doctype html>
+<html lang="fr" class="v327-app-loading">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>La Maison Winnie — Beta V3.29 Checkout</title>
+    <meta name="description" content="Version de test du checkout Stripe avec remise automatique." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href="ChatGPT%20Image%2018%20juil.%202026%20a%CC%80%2014_03_05.png?v=1" media="(max-width: 767px)" />
+    <link rel="preload" as="image" href="ChatGPT%20Image%2018%20juil.%202026%20a%CC%80%2012_46_32.png?v=2" media="(min-width: 768px)" />
+    <link rel="stylesheet" href="beta-finale.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-offres.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-configurator.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-configurator-fix.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-stability-hardfix.css?v={{ build_version }}" />
+    <style>
+      html.v327-app-loading { overflow: hidden; background: #fdf6f0; }
+      html.v327-app-loading body { opacity: 0; pointer-events: none; }
+      html.v327-app-loading::before { content: "Préparation de La Maison Winnie…"; position: fixed; z-index: 10000; inset: 0; display: grid; place-items: center; padding-top: 70px; background: radial-gradient(circle at 50% 38%, rgba(255,255,255,.96), transparent 25%), linear-gradient(180deg, #fffaf6, #f6e4d7); color: #6f4032; font: 700 15px/1.4 Jost, sans-serif; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+      html.v327-app-loading::after { content: ""; position: fixed; z-index: 10001; top: calc(50% - 38px); left: calc(50% - 18px); width: 36px; height: 36px; border: 3px solid rgba(111,64,50,.16); border-top-color: #6f4032; border-radius: 50%; animation: lmw-final-spin .8s linear infinite; }
+      html.v327-app-ready body { animation: lmw-final-reveal .24s ease both; }
+      @keyframes lmw-final-spin { to { transform: rotate(360deg); } }
+      @keyframes lmw-final-reveal { from { opacity: 0; } to { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { html.v327-app-loading::after, html.v327-app-ready body { animation: none; } }
+    </style>
+    <script>
+      window.__lmwFinalLoadTimeout = setTimeout(() => {
+        document.documentElement.classList.remove("v327-app-loading");
+        document.documentElement.classList.add("v327-app-ready");
+      }, 4000);
+    </script>
+    <script defer src="beta-finale.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-offres.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-mobile-hero-name.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-configurator.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-dynamic-cutoff.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-stability-hardfix.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-no-image-flicker.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-desktop-incremental-qty.js?v={{ build_version }}"></script>
+  </head>
+  <body>
+{{ body_fragment }}
+    <script>
+      (() => {
+        const ENDPOINT = "https://lmw-checkout.vercel.app/api/create-checkout-beta";
+        let busy = false;
+
+        async function directBetaCheckout(button) {
+          if (busy) return;
+          const items = (typeof products !== "undefined" && typeof st !== "undefined")
+            ? products.map((product, index) => ({ id: product.id, quantity: Number(st.p?.[index]?.q || 0) })).filter((item) => item.quantity > 0)
+            : [];
+          const feedback = document.getElementById("checkoutFeedback");
+          if (!items.length) {
+            const message = "Ajoutez au moins un produit à votre box avant de passer au paiement.";
+            if (feedback) feedback.textContent = message;
+            alert(message);
+            return;
+          }
+
+          busy = true;
+          const originalText = button?.textContent || "Passer au paiement sécurisé";
+          document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
+            node.disabled = true;
+            node.textContent = "Redirection sécurisée…";
+          });
+          if (feedback) feedback.textContent = "Connexion à Stripe…";
+
+          try {
+            const rabbitName = document.getElementById("rabbitName")?.value.trim() || "";
+            const cancelUrl = `${location.origin}${location.pathname}?checkout=cancelled#composer`;
+            const response = await fetch(ENDPOINT, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ rabbitName, deliveryMode: st?.deliveryMode || "one_time", items, cancelUrl }),
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok || !data.url) throw new Error(data.error || `Erreur Stripe (${response.status})`);
+            location.assign(data.url);
+          } catch (error) {
+            busy = false;
+            document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
+              node.disabled = false;
+              node.textContent = originalText;
+            });
+            const message = error?.message || "Impossible de créer le paiement.";
+            if (feedback) feedback.textContent = message;
+            alert(message);
+          }
+        }
+
+        document.addEventListener("click", (event) => {
+          const button = event.target.closest("#orderCta, .v325-review-button, [data-v325-direct-checkout]");
+          if (!button) return;
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          directBetaCheckout(button);
+        }, true);
+      })();
+    </script>
+  </body>
+</html>
