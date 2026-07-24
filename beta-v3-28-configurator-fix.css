@@ -5,13 +5,113 @@
   overflow-anchor: none;
 }
 
+.v326-products.v328-products-transparent {
+  display: contents !important;
+}
+
+body.v328-config-updating,
+body.v328-config-updating * {
+  scroll-behavior: auto !important;
+}
+
 body.v328-config-updating .v325-choice-row,
 body.v328-config-updating .v328-progress-fill,
+body.v328-config-updating .v328-progress-message,
 body.v328-config-updating .v325-preview-chip,
 body.v328-config-updating .v328-match-chip {
   transition: none !important;
   animation: none !important;
 }
+
+.v328-progress-head span {
+  display: none !important;
+}
+
+.v328-checkpoint-success {
+  position: absolute;
+  z-index: 5;
+  bottom: 56px;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4f7a55;
+  color: #fff;
+  box-shadow: 0 7px 18px rgba(49, 85, 58, .22);
+}
+
+.v328-checkpoint-success[data-count="4"] { left: 50%; }
+.v328-checkpoint-success[data-count="8"] { left: 100%; transform: translateX(-100%); }
+.v328-checkpoint-success b { font: 900 13px/1 Jost, sans-serif; }
+.v328-checkpoint-success i {
+  position: absolute;
+  bottom: -5px;
+  width: 9px;
+  height: 9px;
+  background: #4f7a55;
+  transform: rotate(45deg);
+}
+
+.v328-cutoff {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  width: 100%;
+  margin: 12px 0 0 !important;
+  padding: 13px 15px !important;
+  border: 1px solid rgba(111, 64, 50, .14);
+  border-radius: 17px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(232, 148, 122, .12), transparent 42%),
+    linear-gradient(135deg, #fffaf6, #f8ebe1);
+  color: #6f4032 !important;
+  text-align: left !important;
+  box-shadow: 0 10px 24px rgba(73, 42, 31, .06);
+}
+
+.v328-cutoff.is-today {
+  border-color: rgba(79, 122, 85, .24);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(79, 122, 85, .12), transparent 42%),
+    linear-gradient(135deg, #fffaf6, #edf6eb);
+}
+
+.v328-cutoff-icon {
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #7c432f;
+  color: #fff;
+  font-size: 17px;
+  box-shadow: 0 7px 16px rgba(111, 64, 50, .18);
+}
+
+.v328-cutoff.is-today .v328-cutoff-icon { background: #4f7a55; }
+
+.v328-cutoff-copy {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+  line-height: 1.25;
+}
+
+.v328-cutoff-copy small {
+  color: #9a5f48;
+  font: 800 9px/1 Jost, sans-serif;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.v328-cutoff.is-today .v328-cutoff-copy small { color: #4f7a55; }
+.v328-cutoff-copy strong { color: #3f261e; font-size: 13px; }
+.v328-cutoff-copy > span { color: #765b50; font-size: 12px; }
 
 @media (max-width: 899px) {
   .v328-story-head {
@@ -44,7 +144,7 @@ body.v328-config-updating .v328-match-chip {
 
   .v328-progress-card {
     margin-bottom: 20px;
-    padding: 12px 14px 18px;
+    padding: 12px 14px 40px;
     border: 1px solid rgba(111, 64, 50, .12);
     border-radius: 18px;
     background: rgba(255, 250, 246, .72);
@@ -52,24 +152,18 @@ body.v328-config-updating .v328-match-chip {
 
   .v328-progress-head {
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 5px;
   }
 
   .v328-progress-head strong {
     font-size: 14px;
   }
 
-  .v328-progress-head span {
-    display: block;
-    max-width: none;
-    margin-top: 4px;
-    text-align: left;
-    font-size: 12px;
+  .v328-progress-track {
+    margin: 58px 5px 3px;
   }
 
-  .v328-progress-track {
-    margin: 34px 5px 3px;
-  }
+  .v328-checkpoint-success { bottom: 53px; }
 
   .v325-composition-inner,
   .v325-composition-inner.v328-artistic-desktop {
@@ -159,5 +253,31 @@ body.v328-config-updating .v328-match-chip {
 
   .v328-progress-label b {
     font-size: 9px;
+  }
+
+  .v328-progress-message {
+    max-width: 126px;
+  }
+
+  .v328-checkpoint-success {
+    width: 22px;
+    height: 22px;
+    bottom: 51px;
+  }
+
+  .v328-cutoff {
+    padding: 11px 12px !important;
+    border-radius: 15px;
+  }
+
+  .v328-cutoff-icon {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+
+  .v328-match-chip {
+    align-items: flex-start;
   }
 }
