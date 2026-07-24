@@ -1,0 +1,163 @@
+/* Correctifs de stabilité et simplification mobile — Beta V3.28 */
+.v325-composition-ui,
+.v325-composition-inner,
+.v325-choice-list {
+  overflow-anchor: none;
+}
+
+body.v328-config-updating .v325-choice-row,
+body.v328-config-updating .v328-progress-fill,
+body.v328-config-updating .v325-preview-chip,
+body.v328-config-updating .v328-match-chip {
+  transition: none !important;
+  animation: none !important;
+}
+
+@media (max-width: 899px) {
+  .v328-story-head {
+    margin: 0 0 14px;
+  }
+
+  .v328-story-pill {
+    width: auto;
+    min-height: 0;
+    padding: 11px 13px;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+
+  .v328-story-pill > span:first-child {
+    font-size: 16px;
+  }
+
+  .v328-story-pill strong {
+    font-size: 16px;
+  }
+
+  .v328-story-pill a {
+    margin-left: auto;
+  }
+
+  .v328-story-head > p {
+    display: none;
+  }
+
+  .v328-progress-card {
+    margin-bottom: 20px;
+    padding: 12px 14px 18px;
+    border: 1px solid rgba(111, 64, 50, .12);
+    border-radius: 18px;
+    background: rgba(255, 250, 246, .72);
+  }
+
+  .v328-progress-head {
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .v328-progress-head strong {
+    font-size: 14px;
+  }
+
+  .v328-progress-head span {
+    display: block;
+    max-width: none;
+    margin-top: 4px;
+    text-align: left;
+    font-size: 12px;
+  }
+
+  .v328-progress-track {
+    margin: 34px 5px 3px;
+  }
+
+  .v325-composition-inner,
+  .v325-composition-inner.v328-artistic-desktop {
+    display: block !important;
+  }
+
+  .v325-composition-inner > .v325-product-group,
+  .v325-composition-inner > .v326-summary,
+  .v325-composition-inner .v328-stage-card {
+    padding: 0 !important;
+    margin: 0 0 28px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .v325-product-group > h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 0 0 14px !important;
+    font-size: 23px !important;
+  }
+
+  .v325-product-group > h3 span {
+    display: inline !important;
+    margin: 0 !important;
+    font-size: 10px !important;
+  }
+
+  .v325-choice-list {
+    gap: 10px !important;
+  }
+
+  .v325-choice-row,
+  .v328-stage-card .v325-choice-row {
+    min-height: 68px;
+    border-radius: 19px !important;
+  }
+
+  .v328-popular-badge {
+    top: -7px;
+    right: 12px;
+    padding: 5px 8px;
+    font-size: 9px;
+  }
+
+  .v326-summary-heading {
+    margin-bottom: 14px !important;
+  }
+
+  .v326-summary-heading h3 {
+    margin: 0 0 7px !important;
+    font-size: 27px !important;
+  }
+
+  .v326-summary-heading p {
+    font-size: 13px !important;
+  }
+
+  .v328-match-chip {
+    margin-bottom: 14px;
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 540px) {
+  .v328-story-pill {
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .v328-story-pill > span:nth-child(2) {
+    flex: 1;
+  }
+
+  .v328-story-pill a {
+    width: auto;
+    margin: 0 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .v328-progress-label {
+    font-size: 8px;
+  }
+
+  .v328-progress-label b {
+    font-size: 9px;
+  }
+}
