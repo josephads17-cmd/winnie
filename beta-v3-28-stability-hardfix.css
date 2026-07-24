@@ -1,0 +1,15 @@
+html.v328-hard-stabilizing,
+html.v328-hard-stabilizing body {
+  scroll-behavior: auto !important;
+  overflow-anchor: none !important;
+}
+
+html.v328-hard-stabilizing .v325-composition-ui,
+html.v328-hard-stabilizing .v325-composition-ui * {
+  transition: none !important;
+  animation: none !important;
+}
+
+html.v328-hard-stabilizing .v325-composition-ui {
+  contain: layout style;
+}
