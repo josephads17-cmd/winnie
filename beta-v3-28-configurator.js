@@ -12,7 +12,7 @@
   ];
 
   let anchorSnapshot = null;
-  let enhanceFrame = 0;
+  let cleanupFrame = 0;
 
   const readQuantities = () =>
     typeof st !== "undefined" && Array.isArray(st.p)
@@ -47,6 +47,11 @@
     return wrapper;
   };
 
+  const checkpointSuccess = (count, threshold) =>
+    count >= threshold
+      ? `<span class="v328-checkpoint-success" data-count="${threshold}" aria-label="Objectif atteint"><b>✓</b><i></i></span>`
+      : "";
+
   const buildProgress = (count) => {
     const progress = document.createElement("div");
     const capped = Math.min(8, count);
@@ -69,15 +74,16 @@
     progress.innerHTML = `
       <div class="v328-progress-head">
         <strong>${count} sachet${count > 1 ? "s" : ""} sélectionné${count > 1 ? "s" : ""}</strong>
-        <span>${status}</span>
       </div>
       <div class="v328-progress-track" role="progressbar" aria-label="Progression de la composition" aria-valuemin="0" aria-valuemax="8" aria-valuenow="${Math.min(count, 8)}">
         <span class="v328-progress-fill" style="width:${width}%"></span>
         <span class="v328-progress-message ${inSecondStage ? "is-second-stage" : "is-first-stage"}${count >= 8 ? " is-complete" : ""}" style="left:${messagePosition}%">${status}</span>
         <span class="v328-progress-label" data-count="4"><b>4 sachets</b>Livraison offerte</span>
         <i class="v328-progress-marker${count >= 4 ? " is-reached" : ""}" data-count="4" aria-hidden="true"></i>
+        ${checkpointSuccess(count, 4)}
         <span class="v328-progress-label" data-count="8"><b>8 sachets</b>Livraison offerte + 15 %</span>
         <i class="v328-progress-marker${count >= 8 ? " is-reached" : ""}" data-count="8" aria-hidden="true"></i>
+        ${checkpointSuccess(count, 8)}
       </div>`;
     return progress;
   };
@@ -97,27 +103,25 @@
     });
   };
 
-  const normalizeArtisticLayout = (inner) => {
+  const applyArtisticLayout = (inner) => {
     const productsWrapper = inner.querySelector(":scope > .v326-products");
-    if (productsWrapper) {
-      Array.from(productsWrapper.querySelectorAll(":scope > .v325-product-group"))
-        .forEach((group) => inner.insertBefore(group, productsWrapper));
-      productsWrapper.remove();
-    }
-
-    const groups = Array.from(inner.querySelectorAll(":scope > .v325-product-group"));
+    const groups = Array.from(
+      (productsWrapper || inner).querySelectorAll(":scope > .v325-product-group"),
+    );
     const summary = inner.querySelector(":scope > .v326-summary");
 
     groups.forEach((group) =>
       group.classList.remove("v328-stage-card", "v328-stage-flowers", "v328-stage-leaves"),
     );
     summary?.classList.remove("v328-stage-card", "v328-stage-summary");
+    productsWrapper?.classList.remove("v328-products-transparent");
 
-    if (!desktopMedia.matches || !summary || groups.length !== 2) {
+    if (!desktopMedia.matches || !summary || groups.length !== 2 || !productsWrapper) {
       inner.classList.remove("v328-artistic-desktop");
       return;
     }
 
+    productsWrapper.classList.add("v328-products-transparent");
     groups[0].classList.add("v328-stage-card", "v328-stage-flowers");
     groups[1].classList.add("v328-stage-card", "v328-stage-leaves");
     summary.classList.add("v328-stage-card", "v328-stage-summary");
@@ -165,11 +169,18 @@
   const addCutoff = (inner) => {
     inner.querySelectorAll(".v328-cutoff").forEach((node) => node.remove());
     inner.querySelectorAll(".v325-review-button").forEach((button) => {
-      const cutoff = document.createElement("p");
+      const cutoff = document.createElement("div");
       cutoff.className = "v328-cutoff";
-      cutoff.innerHTML = '<span aria-hidden="true">🕘</span> Avant <strong>vendredi 13 h</strong> = cette semaine';
+      cutoff.innerHTML = `
+        <span class="v328-cutoff-icon" aria-hidden="true">↗</span>
+        <span class="v328-cutoff-copy">
+          <small>Préparation rapide</small>
+          <strong data-v328-cutoff-label>Calcul de l’expédition…</strong>
+          <span data-v328-cutoff-result></span>
+        </span>`;
       button.insertAdjacentElement("afterend", cutoff);
     });
+    window.dispatchEvent(new CustomEvent("lmw:cutoffs-updated"));
   };
 
   const enhanceConfigurator = () => {
@@ -180,7 +191,7 @@
     compositionUi.querySelectorAll(":scope > .v328-story-head, :scope > .v328-progress-card")
       .forEach((node) => node.remove());
 
-    normalizeArtisticLayout(inner);
+    applyArtisticLayout(inner);
 
     const count = selectedCount();
     const story = buildStoryHeader();
@@ -198,23 +209,28 @@
     const row = document.querySelector(`[data-v325-info="${anchorSnapshot.index}"]`)?.closest(".v325-choice-row");
     if (row) {
       const delta = row.getBoundingClientRect().top - anchorSnapshot.top;
-      if (Math.abs(delta) > 0.5) window.scrollBy(0, delta);
+      if (Math.abs(delta) > 0.5) window.scrollBy({ top: delta, left: 0, behavior: "instant" });
     } else {
-      window.scrollTo(0, anchorSnapshot.scrollY);
+      window.scrollTo({ top: anchorSnapshot.scrollY, left: 0, behavior: "instant" });
     }
     anchorSnapshot = null;
   };
 
-  const scheduleEnhance = () => {
-    cancelAnimationFrame(enhanceFrame);
+  const runStableEnhance = () => {
+    cancelAnimationFrame(cleanupFrame);
     document.body.classList.add("v328-config-updating");
-    enhanceFrame = requestAnimationFrame(() => {
+    const composer = document.getElementById("v325-composition-ui");
+    const previousHeight = composer?.getBoundingClientRect().height || 0;
+    if (composer && previousHeight) composer.style.minHeight = `${previousHeight}px`;
+
+    enhanceConfigurator();
+    restoreAnchor();
+
+    cleanupFrame = requestAnimationFrame(() => {
       enhanceConfigurator();
-      requestAnimationFrame(() => {
-        enhanceConfigurator();
-        restoreAnchor();
-        document.body.classList.remove("v328-config-updating");
-      });
+      restoreAnchor();
+      if (composer) composer.style.minHeight = "";
+      document.body.classList.remove("v328-config-updating");
     });
   };
 
@@ -231,6 +247,7 @@
         top: row.getBoundingClientRect().top,
         scrollY: window.scrollY,
       };
+      document.body.classList.add("v328-config-updating");
     },
     true,
   );
@@ -257,15 +274,15 @@
   if (typeof baseRender === "function") {
     window.render = function renderV328Configurator() {
       const result = baseRender();
-      scheduleEnhance();
+      runStableEnhance();
       return result;
     };
   }
 
   preselectDefaults();
-  scheduleEnhance();
-  document.getElementById("rabbitName")?.addEventListener("input", scheduleEnhance);
-  if (desktopMedia.addEventListener) desktopMedia.addEventListener("change", scheduleEnhance);
-  else window.addEventListener("resize", scheduleEnhance);
-  window.addEventListener("pageshow", scheduleEnhance);
+  runStableEnhance();
+  document.getElementById("rabbitName")?.addEventListener("input", runStableEnhance);
+  if (desktopMedia.addEventListener) desktopMedia.addEventListener("change", runStableEnhance);
+  else window.addEventListener("resize", runStableEnhance);
+  window.addEventListener("pageshow", runStableEnhance);
 })();
