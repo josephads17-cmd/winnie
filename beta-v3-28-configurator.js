@@ -3,7 +3,8 @@
   document.body.classList.add("v328-configurator-ready");
 
   const STORAGE_KEY = "lmw-checkout-draft-v1";
-  const popularIndexes = new Set([0, 4]);
+  const desktopMedia = window.matchMedia("(min-width: 900px)");
+  const popularIndexes = new Set([1, 4]);
   const thematicBoxes = [
     { name: "Box Fleurs", indexes: [0, 1, 2, 3] },
     { name: "Box Plantes", indexes: [4, 5, 6, 7] },
@@ -29,16 +30,18 @@
     return value || "votre lapin";
   };
 
-  const buildIntro = () => {
-    const intro = document.createElement("div");
-    intro.className = "v328-config-intro";
-    intro.innerHTML = `
-      <div>
-        <span>Votre sélection personnalisée</span>
-        <strong>La box de <b data-v328-rabbit-name></b> prend forme.</strong>
+  const buildStoryHeader = () => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "v328-story-head";
+    wrapper.innerHTML = `
+      <div class="v328-story-pill">
+        <span aria-hidden="true">🐇</span>
+        <span>La box de <strong data-v328-rabbit-name></strong> prend forme</span>
+        <a href="#top">Modifier le prénom</a>
       </div>
-      <small>Deux références sont déjà proposées pour vous aider à démarrer.</small>`;
-    return intro;
+      <p>Choisissez ses fleurs, puis ses plantes. Votre composition se met à jour sous vos yeux.</p>`;
+    wrapper.querySelector("[data-v328-rabbit-name]").textContent = rabbitName();
+    return wrapper;
   };
 
   const buildProgress = (count) => {
@@ -46,10 +49,10 @@
     const capped = Math.min(6, count);
     const width = (capped / 6) * 100;
     const status = count >= 6
-      ? "Vous avez atteint le format Box Complète."
+      ? "Votre Box Complète est prête."
       : count >= 4
-        ? "Livraison offerte atteinte — encore deux sachets pour le prix Box Complète."
-        : `${4 - count} sachet${4 - count > 1 ? "s" : ""} avant la livraison offerte.`;
+        ? "Livraison offerte débloquée — encore deux sachets pour le format Box Complète."
+        : `${Math.max(0, 4 - count)} sachet${Math.max(0, 4 - count) > 1 ? "s" : ""} avant la livraison offerte.`;
 
     progress.className = "v328-progress-card";
     progress.innerHTML = `
@@ -67,10 +70,13 @@
     return progress;
   };
 
-  const applyPopularBadges = () => {
+  const decorateChoiceRows = () => {
     document.querySelectorAll(".v325-choice-row").forEach((row) => {
       row.querySelector(".v328-popular-badge")?.remove();
       const index = Number(row.querySelector("[data-v325-info]")?.dataset.v325Info);
+      const quantity = Number(row.querySelector(".v325-choice-qty span")?.textContent || 0);
+      row.classList.toggle("v328-selected", quantity > 0);
+
       if (!popularIndexes.has(index)) return;
       const badge = document.createElement("span");
       badge.className = "v328-popular-badge";
@@ -79,44 +85,76 @@
     });
   };
 
-  const enhanceConfigurator = () => {
-    const inner = document.querySelector(".v325-composition-inner");
-    if (!inner) return;
+  const normalizeArtisticLayout = (inner) => {
+    const productsWrapper = inner.querySelector(":scope > .v326-products");
+    if (productsWrapper) {
+      Array.from(productsWrapper.querySelectorAll(":scope > .v325-product-group"))
+        .forEach((group) => inner.insertBefore(group, productsWrapper));
+      productsWrapper.remove();
+    }
 
-    inner.querySelectorAll(".v328-config-intro, .v328-progress-card, .v328-match-chip").forEach((node) => node.remove());
+    const groups = Array.from(inner.querySelectorAll(":scope > .v325-product-group"));
+    const summary = inner.querySelector(":scope > .v326-summary");
+    if (!summary || groups.length !== 2) return;
+
+    groups[0].classList.add("v328-stage-card", "v328-stage-flowers");
+    groups[1].classList.add("v328-stage-card", "v328-stage-leaves");
+    summary.classList.add("v328-stage-card", "v328-stage-summary");
+
+    const headings = [
+      [groups[0], "Étape 1", "Choisir ses fleurs"],
+      [groups[1], "Étape 2", "Choisir ses plantes"],
+    ];
+    headings.forEach(([group, step, title]) => {
+      const heading = group.querySelector("h3");
+      if (heading) heading.innerHTML = `<span>${step}</span>${title}`;
+    });
+
+    const summaryHeading = summary.querySelector(".v326-summary-heading");
+    if (summaryHeading) {
+      summaryHeading.innerHTML = `
+        <span>Étape 3 — validation</span>
+        <h3>La box de ${rabbitName()}</h3>
+        <p>Vérifiez les références, le rythme de livraison et le total avant le paiement sécurisé.</p>`;
+    }
+  };
+
+  const addMatchChip = (inner, quantities) => {
+    inner.querySelectorAll(".v328-match-chip").forEach((node) => node.remove());
+    const match = matchingTheme(quantities);
+    if (!match) return;
+
+    const chip = document.createElement("div");
+    chip.className = "v328-match-chip";
+    chip.innerHTML = `
+      <span>Cette sélection correspond à la <strong>${match.name}</strong>, au même prix.</span>
+      <a href="#offres">Voir la box</a>`;
+
+    const summary = inner.querySelector(":scope > .v326-summary");
+    const checkout = summary?.querySelector(".v325-review-button");
+    if (summary && checkout) summary.insertBefore(chip, checkout);
+  };
+
+  const enhanceConfigurator = () => {
+    const compositionUi = document.getElementById("v325-composition-ui");
+    const inner = document.querySelector(".v325-composition-inner");
+    if (!compositionUi || !inner) return;
+
+    compositionUi.querySelectorAll(":scope > .v328-story-head, :scope > .v328-progress-card")
+      .forEach((node) => node.remove());
+
+    normalizeArtisticLayout(inner);
 
     const count = selectedCount();
-    const quantities = readQuantities();
-    const intro = buildIntro();
-    intro.querySelector("[data-v328-rabbit-name]").textContent = rabbitName();
-
-    const productsColumn = inner.querySelector(":scope > .v326-products");
-    const firstGroup = inner.querySelector(":scope > .v325-product-group");
-    if (productsColumn) productsColumn.prepend(intro);
-    else if (firstGroup) inner.insertBefore(intro, firstGroup);
-    else inner.prepend(intro);
-
+    const story = buildStoryHeader();
     const progress = buildProgress(count);
-    const summary = inner.querySelector(":scope > .v326-summary");
-    const total = inner.querySelector(".v325-total-summary");
-    if (summary && total) summary.insertBefore(progress, total);
-    else {
-      const validation = inner.querySelector(".v325-validation-copy");
-      if (validation) inner.insertBefore(progress, validation);
-      else inner.appendChild(progress);
-    }
+    compositionUi.insertBefore(progress, inner);
+    compositionUi.insertBefore(story, progress);
 
-    const match = matchingTheme(quantities);
-    if (match) {
-      const chip = document.createElement("div");
-      chip.className = "v328-match-chip";
-      chip.innerHTML = `<span>Votre sélection correspond à la <strong>${match.name}</strong>, au même prix de 23,60 €. Vous pouvez conserver cette composition sans changer de parcours.</span>`;
-      const preview = inner.querySelector(".v325-composition-preview");
-      if (preview) preview.insertAdjacentElement("beforebegin", chip);
-      else (summary || inner).appendChild(chip);
-    }
+    addMatchChip(inner, readQuantities());
+    decorateChoiceRows();
 
-    applyPopularBadges();
+    inner.classList.toggle("v328-artistic-desktop", desktopMedia.matches);
   };
 
   const preselectDefaults = () => {
@@ -151,5 +189,7 @@
   document.getElementById("rabbitName")?.addEventListener("input", () => {
     requestAnimationFrame(enhanceConfigurator);
   });
+  if (desktopMedia.addEventListener) desktopMedia.addEventListener("change", enhanceConfigurator);
+  else window.addEventListener("resize", enhanceConfigurator);
   window.addEventListener("pageshow", () => requestAnimationFrame(enhanceConfigurator));
 })();
