@@ -1,82 +1,29 @@
 (() => {
-  if (window.__v330MobileCheckpoints) return;
-  window.__v330MobileCheckpoints = true;
-
-  const mobileMedia = window.matchMedia("(max-width: 767px)");
-
-  const readCount = () => {
-    try {
-      if (typeof st !== "undefined" && Array.isArray(st.p)) {
-        return st.p.reduce((sum, item) => sum + Number(item?.q || 0), 0);
-      }
-    } catch (_) {}
-    return 0;
-  };
-
-  const restoreTopProgress = () => {
-    const progress = document.querySelector("#v325-composition-ui .v328-progress-card");
-    if (!progress) return;
-
-    const four = progress.querySelector('.v328-progress-label[data-count="4"]');
-    const eight = progress.querySelector('.v328-progress-label[data-count="8"]');
-
-    if (four) four.innerHTML = "<b>4 sachets</b>Livraison offerte";
-    if (eight) eight.innerHTML = "<b>8 sachets</b>Livraison offerte + 15 %";
-  };
-
-  const decorateTotalProgress = () => {
-    if (!mobileMedia.matches) return;
-    restoreTopProgress();
-
-    const track = document.querySelector(
-      "#v325-composition-ui .v325-total-summary > .v325-total-progress",
-    );
-    if (!track) return;
-
-    const count = readCount();
-    const capped = Math.min(8, Math.max(0, count));
-    const fill = track.querySelector(":scope > span");
-
-    if (fill) fill.style.width = `${(capped / 8) * 100}%`;
-
-    track.setAttribute("aria-label", "Progression vers les avantages de la box");
-    track.setAttribute("aria-valuemin", "0");
-    track.setAttribute("aria-valuemax", "8");
-    track.setAttribute("aria-valuenow", String(capped));
-    track.classList.toggle("is-four", count >= 4);
-    track.classList.toggle("is-eight", count >= 8);
-
-    if (!track.querySelector(":scope > .v330-total-checkpoint-four")) {
-      track.insertAdjacentHTML(
-        "beforeend",
-        `<i class="v330-total-checkpoint v330-total-checkpoint-four" aria-hidden="true"></i>
-         <i class="v330-total-checkpoint v330-total-checkpoint-eight" aria-hidden="true"></i>
-         <span class="v330-total-label v330-total-label-four">Livraison offerte</span>
-         <span class="v330-total-label v330-total-label-eight">Livraison offerte + 15 %</span>`,
-      );
-    }
-  };
+  if (window.__v330MobileTotalBarHidden) return;
+  window.__v330MobileTotalBarHidden = true;
 
   const style = document.createElement("style");
   style.textContent = `
-    @media(max-width:767px){
-      #v325-composition-ui .v325-total-summary{padding-bottom:58px!important}
-      #v325-composition-ui .v325-total-progress{position:relative!important;overflow:visible!important;margin-top:18px!important}
-      #v325-composition-ui .v325-total-progress>span{transition:width .2s ease!important}
-      .v330-total-checkpoint{position:absolute;z-index:3;top:50%;width:18px;height:18px;border:4px solid #fffaf6;border-radius:50%;background:#b59a8c;box-shadow:0 0 0 2px rgba(111,64,50,.16);transform:translate(-50%,-50%);pointer-events:none}
-      .v330-total-checkpoint-four{left:50%}
-      .v330-total-checkpoint-eight{left:100%}
-      .v325-total-progress.is-four .v330-total-checkpoint-four,.v325-total-progress.is-eight .v330-total-checkpoint-eight{background:#78945f}
-      .v330-total-label{position:absolute;top:25px;color:#6f4032;font:800 9px/1.15 Jost,sans-serif;pointer-events:none}
-      .v330-total-label-four{left:50%;width:118px;text-align:center;transform:translateX(-50%)}
-      .v330-total-label-eight{right:0;width:145px;text-align:right}
+    @media (max-width: 767px) {
+      #v325-composition-ui .v325-total-summary {
+        padding-bottom: 0 !important;
+      }
+
+      #v325-composition-ui .v325-total-summary > .v325-total-progress {
+        display: none !important;
+      }
     }
   `;
   document.head.appendChild(style);
 
-  const schedule = () => requestAnimationFrame(decorateTotalProgress);
-  document.addEventListener("DOMContentLoaded", schedule);
-  document.addEventListener("click", schedule);
-  window.addEventListener("pageshow", schedule);
-  mobileMedia.addEventListener?.("change", schedule);
+  const cleanup = () => {
+    document
+      .querySelectorAll(
+        "#v325-composition-ui .v330-total-checkpoint, #v325-composition-ui .v330-total-label",
+      )
+      .forEach((node) => node.remove());
+  };
+
+  document.addEventListener("DOMContentLoaded", cleanup);
+  window.addEventListener("pageshow", cleanup);
 })();
