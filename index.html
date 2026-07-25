@@ -29,43 +29,30 @@ layout: null
     <link rel="preload" as="image" href="ChatGPT%20Image%2018%20juil.%202026%20a%CC%80%2014_03_05.png?v=1" media="(max-width: 767px)" />
     <link rel="preload" as="image" href="ChatGPT%20Image%2018%20juil.%202026%20a%CC%80%2012_46_32.png?v=2" media="(min-width: 768px)" />
     <link rel="stylesheet" href="beta-finale.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-offres.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-configurator.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-configurator-fix.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-stability-hardfix.css?v={{ build_version }}" />
     <style>
       html.v327-app-loading { overflow: hidden; background: #fdf6f0; }
       html.v327-app-loading body { opacity: 0; pointer-events: none; }
-      html.v327-app-loading::before {
-        content: "Préparation de La Maison Winnie…";
-        position: fixed;
-        z-index: 10000;
-        inset: 0;
-        display: grid;
-        place-items: center;
-        padding-top: 70px;
-        background: radial-gradient(circle at 50% 38%, rgba(255,255,255,.96), transparent 25%), linear-gradient(180deg, #fffaf6, #f6e4d7);
-        color: #6f4032;
-        font: 700 15px/1.4 Jost, sans-serif;
-        letter-spacing: .08em;
-        text-align: center;
-        text-transform: uppercase;
-      }
-      html.v327-app-loading::after {
-        content: "";
-        position: fixed;
-        z-index: 10001;
-        top: calc(50% - 38px);
-        left: calc(50% - 18px);
-        width: 36px;
-        height: 36px;
-        border: 3px solid rgba(111,64,50,.16);
-        border-top-color: #6f4032;
-        border-radius: 50%;
-        animation: lmw-final-spin .8s linear infinite;
-      }
+      html.v327-app-loading::before { content: "Préparation de La Maison Winnie…"; position: fixed; z-index: 10000; inset: 0; display: grid; place-items: center; padding-top: 70px; background: radial-gradient(circle at 50% 38%, rgba(255,255,255,.96), transparent 25%), linear-gradient(180deg, #fffaf6, #f6e4d7); color: #6f4032; font: 700 15px/1.4 Jost, sans-serif; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+      html.v327-app-loading::after { content: ""; position: fixed; z-index: 10001; top: calc(50% - 38px); left: calc(50% - 18px); width: 36px; height: 36px; border: 3px solid rgba(111,64,50,.16); border-top-color: #6f4032; border-radius: 50%; animation: lmw-final-spin .8s linear infinite; }
       html.v327-app-ready body { animation: lmw-final-reveal .24s ease both; }
       @keyframes lmw-final-spin { to { transform: rotate(360deg); } }
       @keyframes lmw-final-reveal { from { opacity: 0; } to { opacity: 1; } }
-      @media (prefers-reduced-motion: reduce) {
-        html.v327-app-loading::after,
-        html.v327-app-ready body { animation: none; }
+      @media (prefers-reduced-motion: reduce) { html.v327-app-loading::after, html.v327-app-ready body { animation: none; } }
+      @media (max-width: 767px) { #v325-composition-ui .v325-validation-copy { display: none !important; } }
+      .v330-discount-total { display: inline-flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; gap: 8px 12px; }
+      .v330-discount-old { color: #9b8175; font: 600 .42em/1 Jost,sans-serif; text-decoration: line-through; white-space: nowrap; }
+      .v330-discount-new { color: #3f281f; white-space: nowrap; }
+      .v330-discount-badge { display: inline-flex; align-items: center; justify-content: center; margin-top: 10px; padding: 8px 12px; border-radius: 999px; background: #e5f1e2; color: #4d7847; font: 800 12px/1 Jost,sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+      .v330-discount-note { margin: 12px 0 0; color: #4d7847; font: 800 14px/1.35 Jost,sans-serif; }
+      .v330-cart-discounted { color: #4d7847 !important; }
+      @media (max-width: 767px) {
+        .v330-discount-total { gap: 6px 9px; }
+        .v330-discount-old { font-size: .36em; }
+        .v330-discount-badge { font-size: 11px; }
       }
     </style>
     <script>
@@ -76,11 +63,153 @@ layout: null
       }, 4000);
     </script>
     <script defer src="beta-finale.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-offres.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-mobile-hero-name.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-configurator.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-dynamic-cutoff.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-stability-hardfix.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-no-image-flicker.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-desktop-incremental-qty.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-29-enhancements.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-29-configurator-copy-info.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-29-summary-progress-safe.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-30-popup-discount.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-30-bunny-position.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-30-mobile-checkpoints.js?v={{ build_version }}"></script>
   </head>
   <body>
     <noscript>
       <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1399877371962156&ev=PageView&noscript=1" alt="" />
     </noscript>
 {{ body_fragment }}
+    <script>
+      (() => {
+        const ENDPOINT = "https://lmw-checkout.vercel.app/api/create-checkout";
+        let busy = false;
+
+        function resetDirectCheckout() {
+          busy = false;
+          document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
+            node.disabled = false;
+            node.textContent = "Passer au paiement sécurisé";
+          });
+          const feedback = document.getElementById("checkoutFeedback");
+          if (feedback?.textContent === "Connexion à Stripe…") feedback.textContent = "";
+        }
+
+        async function directCheckout(button) {
+          if (busy) return;
+          const items = (typeof products !== "undefined" && typeof st !== "undefined")
+            ? products.map((product, index) => ({ id: product.id, quantity: Number(st.p?.[index]?.q || 0) })).filter((item) => item.quantity > 0)
+            : [];
+          const feedback = document.getElementById("checkoutFeedback");
+          if (!items.length) {
+            const message = "Ajoutez au moins un produit à votre box avant de passer au paiement.";
+            if (feedback) feedback.textContent = message;
+            alert(message);
+            return;
+          }
+
+          busy = true;
+          const originalText = button?.textContent || "Passer au paiement sécurisé";
+          document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
+            node.disabled = true;
+            node.textContent = "Redirection sécurisée…";
+          });
+          if (feedback) feedback.textContent = "Connexion à Stripe…";
+
+          try {
+            const rabbitName = document.getElementById("rabbitName")?.value.trim() || "";
+            const cancelUrl = `${location.origin}${location.pathname}?checkout=cancelled#composer`;
+            const response = await fetch(ENDPOINT, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ rabbitName, deliveryMode: st?.deliveryMode || "one_time", items, cancelUrl }),
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok || !data.url) throw new Error(data.error || `Erreur Stripe (${response.status})`);
+            location.assign(data.url);
+          } catch (error) {
+            resetDirectCheckout();
+            document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
+              node.textContent = originalText;
+            });
+            const message = error?.message || "Impossible de créer le paiement.";
+            if (feedback) feedback.textContent = message;
+            alert(message);
+          }
+        }
+
+        document.addEventListener("click", (event) => {
+          const button = event.target.closest("#orderCta, .v325-review-button, [data-v325-direct-checkout]");
+          if (!button) return;
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          directCheckout(button);
+        }, true);
+
+        window.addEventListener("pageshow", resetDirectCheckout);
+        document.addEventListener("visibilitychange", () => {
+          if (document.visibilityState === "visible") resetDirectCheckout();
+        });
+      })();
+    </script>
+    <script>
+      (() => {
+        const money = (value) => Number(value || 0).toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
+
+        const readTotals = () => {
+          try {
+            if (typeof products === "undefined" || typeof st === "undefined" || !Array.isArray(st.p)) return null;
+            let count = 0;
+            let gross = 0;
+            products.forEach((product, index) => {
+              const quantity = Number(st.p?.[index]?.q || 0);
+              count += quantity;
+              gross += quantity * Number(product.p || 0);
+            });
+            return { count, gross, discounted: count >= 8 ? gross * 0.85 : gross };
+          } catch (_) {
+            return null;
+          }
+        };
+
+        const syncDiscount = () => {
+          const totals = readTotals();
+          if (!totals) return;
+          const totalNodes = document.querySelectorAll("#composer .v325-total-line strong");
+          totalNodes.forEach((node) => {
+            if (totals.count >= 8) {
+              node.classList.add("v330-discount-total");
+              node.innerHTML = `<span class="v330-discount-old">${money(totals.gross)}</span><span class="v330-discount-new">${money(totals.discounted)}</span>`;
+            } else {
+              node.classList.remove("v330-discount-total");
+              node.textContent = money(totals.gross);
+            }
+          });
+
+          document.querySelectorAll("#composer .v325-total-summary").forEach((summary) => {
+            let note = summary.querySelector(":scope > .v330-discount-note");
+            if (totals.count >= 8) {
+              if (!note) {
+                note = document.createElement("p");
+                note.className = "v330-discount-note";
+                summary.appendChild(note);
+              }
+              note.innerHTML = `<span class="v330-discount-badge">Avantage 8 sachets débloqué</span> −15 % appliqués à votre sélection.`;
+            } else if (note) {
+              note.remove();
+            }
+          });
+        };
+
+        const schedule = () => requestAnimationFrame(syncDiscount);
+        document.addEventListener("DOMContentLoaded", schedule);
+        document.addEventListener("click", schedule, true);
+        window.addEventListener("pageshow", schedule);
+        setInterval(syncDiscount, 500);
+      })();
+    </script>
   </body>
 </html>
