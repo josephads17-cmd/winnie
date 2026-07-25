@@ -144,7 +144,7 @@ const st = {
 const $ = (id) => document.getElementById(id);
 const money = (n) =>
   n.toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
-const FREE_SHIPPING_THRESHOLD = 29.9;
+const FREE_SHIPPING_THRESHOLD = 23.6;
 const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
 let activeInfoIndex = null;
 let quickAmount = 1;
