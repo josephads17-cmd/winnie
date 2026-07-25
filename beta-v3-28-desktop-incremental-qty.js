@@ -2,7 +2,7 @@
   if (document.body.classList.contains("v328-desktop-incremental-ready")) return;
   document.body.classList.add("v328-desktop-incremental-ready");
 
-  const desktop = window.matchMedia("(min-width: 900px)");
+  const desktop = window.matchMedia("(min-width: 0px)");
   const STORAGE_KEY = "lmw-checkout-draft-v1";
   const formatMoney = (value) => Number(value || 0).toLocaleString("fr-FR", {
     style: "currency",
