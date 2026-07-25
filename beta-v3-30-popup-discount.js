@@ -18,6 +18,13 @@
     @media (max-width: 767px) {
       .v330-floating-benefit { display: none !important; }
     }
+    .v330-discount-row {
+      color: #4d7847;
+    }
+    .v330-discount-row strong {
+      color: #4d7847 !important;
+      font-weight: 800;
+    }
   `;
   document.head.appendChild(style);
 
@@ -37,11 +44,14 @@
         count += quantity;
         gross += quantity * Number(product.p || 0);
       });
+      const discounted = count >= 8;
+      const final = discounted ? gross * 0.85 : gross;
       return {
         count,
         gross,
-        final: count >= 8 ? gross * 0.85 : gross,
-        discounted: count >= 8,
+        final,
+        savings: discounted ? gross - final : 0,
+        discounted,
       };
     } catch (_) {
       return null;
@@ -65,12 +75,35 @@
     }
   };
 
+  const syncDiscountRow = (totals) => {
+    const subtotal = document.getElementById("drawerSubtotal");
+    const subtotalRow = subtotal?.closest(".total-row");
+    if (!subtotal || !subtotalRow) return;
+
+    let row = subtotalRow.parentElement?.querySelector(":scope > .v330-discount-row");
+    if (totals.discounted) {
+      subtotal.textContent = money(totals.gross);
+      if (!row) {
+        row = document.createElement("div");
+        row.className = "total-row v330-discount-row";
+        row.innerHTML = '<span>Réduction 15 %</span><strong></strong>';
+        subtotalRow.insertAdjacentElement("afterend", row);
+      }
+      const amount = row.querySelector("strong");
+      if (amount) amount.textContent = `−${money(totals.savings)}`;
+    } else {
+      subtotal.textContent = money(totals.gross);
+      row?.remove();
+    }
+  };
+
   const sync = () => {
     const totals = readTotals();
     if (!totals) return;
 
-    ["floatTotal", "drawerSubtotal", "drawerTotal"].forEach((id) => {
-      const node = document.getElementById(id);
+    const floatTotal = document.getElementById("floatTotal");
+    const drawerTotal = document.getElementById("drawerTotal");
+    [floatTotal, drawerTotal].forEach((node) => {
       if (!node) return;
       node.textContent = money(totals.final);
       node.classList.toggle("v330-cart-discounted", totals.discounted);
@@ -82,6 +115,8 @@
         node.removeAttribute("aria-label");
       }
     });
+
+    syncDiscountRow(totals);
 
     const deliveryTitle = document.querySelector("#drawerDelivery .delivery-title");
     if (deliveryTitle) {
