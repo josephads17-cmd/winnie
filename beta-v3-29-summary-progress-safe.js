@@ -2,6 +2,8 @@
   if (window.__v329SummaryProgressSafe) return;
   window.__v329SummaryProgressSafe = true;
 
+  const desktopMedia = window.matchMedia("(min-width: 768px)");
+
   const readCount = () => {
     try {
       if (typeof st !== "undefined" && Array.isArray(st.p)) {
@@ -13,17 +15,14 @@
   };
 
   const ensureProgress = () => {
-    const desktopHeading = document.querySelector("#composer .v326-summary-heading");
-    const mobileValidation = document.querySelector("#composer .v325-validation-copy");
-    const anchor = desktopHeading || mobileValidation;
-    if (!anchor) return;
+    if (!desktopMedia.matches) return;
 
-    if (desktopHeading) desktopHeading.style.display = "none";
-    if (mobileValidation && window.matchMedia("(max-width: 767px)").matches) {
-      mobileValidation.style.display = "none";
-    }
+    const heading = document.querySelector("#composer .v326-summary-heading");
+    if (!heading) return;
 
-    const parent = anchor.parentElement;
+    heading.style.display = "none";
+
+    const parent = heading.parentElement;
     if (!parent) return;
 
     let block = parent.querySelector(":scope > .v329-summary-progress-safe");
@@ -43,12 +42,7 @@
           <i class="v329-summary-progress-dot v329-summary-progress-dot-eight"></i>
         </div>
       `;
-
-      if (mobileValidation && window.matchMedia("(max-width: 767px)").matches) {
-        mobileValidation.insertAdjacentElement("beforebegin", block);
-      } else {
-        desktopHeading.insertAdjacentElement("afterend", block);
-      }
+      heading.insertAdjacentElement("afterend", block);
     }
 
     const count = readCount();
@@ -64,27 +58,21 @@
 
   const style = document.createElement("style");
   style.textContent = `
-    #composer .v326-summary-heading{display:none!important}
-    .v329-summary-progress-safe{margin:20px 0 28px;padding:22px 18px 24px;border:1px solid rgba(111,64,50,.12);border-radius:24px;background:rgba(255,250,246,.72)}
-    .v329-summary-progress-count{margin-bottom:20px;color:#4b2d24;font:800 17px/1.2 Jost,sans-serif}
-    .v329-summary-progress-labels{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:end;margin-bottom:12px;color:#6f4032;text-align:center}
-    .v329-summary-progress-labels span:first-child{visibility:hidden}
-    .v329-summary-progress-labels b,.v329-summary-progress-labels small{display:block}
-    .v329-summary-progress-labels b{font:800 13px/1.2 Jost,sans-serif}
-    .v329-summary-progress-labels small{margin-top:3px;font:700 11px/1.2 Jost,sans-serif}
-    .v329-summary-progress-track{position:relative;height:12px;border-radius:999px;background:#eadfd7;overflow:visible}
-    .v329-summary-progress-track>span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#ef8f76,#7e9b68);transition:width .2s ease}
-    .v329-summary-progress-dot{position:absolute;top:50%;width:22px;height:22px;border:4px solid #fff;border-radius:50%;background:#b59a8c;box-shadow:0 0 0 2px rgba(111,64,50,.12);transform:translate(-50%,-50%)}
-    .v329-summary-progress-dot-four{left:50%}
-    .v329-summary-progress-dot-eight{left:100%}
-    .v329-summary-progress-safe.is-four .v329-summary-progress-dot-four,.v329-summary-progress-safe.is-eight .v329-summary-progress-dot-eight{background:#7e9b68}
-    @media(max-width:767px){
-      #composer .v325-validation-copy{display:none!important}
-      #composer .v325-mode-switch + .v329-summary-progress-safe{margin-top:26px}
-      .v329-summary-progress-safe{margin:18px 0 24px;padding:20px 16px 22px}
-      .v329-summary-progress-count{font-size:16px}
-      .v329-summary-progress-labels b{font-size:12px}
-      .v329-summary-progress-labels small{font-size:10px}
+    @media(min-width:768px){
+      #composer .v326-summary-heading{display:none!important}
+      .v329-summary-progress-safe{margin:20px 0 28px;padding:22px 18px 24px;border:1px solid rgba(111,64,50,.12);border-radius:24px;background:rgba(255,250,246,.72)}
+      .v329-summary-progress-count{margin-bottom:20px;color:#4b2d24;font:800 17px/1.2 Jost,sans-serif}
+      .v329-summary-progress-labels{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:end;margin-bottom:12px;color:#6f4032;text-align:center}
+      .v329-summary-progress-labels span:first-child{visibility:hidden}
+      .v329-summary-progress-labels b,.v329-summary-progress-labels small{display:block}
+      .v329-summary-progress-labels b{font:800 13px/1.2 Jost,sans-serif}
+      .v329-summary-progress-labels small{margin-top:3px;font:700 11px/1.2 Jost,sans-serif}
+      .v329-summary-progress-track{position:relative;height:12px;border-radius:999px;background:#eadfd7;overflow:visible}
+      .v329-summary-progress-track>span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#ef8f76,#7e9b68);transition:width .2s ease}
+      .v329-summary-progress-dot{position:absolute;top:50%;width:22px;height:22px;border:4px solid #fff;border-radius:50%;background:#b59a8c;box-shadow:0 0 0 2px rgba(111,64,50,.12);transform:translate(-50%,-50%)}
+      .v329-summary-progress-dot-four{left:50%}
+      .v329-summary-progress-dot-eight{left:100%}
+      .v329-summary-progress-safe.is-four .v329-summary-progress-dot-four,.v329-summary-progress-safe.is-eight .v329-summary-progress-dot-eight{background:#7e9b68}
     }
   `;
   document.head.appendChild(style);
@@ -93,5 +81,6 @@
   document.addEventListener("click", schedule, true);
   document.addEventListener("DOMContentLoaded", schedule);
   window.addEventListener("pageshow", schedule);
-  setInterval(ensureProgress, 350);
+  desktopMedia.addEventListener?.("change", schedule);
+  setInterval(ensureProgress, 500);
 })();
