@@ -81,6 +81,19 @@
     trackInitiateCheckout(readTotals());
   }, true);
 
+  document.addEventListener("click", (event) => {
+    const completeCheckout = event.target.closest(".v328-bundle-checkout");
+    if (completeCheckout && !completeCheckout.disabled) {
+      trackInitiateCheckout({ count: 6, final: 29.9 });
+      return;
+    }
+
+    const themedCheckout = event.target.closest('[data-v328-bundle="flowers"], [data-v328-bundle="plants"], [data-v328-bundle="mixed"]');
+    if (themedCheckout && !themedCheckout.disabled) {
+      trackInitiateCheckout({ count: 4, final: 23.6 });
+    }
+  }, true);
+
   const syncFloatingBenefit = (totals) => {
     const copy = document.querySelector("#floatingCart .float-copy");
     if (!copy) return;
