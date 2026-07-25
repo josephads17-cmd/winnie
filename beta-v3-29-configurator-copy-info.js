@@ -46,19 +46,14 @@
     if (storyCopy) storyCopy.textContent = SUBTITLE;
   };
 
-  const addInfoBadge = (imageContainer, index, label) => {
-    if (!imageContainer || index < 0) return;
-    const host = imageContainer.parentElement || imageContainer;
-    if (host.querySelector(":scope > .v329-info-badge-global")) return;
-    host.classList.add("v329-info-host");
-
+  const makeInfoBadge = (index, label) => {
     const badge = document.createElement("button");
     badge.type = "button";
     badge.className = "v329-info-badge-global";
     badge.textContent = "i";
     badge.dataset.v329InfoIndex = String(index);
     badge.setAttribute("aria-label", `Voir les conseils et le dosage de ${label}`);
-    host.appendChild(badge);
+    return badge;
   };
 
   const decorateProductInfo = () => {
@@ -74,25 +69,34 @@
       }
     });
 
-    document.querySelectorAll(
-      ".v328-mini-products > span, .v328-bundle-product > span, .v325-catalog-image"
-    ).forEach((container) => {
+    document.querySelectorAll(".v328-mini-products").forEach((row) => {
+      row.querySelectorAll(":scope > span").forEach((item) => {
+        const img = item.querySelector("img");
+        const index = productIndexFromImage(img);
+        if (index < 0 || item.querySelector(":scope > .v329-info-badge-global")) return;
+        const label = products?.[index]?.name || normalizeText(img?.alt) || "ce produit";
+        item.classList.add("v329-info-host");
+        item.appendChild(makeInfoBadge(index, label));
+      });
+    });
+
+    document.querySelectorAll(".v328-bundle-product > span, .v325-catalog-image").forEach((container) => {
       const img = container.querySelector("img");
       const index = productIndexFromImage(img);
-      const label = index >= 0 && products?.[index] ? products[index].name : normalizeText(img?.alt) || "ce produit";
-      addInfoBadge(container, index, label);
+      if (index < 0) return;
+      const host = container.parentElement || container;
+      if (host.querySelector(":scope > .v329-info-badge-global")) return;
+      host.classList.add("v329-info-host");
+      const label = products?.[index]?.name || normalizeText(img?.alt) || "ce produit";
+      host.appendChild(makeInfoBadge(index, label));
     });
 
     document.querySelectorAll(".v328-feature-products .v329-info-badge-global").forEach((badge) => badge.remove());
   };
 
-  const removeShippingProgress = () => {
+  const markShippingUi = () => {
     const composer = document.getElementById("composer");
     if (!composer) return;
-
-    composer.querySelectorAll(
-      ".v326-summary .progress, .v326-summary .progress-bar, .v326-summary [role='progressbar'], .v325-composition-summary .progress, .v325-composition-summary .progress-bar, .v325-composition-summary [role='progressbar'], .v325-cart-progress, .v324-cart-progress, .delivery-status, .summary-delivery, .v326-summary-delivery, .v325-review-delivery, [data-v325-delivery-copy]"
-    ).forEach((node) => node.remove());
 
     composer.querySelectorAll("p, span, strong, small, div").forEach((node) => {
       if (node.children.length) return;
@@ -104,7 +108,7 @@
         /atteindre 4 sachets/i.test(text) ||
         /29,90\s*€/i.test(text)
       ) {
-        node.remove();
+        node.classList.add("v329-hide-shipping-copy");
       }
     });
   };
@@ -128,6 +132,7 @@
     #infoModal .modal-content,#infoModal .info-panel{position:relative;z-index:12051!important}
     .v328-bundle-modal{z-index:10050!important}
     #infoModal .quick-add{display:none!important}
+    #composer .v326-summary .progress,#composer .v326-summary .progress-bar,#composer .v326-summary [role="progressbar"],#composer .v325-composition-summary .progress,#composer .v325-composition-summary .progress-bar,#composer .v325-composition-summary [role="progressbar"],#composer .v325-cart-progress,#composer .v324-cart-progress,#composer .v329-hide-shipping-copy{display:none!important}
     @media(max-width:767px){
       html,body{overflow-x:hidden!important;max-width:100%!important}
       .v329-composer-subtitle{padding:0 20px;font-size:14px}
@@ -158,7 +163,7 @@
   const enhance = () => {
     updateHeading();
     decorateProductInfo();
-    removeShippingProgress();
+    markShippingUi();
   };
 
   const observer = new MutationObserver(() => requestAnimationFrame(enhance));
