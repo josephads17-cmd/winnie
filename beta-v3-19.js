@@ -325,7 +325,7 @@ function render() {
   $("subtotal").textContent = money(sub);
   $("shipping").textContent = shippingIsFree
     ? "Offerte"
-    : "Calculée lors du paiement";
+    : money(4.99);
   $("total").textContent = money(total);
   document.querySelectorAll("[data-delivery-mode]").forEach((input) => {
     input.checked = input.value === st.deliveryMode;
@@ -351,7 +351,7 @@ function render() {
   $("drawerSubtotal").textContent = money(sub);
   $("drawerShipping").textContent = shippingIsFree
     ? "Offerte"
-    : "Calculée lors du paiement";
+    : money(4.99);
   $("drawerTotal").textContent = money(total);
   updateDeliveryProgress("drawerDelivery", sub);
   $("orderCta").textContent = `Passer au paiement sécurisé`;
