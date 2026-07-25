@@ -1,6 +1,6 @@
 (() => {
   const badge = document.querySelector(".hero .eyebrow");
-  if (badge) badge.textContent = "Beta finale";
+    if (badge) badge.textContent = "Fait main en France";
 
   const footer = document.querySelector(".footer-meta small");
   if (footer) footer.textContent = "Beta finale consolidée — paiement sécurisé par Stripe";
