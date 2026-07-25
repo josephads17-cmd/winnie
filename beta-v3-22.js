@@ -1,4 +1,4 @@
-(() => {
+  (() => {
   const DESKTOP_QUERY = "(min-width: 981px) and (hover: hover) and (pointer: fine)";
   const MOBILE_QUERY = "(max-width: 767px)";
 
@@ -77,7 +77,7 @@
         <a class="v322-mobile-main-cta" href="#v322-personalisation">Créer la box</a>
         <div class="v322-mobile-notes" aria-label="Avantages principaux">
           <span>Aucun minimum</span>
-          <span>Livraison offerte dès 29,90 €</span>
+          <span>Livraison offerte dès 4 sachets</span>
           <span>8 variétés disponibles</span>
         </div>
       </div>
