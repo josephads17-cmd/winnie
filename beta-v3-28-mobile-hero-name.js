@@ -22,8 +22,8 @@
     const help = nameField.querySelector("#nameHelp");
     if (help) help.textContent = "Son prénom sera placé à l’intérieur de sa box.";
 
-    mainCta.textContent = "Choisir ses produits";
-    mainCta.setAttribute("href", "#v325-references");
+    mainCta.textContent = "Voir nos box personnalisées";
+    mainCta.setAttribute("href", "#v328-box-complete");
 
     personalisation.remove();
   };
