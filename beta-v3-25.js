@@ -4,7 +4,7 @@
 
   const catalogProducts = typeof products !== "undefined" ? products : [];
   const mobileMedia = window.matchMedia("(max-width: 767px)");
-  const FREE_DELIVERY = 29.9;
+  const FREE_DELIVERY = 23.6;
   const formatMoney = (value) =>
     Number(value || 0).toLocaleString("fr-FR", {
       style: "currency",
