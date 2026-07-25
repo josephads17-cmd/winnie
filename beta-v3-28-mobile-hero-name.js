@@ -1,6 +1,27 @@
 (() => {
   const mobileMedia = window.matchMedia("(max-width: 767px)");
 
+  const scrollToCompleteBox = (event) => {
+    if (!mobileMedia.matches) return;
+    const link = event.target.closest('.v322-mobile-main-cta[href="#offres"]');
+    if (!link) return;
+
+    event.preventDefault();
+    const scroll = () => {
+      const completeBox = document.querySelector("#offres .v328-feature");
+      if (!completeBox) return false;
+      completeBox.scrollIntoView({ behavior: "smooth", block: "start" });
+      return true;
+    };
+
+    if (scroll()) return;
+    let attempts = 0;
+    const timer = window.setInterval(() => {
+      attempts += 1;
+      if (scroll() || attempts >= 20) window.clearInterval(timer);
+    }, 50);
+  };
+
   const integrateNameField = () => {
     if (!mobileMedia.matches) return;
     if (document.body.classList.contains("v328-mobile-name-in-hero")) return;
@@ -23,11 +44,12 @@
     if (help) help.textContent = "Son prénom sera placé à l’intérieur de sa box.";
 
     mainCta.textContent = "Voir nos box personnalisées";
-    mainCta.setAttribute("href", "#v328-box-complete");
+    mainCta.setAttribute("href", "#offres");
 
     personalisation.remove();
   };
 
+  document.addEventListener("click", scrollToCompleteBox);
   requestAnimationFrame(integrateNameField);
   window.addEventListener("pageshow", integrateNameField);
 })();
