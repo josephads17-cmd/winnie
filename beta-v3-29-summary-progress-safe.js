@@ -13,12 +13,17 @@
   };
 
   const ensureProgress = () => {
-    const heading = document.querySelector("#composer .v326-summary-heading");
-    if (!heading) return;
+    const desktopHeading = document.querySelector("#composer .v326-summary-heading");
+    const mobileValidation = document.querySelector("#composer .v325-validation-copy");
+    const anchor = desktopHeading || mobileValidation;
+    if (!anchor) return;
 
-    heading.style.display = "none";
+    if (desktopHeading) desktopHeading.style.display = "none";
+    if (mobileValidation && window.matchMedia("(max-width: 767px)").matches) {
+      mobileValidation.style.display = "none";
+    }
 
-    const parent = heading.parentElement;
+    const parent = anchor.parentElement;
     if (!parent) return;
 
     let block = parent.querySelector(":scope > .v329-summary-progress-safe");
@@ -38,7 +43,12 @@
           <i class="v329-summary-progress-dot v329-summary-progress-dot-eight"></i>
         </div>
       `;
-      heading.insertAdjacentElement("afterend", block);
+
+      if (mobileValidation && window.matchMedia("(max-width: 767px)").matches) {
+        mobileValidation.insertAdjacentElement("beforebegin", block);
+      } else {
+        desktopHeading.insertAdjacentElement("afterend", block);
+      }
     }
 
     const count = readCount();
@@ -69,6 +79,8 @@
     .v329-summary-progress-dot-eight{left:100%}
     .v329-summary-progress-safe.is-four .v329-summary-progress-dot-four,.v329-summary-progress-safe.is-eight .v329-summary-progress-dot-eight{background:#7e9b68}
     @media(max-width:767px){
+      #composer .v325-validation-copy{display:none!important}
+      #composer .v325-mode-switch + .v329-summary-progress-safe{margin-top:26px}
       .v329-summary-progress-safe{margin:18px 0 24px;padding:20px 16px 22px}
       .v329-summary-progress-count{font-size:16px}
       .v329-summary-progress-labels b{font-size:12px}
@@ -81,5 +93,5 @@
   document.addEventListener("click", schedule, true);
   document.addEventListener("DOMContentLoaded", schedule);
   window.addEventListener("pageshow", schedule);
-  setInterval(ensureProgress, 500);
+  setInterval(ensureProgress, 350);
 })();
