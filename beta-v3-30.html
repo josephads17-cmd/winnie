@@ -35,6 +35,16 @@ permalink: /beta-v3-30.html
       @media (max-width: 767px) {
         #v325-composition-ui .v325-validation-copy { display: none !important; }
       }
+      .v330-discount-total { display: inline-flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; gap: 8px 12px; }
+      .v330-discount-old { color: #9b8175; font: 600 .42em/1 Jost,sans-serif; text-decoration: line-through; white-space: nowrap; }
+      .v330-discount-new { color: #3f281f; white-space: nowrap; }
+      .v330-discount-badge { display: inline-flex; align-items: center; justify-content: center; margin-top: 10px; padding: 8px 12px; border-radius: 999px; background: #e5f1e2; color: #4d7847; font: 800 12px/1 Jost,sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+      .v330-discount-note { margin: 12px 0 0; color: #4d7847; font: 800 14px/1.35 Jost,sans-serif; }
+      @media (max-width: 767px) {
+        .v330-discount-total { gap: 6px 9px; }
+        .v330-discount-old { font-size: .36em; }
+        .v330-discount-badge { font-size: 11px; }
+      }
     </style>
     <script>
       window.__lmwFinalLoadTimeout = setTimeout(() => {
@@ -127,6 +137,62 @@ permalink: /beta-v3-30.html
         document.addEventListener("visibilitychange", () => {
           if (document.visibilityState === "visible") resetDirectCheckout();
         });
+      })();
+    </script>
+    <script>
+      (() => {
+        const money = (value) => Number(value || 0).toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
+
+        const readTotals = () => {
+          try {
+            if (typeof products === "undefined" || typeof st === "undefined" || !Array.isArray(st.p)) return null;
+            let count = 0;
+            let gross = 0;
+            products.forEach((product, index) => {
+              const quantity = Number(st.p?.[index]?.q || 0);
+              count += quantity;
+              gross += quantity * Number(product.p || 0);
+            });
+            return { count, gross, discounted: count >= 8 ? gross * 0.85 : gross };
+          } catch (_) {
+            return null;
+          }
+        };
+
+        const syncDiscount = () => {
+          const totals = readTotals();
+          if (!totals) return;
+          const totalNodes = document.querySelectorAll("#composer .v325-total-line strong");
+          totalNodes.forEach((node) => {
+            if (totals.count >= 8) {
+              node.classList.add("v330-discount-total");
+              node.innerHTML = `<span class="v330-discount-old">${money(totals.gross)}</span><span class="v330-discount-new">${money(totals.discounted)}</span>`;
+            } else {
+              node.classList.remove("v330-discount-total");
+              node.textContent = money(totals.gross);
+            }
+          });
+
+          document.querySelectorAll("#composer .v325-total-summary").forEach((summary) => {
+            let note = summary.querySelector(":scope > .v330-discount-note");
+            if (totals.count >= 8) {
+              if (!note) {
+                note = document.createElement("p");
+                note.className = "v330-discount-note";
+                summary.appendChild(note);
+              }
+              note.innerHTML = `<span class="v330-discount-badge">Avantage 8 sachets débloqué</span> −15 % appliqués à votre sélection.`;
+            } else if (note) {
+              note.remove();
+            }
+          });
+        };
+
+        const schedule = () => requestAnimationFrame(syncDiscount);
+        document.addEventListener("DOMContentLoaded", schedule);
+        document.addEventListener("click", schedule, true);
+        window.addEventListener("pageshow", schedule);
+        setInterval(syncDiscount, 500);
       })();
     </script>
   </body>
