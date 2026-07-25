@@ -2,6 +2,25 @@
   if (window.__v330PopupDiscount) return;
   window.__v330PopupDiscount = true;
 
+  const style = document.createElement("style");
+  style.textContent = `
+    @media (min-width: 768px) {
+      #composer .v329-summary-progress-safe { display: none !important; }
+      .v330-floating-benefit {
+        display: block;
+        margin-top: 3px;
+        color: #4d7847;
+        font: 800 10px/1.2 Jost, sans-serif;
+        letter-spacing: .02em;
+        white-space: nowrap;
+      }
+    }
+    @media (max-width: 767px) {
+      .v330-floating-benefit { display: none !important; }
+    }
+  `;
+  document.head.appendChild(style);
+
   const money = (value) =>
     Number(value || 0).toLocaleString("fr-FR", {
       style: "currency",
@@ -29,6 +48,23 @@
     }
   };
 
+  const syncFloatingBenefit = (totals) => {
+    const copy = document.querySelector("#floatingCart .float-copy");
+    if (!copy) return;
+
+    let benefit = copy.querySelector(".v330-floating-benefit");
+    if (totals.discounted) {
+      if (!benefit) {
+        benefit = document.createElement("span");
+        benefit.className = "v330-floating-benefit";
+        copy.appendChild(benefit);
+      }
+      benefit.textContent = "Livraison offerte + 15 % débloquées";
+    } else if (benefit) {
+      benefit.remove();
+    }
+  };
+
   const sync = () => {
     const totals = readTotals();
     if (!totals) return;
@@ -53,6 +89,8 @@
         ? "Livraison offerte et 15 % de réduction débloquées !"
         : "Livraison offerte débloquée !";
     }
+
+    syncFloatingBenefit(totals);
   };
 
   const schedule = () => requestAnimationFrame(sync);
