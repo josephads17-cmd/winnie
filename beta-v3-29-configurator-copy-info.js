@@ -46,16 +46,19 @@
     if (storyCopy) storyCopy.textContent = SUBTITLE;
   };
 
-  const addInfoBadge = (container, index, label) => {
-    if (!container || index < 0 || container.querySelector(":scope > .v329-info-badge-global")) return;
-    container.classList.add("v329-info-host");
+  const addInfoBadge = (imageContainer, index, label) => {
+    if (!imageContainer || index < 0) return;
+    const host = imageContainer.parentElement || imageContainer;
+    if (host.querySelector(":scope > .v329-info-badge-global")) return;
+    host.classList.add("v329-info-host");
+
     const badge = document.createElement("button");
     badge.type = "button";
     badge.className = "v329-info-badge-global";
     badge.textContent = "i";
     badge.dataset.v329InfoIndex = String(index);
     badge.setAttribute("aria-label", `Voir les conseils et le dosage de ${label}`);
-    container.appendChild(badge);
+    host.appendChild(badge);
   };
 
   const decorateProductInfo = () => {
@@ -126,10 +129,12 @@
     .v329-composer-subtitle{max-width:720px;margin:16px auto 0;color:#765b50;font-size:16px;line-height:1.6;text-align:center}
     .v325-choice-info,.v329-info-host{position:relative}
     .v329-info-host{overflow:visible!important}
+    .v328-product-dot,.v328-mini-products>span,.v328-feature-products .v328-product-dot{border-radius:50%!important;overflow:hidden!important}
+    .v328-product-dot img,.v328-mini-products>span img,.v328-feature-products .v328-product-dot img{border-radius:50%!important;clip-path:circle(50% at 50% 50%);object-fit:cover!important}
     .v329-info-badge,.v329-info-badge-global{display:inline-grid;place-items:center;width:25px;height:25px;border:1px solid rgba(111,64,50,.34);border-radius:50%;background:#fffaf6;color:#6f4032;font:800 14px/1 Jost,sans-serif;box-shadow:0 3px 10px rgba(70,40,30,.12);transition:transform .18s ease,background .18s ease,color .18s ease}
     .v329-info-badge{flex:0 0 auto;margin-left:8px}
     .v329-info-badge-global{position:absolute;z-index:8;top:-7px;right:-7px;padding:0;cursor:pointer}
-    .v328-mini-products .v329-info-badge-global,.v328-feature-products .v329-info-badge-global{width:19px;height:19px;top:-5px;right:-5px;font-size:10px;box-shadow:0 2px 6px rgba(70,40,30,.12)}
+    .v328-mini-products .v329-info-badge-global,.v328-feature-products .v329-info-badge-global{width:19px;height:19px;top:-6px;right:-6px;font-size:10px;box-shadow:0 2px 6px rgba(70,40,30,.12)}
     .v328-bundle-product .v329-info-badge-global{width:20px;height:20px;top:-6px;right:-6px;font-size:11px}
     .v325-choice-info:hover .v329-info-badge,.v325-choice-info:focus-visible .v329-info-badge,.v329-info-badge-global:hover,.v329-info-badge-global:focus-visible{transform:translateY(-1px);background:#6f4032;color:#fff}
     #infoModal{z-index:12050!important}
