@@ -97,6 +97,46 @@
     }
   };
 
+  const syncDeliveryBenefit = (totals) => {
+    const root = document.getElementById("drawerDelivery");
+    if (!root) return;
+
+    const title = root.querySelector(".delivery-title");
+    const detail = root.querySelector(".delivery-detail");
+    const meter = root.querySelector(".delivery-progress");
+    const fill = meter?.querySelector("span");
+    const count = Math.max(0, totals.count);
+    const capped = Math.min(8, count);
+    const progress = (capped / 8) * 100;
+
+    root.classList.toggle("reached", count >= 4);
+
+    if (count >= 8) {
+      if (title) title.textContent = "Livraison offerte et 15 % de réduction débloquées !";
+      if (detail) detail.textContent = "Les deux avantages sont appliqués automatiquement à votre sélection.";
+    } else if (count >= 4) {
+      const remaining = 8 - count;
+      if (title) title.textContent = "Livraison offerte débloquée !";
+      if (detail) detail.textContent = `${remaining} sachet${remaining > 1 ? "s" : ""} supplémentaire${remaining > 1 ? "s" : ""} avant de débloquer 15 % de réduction.`;
+    } else {
+      const remaining = 4 - count;
+      if (title) title.textContent = "Livraison offerte dès 4 sachets";
+      if (detail) detail.textContent = `${remaining} sachet${remaining > 1 ? "s" : ""} avant de débloquer la livraison offerte.`;
+    }
+
+    if (fill) fill.style.width = `${progress}%`;
+    if (meter) {
+      meter.setAttribute("aria-valuemin", "0");
+      meter.setAttribute("aria-valuemax", "8");
+      meter.setAttribute("aria-valuenow", String(capped));
+    }
+  };
+
+  window.updateDeliveryProgress = function updateDeliveryProgressV330() {
+    const totals = readTotals();
+    if (totals) syncDeliveryBenefit(totals);
+  };
+
   const sync = () => {
     const totals = readTotals();
     if (!totals) return;
@@ -117,14 +157,7 @@
     });
 
     syncDiscountRow(totals);
-
-    const deliveryTitle = document.querySelector("#drawerDelivery .delivery-title");
-    if (deliveryTitle) {
-      deliveryTitle.textContent = totals.discounted
-        ? "Livraison offerte et 15 % de réduction débloquées !"
-        : "Livraison offerte débloquée !";
-    }
-
+    syncDeliveryBenefit(totals);
     syncFloatingBenefit(totals);
   };
 
