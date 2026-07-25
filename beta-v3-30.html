@@ -1,0 +1,190 @@
+---
+layout: null
+permalink: /beta-v3-30.html
+---
+{% capture base_document %}{% include_relative beta-finale-base.html %}{% endcapture %}
+{% assign body_fragment = base_document | split: '<body>' | last | split: '<script' | first %}
+{% assign build_version = site.time | date: '%s' %}
+<!doctype html>
+<html lang="fr" class="v327-app-loading">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>La Maison Winnie — Beta V3.30</title>
+    <meta name="description" content="Version de test V3.30 de La Maison Winnie." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href="ChatGPT%20Image%2018%20juil.%202026%20a%CC%80%2014_03_05.png?v=1" media="(max-width: 767px)" />
+    <link rel="preload" as="image" href="ChatGPT%20Image%2018%20juil.%202026%20a%CC%80%2012_46_32.png?v=2" media="(min-width: 768px)" />
+    <link rel="stylesheet" href="beta-finale.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-offres.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-configurator.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-configurator-fix.css?v={{ build_version }}" />
+    <link rel="stylesheet" href="beta-v3-28-stability-hardfix.css?v={{ build_version }}" />
+    <style>
+      html.v327-app-loading { overflow: hidden; background: #fdf6f0; }
+      html.v327-app-loading body { opacity: 0; pointer-events: none; }
+      html.v327-app-loading::before { content: "Préparation de La Maison Winnie…"; position: fixed; z-index: 10000; inset: 0; display: grid; place-items: center; padding-top: 70px; background: radial-gradient(circle at 50% 38%, rgba(255,255,255,.96), transparent 25%), linear-gradient(180deg, #fffaf6, #f6e4d7); color: #6f4032; font: 700 15px/1.4 Jost, sans-serif; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+      html.v327-app-loading::after { content: ""; position: fixed; z-index: 10001; top: calc(50% - 38px); left: calc(50% - 18px); width: 36px; height: 36px; border: 3px solid rgba(111,64,50,.16); border-top-color: #6f4032; border-radius: 50%; animation: lmw-final-spin .8s linear infinite; }
+      html.v327-app-ready body { animation: lmw-final-reveal .24s ease both; }
+      @keyframes lmw-final-spin { to { transform: rotate(360deg); } }
+      @keyframes lmw-final-reveal { from { opacity: 0; } to { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { html.v327-app-loading::after, html.v327-app-ready body { animation: none; } }
+      @media (max-width: 767px) {
+        #composer .v325-validation-copy { display: none !important; }
+        .v330-mobile-progress { margin: 28px 0 30px; padding: 22px 18px 24px; border: 1px solid rgba(111,64,50,.12); border-radius: 24px; background: rgba(255,250,246,.78); }
+        .v330-mobile-progress-count { margin-bottom: 20px; color: #4b2d24; font: 800 16px/1.2 Jost,sans-serif; }
+        .v330-mobile-progress-labels { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; margin-bottom: 12px; color: #6f4032; text-align: center; }
+        .v330-mobile-progress-labels span:first-child { visibility: hidden; }
+        .v330-mobile-progress-labels b, .v330-mobile-progress-labels small { display: block; }
+        .v330-mobile-progress-labels b { font: 800 12px/1.2 Jost,sans-serif; }
+        .v330-mobile-progress-labels small { margin-top: 3px; font: 700 10px/1.2 Jost,sans-serif; }
+        .v330-mobile-progress-track { position: relative; height: 12px; border-radius: 999px; background: #eadfd7; overflow: visible; }
+        .v330-mobile-progress-track > span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg,#ef8f76,#7e9b68); transition: width .2s ease; }
+        .v330-mobile-progress-dot { position: absolute; top: 50%; width: 22px; height: 22px; border: 4px solid #fff; border-radius: 50%; background: #b59a8c; box-shadow: 0 0 0 2px rgba(111,64,50,.12); transform: translate(-50%,-50%); }
+        .v330-mobile-progress-dot-four { left: 50%; }
+        .v330-mobile-progress-dot-eight { left: 100%; }
+        .v330-mobile-progress.is-four .v330-mobile-progress-dot-four,
+        .v330-mobile-progress.is-eight .v330-mobile-progress-dot-eight { background: #7e9b68; }
+      }
+    </style>
+    <script>
+      window.__lmwFinalLoadTimeout = setTimeout(() => {
+        document.documentElement.classList.remove("v327-app-loading");
+        document.documentElement.classList.add("v327-app-ready");
+      }, 4000);
+    </script>
+    <script defer src="beta-finale.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-offres.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-mobile-hero-name.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-configurator.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-dynamic-cutoff.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-stability-hardfix.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-no-image-flicker.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-28-desktop-incremental-qty.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-29-enhancements.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-29-configurator-copy-info.js?v={{ build_version }}"></script>
+    <script defer src="beta-v3-29-summary-progress-safe.js?v={{ build_version }}"></script>
+  </head>
+  <body>
+{{ body_fragment }}
+    <script>
+      (() => {
+        const ENDPOINT = "https://lmw-checkout.vercel.app/api/create-checkout-beta";
+        let busy = false;
+        function resetDirectCheckout() {
+          busy = false;
+          document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
+            node.disabled = false;
+            node.textContent = "Passer au paiement sécurisé";
+          });
+          const feedback = document.getElementById("checkoutFeedback");
+          if (feedback?.textContent === "Connexion à Stripe…") feedback.textContent = "";
+        }
+        async function directBetaCheckout(button) {
+          if (busy) return;
+          const items = (typeof products !== "undefined" && typeof st !== "undefined")
+            ? products.map((product, index) => ({ id: product.id, quantity: Number(st.p?.[index]?.q || 0) })).filter((item) => item.quantity > 0)
+            : [];
+          const feedback = document.getElementById("checkoutFeedback");
+          if (!items.length) {
+            const message = "Ajoutez au moins un produit à votre box avant de passer au paiement.";
+            if (feedback) feedback.textContent = message;
+            alert(message);
+            return;
+          }
+          busy = true;
+          const originalText = button?.textContent || "Passer au paiement sécurisé";
+          document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
+            node.disabled = true;
+            node.textContent = "Redirection sécurisée…";
+          });
+          if (feedback) feedback.textContent = "Connexion à Stripe…";
+          try {
+            const rabbitName = document.getElementById("rabbitName")?.value.trim() || "";
+            const cancelUrl = `${location.origin}${location.pathname}?checkout=cancelled#composer`;
+            const response = await fetch(ENDPOINT, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ rabbitName, deliveryMode: st?.deliveryMode || "one_time", items, cancelUrl }),
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok || !data.url) throw new Error(data.error || `Erreur Stripe (${response.status})`);
+            location.assign(data.url);
+          } catch (error) {
+            resetDirectCheckout();
+            document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
+              node.textContent = originalText;
+            });
+            const message = error?.message || "Impossible de créer le paiement.";
+            if (feedback) feedback.textContent = message;
+            alert(message);
+          }
+        }
+        document.addEventListener("click", (event) => {
+          const button = event.target.closest("#orderCta, .v325-review-button, [data-v325-direct-checkout]");
+          if (!button) return;
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          directBetaCheckout(button);
+        }, true);
+        window.addEventListener("pageshow", resetDirectCheckout);
+        document.addEventListener("visibilitychange", () => {
+          if (document.visibilityState === "visible") resetDirectCheckout();
+        });
+      })();
+    </script>
+    <script>
+      (() => {
+        const mobileMedia = window.matchMedia("(max-width: 767px)");
+        const readCount = () => {
+          try {
+            if (typeof st !== "undefined" && Array.isArray(st.p)) return st.p.reduce((sum, item) => sum + Number(item?.q || 0), 0);
+          } catch (_) {}
+          return 0;
+        };
+        const sync = () => {
+          if (!mobileMedia.matches) return;
+          const root = document.getElementById("v325-composition-ui");
+          const mode = root?.querySelector(".v325-mode-switch");
+          const validation = root?.querySelector(".v325-validation-copy");
+          if (!root || !mode) return;
+          if (validation) validation.style.setProperty("display", "none", "important");
+          let block = root.querySelector(".v330-mobile-progress");
+          if (!block) {
+            block = document.createElement("div");
+            block.className = "v330-mobile-progress";
+            block.innerHTML = `<div class="v330-mobile-progress-count" data-v330-count>0 sachet sélectionné</div><div class="v330-mobile-progress-labels" aria-hidden="true"><span></span><span><b>4 sachets</b><small>Livraison offerte</small></span><span><b>8 sachets</b><small>Livraison offerte + 15 %</small></span></div><div class="v330-mobile-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><span data-v330-fill></span><i class="v330-mobile-progress-dot v330-mobile-progress-dot-four"></i><i class="v330-mobile-progress-dot v330-mobile-progress-dot-eight"></i></div>`;
+            mode.insertAdjacentElement("afterend", block);
+          }
+          const count = readCount();
+          const countNode = block.querySelector("[data-v330-count]");
+          const fill = block.querySelector("[data-v330-fill]");
+          const track = block.querySelector(".v330-mobile-progress-track");
+          if (countNode) countNode.textContent = `${count} sachet${count > 1 ? "s" : ""} sélectionné${count > 1 ? "s" : ""}`;
+          if (fill) fill.style.width = `${Math.min(100, count / 8 * 100)}%`;
+          if (track) track.setAttribute("aria-valuenow", String(Math.min(8, count)));
+          block.classList.toggle("is-four", count >= 4);
+          block.classList.toggle("is-eight", count >= 8);
+        };
+        const observer = new MutationObserver(() => requestAnimationFrame(sync));
+        const start = () => {
+          sync();
+          const root = document.getElementById("v325-composition-ui");
+          if (root && !root.dataset.v330Observed) {
+            root.dataset.v330Observed = "true";
+            observer.observe(root, { childList: true, subtree: true });
+          }
+        };
+        document.addEventListener("DOMContentLoaded", start);
+        window.addEventListener("load", start);
+        window.addEventListener("pageshow", start);
+        document.addEventListener("click", () => requestAnimationFrame(start), true);
+        setInterval(start, 250);
+      })();
+    </script>
+  </body>
+</html>
