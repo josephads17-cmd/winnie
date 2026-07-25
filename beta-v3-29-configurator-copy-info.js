@@ -82,19 +82,28 @@
   };
 
   const updateShippingCopy = () => {
-    document.querySelectorAll("body *").forEach((node) => {
-      if (node.children.length) return;
-      const text = normalizeText(node.textContent);
-      if (!text) return;
+    const selectors = [
+      ".v326-summary",
+      ".v325-composition-summary",
+      ".v328-progress-card",
+      "#checkoutFeedback",
+      ".v325-cart-progress",
+      ".v324-cart-progress",
+      "[data-v325-delivery-copy]"
+    ];
 
-      let next = text
-        .replace(/La livraison est offerte dès 29,90\s*€ de produits\.?/gi, "La livraison est offerte dès 4 sachets.")
-        .replace(/Livraison offerte dès 29,90\s*€/gi, "Livraison offerte dès 4 sachets")
-        .replace(/Encore [^.]*(?:€|euros?) avant la livraison offerte\.?/gi, "Ajoutez encore quelques sachets pour atteindre 4 sachets et profiter de la livraison offerte.")
-        .replace(/avant d’obtenir la livraison gratuite/gi, "avant d’atteindre 4 sachets et d’obtenir la livraison gratuite")
-        .replace(/avant la livraison offerte/gi, "avant la livraison offerte dès 4 sachets");
-
-      if (next !== text) node.textContent = next;
+    document.querySelectorAll(selectors.join(",")).forEach((scope) => {
+      scope.querySelectorAll("*").forEach((node) => {
+        if (node.children.length) return;
+        const text = normalizeText(node.textContent);
+        if (!text) return;
+        const next = text
+          .replace(/La livraison est offerte dès 29,90\s*€ de produits\.?/gi, "La livraison est offerte dès 4 sachets.")
+          .replace(/Livraison offerte dès 29,90\s*€/gi, "Livraison offerte dès 4 sachets")
+          .replace(/Encore [^.]*(?:€|euros?) avant la livraison offerte\.?/gi, "Ajoutez des sachets pour atteindre 4 sachets et profiter de la livraison offerte.")
+          .replace(/avant d’obtenir la livraison gratuite/gi, "avant d’atteindre 4 sachets et d’obtenir la livraison gratuite");
+        if (next !== text) node.textContent = next;
+      });
     });
   };
 
@@ -104,10 +113,22 @@
     .v325-choice-info,.v329-info-host{position:relative}
     .v329-info-badge,.v329-info-badge-global{display:inline-grid;place-items:center;width:25px;height:25px;border:1px solid rgba(111,64,50,.28);border-radius:50%;background:#fffaf6;color:#6f4032;font:800 14px/1 Jost,sans-serif;box-shadow:0 3px 10px rgba(70,40,30,.08);transition:transform .18s ease,background .18s ease,color .18s ease}
     .v329-info-badge{flex:0 0 auto;margin-left:8px}
-    .v329-info-badge-global{position:absolute;z-index:4;top:6px;right:6px;padding:0;cursor:pointer}
+    .v329-info-badge-global{position:absolute;z-index:4;top:5px;right:5px;padding:0;cursor:pointer}
+    .v328-mini-products .v329-info-badge-global,.v328-feature-products .v329-info-badge-global{width:18px;height:18px;top:1px;right:1px;font-size:10px;box-shadow:0 2px 5px rgba(70,40,30,.08)}
+    .v328-bundle-product .v329-info-badge-global{width:20px;height:20px;top:5px;right:5px;font-size:11px}
     .v325-choice-info:hover .v329-info-badge,.v325-choice-info:focus-visible .v329-info-badge,.v329-info-badge-global:hover,.v329-info-badge-global:focus-visible{transform:translateY(-1px);background:#6f4032;color:#fff}
+    #infoModal{z-index:12050!important}
+    #infoModal .modal-content,#infoModal .info-panel{position:relative;z-index:12051!important}
+    .v328-bundle-modal{z-index:10050!important}
     #infoModal .quick-add{display:none!important}
-    @media(max-width:767px){.v329-composer-subtitle{padding:0 20px;font-size:14px}.v329-info-badge,.v329-info-badge-global{width:23px;height:23px;font-size:13px}.v329-info-badge{margin-left:6px}}
+    @media(max-width:767px){
+      html,body{overflow-x:hidden!important;max-width:100%!important}
+      .v329-composer-subtitle{padding:0 20px;font-size:14px}
+      .v329-info-badge{width:23px;height:23px;margin-left:6px;font-size:13px}
+      .v329-info-badge-global{width:20px;height:20px;font-size:11px}
+      .v328-mini-products .v329-info-badge-global,.v328-feature-products .v329-info-badge-global{width:17px;height:17px;font-size:9px}
+      .v328-bundle-product .v329-info-badge-global{width:18px;height:18px;font-size:10px}
+    }
   `;
   document.head.appendChild(style);
 
@@ -118,7 +139,13 @@
     event.stopPropagation();
     event.stopImmediatePropagation();
     const index = Number(badge.dataset.v329InfoIndex);
-    if (Number.isInteger(index) && typeof window.openInfo === "function") window.openInfo(index);
+    if (Number.isInteger(index) && typeof window.openInfo === "function") {
+      window.openInfo(index);
+      requestAnimationFrame(() => {
+        const infoModal = document.getElementById("infoModal");
+        if (infoModal) infoModal.style.zIndex = "12050";
+      });
+    }
   }, true);
 
   const enhance = () => {
