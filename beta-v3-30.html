@@ -32,6 +32,9 @@ permalink: /beta-v3-30.html
       @keyframes lmw-final-spin { to { transform: rotate(360deg); } }
       @keyframes lmw-final-reveal { from { opacity: 0; } to { opacity: 1; } }
       @media (prefers-reduced-motion: reduce) { html.v327-app-loading::after, html.v327-app-ready body { animation: none; } }
+      @media (max-width: 767px) {
+        #v325-composition-ui .v325-validation-copy { display: none !important; }
+      }
     </style>
     <script>
       window.__lmwFinalLoadTimeout = setTimeout(() => {
