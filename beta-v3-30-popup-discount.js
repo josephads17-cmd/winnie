@@ -46,6 +46,13 @@
         node.removeAttribute("aria-label");
       }
     });
+
+    const deliveryTitle = document.querySelector("#drawerDelivery .delivery-title");
+    if (deliveryTitle) {
+      deliveryTitle.textContent = totals.discounted
+        ? "Livraison offerte et 15 % de réduction débloquées !"
+        : "Livraison offerte débloquée !";
+    }
   };
 
   const schedule = () => requestAnimationFrame(sync);
