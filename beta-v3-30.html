@@ -32,23 +32,6 @@ permalink: /beta-v3-30.html
       @keyframes lmw-final-spin { to { transform: rotate(360deg); } }
       @keyframes lmw-final-reveal { from { opacity: 0; } to { opacity: 1; } }
       @media (prefers-reduced-motion: reduce) { html.v327-app-loading::after, html.v327-app-ready body { animation: none; } }
-      @media (max-width: 767px) {
-        #composer .v325-validation-copy { display: none !important; }
-        .v330-mobile-progress { margin: 28px 0 30px; padding: 22px 18px 24px; border: 1px solid rgba(111,64,50,.12); border-radius: 24px; background: rgba(255,250,246,.78); }
-        .v330-mobile-progress-count { margin-bottom: 20px; color: #4b2d24; font: 800 16px/1.2 Jost,sans-serif; }
-        .v330-mobile-progress-labels { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; margin-bottom: 12px; color: #6f4032; text-align: center; }
-        .v330-mobile-progress-labels span:first-child { visibility: hidden; }
-        .v330-mobile-progress-labels b, .v330-mobile-progress-labels small { display: block; }
-        .v330-mobile-progress-labels b { font: 800 12px/1.2 Jost,sans-serif; }
-        .v330-mobile-progress-labels small { margin-top: 3px; font: 700 10px/1.2 Jost,sans-serif; }
-        .v330-mobile-progress-track { position: relative; height: 12px; border-radius: 999px; background: #eadfd7; overflow: visible; }
-        .v330-mobile-progress-track > span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg,#ef8f76,#7e9b68); transition: width .2s ease; }
-        .v330-mobile-progress-dot { position: absolute; top: 50%; width: 22px; height: 22px; border: 4px solid #fff; border-radius: 50%; background: #b59a8c; box-shadow: 0 0 0 2px rgba(111,64,50,.12); transform: translate(-50%,-50%); }
-        .v330-mobile-progress-dot-four { left: 50%; }
-        .v330-mobile-progress-dot-eight { left: 100%; }
-        .v330-mobile-progress.is-four .v330-mobile-progress-dot-four,
-        .v330-mobile-progress.is-eight .v330-mobile-progress-dot-eight { background: #7e9b68; }
-      }
     </style>
     <script>
       window.__lmwFinalLoadTimeout = setTimeout(() => {
@@ -74,6 +57,7 @@ permalink: /beta-v3-30.html
       (() => {
         const ENDPOINT = "https://lmw-checkout.vercel.app/api/create-checkout-beta";
         let busy = false;
+
         function resetDirectCheckout() {
           busy = false;
           document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
@@ -83,6 +67,7 @@ permalink: /beta-v3-30.html
           const feedback = document.getElementById("checkoutFeedback");
           if (feedback?.textContent === "Connexion à Stripe…") feedback.textContent = "";
         }
+
         async function directBetaCheckout(button) {
           if (busy) return;
           const items = (typeof products !== "undefined" && typeof st !== "undefined")
@@ -95,6 +80,7 @@ permalink: /beta-v3-30.html
             alert(message);
             return;
           }
+
           busy = true;
           const originalText = button?.textContent || "Passer au paiement sécurisé";
           document.querySelectorAll("#orderCta, .v325-review-button, [data-v325-direct-checkout]").forEach((node) => {
@@ -102,6 +88,7 @@ permalink: /beta-v3-30.html
             node.textContent = "Redirection sécurisée…";
           });
           if (feedback) feedback.textContent = "Connexion à Stripe…";
+
           try {
             const rabbitName = document.getElementById("rabbitName")?.value.trim() || "";
             const cancelUrl = `${location.origin}${location.pathname}?checkout=cancelled#composer`;
@@ -123,6 +110,7 @@ permalink: /beta-v3-30.html
             alert(message);
           }
         }
+
         document.addEventListener("click", (event) => {
           const button = event.target.closest("#orderCta, .v325-review-button, [data-v325-direct-checkout]");
           if (!button) return;
@@ -131,59 +119,11 @@ permalink: /beta-v3-30.html
           event.stopImmediatePropagation();
           directBetaCheckout(button);
         }, true);
+
         window.addEventListener("pageshow", resetDirectCheckout);
         document.addEventListener("visibilitychange", () => {
           if (document.visibilityState === "visible") resetDirectCheckout();
         });
-      })();
-    </script>
-    <script>
-      (() => {
-        const mobileMedia = window.matchMedia("(max-width: 767px)");
-        const readCount = () => {
-          try {
-            if (typeof st !== "undefined" && Array.isArray(st.p)) return st.p.reduce((sum, item) => sum + Number(item?.q || 0), 0);
-          } catch (_) {}
-          return 0;
-        };
-        const sync = () => {
-          if (!mobileMedia.matches) return;
-          const root = document.getElementById("v325-composition-ui");
-          const mode = root?.querySelector(".v325-mode-switch");
-          const validation = root?.querySelector(".v325-validation-copy");
-          if (!root || !mode) return;
-          if (validation) validation.style.setProperty("display", "none", "important");
-          let block = root.querySelector(".v330-mobile-progress");
-          if (!block) {
-            block = document.createElement("div");
-            block.className = "v330-mobile-progress";
-            block.innerHTML = `<div class="v330-mobile-progress-count" data-v330-count>0 sachet sélectionné</div><div class="v330-mobile-progress-labels" aria-hidden="true"><span></span><span><b>4 sachets</b><small>Livraison offerte</small></span><span><b>8 sachets</b><small>Livraison offerte + 15 %</small></span></div><div class="v330-mobile-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><span data-v330-fill></span><i class="v330-mobile-progress-dot v330-mobile-progress-dot-four"></i><i class="v330-mobile-progress-dot v330-mobile-progress-dot-eight"></i></div>`;
-            mode.insertAdjacentElement("afterend", block);
-          }
-          const count = readCount();
-          const countNode = block.querySelector("[data-v330-count]");
-          const fill = block.querySelector("[data-v330-fill]");
-          const track = block.querySelector(".v330-mobile-progress-track");
-          if (countNode) countNode.textContent = `${count} sachet${count > 1 ? "s" : ""} sélectionné${count > 1 ? "s" : ""}`;
-          if (fill) fill.style.width = `${Math.min(100, count / 8 * 100)}%`;
-          if (track) track.setAttribute("aria-valuenow", String(Math.min(8, count)));
-          block.classList.toggle("is-four", count >= 4);
-          block.classList.toggle("is-eight", count >= 8);
-        };
-        const observer = new MutationObserver(() => requestAnimationFrame(sync));
-        const start = () => {
-          sync();
-          const root = document.getElementById("v325-composition-ui");
-          if (root && !root.dataset.v330Observed) {
-            root.dataset.v330Observed = "true";
-            observer.observe(root, { childList: true, subtree: true });
-          }
-        };
-        document.addEventListener("DOMContentLoaded", start);
-        window.addEventListener("load", start);
-        window.addEventListener("pageshow", start);
-        document.addEventListener("click", () => requestAnimationFrame(start), true);
-        setInterval(start, 250);
       })();
     </script>
   </body>
