@@ -9,7 +9,7 @@
   if (heroHeading) {
     const emphasis = heroHeading.querySelector("em")?.textContent.trim() ||
       "Personnalisée à son prénom.";
-    heroHeading.innerHTML = `Une box composée pour votre lapin. <em>${emphasis}</em>`;
+    heroHeading.innerHTML = `Votre lapin mange toujours la même chose ? <em>${emphasis}</em>`;
   }
 
   if (isDesktop) {
@@ -67,12 +67,13 @@
       <div class="v322-mobile-hero-card">
         <span class="v322-mobile-kicker">Box personnalisée pour lapin</span>
         <h1>
-          Une box composée pour votre lapin.
+          Votre lapin mange toujours la même chose ?
           <em>Personnalisée à son prénom.</em>
         </h1>
         <p>
-          Choisissez librement ses fleurs et plantes séchées, dans de petits
-          formats pensés pour découvrir plusieurs variétés sans gaspiller.
+          La Maison Winnie lui compose chaque mois une sélection différente
+          de fleurs et plantes séchées. Indiquez son prénom, puis choisissez
+          librement sa composition.
         </p>
         <a class="v322-mobile-main-cta" href="#v322-personalisation">Créer la box</a>
         <div class="v322-mobile-notes" aria-label="Avantages principaux">
