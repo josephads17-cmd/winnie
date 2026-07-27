@@ -72,8 +72,7 @@
         </h1>
         <p>
           La Maison Winnie lui compose chaque mois une sélection différente
-          de fleurs et plantes séchées. Indiquez son prénom, puis choisissez
-          librement sa composition.
+          de fleurs et plantes séchées, personnalisée à son prénom.
         </p>
         <a class="v322-mobile-main-cta" href="#v322-personalisation">Créer la box</a>
         <div class="v322-mobile-notes" aria-label="Avantages principaux">
