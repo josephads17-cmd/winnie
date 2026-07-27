@@ -25,7 +25,7 @@
                                                                                 strip.className = "v332-guarantee-strip";
                                                                                     strip.id = "garantie";
                                                                                         strip.setAttribute("role", "note");
-                                                                                            strip.innerHTML = `<span class="v332-guarantee-icon" aria-hidden="true">🐇</span><p><strong>Une fleur ne plaît pas à votre lapin ?</strong> Avoir de 5,90 € sur votre prochaine box, ou sachet ajouté à votre prochain envoi si vous êtes abonné.</p>`;
+                                                                                            strip.innerHTML = `<span class="v332-guarantee-icon" aria-hidden="true">🐇</span><p><strong>Une fleur ne plaît pas à votre lapin ?</strong> Sur votre 1ère commande, remboursement intégral sous 14 jours. Ensuite, avoir de 5,90 € ou sachet ajouté à votre prochain envoi si vous êtes abonné.</p>`;
                                                                                                 preuves.insertAdjacentElement("afterend", strip);
                                                                                                   };
 
@@ -34,7 +34,7 @@
                                                                                                             if (!track || track.querySelector(".v332-guarantee-badge")) return;
                                                                                                                 const item = document.createElement("div");
                                                                                                                     item.className = "v324-trust-item v332-guarantee-badge";
-                                                                                                                        item.innerHTML = `<span aria-hidden="true">🐇</span><strong>Avoir garanti si ça ne plaît pas</strong>`;
+                                                                                                                        item.innerHTML = `<span aria-hidden="true">🐇</span><strong>Remboursé si votre lapin n’aime pas (1ère commande)</strong>`;
                                                                                                                             track.appendChild(item);
                                                                                                                               };
                                                                                                                               
